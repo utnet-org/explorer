@@ -1,14 +1,30 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-defineProps<{ viewportWidth: number }>()
+import { useRouter } from 'vue-router';
+const props = defineProps<{ viewportWidth: number }>()
+const router = useRouter()
+const scaleViewportWidth = ref(1) //尺寸缩放比例
+
+if (props.viewportWidth > 834 && props.viewportWidth < 950) {
+    scaleViewportWidth.value = props.viewportWidth / 950
+}
+if (props.viewportWidth > 430 && props.viewportWidth < 834) {
+    scaleViewportWidth.value = props.viewportWidth / 834
+}
 const navSelectList = ['首页', '区块链', '合约', '统计', '资源']
 const selectIndex = ref(0)
 const chanegSelectIndex = (navIndex: number) => {
-    selectIndex.value = navIndex
+    selectIndex.value = navIndex;
+    if (navIndex == 1) {
+        router.push('/test')
+    } else {
+        router.push('/')
+    }
 }
 </script>
 <template>
-    <div class="nav_content1440" v-if="viewportWidth > 834">
+    <div class="nav_content1440" v-if="props.viewportWidth > 834"
+        :style="props.viewportWidth > 834 && props.viewportWidth < 950 ? `height:${115 * props.viewportWidth / 950}px;` : ''">
         <div class="nav_select">
             <div class="nav_select_left">
                 <img src="../assets/images/logo.png" alt="" srcset="">
@@ -29,17 +45,32 @@ const chanegSelectIndex = (navIndex: number) => {
                 <img class="language_icon" src="../assets/images/nav_to_bottom.png" alt="" srcset="">
             </div>
         </div>
-        <div class=""></div>
+        <div class="nav_corner">
+            <div class="nav_corner_item">
+                <img src="../assets/images/price_icon.png" alt="">
+                <div>UNC Price:</div>
+                <div>$1.2313</div>
+                <div>(+0.81%)</div>
+            </div>
+            <div class="nav_corner_item">
+                <div class="nav_corner_item_side">
+                    <img src="../assets/images/message_icon.png" alt="">
+                    <div>Temporarily suspend the search of user for system updates</div>
+                </div>
+                <div class="nav_corner_item_time">2023.05.12 23:00:00</div>
+            </div>
+        </div>
     </div>
-    <div class="nav_content834" v-if="viewportWidth > 430 && viewportWidth <= 834">
+    <div class="nav_content834" v-if="props.viewportWidth > 430 && props.viewportWidth <= 834">
         <div></div>
     </div>
-    <div class="nav_content430" v-if="viewportWidth <= 430">
+    <div class="nav_content430" v-if="props.viewportWidth <= 430">
         <div></div>
     </div>
 </template>
 <style scoped lang="scss">
 //大屏样式
+
 .nav_content1440 {
     width: 100%;
     height: 115px;
@@ -155,11 +186,87 @@ const chanegSelectIndex = (navIndex: number) => {
         }
     }
 
-    // div {
-    //     width: 100px;
-    //     height: 115px;
-    //     background-color: red;
-    // }
+    .nav_corner {
+        display: flex;
+        margin: 7px 32px 18px;
+
+        .nav_corner_item {
+            display: flex;
+            align-items: center;
+            height: 37px;
+            flex: 1;
+            border-radius: 4px;
+            background: #F5F5F5;
+
+            &:first-child {
+                margin-right: 16px;
+                padding: 0 12px;
+                box-sizing: border-box;
+                justify-content: flex-start;
+
+                img {
+                    width: 18px;
+                    height: 14px;
+                }
+
+                div {
+                    margin-left: 8px;
+
+                    &:nth-child(2) {
+                        color: #000;
+                        font-family: PingFang SC;
+                        font-size: 10px;
+                        font-style: normal;
+                    }
+
+                    &:nth-child(3) {
+                        color: #0FACB6;
+                        font-family: PingFang SC;
+                        font-size: 10px;
+                        font-weight: 400;
+                    }
+
+                    &:last-child {
+                        color: #03AD00;
+                        font-family: PingFang SC;
+                        font-size: 10px;
+                        font-weight: 300;
+                    }
+                }
+            }
+
+            &:last-child {
+                justify-content: space-between;
+
+                .nav_corner_item_side {
+                    display: flex;
+                    align-items: center;
+
+                    img {
+                        width: 13px;
+                        height: 15px;
+                        margin: 0 5px 0 10px;
+                    }
+
+                    div {
+                        color: #000;
+                        font-family: PingFang SC;
+                        font-size: 12px;
+                        font-weight: 300;
+                    }
+                }
+
+                .nav_corner_item_time {
+                    color: #000;
+                    font-family: PingFang SC;
+                    font-size: 10px;
+                    font-weight: 300;
+                    margin-right: 9px;
+                }
+
+            }
+        }
+    }
 }
 
 //中屏样式

@@ -3,8 +3,8 @@ import { ref } from 'vue';
 // defineProps<{ msg: string }>()
 // const count = ref(0)
 // import NavPage from '../../components/navContent.vue';
-import HeaderPage from '../../components/headerContent.vue';
-import EchartPage from '../../components/eChartContent.vue';
+// import HeaderPage from '../../components/headerContent.vue';
+// import EchartPage from '../../components/eChartContent.vue';
 import EcologyPage from '../../components/ecologyContent.vue';
 import ComputingPowerServicePage from '../../components/computingPowerServiceContent.vue';
 import NewBlockPage from '../../components/newBlockContent.vue';
@@ -23,9 +23,9 @@ onMounted(() => {
 <template>
     <div class="content">
         <!-- 头部 -->
-        <HeaderPage :viewportWidth=windowWidth />
+        <!-- <HeaderPage :viewportWidth=windowWidth /> -->
         <!-- 可视化视图 -->
-        <EchartPage :viewportWidth=windowWidth />
+        <!-- <EchartPage :viewportWidth=windowWidth /> -->
         <!-- 生态导览 -->
         <EcologyPage :viewportWidth=windowWidth />
         <!-- 算力服务排行榜 -->

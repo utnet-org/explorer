@@ -3,5 +3,8 @@ import "./style.css";
 import App from "./App.vue";
 import router from "./route/route.ts";
 import axiosInstance from "./servers/request.ts";
+import ElementPlus from 'element-plus';
+import 'element-plus/dist/index.css';
 const app = createApp(App);
+app.use(ElementPlus);
 app.use(router).provide("axios", axiosInstance).mount("#app");

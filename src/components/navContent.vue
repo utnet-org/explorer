@@ -2,11 +2,10 @@
 import {ref} from 'vue';
 import Wallet from '../wallet/connect.ts';
 
-
 defineProps<{ viewportWidth: number }>()
 const navSelectList = ['首页', '区块链', '合约', '统计', '资源']
 const selectIndex = ref(0)
-var address = ref('address')
+const address = ref('Connect Wallet');
 const chanegSelectIndex = (navIndex: number) => {
   selectIndex.value = navIndex
 }
@@ -23,9 +22,8 @@ window.onload = () => {
 };
 
 async function connectWallet() {
-  
   const wallet = new Wallet();
-  address.value = await wallet.connectWallet() ?? "address";
+  address.value = await wallet.connectWallet() ?? "Connect Wallet";
   
   // 设置账户变更回调函数
   wallet.registerAccountChangeCallback((newAccount: string) => {
@@ -52,6 +50,13 @@ async function connectWallet() {
   // }
 }
 
+const handleCommand = (command: string) => {
+  const wallet = new Wallet();
+  if (command === 'disconnect') {
+    console.log("断开");
+    address.value = wallet.disconnectWallet();
+  }
+};
 
 </script>
 <template>
@@ -67,17 +72,17 @@ async function connectWallet() {
         </div>
       </div>
       <div class="nav_select_right">
-        <!--                <div class="nav_select_right_title">Connect Wallet</div>-->
-        <!--        <div id="connectButton" class="nav_select_right_title">-->
-        <!--          -->
-        <!--        </div>-->
-        <el-button class="nav_select_right_title" @click="connectWallet">
-          <!--          Connect Wallet-->
-          {{ address }}
-        </el-button>
-<!--        <el-button class="nav_select_right_title" @click="logout">-->
-<!--          退出-->
-<!--        </el-button>-->
+        <el-dropdown type="primary">
+          <el-button class="nav_select_right_title" @click="connectWallet">
+            {{ address }}
+          </el-button>
+          <template #dropdown>
+          <el-dropdown-menu>
+            <el-dropdown-item @click="handleCommand('disconnect')">断开连接</el-dropdown-item>
+            <el-dropdown-item @click="handleCommand('disconnect2')">断开连接2</el-dropdown-item>
+          </el-dropdown-menu>
+          </template>
+        </el-dropdown>
         <div class="wallet_address_section">
           <img src="../assets/images/nav_logo.png" alt="" srcset="">
           <div class="wallet_address">Utility Mainnet</div>

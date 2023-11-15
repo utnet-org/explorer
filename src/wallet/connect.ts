@@ -1,6 +1,7 @@
 import Web3 from 'web3';
 
 type AccountChangeCallback = (newAccount: string) => void;
+
 class Wallet {
     web3: Web3 | null = null;
     currentAccount: string | null = null;
@@ -17,7 +18,7 @@ class Wallet {
 
     async connectWallet(): Promise<string | null> {
         try {
-            const accounts = await (window as any).ethereum.request({ method: 'eth_requestAccounts' });
+            const accounts = await (window as any).ethereum.request({method: 'eth_requestAccounts'});
             this.currentAccount = accounts[0];
             console.log(`Connected to account: ${this.currentAccount}`);
             return this.currentAccount;
@@ -25,6 +26,12 @@ class Wallet {
             console.error('Error connecting to wallet:', error);
             return null;
         }
+    }
+
+    disconnectWallet(): string {
+        // 断开连接的逻辑
+        this.currentAccount = 'Connect Wallet';
+        return this.currentAccount;
     }
 
     setupListeners() {

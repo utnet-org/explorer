@@ -17,23 +17,7 @@ const navSelectList = ['首页', '区块链', '合约', '统计', '资源']
 const selectIndex = ref(0)
 const address = ref('Connect Wallet');
 const chanegSelectIndex = (navIndex: number) => {
-  selectIndex.value = navIndex;
-  if (navIndex == 1) {
-    router.push('/test')
-  } else {
-    router.push('/')
-  };
-  if (navIndex == 1) {
-    router.push('/test')
-  } else {
-    router.push('/')
-  }
-}
-// 定义 Ethereum 类型
-declare global {
-  interface Window {
-    ethereum?: any;
-  }
+  selectIndex.value = navIndex
 }
 
 // 等待页面加载完成后执行
@@ -93,28 +77,16 @@ const handleCommand = (command: string) => {
         </div>
       </div>
       <div class="nav_select_right">
-        <el-dropdown type="primary">
+        <el-dropdown @command="handleCommand">
           <el-button class="nav_select_right_title" @click="connectWallet">
-            {{ address }}<el-icon class="el-icon--right"><arrow-down /></el-icon>
+            {{ address }}
+            <el-icon class="el-icon--right">
+              <arrow-down />
+            </el-icon>
           </el-button>
           <template #dropdown>
             <el-dropdown-menu>
-              <el-dropdown-item @click="handleCommand('disconnect')">断开连接</el-dropdown-item>
-              <el-dropdown-item @click="handleCommand('disconnect2')">断开连接2</el-dropdown-item>
-            </el-dropdown-menu>
-          </template>
-        </el-dropdown>
-        <el-dropdown>
-          <el-button type="primary">
-            Dropdown List<el-icon class="el-icon--right"><arrow-down /></el-icon>
-          </el-button>
-          <template #dropdown>
-            <el-dropdown-menu>
-              <el-dropdown-item>Action 1</el-dropdown-item>
-              <el-dropdown-item>Action 2</el-dropdown-item>
-              <el-dropdown-item>Action 3</el-dropdown-item>
-              <el-dropdown-item>Action 4</el-dropdown-item>
-              <el-dropdown-item>Action 5</el-dropdown-item>
+              <el-dropdown-item command="disconnect">断开连接</el-dropdown-item>
             </el-dropdown-menu>
           </template>
         </el-dropdown>
@@ -138,15 +110,15 @@ const handleCommand = (command: string) => {
           <img src="../assets/images/message_icon.png" alt="">
           <div>Temporarily suspend the search of user for system updates</div>
         </div>
-        <div class="nav_corner_item_time">2023.05.12 23:00:00</div>
+        <div class=""></div>
+      </div>
+      <div class="nav_content834" v-if="viewportWidth > 430 && viewportWidth <= 834">
+        <div></div>
+      </div>
+      <div class="nav_content430" v-if="viewportWidth <= 430">
+        <div></div>
       </div>
     </div>
-  </div>
-  <div class="nav_content834" v-if="props.viewportWidth > 430 && props.viewportWidth <= 834">
-    <div></div>
-  </div>
-  <div class="nav_content430" v-if="props.viewportWidth <= 430">
-    <div></div>
   </div>
 </template>
 <style scoped lang="scss">
@@ -215,8 +187,6 @@ const handleCommand = (command: string) => {
       align-items: center;
 
       .nav_select_right_title {
-        //width: 126px;
-        //height: 29px;
         line-height: 29px;
         text-align: center;
         color: #191919;
@@ -266,88 +236,12 @@ const handleCommand = (command: string) => {
       }
     }
   }
-
-  .nav_corner {
-    display: flex;
-    margin: 7px 32px 18px;
-
-    .nav_corner_item {
-      display: flex;
-      align-items: center;
-      height: 37px;
-      flex: 1;
-      border-radius: 4px;
-      background: #F5F5F5;
-
-      &:first-child {
-        margin-right: 16px;
-        padding: 0 12px;
-        box-sizing: border-box;
-        justify-content: flex-start;
-
-        img {
-          width: 18px;
-          height: 14px;
-        }
-
-        div {
-          margin-left: 8px;
-
-          &:nth-child(2) {
-            color: #000;
-            font-family: PingFang SC;
-            font-size: 10px;
-            font-style: normal;
-          }
-
-          &:nth-child(3) {
-            color: #0FACB6;
-            font-family: PingFang SC;
-            font-size: 10px;
-            font-weight: 400;
-          }
-
-          &:last-child {
-            color: #03AD00;
-            font-family: PingFang SC;
-            font-size: 10px;
-            font-weight: 300;
-          }
-        }
-      }
-
-      &:last-child {
-        justify-content: space-between;
-
-        .nav_corner_item_side {
-          display: flex;
-          align-items: center;
-
-          img {
-            width: 13px;
-            height: 15px;
-            margin: 0 5px 0 10px;
-          }
-
-          div {
-            color: #000;
-            font-family: PingFang SC;
-            font-size: 12px;
-            font-weight: 300;
-          }
-        }
-
-        .nav_corner_item_time {
-          color: #000;
-          font-family: PingFang SC;
-          font-size: 10px;
-          font-weight: 300;
-          margin-right: 9px;
-        }
-
-      }
-    }
-  }
+  
+  // div {
+  //     width: 100px;
+  //     height: 115px;
+  //     background-color: red;
+  // }
 }
 
 //中屏样式

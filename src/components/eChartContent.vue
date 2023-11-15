@@ -139,7 +139,7 @@ const setTimeRange = (range: string) => {
     grid: {
       containLabel: true, // 确保坐标轴的标签完全显示
       left: 0,
-      right: 23,
+      right: 40,
       top: 15,
       bottom: 20,
     },
@@ -264,6 +264,25 @@ const setTimeRange = (range: string) => {
     media: [
       {
         query: {
+          minWidth: 808,
+        },
+        option: {
+          xAxis: {
+            axisLabel: {
+              fontSize: 12, // 设置 X 轴标签的文字大小
+              fontWeight: 500, // 加粗文字
+            },
+          },
+          yAxis: {
+            axisLabel: {
+              fontSize: 12, // 设置 X 轴标签的文字大小
+              fontWeight: 500, // 加粗文字
+            },
+          },
+        },
+      },
+      {
+        query: {
           maxWidth: 807, // 小于等于 834px
           minWidth: 393,
         },
@@ -298,9 +317,24 @@ const setTimeRange = (range: string) => {
           `;
             },
           },
+          xAxis: {
+            axisLabel: {
+              fontSize: 12, // 设置 X 轴标签的文字大小
+            },
+          },
+          yAxis: {
+            axisLabel: {
+              fontSize: 12, // 设置 X 轴标签的文字大小
+            },
+          },
           series: [
             {
               symbolSize: 17, //拐点大小
+              label: {
+                show: true, // 显示标签
+                fontWeight: 500, // 加粗文字
+                fontSize: 12, // 设置 X 轴标签的文字大小
+              },
             },
           ],
         },
@@ -625,12 +659,15 @@ onUnmounted(() => {
     padding-bottom: 6px;
   }
   .computing {
-    width: 899px;
+    flex: 2;
+    margin-right: 18px;
+    width: 100%;
     height: 380px;
   }
 
   .rate_trend {
-    width: 459px;
+    flex: 1;
+    width: 100%;
     height: 380px;
   }
   .custom_buttons,
@@ -660,14 +697,18 @@ onUnmounted(() => {
     margin: 0px 22px 0 19px;
   }
   .computing {
-    width: 807px;
+    margin-left: 14px;
+    margin-right: 13px;
+    width: 100%;
     height: 380px;
     margin-bottom: 16px;
   }
 
   .rate_trend {
-    width: 807px;
+    width: 100%;
     height: 380px;
+    margin-left: 14px;
+    margin-right: 13px;
   }
   .work_m {
     font-size: 14px;

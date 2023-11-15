@@ -20,6 +20,49 @@ const address = ref('Connect Wallet');
 const chanegSelectIndex = (navIndex: number) => {
   selectIndex.value = navIndex
 }
+
+// 等待页面加载完成后执行
+window.onload = () => {
+  connectWallet();
+};
+
+async function connectWallet() {
+  const wallet = new Wallet();
+  address.value = await wallet.connectWallet() ?? "Connect Wallet";
+  
+  // 设置账户变更回调函数
+  wallet.registerAccountChangeCallback((newAccount: string) => {
+    address.value = newAccount;
+    // 这里可以更新UI以反映新的地址
+    console.log(`Address updated to: ${address.value}`);
+  });
+  
+  // 检查是否存在 MetaMask
+  // if (window.ethereum) {
+  //   try {
+  //     // 请求用户授权连接到 MetaMask
+  //     const accounts = await window.ethereum.request({method: 'eth_requestAccounts'});
+  //     console.log('已连接到 MetaMask');
+  //     // 获取连接的钱包地址
+  //     address.value = accounts[0];
+  //     // 更新按钮文字为钱包地址
+  //     // connectButton.textContent = `${connectedAddress}`;
+  //   } catch (error) {
+  //     console.error('连接 MetaMask 时发生错误', error);
+  //   }
+  // } else {
+  //   console.error('MetaMask 未安装');
+  // }
+}
+
+const handleCommand = (command: string) => {
+  const wallet = new Wallet();
+  if (command === 'disconnect') {
+    console.log("断开");
+    address.value = wallet.disconnectWallet();
+  }
+};
+
 </script>
 <template>
   <div class="nav_content1440" v-if="props.viewportWidth > 834"
@@ -145,8 +188,6 @@ const chanegSelectIndex = (navIndex: number) => {
       align-items: center;
       
       .nav_select_right_title {
-        width: 126px;
-        height: 29px;
         line-height: 29px;
         text-align: center;
         color: #191919;

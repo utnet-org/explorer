@@ -22,26 +22,49 @@ const chanegSelectIndex = (navIndex: number) => {
 }
 </script>
 <template>
-    <div class="nav_content1440" v-if="viewportWidth > 834">
-        <div class="nav_select">
-            <div class="nav_select_left">
-                <img src="../assets/images/logo.png" alt="" srcset="">
-                <div class="nav_select_left_title">Utilityscan</div>
-                <div class="select_list">
-                    <div v-for="(navItem, navIndex) in navSelectList" :key="navIndex" class="select_list_item"
-                        @click="chanegSelectIndex(navIndex)" :class="selectIndex == navIndex ? 'active' : ''">{{ navItem }}
-                    </div>
-                </div>
-            </div>
-            <div class="nav_select_right">
-                <div class="nav_select_right_title">Connect Wallet</div>
-                <div class="wallet_address_section">
-                    <img src="../assets/images/nav_logo.png" alt="" srcset="">
-                    <div class="wallet_address">Utility Mainnet</div>
-                </div>
-                <div class="language_title">EN</div>
-                <img class="language_icon" src="../assets/images/nav_to_bottom.png" alt="" srcset="">
-            </div>
+  <div class="nav_content1440" v-if="props.viewportWidth > 834"
+       :style="props.viewportWidth > 834 && props.viewportWidth < 950 ? `height:${115 * props.viewportWidth / 950}px;` : ''">
+    <div class="nav_select">
+      <div class="nav_select_left">
+        <img src="../assets/images/logo.png" alt="" srcset="">
+        <div class="nav_select_left_title">Utilityscan</div>
+        <div class="select_list">
+          <div v-for="(navItem, navIndex) in navSelectList" :key="navIndex" class="select_list_item"
+               @click="chanegSelectIndex(navIndex)" :class="selectIndex == navIndex ? 'active' : ''">{{ navItem }}
+          </div>
+        </div>
+      </div>
+      <div class="nav_select_right">
+        <el-dropdown @command="handleCommand">
+          <el-button class="nav_select_right_title" @click="connectWallet">
+            {{ address }}
+            <el-icon class="el-icon--right"><arrow-down /></el-icon>
+          </el-button>
+          <template #dropdown>
+            <el-dropdown-menu>
+              <el-dropdown-item command="disconnect">断开连接</el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
+        <div class="wallet_address_section">
+          <img src="../assets/images/nav_logo.png" alt="" srcset="">
+          <div class="wallet_address">Utility Mainnet</div>
+        </div>
+        <div class="language_title">EN</div>
+        <img class="language_icon" src="../assets/images/nav_to_bottom.png" alt="" srcset="">
+      </div>
+    </div>
+    <div class="nav_corner">
+      <div class="nav_corner_item">
+        <img src="../assets/images/price_icon.png" alt="">
+        <div>UNC Price:</div>
+        <div>$1.2313</div>
+        <div>(+0.81%)</div>
+      </div>
+      <div class="nav_corner_item">
+        <div class="nav_corner_item_side">
+          <img src="../assets/images/message_icon.png" alt="">
+          <div>Temporarily suspend the search of user for system updates</div>
         </div>
         <div class=""></div>
     </div>

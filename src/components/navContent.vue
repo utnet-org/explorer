@@ -89,28 +89,14 @@ const handleCommand = (command: string) => {
         </div>
       </div>
       <div class="nav_select_right">
-        <el-dropdown type="primary">
+        <el-dropdown @command="handleCommand">
           <el-button class="nav_select_right_title" @click="connectWallet">
-            {{ address }}<el-icon class="el-icon--right"><arrow-down /></el-icon>
+            {{ address }}
+            <el-icon class="el-icon--right"><arrow-down /></el-icon>
           </el-button>
           <template #dropdown>
             <el-dropdown-menu>
-              <el-dropdown-item @click="handleCommand('disconnect')">断开连接</el-dropdown-item>
-              <el-dropdown-item @click="handleCommand('disconnect2')">断开连接2</el-dropdown-item>
-            </el-dropdown-menu>
-          </template>
-        </el-dropdown>
-        <el-dropdown>
-          <el-button type="primary">
-            Dropdown List<el-icon class="el-icon--right"><arrow-down /></el-icon>
-          </el-button>
-          <template #dropdown>
-            <el-dropdown-menu>
-              <el-dropdown-item>Action 1</el-dropdown-item>
-              <el-dropdown-item>Action 2</el-dropdown-item>
-              <el-dropdown-item>Action 3</el-dropdown-item>
-              <el-dropdown-item>Action 4</el-dropdown-item>
-              <el-dropdown-item>Action 5</el-dropdown-item>
+              <el-dropdown-item command="disconnect">断开连接</el-dropdown-item>
             </el-dropdown-menu>
           </template>
         </el-dropdown>

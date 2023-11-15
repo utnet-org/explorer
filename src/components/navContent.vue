@@ -236,7 +236,89 @@ const handleCommand = (command: string) => {
       }
     }
   }
-  
+
+  .nav_corner {
+    display: flex;
+    margin: 7px 32px 18px;
+
+    .nav_corner_item {
+      display: flex;
+      align-items: center;
+      height: 37px;
+      flex: 1;
+      border-radius: 4px;
+      background: #F5F5F5;
+
+      &:first-child {
+        margin-right: 16px;
+        padding: 0 12px;
+        box-sizing: border-box;
+        justify-content: flex-start;
+
+        img {
+          width: 18px;
+          height: 14px;
+        }
+
+        div {
+          margin-left: 8px;
+
+          &:nth-child(2) {
+            color: #000;
+            font-family: PingFang SC;
+            font-size: 10px;
+            font-style: normal;
+          }
+
+          &:nth-child(3) {
+            color: #0FACB6;
+            font-family: PingFang SC;
+            font-size: 10px;
+            font-weight: 400;
+          }
+
+          &:last-child {
+            color: #03AD00;
+            font-family: PingFang SC;
+            font-size: 10px;
+            font-weight: 300;
+          }
+        }
+      }
+
+      &:last-child {
+        justify-content: space-between;
+
+        .nav_corner_item_side {
+          display: flex;
+          align-items: center;
+
+          img {
+            width: 13px;
+            height: 15px;
+            margin: 0 5px 0 10px;
+          }
+
+          div {
+            color: #000;
+            font-family: PingFang SC;
+            font-size: 12px;
+            font-weight: 300;
+          }
+        }
+
+        .nav_corner_item_time {
+          color: #000;
+          font-family: PingFang SC;
+          font-size: 10px;
+          font-weight: 300;
+          margin-right: 9px;
+        }
+
+      }
+    }
+  }
+
   // div {
   //     width: 100px;
   //     height: 115px;

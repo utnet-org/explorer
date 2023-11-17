@@ -67,7 +67,7 @@ defineProps<{ viewportWidth: number }>()
                     margin-left: 48px;
 
                     .peak_content_top_side {
-                        margin-top: 60px;
+                        margin-top: 65.47px;
 
                         .peak_content_top_side_title {
                             color: #191919;

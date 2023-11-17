@@ -169,7 +169,7 @@ const setTimeRange = (range: string) => {
               overflow: hidden;
               border : 1px solid #3EDFCF;
               background-color:rgba(217, 217, 217, 0.8);
-              backdrop-filter: blur(2px);  
+              backdrop-filter: blur(2px);
               border-radius: 8px;">
               <div style="z-index:1000">
                 <div style="color: rgba(25, 25, 25, 0.5);font-size: 10px" ;font-weight: 500>星期四 27/09/2023</div>
@@ -385,7 +385,7 @@ const setTimeRange = (range: string) => {
               padding-right: 11px;
               border : 1px solid #3EDFCF;
             background-color:rgba(217, 217, 217, 0.8);
-              backdrop-filter: blur(2px);  
+              backdrop-filter: blur(2px);
               border-radius: 8px;">
   
               <div style="color: rgba(25, 25, 25, 0.5); font-size:8px ;font-weight: 500">星期四 27/09/2023</div>

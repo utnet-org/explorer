@@ -290,29 +290,49 @@ const setTimeRange = (range: string) => {
           tooltip: {
             formatter: function () {
               return `
-                <div style="
-              width: 232px;
-              height: 98px;
-              overflow: hidden;
-              padding: 11px;
-              border : 1px solid #3EDFCF;
-              background-color:rgba(217, 217, 217, 0.8);
-              backdrop-filter: blur(2px);  
-              border-radius: 8px;">
-               <div style="color: rgba(25, 25, 25, 0.5);font-size: 10px ;font-weight: 500">星期四 27/09/2023</div>
-                <div style="display: flex; justify-content: space-between ; margin-top:13px ">
-                   <div style="color: #191919; font-size: 12px">当日算力新增：</div>
-                   <div style="color: #191919; font-size: 12px; font-weight: 600">21,21 TFLOPS</div>
-                </div>
-                <div style="display: flex; justify-content: space-between">
-                  <div style="color: #191919; font-size: 12px">全网有效算力：</div>
-                  <div style="color: #191919; font-size: 12px; font-weight: 600">123K TFLOPS</div>
-                </div>
-                <div style="display: flex; justify-content: space-between">
-                  <div style="color: #191919; font-size: 12px">当日平均服务收益：</div>
-                  <div style="color: #191919; font-size: 12px; font-weight: 600">0.015 UNC/TFLOPS</div>
-                </div>
-          </div>
+          
+  <div
+    style="
+      width: 232px;
+      height: 98px;
+      padding: 11px;
+      border: 1px solid #3edfcf;
+      background-color: rgba(217, 217, 217, 0.8);
+      backdrop-filter: blur(2px);
+      border-radius: 8px;
+      position: relative;
+     
+    "
+  >
+    <div style="z-index: 1000">
+      <div
+        style="color: rgba(25, 25, 25, 0.5); font-size: 10px; font-weight: 500"
+      >
+        星期四 27/09/2023
+      </div>
+      <div
+        style="display: flex; justify-content: space-between; margin-top: 13px"
+      >
+        <div style="color: #191919; font-size: 12px">当日算力新增：</div>
+        <div style="color: #191919; font-size: 12px; font-weight: 600">
+          21,21 TFLOPS
+        </div>
+      </div>
+      <div style="display: flex; justify-content: space-between">
+        <div style="color: #191919; font-size: 12px">全网有效算力：</div>
+        <div style="color: #191919; font-size: 12px; font-weight: 600">
+          123K TFLOPS
+        </div>
+      </div>
+      <div style="display: flex; justify-content: space-between">
+        <div style="color: #191919; font-size: 12px">当日平均服务收益：</div>
+        <div style="color: #191919; font-size: 12px; font-weight: 600">
+          0.015 UNC/TFLOPS
+        </div>
+      </div>
+    </div>
+ 
+  </div>
           
           `;
             },
@@ -331,7 +351,7 @@ const setTimeRange = (range: string) => {
             {
               symbolSize: 17, //拐点大小
               label: {
-                show: true, // 显示标签
+                show: false, // 显示标签
                 fontWeight: 500, // 加粗文字
                 fontSize: 12, // 设置 X 轴标签的文字大小
               },

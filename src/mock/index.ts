@@ -2,10 +2,8 @@ import Mock from 'mockjs';
 
 // import './user';
 // import './message-box';
-import './mockApi';
-
-
-// import '@/views/dashboard/workplace/mock';
+import './info.ts';
+import './price.ts';
 
 Mock.setup({
   timeout: '600-1000',

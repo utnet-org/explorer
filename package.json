@@ -22,7 +22,8 @@
     "web3": "^4.2.2"
   },
   "devDependencies": {
-    "@types/node": "^18.0.0",
+    "@types/mockjs": "^1.0.10",
+    "@types/node": "^18.18.9",
     "@vitejs/plugin-vue": "^4.2.3",
     "mockjs": "^1.1.0",
     "typescript": "^5.0.2",

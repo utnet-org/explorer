@@ -14,7 +14,7 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 }
 if (process.env.NODE_ENV === 'development') {
     // Mock.start(); // 在开发环境中启用Mock.js
-    // import('./mock/mockApi.ts');
+    // import('./mock/price.ts');
     // Mock.setup({
     //     timeout: '300-6000',
     // });

@@ -19,6 +19,8 @@ const navSelectList = ['首页', '区块链', '合约', '统计', '资源']
 const selectIndex = ref(0)
 const address = ref('Connect Wallet');
 const price = ref('---');
+const amount = ref('0.00');
+
 const chanegSelectIndex = (navIndex: number) => {
   selectIndex.value = navIndex
   if (navIndex == 0) {
@@ -43,17 +45,11 @@ onMounted(() => {
   // connectWallet();
 })
 
-// 等待页面加载完成后执行
-window.onload = () => {
-
-};
-
 async function getP() {
   console.log("start get price");
   const response = await getPrice();
-  console.log(response.data.data.price);
   price.value = response.data.data.price;
-  console.log(price.value);
+  amount.value = response.data.data.amount;
 }
 
 async function connectWallet() {
@@ -149,7 +145,7 @@ const handleCommand = (command: string) => {
         <div>UNC Price:</div>
         <!--        <div>$1.2313</div>-->
         <div>${{ price }}</div>
-        <div>(+0.81%)</div>
+        <div>(+{{amount}}%)</div>
       </div>
       <div class="nav_corner_item">
         <div class="nav_corner_item_side">

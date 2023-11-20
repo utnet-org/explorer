@@ -11,13 +11,13 @@
             @click="setTimeRange('week')"
             type="success"
             size="small"
-            :plain="selectedRange === 'week' ? false : true"
+            :plain="selectedRange!=='week'"
             :style="{
               color: selectedRange === 'week' ? ' #000' : ' rgba(0, 0, 0, 0.5)',
               backgroundColor: selectedRange === 'week' ? '#3EDFCF' : '#fff',
               fontWeight: selectedRange === 'week' ? 500 : 300,
             }"
-            >week</el-button
+            >周</el-button
           >
           <el-button
             class="custom_buttons"
@@ -25,14 +25,14 @@
             color="#3EDFCF"
             @click="setTimeRange('month')"
             type="success"
-            :plain="selectedRange === 'month' ? false : true"
+            :plain="selectedRange!=='month'"
             :style="{
               color:
                 selectedRange === 'month' ? ' #000' : ' rgba(0, 0, 0, 0.5)',
               backgroundColor: selectedRange === 'month' ? '#3EDFCF' : '#fff',
               fontWeight: selectedRange === 'month' ? 500 : 300,
             }"
-            >month</el-button
+            >月</el-button
           >
         </div>
         <div>

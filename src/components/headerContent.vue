@@ -9,12 +9,10 @@ defineProps<{ viewportWidth: number }>()
 let ovData = reactive<OverviewInfo>({});
 const lastTime = ref('');
 
-async function fetchOverviewInfoInfo() {
+async function fetchOverviewInfo() {
   const response = await getOverviewInfo();
   console.log(response.data.data);
   Object.assign(ovData, response.data.data);
-  // const refs = toRaw(response.data.data);
-  // ovData = {...ovData,...refs};
   lastTime.value = updateTimeAgo(ovData.latestBlock);
   console.log(ovData.latestBlock);
   console.log(lastTime.value);
@@ -23,7 +21,7 @@ async function fetchOverviewInfoInfo() {
 onMounted(() => {
   // 每3秒更新数据
   intervalId = window.setInterval(() => {
-    fetchOverviewInfoInfo();
+    fetchOverviewInfo();
     // timeDifference();
   }, 3000);
 })
@@ -44,20 +42,20 @@ onUnmounted(() => {
             <div class="peak_content_top_side">
               <div class="peak_content_top_side_title">Utility Chain Explorer</div>
               <div class="peak_content_top_side_search">
-                <div class="peak_content_top_side_search_type">All Filters</div>
-                <img class="peak_content_top_side_search_type_icon"
-                     src="../assets/images/search_to_bottom.png" alt="">
+                <!--                <div class="peak_content_top_side_search_type">All Filters</div>-->
+                <!--                <img class="peak_content_top_side_search_type_icon"-->
+                <!--                     src="../assets/images/search_to_bottom.png" alt="">-->
                 <input type="text" name="" id="" placeholder="搜索账户/区块/地址/消息">
                 <img class="peak_content_top_side_search_btn" src="../assets/images/home_search_icon.png"
                      alt="">
               </div>
-              <div class="search_history">
-                <div>Trending search:</div>
-                <div>内容1</div>
-                <div>内容2</div>
-                <div>内容3</div>
-                <div>内容4</div>
-              </div>
+              <!--              <div class="search_history">-->
+              <!--                <div>Trending search:</div>-->
+              <!--                <div>内容1</div>-->
+              <!--                <div>内容2</div>-->
+              <!--                <div>内容3</div>-->
+              <!--                <div>内容4</div>-->
+              <!--              </div>-->
             </div>
             <div class="peak_content_top_right">
               <img class="middle_image" src="../assets/images/header_middle_image.png" alt="">

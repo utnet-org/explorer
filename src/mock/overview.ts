@@ -1,6 +1,6 @@
 import Mock from 'mockjs';
 
-Mock.mock('/api/home/info', 'post', {
+Mock.mock('/api/overview/info', 'post', {
     code: 200,
     data: {
         height: '@integer(0, 100000)',

@@ -65,12 +65,5 @@ setupMock({
         Mock.mock(new RegExp('/api/user/logout'), () => {
             return successResponseWrap(null);
         });
-
-        Mock.mock('/api/price', 'get', {
-            code: 200,
-            data: {
-                price: '@integer(20, 50)',
-            },
-        });
     },
 });

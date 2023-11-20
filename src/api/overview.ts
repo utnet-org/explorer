@@ -14,5 +14,5 @@ export interface OverviewInfo {
 }
 
 export function getOverviewInfo() {
-    return axios.post<OverviewInfo>('/api/home/info');
+    return axios.post<OverviewInfo>('/api/overview/info');
 }

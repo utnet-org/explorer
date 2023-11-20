@@ -136,41 +136,42 @@ const tableData = [
         <div style="height: 212px;"></div>
         <div class="block_list">
             <div class="block_list_header">区块列表</div>
-            <el-table :data="tableData" table-layout="fixed"
-                :header-cell-style="{ textAlign: 'center', color: 'rgba(0,0,0,0.5)', fontSize: '12px', fontWeight: '300', borderBottom: 'none', backgroundColor: '#F9F9F8' }"
-                :cell-style="{ color: '#000', height: '36px', fontSize: '14px', fontWeight: '500', textAlign: 'center', borderBottom: '0.5px solid rgba(140, 233, 220,0.5)', backgroundColor: '#F9F9F8' }">
-                <el-table-column prop="name" label="高度">
-                    <template #default="">
-                        <div style="color: #0FACB6;margin-bottom: 8px;font-size: 14px;">3292964</div>
-                        <div style="color: #6a6a69;font-size: 12px;">1分13秒前</div>
-                    </template>
-                </el-table-column>
-                <el-table-column label="区块ID">
-                    <template #default="scope">
-                        <div v-for="(item, index) in scope.row.newBlockList" :key="index">{{ item }}</div>
-                    </template>
-                </el-table-column>
-                <el-table-column label="算力提供者">
-                    <template #default="scope">
-                        <div v-for="( index) in scope.row.newBlockList" :key="index">f01234921</div>
-                    </template>
-                </el-table-column>
-                <el-table-column label="标签">
-                    <template #default="scope">
-                        <div v-for="( index) in scope.row.newBlockList" :key="index">---</div>
-                    </template>
-                </el-table-column>
-                <el-table-column label="消息">
-                    <template #default="scope">
-                        <div v-for="( index) in scope.row.newBlockList" :key="index">66</div>
-                    </template>
-                </el-table-column>
-                <el-table-column label="奖励">
-                    <template #default="scope">
-                        <div v-for="( index) in scope.row.newBlockList" :key="index">11.23 UNC</div>
-                    </template>
-                </el-table-column>
-            </el-table>
+            <div style="padding: 0 31px;margin-top: 22px;">
+                <el-table :data="tableData" table-layout="fixed"
+                    :header-cell-style="{ textAlign: 'center', color: 'rgba(0,0,0,0.5)', fontSize: '12px', fontWeight: '300', borderBottom: 'none', backgroundColor: '#F9F9F8' }"
+                    :cell-style="{ color: '#000', height: '36px', fontSize: '14px', fontWeight: '500', textAlign: 'center', borderBottom: '0.5px solid rgba(140, 233, 220,0.5)', backgroundColor: '#F9F9F8' }">
+                    <el-table-column prop="name" label="高度">
+                        <template #default="">
+                            <div style="color: #0FACB6;margin-bottom: 8px;font-size: 14px;">3292964</div>
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="时间">
+                        <template #default="">
+                            <div style="color: #6a6a69;margin-bottom: 8px;font-size: 14px;">1分30秒前</div>
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="区块ID">
+                        <template #default="scope">
+                            <div v-for="(item, index) in scope.row.newBlockList" :key="index">{{ item }}</div>
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="算力提供者">
+                        <template #default="scope">
+                            <div v-for="( index) in scope.row.newBlockList" :key="index">f01234921</div>
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="消息">
+                        <template #default="scope">
+                            <div v-for="( index) in scope.row.newBlockList" :key="index">66</div>
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="奖励">
+                        <template #default="scope">
+                            <div v-for="( index) in scope.row.newBlockList" :key="index">11.23 UNC</div>
+                        </template>
+                    </el-table-column>
+                </el-table>
+            </div>
         </div>
 
     </div>

@@ -1,22 +1,30 @@
 <script setup lang="ts">
-import {getHomeInfo} from "@/api/info.ts";
-import {onMounted, onUnmounted, ref} from "vue";
+import {getOverviewInfo, OverviewInfo} from "@/api/overview.ts";
+import {onMounted, onUnmounted, reactive, ref} from "vue";
+import {updateTimeAgo} from "@/utils/time.ts";
 
-const height = ref('0.00');
-const totalPower = ref('0.00');
 let intervalId: number | undefined;
 defineProps<{ viewportWidth: number }>()
 
-async function fetchHomeInfo() {
-  const response = await getHomeInfo();
-  height.value = response.data.data.height;
-  totalPower.value = response.data.data.totalPower;
+let ovData = reactive<OverviewInfo>({});
+const lastTime = ref('');
+
+async function fetchOverviewInfoInfo() {
+  const response = await getOverviewInfo();
+  console.log(response.data.data);
+  Object.assign(ovData, response.data.data);
+  // const refs = toRaw(response.data.data);
+  // ovData = {...ovData,...refs};
+  lastTime.value = updateTimeAgo(ovData.latestBlock);
+  console.log(ovData.latestBlock);
+  console.log(lastTime.value);
 }
 
 onMounted(() => {
   // 每3秒更新数据
   intervalId = window.setInterval(() => {
-    fetchHomeInfo();
+    fetchOverviewInfoInfo();
+    // timeDifference();
   }, 3000);
 })
 
@@ -65,54 +73,54 @@ onUnmounted(() => {
             <div class="peak_content_section_above">
               <div class="peak_content_section_item first_item">
                 <div>区块高度</div>
-                <div>{{ height }}</div>
+                <div>{{ ovData.height }}</div>
               </div>
               <div class="peak_content_section_item_side"></div>
               <div class="peak_content_section_item secound_item">
                 <div>最新区块时间</div>
-                <div>1分15秒前</div>
+                <div>{{ lastTime }}</div>
               </div>
               <div class="peak_content_section_item_side"></div>
               <div class="peak_content_section_item third_item">
                 <div>全网有效算力</div>
-                <div>{{ totalPower }} TIB</div>
+                <div>{{ ovData.totalPower }} TIB</div>
               </div>
               <div class="peak_content_section_item_side"></div>
               <div class="peak_content_section_item fourth_item">
                 <div>活跃算力提供者</div>
-                <div>3366</div>
+                <div>{{ ovData.activeMiner }}</div>
               </div>
               <div class="peak_content_section_item_side"></div>
               <div class="peak_content_section_item fifth_item">
                 <div>每区块奖励</div>
-                <div>11.1898 UNC</div>
+                <div>{{ ovData.blockReward }} UNC</div>
               </div>
             </div>
             <div class="peak_content_section_line"></div>
             <div class="peak_content_section_under">
               <div class="peak_content_section_item first_item">
-                <div>区块高度</div>
-                <div>3,290,404</div>
+                <div>24h/T算力平均收益</div>
+                <div>{{ ovData.blockReward }} UNC/TIB</div>
               </div>
               <div class="peak_content_section_item_side"></div>
               <div class="peak_content_section_item secound_item">
-                <div>区块高度</div>
-                <div>3,290,404</div>
+                <div>近24h产出量</div>
+                <div>{{ ovData.dayProduction }} UNC</div>
               </div>
               <div class="peak_content_section_item_side"></div>
               <div class="peak_content_section_item third_item">
-                <div>区块高度</div>
-                <div>3,290,404</div>
+                <div>24h消息数</div>
+                <div>{{ ovData.dayMessage }}</div>
               </div>
               <div class="peak_content_section_item_side"></div>
               <div class="peak_content_section_item fourth_item">
-                <div>区块高度</div>
-                <div>3,290,404</div>
+                <div>总账户数</div>
+                <div>{{ ovData.totalAccount }}</div>
               </div>
               <div class="peak_content_section_item_side"></div>
               <div class="peak_content_section_item fifth_item">
-                <div>区块高度</div>
-                <div>3,290,404</div>
+                <div>平均区块间隔</div>
+                <div>{{ ovData.aveBlockInterval }} 秒</div>
               </div>
             </div>
           </div>

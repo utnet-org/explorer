@@ -2,7 +2,7 @@ import Mock from 'mockjs';
 
 // import './user';
 // import './message-box';
-import './info.ts';
+import './overview.ts';
 import './price.ts';
 
 Mock.setup({

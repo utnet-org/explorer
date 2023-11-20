@@ -21,7 +21,7 @@ const address = ref('Connect Wallet');
 const price = ref('---');
 const amount = ref('0.00');
 
-const chanegSelectIndex = (navIndex: number) => {
+const changeSelectIndex = (navIndex: number) => {
   selectIndex.value = navIndex
   if (navIndex == 0) {
     router.push('/')
@@ -98,7 +98,7 @@ const handleCommand = (command: string) => {
         <div class="nav_select_left_title">Utilityscan</div>
         <div class="select_list">
           <div v-for="(navItem, navIndex) in navSelectList" :key="navIndex" class="select_list_item"
-            @click="chanegSelectIndex(navIndex)" :class="selectIndex == navIndex ? 'active' : ''">{{ navItem }}
+            @click="changeSelectIndex(navIndex)" :class="selectIndex == navIndex ? 'active' : ''">{{ navItem }}
           </div>
         </div>
       </div>

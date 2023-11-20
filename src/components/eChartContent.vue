@@ -168,7 +168,7 @@ const setTimeRange = (range: string) => {
               padding: 11px;
               overflow: hidden;
               border : 1px solid #3EDFCF;
-              background-color:rgba(217, 217, 217, 0.8);
+              background-color:rgba(217, 217, 217, 0.7);
               backdrop-filter: blur(2px);
               border-radius: 8px;">
               <div style="z-index:1000">
@@ -297,7 +297,7 @@ const setTimeRange = (range: string) => {
       height: 98px;
       padding: 11px;
       border: 1px solid #3edfcf;
-      background-color: rgba(217, 217, 217, 0.8);
+      background-color: rgba(217, 217, 217, 0.7);
       backdrop-filter: blur(2px);
       border-radius: 8px;
       position: relative;
@@ -384,7 +384,7 @@ const setTimeRange = (range: string) => {
               padding-left: 11px;
               padding-right: 11px;
               border : 1px solid #3EDFCF;
-            background-color:rgba(217, 217, 217, 0.8);
+            background-color:rgba(217, 217, 217, 0.7);
               backdrop-filter: blur(2px);
               border-radius: 8px;">
   

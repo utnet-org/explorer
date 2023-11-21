@@ -33,7 +33,7 @@ export default defineConfig({
     https: false, // 是否开启 https
     open: false, // 是否自动在浏览器打开
     cors: true, // 允许跨域  8月更新
-    host: "127.0.0.1",
+    host: "0.0.0.0",
   },
   // css: {
   //   preprocessorOptions: {

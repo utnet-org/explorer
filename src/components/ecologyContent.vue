@@ -4,34 +4,6 @@ import {getEcoInfo} from "@/api/ecosystem.ts";
 import {EcoInfo} from "@/api/ecosystem.ts";
 
 defineProps<{ viewportWidth: number }>()
-//表格相关数据
-// const tableData = [
-//     {
-//         date: '+8.34%',
-//         name: 'MineFi',
-//         address: 'No. 189, Grove St, Los Angeles',
-//     },
-//     {
-//         date: '+8.34%',
-//         name: 'MineFi',
-//         address: 'No. 189, Grove St, Los Angeles',
-//     },
-//     {
-//         date: '+8.34%',
-//         name: 'MineFi',
-//         address: 'No. 189, Grove St, Los Angeles',
-//     },
-//     {
-//         date: '+8.34%',
-//         name: 'MineFi',
-//         address: 'No. 189, Grove St, Los Angeles',
-//     },
-//     {
-//         date: '+8.34%',
-//         name: 'MineFi',
-//         address: 'No. 189, Grove St, Los Angeles',
-//     },
-// ]
 // 24h, week, month, year 时间相关数据及变量
 const ecologyTimeTypeList = ['24小时', '周', '月', '年']
 const checkEcologyTimeType = ref('24h')
@@ -50,7 +22,6 @@ let ecoDatas = reactive<EcoInfo[]>([{}]);
 
 async function fetchEcoInfo() {
   const res = await getEcoInfo();
-  console.log(res.data.data);
   Object.assign(ecoDatas, res.data.data);
 }
 
@@ -66,7 +37,6 @@ onUnmounted(() => {
     clearInterval(intervalId);
   }
 });
-
 </script>
 <template>
   <div class="ecology_content">
@@ -98,9 +68,9 @@ onUnmounted(() => {
           <template #default="scope">
             <div style="display: flex;align-items: center;justify-content: center;">
               <div>{{ scope.row.trans }}</div>
-              <div style="color: #0FACB6;margin-left: 7px;">
-                <div v-if="scope.row.transPer>0">+{{ scope.row.transPer }}%</div>
-                <div v-else-if="scope.row.transPer<=0">{{ scope.row.transPer }}%</div>
+              <div style="margin-left: 7px">
+                <div v-if="scope.row.transPer>0" style="color: #0FACB6;">+{{ scope.row.transPer }}%</div>
+                <div v-else-if="scope.row.transPer<=0" style="color: palevioletred;">{{ scope.row.transPer }}%</div>
               </div>
             </div>
           </template>
@@ -109,9 +79,9 @@ onUnmounted(() => {
           <template #default="scope">
             <div style="display: flex;align-items: center;justify-content: center;">
               <div>{{ scope.row.uniAddr }}</div>
-              <div style="color: #0FACB6;margin-left: 7px;">
-                <div v-if="scope.row.uniAddrPer>0">+{{ scope.row.uniAddrPer }}%</div>
-                <div v-else-if="scope.row.uniAddrPer<=0">{{ scope.row.uniAddrPer }}%</div>
+              <div style="margin-left: 7px;">
+                <div v-if="scope.row.uniAddrPer>0" style="color: #0FACB6;">+{{ scope.row.uniAddrPer }}%</div>
+                <div v-else-if="scope.row.uniAddrPer<=0" style="color: palevioletred;">{{ scope.row.uniAddrPer }}%</div>
               </div>
             </div>
           </template>
@@ -120,9 +90,9 @@ onUnmounted(() => {
           <template #default="scope">
             <div style="display: flex;align-items: center;justify-content: center;">
               <div>${{ scope.row.locked }}M USD</div>
-              <div style="color: #0FACB6;margin-left: 7px;">
-                <div v-if="scope.row.lockedPer>0">+{{ scope.row.lockedPer }}%</div>
-                <div v-else-if="scope.row.lockedPer<=0">{{ scope.row.lockedPer }}%</div>
+              <div style="margin-left: 7px;">
+                <div v-if="scope.row.lockedPer>0" style="color: #0FACB6;">+{{ scope.row.lockedPer }}%</div>
+                <div v-else-if="scope.row.lockedPer<=0" style="color: palevioletred;">{{ scope.row.lockedPer }}%</div>
               </div>
             </div>
           </template>
@@ -131,9 +101,9 @@ onUnmounted(() => {
           <template #default="scope">
             <div style="display: flex;align-items: center;justify-content: center;">
               <div>${{ scope.row.tvl }}M USD</div>
-              <div style="color: #0FACB6;margin-left: 7px;">
-                <div v-if="scope.row.tvlPer>0">+{{ scope.row.tvlPer }}%</div>
-                <div v-else-if="scope.row.tvlPer<=0">{{ scope.row.tvlPer }}%</div>
+              <div style="margin-left: 7px;">
+                <div v-if="scope.row.tvlPer>0" style="color: #0FACB6;">+{{ scope.row.tvlPer }}%</div>
+                <div v-else-if="scope.row.tvlPer<=0" style="color: palevioletred;">{{ scope.row.tvlPer }}%</div>
               </div>
             </div>
           </template>

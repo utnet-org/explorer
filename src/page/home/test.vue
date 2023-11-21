@@ -6,8 +6,8 @@ import { ref } from 'vue';
 // import HeaderPage from '../../components/headerContent.vue';
 // import EchartPage from '../../components/eChartContent.vue';
 import EcologyPage from '../../components/ecologyContent.vue';
-import ComputingPowerServicePage from '../../components/computingPowerServiceContent.vue';
-import NewBlockPage from '../../components/newBlockContent.vue';
+import PowerPage from '../../components/powerContent.vue';
+import BlockPage from '../../components/blockContent.vue';
 // import FooterPage from '../../components/footerContent.vue';
 import { onMounted } from 'vue';
 const windowWidth = ref(document.documentElement.clientWidth);
@@ -29,9 +29,9 @@ onMounted(() => {
         <!-- 生态导览 -->
         <EcologyPage :viewportWidth=windowWidth />
         <!-- 算力服务排行榜 -->
-        <ComputingPowerServicePage :viewportWidth=windowWidth />
+        <PowerPage :viewportWidth=windowWidth />
         <!-- 最新区块 -->
-        <NewBlockPage :viewportWidth=windowWidth />
+        <BlockPage :viewportWidth=windowWidth />
 
     </div>
 </template>

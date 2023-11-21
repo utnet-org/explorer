@@ -11,11 +11,8 @@ const lastTime = ref('');
 
 async function fetchOverviewInfo() {
   const response = await getOverviewInfo();
-  console.log(response.data.data);
   Object.assign(ovData, response.data.data);
   lastTime.value = updateTimeAgo(ovData.latestBlock);
-  console.log(ovData.latestBlock);
-  console.log(lastTime.value);
 }
 
 onMounted(() => {
@@ -81,7 +78,7 @@ onUnmounted(() => {
               <div class="peak_content_section_item_side"></div>
               <div class="peak_content_section_item third_item">
                 <div>全网有效算力</div>
-                <div>{{ ovData.totalPower }} TIB</div>
+                <div>{{ ovData.totalPower }} TFLOPS</div>
               </div>
               <div class="peak_content_section_item_side"></div>
               <div class="peak_content_section_item fourth_item">
@@ -98,7 +95,7 @@ onUnmounted(() => {
             <div class="peak_content_section_under">
               <div class="peak_content_section_item first_item">
                 <div>24h/T算力平均收益</div>
-                <div>{{ ovData.blockReward }} UNC/TIB</div>
+                <div>{{ ovData.blockReward }} UNC/TFLOPS</div>
               </div>
               <div class="peak_content_section_item_side"></div>
               <div class="peak_content_section_item secound_item">

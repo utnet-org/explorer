@@ -1,10 +1,10 @@
 import Mock from 'mockjs';
 
-// import './user';
-// import './message-box';
+import './price.ts';
 import './overview.ts';
 import './ecosystem.ts';
-import './price.ts';
+import './power.ts';
+import './block.ts';
 
 Mock.setup({
   timeout: '600-1000',

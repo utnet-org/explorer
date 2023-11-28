@@ -6,7 +6,7 @@ function generateData() {
     return Array.from({length: 5}, () => ({
         rank: random.integer(0, 5),
         miner: "u0" + random.integer(10000000, 20000000),
-        tag: random.cword("尤特", 2, 5),
+        tag: random.cword("优特", 2, 5),
         effPower: random.float(0, 100, 2, 2),
         effPer: random.float(0, 50, 2, 2),
         dayReward: random.float(100, 1000, 2, 2),

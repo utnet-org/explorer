@@ -12,7 +12,7 @@ defineProps<{ viewportWidth: number }>()
                         <div class="peak_content_top_side">
                             <div class="peak_content_top_side_title">Utility Chain Explorer</div>
                             <div class="peak_content_top_side_search">
-                                <div class="peak_content_top_side_search_type">All Filters</div>
+<!--                                <div class="peak_content_top_side_search_type">All Filters</div>-->
                                 <img class="peak_content_top_side_search_type_icon"
                                     src="../assets/images/search_to_bottom.png" alt="">
                                 <input type="text" name="" id="" placeholder="搜索账户/区块/地址/消息">

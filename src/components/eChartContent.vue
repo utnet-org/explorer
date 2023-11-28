@@ -607,9 +607,9 @@ onUnmounted(() => {
 });
 </script>
 <style scoped lang="scss">
-.my_father {
-  margin: 15px 0px;
-}
+//.my_father {
+//  margin: 15px 0px;
+//}
 .custom_buttons:hover {
   background-color: #3edfcf !important;
 }
@@ -668,7 +668,7 @@ onUnmounted(() => {
     display: flex;
     justify-content: space-between;
     height: 380px;
-    margin: 15px 32px;
+    margin: 24px 32px;
   }
   .chart_one {
     margin: 8px 33px 0 26px;
@@ -747,7 +747,7 @@ onUnmounted(() => {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 16px 14px;
+    margin: 16px 21px;
   }
   .chart_one {
     margin: 20px 10px 0 9px;

@@ -638,7 +638,6 @@ onUnmounted(() => {
     0px 4px 8px 0px rgba(0, 0, 0, 0.04);
   display: flex;
   flex-direction: column;
-
   background: #f9f9f8;
 }
 
@@ -655,7 +654,6 @@ onUnmounted(() => {
   display: flex;
   justify-content: start;
   align-items: center;
-
   font-weight: 500;
   color: #191919;
 }

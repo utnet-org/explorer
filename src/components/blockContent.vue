@@ -182,7 +182,8 @@ onUnmounted(() => {
         </el-table-column>
         <el-table-column label="标签">
           <template #default="scope">
-            <div v-for="(item, index) in scope.row.tags" :key="index">{{ item }}</div>
+            <!--                      <div v-for="(item, index) in scope.row.tags" :key="index">{{ item }}</div>-->
+            <div v-for="index in scope.row.tags" :key="index">Utility</div>
           </template>
         </el-table-column>
         <el-table-column label="消息">

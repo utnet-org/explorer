@@ -35,16 +35,20 @@ export default defineConfig({
     cors: true, // 允许跨域  8月更新
     host: "0.0.0.0",
   },
-  // css: {
-  //   preprocessorOptions: {
-  //     less: {
-  //       modifyVars: {
-  //         hack: `true; @import (reference) "${resolve(
-  //           'src/assets/style/breakpoint.less'
-  //         )}";`,
-  //       },
-  //       javascriptEnabled: true,
-  //     },
-  //   },
-  // },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        // modifyVars: {
+        //   hack: `true; @import (reference) "${resolve(
+        //     'src/assets/style/global.scss'
+        //   )}";`,
+        // },
+        additionalData: `
+        @import "@/assets/style/global.scss";
+        @import "@/assets/style/font.scss";
+        `,
+        javascriptEnabled: true,
+      },
+    },
+  },
 });

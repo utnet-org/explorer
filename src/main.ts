@@ -5,9 +5,10 @@ import router from "./route/route.ts";
 import ElementPlus from "element-plus";
 import 'element-plus/dist/index.css';
 import axiosInstance from "./servers/request.ts";
-import Mock from 'mockjs';
+// import Mock from 'mockjs';
 import './mock';
 import * as ElementPlusIconsVue from '@element-plus/icons-vue';
+
 const app = createApp(App);
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
     app.component(key, component)

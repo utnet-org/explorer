@@ -1,18 +1,99 @@
-# Vue 3 + TypeScript + Vite
+# UNCSCAN
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+cloud serve client for zee daily running
 
-## Recommended IDE Setup
+## 初始化运行环境
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+安装node 并检查（Exp: v18.0）
 
-## Type Support For `.vue` Imports in TS
+```
+node -v
+```
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+安装npm 并检查（Exp: v8.6.0）
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+```
+npm -v
+```
 
-1. Disable the built-in TypeScript Extension
-   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+安装vue 并检查（Exp: v5.0.8）
+
+```
+vue --version
+```
+## 启动
+npm安装依赖
+
+```
+npm install
+```
+cd到工程目录下执行
+
+```
+npm run dev
+```
+
+## 发布
+构建测试环境
+
+```
+npm run build:stage
+```
+构建生产环境
+
+```
+npm run build:prod
+```
+
+## 其它
+预览发布环境效果
+
+```
+npm run preview
+```
+预览发布环境效果 + 静态资源分析
+
+```
+npm run preview -- --report
+```
+代码格式检查
+
+```
+npm run lint
+```
+代码格式检查并自动修复
+
+```
+npm run lint -- --fix
+```
+## npm install 失败解决办法
+删除project目录下的node_modules
+``` shell
+npm cache clean (可选)
+
+npm i --legacy-peer-deps
+```
+
+## 配置axios默认请求地址
+默认
+``` 
+VITE_API_BASE_URL= 'http://localhost:8080'
+```
+自定义
+```
+VITE_API_BASE_URL= 'http://your ip: your port'
+
+## vite 启动服务配置
+```
+  {
+    mode: 'development',
+    server: {
+      open: true, // 启动后是否默认打开
+      open: false,
+      fs: {
+        strict: true,
+      },
+      host: '0.0.0.0', // 加上host配置即可暴露ip通过局域网访问
+  }
+```
+

@@ -10,7 +10,7 @@
         <div class="black-text-15-600">Utility 公链提供支持</div>
       </div>
       <div class="black-text-14">
-        UNC SCAN是公用事业链的区块链浏览器和分析平台。
+        UNCSCAN是公用事业链的区块链浏览器和分析平台。
       </div>
     </div>
     <div class="link-content">

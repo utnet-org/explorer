@@ -91,7 +91,7 @@ const handleCommand = (command: string) => {
     <div class="nav_select">
       <div class="nav_select_left">
         <img src="../assets/images/logo.png" alt="" srcset="">
-        <div class="nav_select_left_title">UNC SCAN</div>
+        <div class="nav_select_left_title">UNCSCAN</div>
         <div v-if="size === Screen.Large" class="select_list">
           <div v-for="(navItem, navIndex) in navSelectList" :key="navIndex" class="select_list_item"
                @click="changeSelectIndex(navIndex)" :class="selectIndex == navIndex ? 'active' : ''">{{ navItem }}

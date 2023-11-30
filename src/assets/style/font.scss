@@ -1,4 +1,18 @@
-/// text 12
+/*
+text 10
+*/
+
+.grey-text-10 {
+  color: #000;
+  font-family: $primary-font-family;
+  font-size: 10px;
+  opacity: 0.5;
+}
+
+
+/*
+text 12
+*/
 
 .second-text-12{
   color: #0FACB6;
@@ -44,6 +58,23 @@
   opacity: 0.5;
 }
 
+.black-text-12 {
+  color: #000;
+  font-family: $primary-font-family;
+  font-size: 12px;
+  font-style: normal;
+  line-height: normal;
+}
+
+.black-text-12-600 {
+  color: #000;
+  font-family: $primary-font-family;
+  font-size: 12px;
+  font-weight: 600;
+  font-style: normal;
+  line-height: normal;
+}
+
 /// text 14
 
 .second-text-14{
@@ -56,6 +87,23 @@
 
 .second-text-14-500{
   color: #0FACB6;
+  font-family: $primary-font-family;
+  font-size: 14px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: normal;
+}
+
+.primary-text-14{
+  color: $primary-color;
+  font-family: $primary-font-family;
+  font-size: 14px;
+  font-style: normal;
+  line-height: normal;
+}
+
+.primary-text-14-500{
+  color: $primary-color;
   font-family: $primary-font-family;
   font-size: 14px;
   font-weight: 500;
@@ -107,3 +155,30 @@
   line-height: normal;
 }
 
+.black-text-14-600 {
+  color: #191919;
+  font-family: $primary-font-family;
+  font-size: 14px;
+  font-weight: 600;
+  font-style: normal;
+  line-height: normal;
+}
+
+/// text 15
+.black-text-15-600 {
+  color: #191919;
+  font-family: $primary-font-family;
+  font-size: 15px;
+  font-weight: 600;
+  font-style: normal;
+  line-height: normal;
+}
+/// text 20
+.black-text-20-600 {
+  color: #191919;
+  font-family: $primary-font-family;
+  font-size: 20px;
+  font-weight: 600;
+  font-style: normal;
+  line-height: normal;
+}

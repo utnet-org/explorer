@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {onMounted, reactive, ref} from 'vue';
+import {onMounted, ref} from 'vue';
 import {useRouter} from 'vue-router';
 import Wallet from '../wallet/connect.ts';
 import {ArrowDown} from "@element-plus/icons-vue";
@@ -91,7 +91,7 @@ const handleCommand = (command: string) => {
     <div class="nav_select">
       <div class="nav_select_left">
         <img src="../assets/images/logo.png" alt="" srcset="">
-        <div class="nav_select_left_title">UtilityScan</div>
+        <div class="nav_select_left_title">UNC SCAN</div>
         <div v-if="size === Screen.Large" class="select_list">
           <div v-for="(navItem, navIndex) in navSelectList" :key="navIndex" class="select_list_item"
                @click="changeSelectIndex(navIndex)" :class="selectIndex == navIndex ? 'active' : ''">{{ navItem }}
@@ -149,20 +149,21 @@ const handleCommand = (command: string) => {
           <img src="@/assets/images/message_icon.png" alt="">
           <div>页面展示均为模拟数据，测试网上线后转换为真实数据。</div>
         </div>
-        <!--        <div class=""></div>-->
       </div>
-      <!--      <div class="nav_content834" v-if="viewportWidth > 430 && viewportWidth <= 834">-->
-      <!--        <div></div>-->
-      <!--      </div>-->
-      <!--      <div class="nav_content430" v-if="viewportWidth <= 430">-->
-      <!--        <div></div>-->
-      <!--      </div>-->
+    </div>
+    <div v-else class="nav_corner">
+      <div class="nav_corner_item">
+        <div class="nav_corner_item_side">
+          <img src="@/assets/images/message_icon.png" alt="">
+          <div>页面展示均为模拟数据，测试网上线后转换为真实数据。</div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 <style scoped lang="scss">
 //大屏样式
-@media screen and (min-width: 1440px) {
+@media screen and (min-width: 1024px) {
   .nav_content {
     width: 100%;
     height: 115px;
@@ -364,24 +365,96 @@ const handleCommand = (command: string) => {
   }
 }
 
-/* 屏幕宽度小于 834px */
-//@media screen and (min-width: 320px) and (max-width: 834px) {
-//  .nav_content {
-//    width: 100%;
-//    height: 115px;
-//  }
-//}
-
 /* 屏幕宽度小于 430px */
-@media screen and (min-width: 320px) and (max-width: 834px) {
+@media screen and (min-width: 320px) and (max-width: 1023px) {
   .nav_content {
     width: 100%;
     height: 65px;
   }
-}
-
-:global(.drop-menu .el-dropdown-menu__item) {
-  --el-dropdown-menuItem-hover-fill: rgba(62, 223, 207, 0.1);;
-  --el-dropdown-menuItem-hover-color: #3edfcf;
+  .nav_corner {
+    display: flex;
+    margin: 20px 0 0 0;
+    
+    .nav_corner_item {
+      display: flex;
+      align-items: center;
+      height: 37px;
+      flex: 1;
+      border-radius: 4px;
+      background: transparent;
+      
+      //&:first-child {
+      //  margin-right: 16px;
+      //  padding: 0 12px;
+      //  box-sizing: border-box;
+      //  justify-content: flex-start;
+      //
+      //  img {
+      //    width: 18px;
+      //    height: 14px;
+      //  }
+      //
+      //  div {
+      //    margin-left: 8px;
+      //
+      //    &:nth-child(2) {
+      //      color: #000;
+      //      font-family: PingFang SC;
+      //      font-size: 12px;
+      //      font-style: normal;
+      //    }
+      //
+      //    &:nth-child(3) {
+      //      color: #0FACB6;
+      //      font-family: PingFang SC;
+      //      font-size: 14px;
+      //      font-weight: 400;
+      //    }
+      //
+      //    &:last-child {
+      //      color: #03AD00;
+      //      font-family: PingFang SC;
+      //      font-size: 12px;
+      //      font-weight: 300;
+      //    }
+      //  }
+      //}
+      
+      &:last-child {
+        justify-content: space-between;
+        
+        .nav_corner_item_side {
+          display: flex;
+          align-items: center;
+          
+          img {
+            width: 13px;
+            height: 15px;
+            margin: 0 5px 0 0;
+          }
+          
+          div {
+            color: #000;
+            font-family: PingFang SC;
+            font-size: 12px;
+            font-weight: 300;
+          }
+        }
+        
+        .nav_corner_item_time {
+          color: #000;
+          font-family: PingFang SC;
+          font-size: 10px;
+          font-weight: 300;
+          margin-right: 9px;
+        }
+        
+      }
+    }
+  }
+  :global(.drop-menu .el-dropdown-menu__item) {
+    --el-dropdown-menuItem-hover-fill: rgba(62, 223, 207, 0.1);;
+    --el-dropdown-menuItem-hover-color: #3edfcf;
+  }
 }
 </style>

@@ -45,7 +45,10 @@ export default defineConfig({
         // },
         additionalData: `
         @import "@/assets/style/global.scss";
+        @import "@/assets/style/common.scss";
         @import "@/assets/style/font.scss";
+        @import "@/assets/style/btn.scss";
+        @import "@/assets/style/line.scss";
         `,
         javascriptEnabled: true,
       },

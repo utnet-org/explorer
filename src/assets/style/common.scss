@@ -1,0 +1,21 @@
+/// 首页
+
+// 小屏幕元素排列
+.eco-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 3.5px 18px;
+}
+
+.eco-merge-value {
+  display: flex;
+  align-items: center;
+}
+
+// 排名
+.eco-rank-item {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 2px 18px;
+}

@@ -120,11 +120,11 @@ onUnmounted(() => {
       </div>
     </div>
     <div v-else-if="size === Screen.Small">
+      <div style="padding:0 0 5px 18px" class="primary-text-14-500">排名</div>
       <div v-for="(item, index) in ecoDatas" :key="index">
-        <div class="eco-item">
-          <div class="grey-text-12-300">排名</div>
+        <div class="eco-rank-item">
           <!--          <div class="black-text-14">{{ item.rank }}</div>-->
-          <div class="black-text-14-500">{{ index + 1 }}</div>
+          <div class="primary-text-14-500">{{ index + 1 }}</div>
         </div>
         <div class="eco-item">
           <div class="grey-text-12-300">名称</div>
@@ -133,33 +133,33 @@ onUnmounted(() => {
         <div class="eco-item">
           <div class="grey-text-12-300">交易次数</div>
           <div class="eco-merge-value">
+            <div class="black-text-14-500">&nbsp;{{ item.trans }}&nbsp;</div>
             <div v-if="item.transPer! > 0" class="second-text-12-500">+{{ item.transPer }}%</div>
             <div v-else-if="item.transPer! <= 0" class="minus-text-12-500">{{ item.transPer }}%</div>
-            <div class="black-text-14-500">&nbsp;{{ item.trans }}</div>
           </div>
         </div>
         <div class="eco-item">
           <div class="grey-text-12-300">独立地址数</div>
           <div class="eco-merge-value">
+            <div class="black-text-14-500">&nbsp;{{ item.uniAddr }}&nbsp;</div>
             <div v-if="item.uniAddrPer! > 0" class="second-text-12-500">+{{ item.uniAddrPer }}%</div>
             <div v-else-if="item.uniAddrPer! <= 0" class="minus-text-12-500">{{ item.uniAddrPer }}%</div>
-            <div class="black-text-14-500">&nbsp;{{ item.uniAddr }}</div>
           </div>
         </div>
         <div class="eco-item">
           <div class="grey-text-12-300">锁定UNC</div>
           <div class="eco-merge-value">
+            <div class="black-text-14-500">&nbsp;{{ item.locked }}M USD&nbsp;</div>
             <div v-if="item.lockedPer!> 0" class="second-text-12-500">+{{ item.lockedPer }}%</div>
             <div v-else-if="item.lockedPer! <= 0" class="minus-text-12-500">{{ item.lockedPer }}%</div>
-            <div class="black-text-14-500">&nbsp;${{ item.locked }}M USD</div>
           </div>
         </div>
         <div class="eco-item">
           <div class="grey-text-12-300">TVL</div>
           <div class="eco-merge-value">
+            <div class="black-text-14-500">&nbsp;{{ item.tvl }}M USD&nbsp;</div>
             <div v-if="item.tvlPer! > 0" class="second-text-12-500">+{{ item.tvlPer }}%</div>
             <div v-else-if="item.tvlPer! <= 0" class="minus-text-12-500">{{ item.tvlPer }}%</div>
-            <div class="black-text-14-500">&nbsp;${{ item.tvl }}M USD</div>
           </div>
         </div>
         <!--        最后一条数据去除分隔线-->
@@ -234,19 +234,6 @@ onUnmounted(() => {
       padding: 0 22px;
       box-sizing: border-box;
     }
-    
-    .open_more {
-      margin-top: 12px;
-      height: 32px;
-      line-height: 32px;
-      text-align: center;
-      color: #000;
-      font-size: 14px;
-      cursor: pointer;
-      font-weight: 400;
-      border-radius: 0 0 8px 8px;
-      background: rgba(255, 255, 255, 0.80);
-    }
   }
 }
 
@@ -313,36 +300,6 @@ onUnmounted(() => {
       padding: 0 22px;
       box-sizing: border-box;
     }
-    
-    .open_more {
-      margin-top: 12px;
-      height: 32px;
-      line-height: 32px;
-      text-align: center;
-      color: #000;
-      font-size: 14px;
-      cursor: pointer;
-      font-weight: 400;
-      border-radius: 0 0 8px 8px;
-      background: rgba(255, 255, 255, 0.80);
-    }
-  }
-  
-  .eco-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 2px 18px;
-  }
-  .eco-line {
-    height: 0.5px;
-    background: $primary-color;
-    opacity: 0.5;
-    margin: 12px 18px;
-  }
-  
-  .eco-merge-value {
-    display: flex;
-    align-items: center;
   }
 }
 </style>

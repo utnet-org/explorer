@@ -2,92 +2,87 @@
 
 utility scan explorer
 
-## 初始化运行环境
+## Initialize Running Env
 
-安装node 并检查（Exp: v18.0）
+install node check version（Exp: v18.0）
 
 ``` shell
 node -v
 ```
 
-安装npm 并检查（Exp: v8.6.0）
+install npm check version（Exp: v8.6.0）
 
 ``` shell
 npm -v
 ```
 
-安装vue 并检查（Exp: v5.0.8）
+install vue3.2 check version（Exp: v5.0.8）
 
 ``` shell
 vue --version
 ```
-## 启动
-npm安装依赖
+## Launch
+npm install dependencies
 
 ``` shell
 npm install
 ```
-cd到工程目录下执行
+execute in the project directory
 
 ``` shell
 npm run dev
 ```
 
-## 发布
-构建生产环境
+## Release
+Build production
 ``` shell
 npm run build
 ```
 
-## 其它
-预览发布环境效果
+## Other
+Preview the release environment effects
 
 ``` shell
 npm run preview
 ```
-预览发布环境效果 + 静态资源分析
+Preview the release environment effects, Static resource analysis
 
 ``` shell
 npm run preview -- --report
 ```
-代码格式检查
-
-``` shell
-npm run lint
-```
-代码格式检查并自动修复
+format check & fix
 
 ``` shell
 npm run lint -- --fix
 ```
-## npm install 失败解决办法
-删除project目录下的node_modules
+## Install failure solution
+Delete node modules from the project directory
 ``` shell
-npm cache clean (可选)
+npm cache clean (choosable)
 npm i --legacy-peer-deps
 ```
 
-## 配置axios默认请求地址
-默认
+## Configure the axios default request address
+default
 ``` dotenv
 VITE_API_BASE_URL= 'http://localhost:8080'
 ```
-自定义
+operation
 ``` dotenv
 VITE_API_BASE_URL= 'http://your ip: your port'
 ``` 
 
-## vite 启动服务配置
+## Vite serve configuration
 ``` typescript
  {
     mode: 'development',
     server: {
-      open: true, // 启动后是否默认打开
+      open: true, // Whether to open by default after startup
       open: false,
       fs: {
         strict: true,
       },
-      host: '0.0.0.0', // 加上host配置即可暴露ip通过局域网访问
+      host: '0.0.0.0', // Add host configuration to expose ip access via LAN
   }
 ```
 

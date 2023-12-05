@@ -1,6 +1,5 @@
 import { mergeConfig } from 'vite';
 import baseConfig from './vite.config.base';
-import configCompressPlugin from './plugin/compress';
 
 export default mergeConfig(
   {

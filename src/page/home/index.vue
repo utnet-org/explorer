@@ -23,15 +23,15 @@
 <template>
   <div class="content">
     <!-- 头部 -->
-    <HeaderPage :viewportWidth="windowWidth" />
+    <HeaderPage fromPage="home" />
     <!-- 可视化视图 -->
     <EChartPage :viewportWidth="windowWidth" />
     <!-- 生态导览 -->
     <EcologyPage :viewportWidth="windowWidth" />
     <!-- 算力服务排行榜 -->
-    <PowerPage :viewportWidth="windowWidth" />
+    <PowerPage />
     <!-- 最新区块 -->
-    <BlockPage :viewportWidth="windowWidth" />
+    <BlockPage fromPage="home" />
   </div>
 </template>
 <style scoped lang="scss">

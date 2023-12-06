@@ -5,7 +5,7 @@
   import { getScreenSize, Screen } from '@/utils/screen-size.ts';
 
   let intervalId: number | undefined;
-  defineProps<{ viewportWidth: number }>();
+  defineProps<{ fromPage: string }>();
 
   const ovData = reactive<OverviewInfo>({});
   const lastTime = ref('');
@@ -64,89 +64,68 @@
         <!--            </div>-->
         <!--          </div>-->
       </div>
-      <div v-if="size !== Screen.Small" class="peak_content_section">
+      <div
+        v-if="fromPage == 'home' && size !== Screen.Small"
+        class="peak_content_section"
+      >
         <div class="peak_content_section_above">
           <div class="peak_content_section_item first_item">
             <div>区块高度</div>
             <div>{{ ovData.height }}</div>
           </div>
-          <div
-            v-if="size !== Screen.Small"
-            class="peak_content_section_item_side"
-          ></div>
+          <div class="peak_content_section_item_side"></div>
           <div class="peak_content_section_item second_item">
             <div>最新区块时间</div>
             <div>{{ lastTime }}</div>
           </div>
-          <div
-            v-if="size !== Screen.Small"
-            class="peak_content_section_item_side"
-          ></div>
+          <div class="peak_content_section_item_side"></div>
           <div class="peak_content_section_item third_item">
             <div>全网有效算力</div>
             <div>{{ ovData.totalPower }} TFLOPS</div>
           </div>
-          <div
-            v-if="size !== Screen.Small"
-            class="peak_content_section_item_side"
-          ></div>
+          <div class="peak_content_section_item_side"></div>
           <div class="peak_content_section_item fourth_item">
             <div>活跃算力提供者</div>
             <div>{{ ovData.activeMiner }}</div>
           </div>
-          <div
-            v-if="size !== Screen.Small"
-            class="peak_content_section_item_side"
-          ></div>
+          <div class="peak_content_section_item_side"></div>
           <div class="peak_content_section_item fifth_item">
             <div>每区块奖励</div>
             <div>{{ ovData.blockReward }} UNC</div>
           </div>
         </div>
-        <div
-          v-if="size !== Screen.Small"
-          class="peak_content_section_line"
-        ></div>
+        <div class="peak_content_section_line"></div>
         <div class="peak_content_section_under">
           <div class="peak_content_section_item first_item">
             <div>24h/T算力平均收益</div>
             <div>{{ ovData.blockReward }} UNC/TFLOPS</div>
           </div>
-          <div
-            v-if="size !== Screen.Small"
-            class="peak_content_section_item_side"
-          ></div>
+          <div class="peak_content_section_item_side"></div>
           <div class="peak_content_section_item second_item">
             <div>近24h产出量</div>
             <div>{{ ovData.dayProduction }} UNC</div>
           </div>
-          <div
-            v-if="size !== Screen.Small"
-            class="peak_content_section_item_side"
-          ></div>
+          <div class="peak_content_section_item_side"></div>
           <div class="peak_content_section_item third_item">
             <div>24h消息数</div>
             <div>{{ ovData.dayMessage }}</div>
           </div>
-          <div
-            v-if="size !== Screen.Small"
-            class="peak_content_section_item_side"
-          ></div>
+          <div class="peak_content_section_item_side"></div>
           <div class="peak_content_section_item fourth_item">
             <div>总账户数</div>
             <div>{{ ovData.totalAccount }}</div>
           </div>
-          <div
-            v-if="size !== Screen.Small"
-            class="peak_content_section_item_side"
-          ></div>
+          <div class="peak_content_section_item_side"></div>
           <div class="peak_content_section_item fifth_item">
             <div>平均区块间隔</div>
             <div>{{ ovData.aveBlockInterval }} 秒</div>
           </div>
         </div>
       </div>
-      <div v-else class="peak_content_section">
+      <div
+        v-if="fromPage == 'home' && size == Screen.Small"
+        class="peak_content_section"
+      >
         <div class="peak_content_section_above">
           <div class="peak_content_section_item">
             <div>区块高度</div>

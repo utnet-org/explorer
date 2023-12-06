@@ -5,7 +5,7 @@
   import { updateTimeAgo } from '@/utils/time.ts';
   import { getScreenSize, Screen } from '@/utils/screen-size.ts';
 
-  // defineProps<{ viewportWidth: number }>()
+  const porps = defineProps<{ fromPage: string }>();
   const size = getScreenSize().currentScreenSize;
   let intervalId: number | undefined;
 
@@ -41,7 +41,10 @@
   });
 </script>
 <template>
-  <div class="new_block_content">
+  <div
+    class="new_block_content"
+    :style="porps.fromPage == 'blockChain' ? 'margin-top:60px !important;' : ''"
+  >
     <div class="new_block_content_header">
       <div class="new_block_content_header_title">最新区块</div>
       <!--      <div class="new_block_content_header_button">查看更多</div>-->

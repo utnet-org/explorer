@@ -8,6 +8,8 @@ import BlockChain from '../page/blockchain/index.vue'; // 你的视图组件路�
 import Message from '../page/blockchain/message.vue'; // 你的视图组件路径
 import RichList from '../page/blockchain/richList.vue'; // 你的视图组件路径
 import OrderList from '../page/blockchain/order.vue'; // 你的视图组件路径
+import MemoryPool from '../page/blockchain/memoryPool.vue'; // 你的视图组件路径
+import ContractVerification from '../page/blockchain/contractVerification.vue'; // 你的视图组件路径
 import Contract from '../page/home/contract.vue'; // 你的视图组件路径
 import Statistics from '../page/home/statistics.vue'; // 你的视图组件路径
 import Resource from '../page/home/resource.vue'; // 你的视图组件路径
@@ -53,6 +55,14 @@ const routes = [
       {
         path: '/blockchain/order',
         component: OrderList,
+      },
+      {
+        path: '/blockchain/memoryPool',
+        component: MemoryPool,
+      },
+      {
+        path: '/blockchain/contractVerification',
+        component: ContractVerification,
       },
     ],
   },

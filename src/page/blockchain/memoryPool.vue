@@ -1,124 +1,112 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { onMounted } from 'vue';
 import HeaderPage from '../../components/otherHeaderContent.vue';
 // import Mock from 'mockjs';
 import { getScreenSize, Screen } from '@/utils/screen-size.ts';
-import { Search } from '@element-plus/icons-vue'
 // defineProps<{ msg: string }>()
 const size = getScreenSize().currentScreenSize;
-const searchMessage = ref('');
 onMounted(() => {
 });
 const tableData = [
     {
-        messageId: 'baf...azy',
-        blockHeight: '3292964',
-        time: '1分13秒前',
+        memoryPoolId: 'f3wc2vre...7hjss21iq',
+        createTime: '2020-10-21 11:13:30',
         sender: 'f3wc2vre...7hjss21iq',
-        receiver: 'f10923786',
-        method: 'SubmitWindowedPoSt',
+        receiver: 'f10232129',
+        method: 'ProveCommitSector',
         amount: '0',
-        status: 'OK',
+        gasLimit: '80,234.092',
+        gasPremium: '100,400',
     },
     {
-        messageId: 'baf...azy',
-        blockHeight: '3292964',
-        time: '1分13秒前',
+        memoryPoolId: 'f3wc2vre...7hjss21iq',
+        createTime: '2020-10-21 11:13:30',
         sender: 'f3wc2vre...7hjss21iq',
-        receiver: 'f10923786',
-        method: 'SubmitWindowedPoSt',
+        receiver: 'f10232129',
+        method: 'ProveCommitSector',
         amount: '0',
-        status: 'OK',
+        gasLimit: '80,234.092',
+        gasPremium: '100,400',
     },
     {
-        messageId: 'baf...azy',
-        blockHeight: '3292964',
-        time: '1分13秒前',
+        memoryPoolId: 'f3wc2vre...7hjss21iq',
+        createTime: '2020-10-21 11:13:30',
         sender: 'f3wc2vre...7hjss21iq',
-        receiver: 'f10923786',
-        method: 'SubmitWindowedPoSt',
+        receiver: 'f10232129',
+        method: 'ProveCommitSector',
         amount: '0',
-        status: 'OK',
+        gasLimit: '80,234.092',
+        gasPremium: '100,400',
     },
     {
-        messageId: 'baf...azy',
-        blockHeight: '3292964',
-        time: '1分13秒前',
+        memoryPoolId: 'f3wc2vre...7hjss21iq',
+        createTime: '2020-10-21 11:13:30',
         sender: 'f3wc2vre...7hjss21iq',
-        receiver: 'f10923786',
-        method: 'SubmitWindowedPoSt',
+        receiver: 'f10232129',
+        method: 'ProveCommitSector',
         amount: '0',
-        status: 'OK',
+        gasLimit: '80,234.092',
+        gasPremium: '100,400',
     },
     {
-        messageId: 'baf...azy',
-        blockHeight: '3292964',
-        time: '1分13秒前',
+        memoryPoolId: 'f3wc2vre...7hjss21iq',
+        createTime: '2020-10-21 11:13:30',
         sender: 'f3wc2vre...7hjss21iq',
-        receiver: 'f10923786',
-        method: 'SubmitWindowedPoSt',
+        receiver: 'f10232129',
+        method: 'ProveCommitSector',
         amount: '0',
-        status: 'OK',
+        gasLimit: '80,234.092',
+        gasPremium: '100,400',
     },
     {
-        messageId: 'baf...azy',
-        blockHeight: '3292964',
-        time: '1分13秒前',
+        memoryPoolId: 'f3wc2vre...7hjss21iq',
+        createTime: '2020-10-21 11:13:30',
         sender: 'f3wc2vre...7hjss21iq',
-        receiver: 'f10923786',
-        method: 'SubmitWindowedPoSt',
+        receiver: 'f10232129',
+        method: 'ProveCommitSector',
         amount: '0',
-        status: 'OK',
+        gasLimit: '80,234.092',
+        gasPremium: '100,400',
     },
     {
-        messageId: 'baf...azy',
-        blockHeight: '3292964',
-        time: '1分13秒前',
+        memoryPoolId: 'f3wc2vre...7hjss21iq',
+        createTime: '2020-10-21 11:13:30',
         sender: 'f3wc2vre...7hjss21iq',
-        receiver: 'f10923786',
-        method: 'SubmitWindowedPoSt',
+        receiver: 'f10232129',
+        method: 'ProveCommitSector',
         amount: '0',
-        status: 'OK',
+        gasLimit: '80,234.092',
+        gasPremium: '100,400',
     },
     {
-        messageId: 'baf...azy',
-        blockHeight: '3292964',
-        time: '1分13秒前',
+        memoryPoolId: 'f3wc2vre...7hjss21iq',
+        createTime: '2020-10-21 11:13:30',
         sender: 'f3wc2vre...7hjss21iq',
-        receiver: 'f10923786',
-        method: 'SubmitWindowedPoSt',
+        receiver: 'f10232129',
+        method: 'ProveCommitSector',
         amount: '0',
-        status: 'OK',
+        gasLimit: '80,234.092',
+        gasPremium: '100,400',
     },
     {
-        messageId: 'baf...azy',
-        blockHeight: '3292964',
-        time: '1分13秒前',
+        memoryPoolId: 'f3wc2vre...7hjss21iq',
+        createTime: '2020-10-21 11:13:30',
         sender: 'f3wc2vre...7hjss21iq',
-        receiver: 'f10923786',
-        method: 'SubmitWindowedPoSt',
+        receiver: 'f10232129',
+        method: 'ProveCommitSector',
         amount: '0',
-        status: 'OK',
+        gasLimit: '80,234.092',
+        gasPremium: '100,400',
     },
     {
-        messageId: 'baf...azy',
-        blockHeight: '3292964',
-        time: '1分13秒前',
+        memoryPoolId: 'f3wc2vre...7hjss21iq',
+        createTime: '2020-10-21 11:13:30',
         sender: 'f3wc2vre...7hjss21iq',
-        receiver: 'f10923786',
-        method: 'SubmitWindowedPoSt',
+        receiver: 'f10232129',
+        method: 'ProveCommitSector',
         amount: '0',
-        status: 'OK',
-    },
-    {
-        messageId: 'baf...azy',
-        blockHeight: '3292964',
-        time: '1分13秒前',
-        sender: 'f3wc2vre...7hjss21iq',
-        receiver: 'f10923786',
-        method: 'SubmitWindowedPoSt',
-        amount: '0',
-        status: 'OK',
+        gasLimit: '80,234.092',
+        gasPremium: '100,400',
     },
 ]
 </script>
@@ -128,27 +116,14 @@ const tableData = [
         <div style="height: 200px;"></div>
         <div class="block_list">
             <div class="block_list_header">
-                <div class="block_list_header_side">
-                    <div class="block_list_header_title">消息列表</div>
-                    <div class="block_list_header_text">共 1141606363 条消息</div>
-                </div>
-                <el-input v-if="size === Screen.Large" style="width: 30%;height: 30px;margin-right: 20px;"
-                    v-model="searchMessage" placeholder="搜索客户/矿工" :suffix-icon="Search" clearable />
-            </div>
-            <div class="search" v-if="size === Screen.Small">
-                <el-input style="width: 50%;height: 40px;" v-model="searchMessage" placeholder="搜索客户/矿工"
-                    :suffix-icon="Search" clearable />
+                <div class="block_list_header_title">内存池消息列表</div>
+                <div class="block_list_header_text">共 676 条消息</div>
             </div>
             <el-table :data="tableData" table-layout="fixed" v-if="size === Screen.Large"
                 :header-cell-style="{ textAlign: 'center', color: 'rgba(0,0,0,0.5)', fontSize: '12px', fontWeight: '300', borderBottom: 'none', backgroundColor: '#F9F9F8' }"
                 :cell-style="{ color: '#000', height: '36px', fontSize: '14px', fontWeight: '500', textAlign: 'center', borderBottom: '0.5px solid rgba(140, 233, 220,0.5)', backgroundColor: '#F9F9F8' }">
-                <el-table-column prop="messageId" label="消息ID"></el-table-column>
-                <el-table-column label="区块高度">
-                    <template #default="scope">
-                        <div style="color:  #0FACB6;">{{ scope.row.blockHeight }}</div>
-                    </template>
-                </el-table-column>
-                <el-table-column prop="time" label="时间"></el-table-column>
+                <el-table-column prop="memoryPoolId" label="ID" />
+                <el-table-column prop="createTime" label="创建时间"></el-table-column>
                 <el-table-column prop="sender" label="发送方"></el-table-column>
                 <el-table-column prop="receiver" label="接收方"></el-table-column>
                 <el-table-column label="方法">
@@ -158,11 +133,15 @@ const tableData = [
                 </el-table-column>
                 <el-table-column label="金额">
                     <template #default="scope">
-                        <span>{{ scope.row.amount }}</span>
-                        <span>UNC</span>
+                        <div>{{ scope.row.amount }} UNC</div>
                     </template>
                 </el-table-column>
-                <el-table-column prop="status" label="状态"></el-table-column>
+                <el-table-column prop="gasLimit" label="gas限额"></el-table-column>
+                <el-table-column label="Gas Premium">
+                    <template #default="scope">
+                        <div>{{ scope.row.gasPremium }} attoFil</div>
+                    </template>
+                </el-table-column>
             </el-table>
             <div v-else style="padding-bottom: 20px;">
                 <div>
@@ -170,42 +149,30 @@ const tableData = [
                         <div class="eco-item">
                             <div>
                                 <div class="grey-text-12-300">
-                                    消息ID
+                                    ID
                                 </div>
                             </div>
                             <div>
                                 <div class="black-text-14">
-                                    {{ item.messageId }}
+                                    {{ item.memoryPoolId }}
                                 </div>
                             </div>
                         </div>
                         <div class="eco-item">
                             <div>
-                                <div class="grey-text-14-300">
-                                    区块高度
-                                </div>
-                            </div>
-                            <div>
-                                <div class="black-text-14" style="color: #0FACB6;">
-                                    {{ item.blockHeight }}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="eco-item">
-                            <div>
-                                <div class="grey-text-14-300">
-                                    时间
+                                <div class="grey-text-12-300">
+                                    创建时间
                                 </div>
                             </div>
                             <div>
                                 <div class="black-text-14">
-                                    {{ item.time }}
+                                    {{ item.createTime }}
                                 </div>
                             </div>
                         </div>
                         <div class="eco-item">
                             <div>
-                                <div class="grey-text-14-300">
+                                <div class="grey-text-12-300">
                                     发送方
                                 </div>
                             </div>
@@ -234,7 +201,7 @@ const tableData = [
                                 </div>
                             </div>
                             <div>
-                                <div class="black-text-14">
+                                <div class="black-text-14" style="color: #0FACB6;">
                                     {{ item.method }}
                                 </div>
                             </div>
@@ -247,19 +214,31 @@ const tableData = [
                             </div>
                             <div>
                                 <div class="black-text-14">
-                                    {{ item.amount }}UNC
+                                    {{ item.amount }} UNC
                                 </div>
                             </div>
                         </div>
                         <div class="eco-item">
                             <div>
                                 <div class="grey-text-14-300">
-                                    状态
+                                    gas限额
                                 </div>
                             </div>
                             <div>
                                 <div class="black-text-14">
-                                    {{ item.status }}
+                                    {{ item.gasLimit }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="eco-item">
+                            <div>
+                                <div class="grey-text-14-300">
+                                    Gas Premium
+                                </div>
+                            </div>
+                            <div>
+                                <div class="black-text-14">
+                                    {{ item.gasPremium }} attoFil
                                 </div>
                             </div>
                         </div>
@@ -290,7 +269,7 @@ const tableData = [
         margin: 39px auto 36px;
 
         .block_list_header {
-            height: 50px;
+            height: 40px;
             border-radius: 8px;
             background: #FFF;
             padding-left: 26px;
@@ -298,36 +277,22 @@ const tableData = [
             margin-bottom: 10px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
 
-            .block_list_header_side {
-                display: flex;
-                align-items: center;
-
-                .block_list_header_title {
-                    color: #000;
-                    font-family: PingFang SC;
-                    font-size: 16px;
-                    font-weight: 500;
-                    margin-right: 26px;
-                }
-
-                .block_list_header_text {
-                    color: #0FACB6;
-                    font-family: PingFang SC;
-                    font-size: 14px;
-                    font-weight: 400;
-                    opacity: 0.7;
-                }
+            .block_list_header_title {
+                color: #000;
+                font-family: PingFang SC;
+                font-size: 16px;
+                font-weight: 500;
+                margin-right: 26px;
             }
-        }
 
-        .search {
-            width: 100%;
-            padding: 22px 35px 20px 0;
-            box-sizing: border-box;
-            display: flex;
-            justify-content: flex-end;
+            .block_list_header_text {
+                color: #0FACB6;
+                font-family: PingFang SC;
+                font-size: 14px;
+                font-weight: 400;
+                opacity: 0.7;
+            }
         }
     }
 }
@@ -346,10 +311,6 @@ const tableData = [
                 .block_list_header_title {
                     font-size: 14px;
                 }
-            }
-
-            .search {
-                padding: 10px 15px 15px 0;
             }
         }
 

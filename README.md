@@ -6,74 +6,90 @@ utility scan explorer
 
 install node check version（Exp: v18.0）
 
-``` shell
+```shell
 node -v
 ```
 
 install npm check version（Exp: v8.6.0）
 
-``` shell
+```shell
 npm -v
 ```
 
 install vue3.2 check version（Exp: v5.0.8）
 
-``` shell
+```shell
 vue --version
 ```
+
 ## Launch
+
 npm install dependencies
 
-``` shell
+```shell
 npm install
 ```
+
 execute in the project directory
 
-``` shell
+```shell
 npm run dev
 ```
 
 ## Release
+
 Build production
-``` shell
+
+```shell
 npm run build
 ```
 
 ## Other
+
 Preview the release environment effects
 
-``` shell
+```shell
 npm run preview
 ```
+
 Preview the release environment effects, Static resource analysis
 
-``` shell
+```shell
 npm run preview -- --report
 ```
+
 format check & fix
 
-``` shell
+```shell
 npm run lint -- --fix
 ```
+
 ## Install failure solution
+
 Delete node modules from the project directory
-``` shell
+
+```shell
 npm cache clean (choosable)
 npm i --legacy-peer-deps
 ```
 
 ## Configure the axios default request address
+
 default
-``` dotenv
+
+```dotenv
 VITE_API_BASE_URL= 'http://localhost:8080'
 ```
+
 operation
-``` dotenv
+
+```dotenv
 VITE_API_BASE_URL= 'http://your ip: your port'
-``` 
+```
 
 ## Vite serve configuration
-``` typescript
+
+```typescript
  {
     mode: 'development',
     server: {
@@ -85,4 +101,3 @@ VITE_API_BASE_URL= 'http://your ip: your port'
       host: '0.0.0.0', // Add host configuration to expose ip access via LAN
   }
 ```
-

@@ -44,12 +44,18 @@
 <template>
   <div class="computing_power_service_content">
     <div class="computing_power_service_header">
-      <div class="computing_power_service_title">算力服务排行榜</div>
+      <div class="computing_power_service_title"
+        >{{ $t('home.service_rank') }}
+      </div>
     </div>
     <div class="computing_power_service_tabs">
-      <div class="computing_power_service_tabs_title">有效算力</div>
+      <div class="computing_power_service_tabs_title"
+        >{{ $t('home.effect_power') }}
+      </div>
       <div class="computing_power_service_tabs_dropdown">
-        <div class="computing_power_service_tabs_dropdown_title">算力类型</div>
+        <div class="computing_power_service_tabs_dropdown_title"
+          >{{ $t('home.power_type') }}
+        </div>
         <el-dropdown @command="changeDropdownText">
           <div class="dropdown_text">{{ dropdownText }}</div>
           <template #dropdown>
@@ -85,16 +91,16 @@
             backgroundColor: '#F9F9F8',
           }"
         >
-          <el-table-column type="index" label="排名" width="48px" />
-          <el-table-column prop="miner" label="算力提供者" />
+          <el-table-column type="index" :label="$t('home.rank')" width="55px" />
+          <el-table-column prop="miner" :label="$t('home.miner')" />
           <!--        <el-table-column prop="tag" label="标签">-->
-          <el-table-column label="标签">
+          <el-table-column :label="$t('home.tag')">
             <div>Utility</div>
             <!--          <template #default="">-->
             <!--            <div>-&#45;&#45;</div>-->
             <!--          </template>-->
           </el-table-column>
-          <el-table-column label="有效算力 / 占比" width="250px">
+          <el-table-column :label="$t('home.eff_power_ratio')" width="250px">
             <template #default="scope">
               <div
                 style="
@@ -116,17 +122,17 @@
               </div>
             </template>
           </el-table-column>
-          <el-table-column label="24小时出块奖励">
+          <el-table-column :label="$t('home.day_block_reward')">
             <template #default="scope">
               <div>{{ scope.row.dayReward }} UNC</div>
             </template>
           </el-table-column>
-          <el-table-column label="24小时算力效率">
+          <el-table-column :label="$t('home.day_compute_efficiency')">
             <template #default="scope">
               <div>{{ scope.row.dayEff }} UNC/TFLOPS</div>
             </template>
           </el-table-column>
-          <el-table-column label="24小时算力增量">
+          <el-table-column :label="$t('home.day_compute_increment')">
             <template #default="scope">
               <div>{{ scope.row.dayGrowth }} TFLOPS</div>
             </template>
@@ -137,46 +143,52 @@
     <div v-else>
       <div class="ecology_table">
         <div style="padding: 0 0 5px 18px" class="primary-text-14-500"
-          >排名</div
-        >
+          >{{ $t('home.rank') }}
+        </div>
         <div v-for="(item, index) in poDatas" :key="index">
           <div class="eco-rank-item">
             <!--          <div class="black-text-14">{{ item.rank }}</div>-->
             <div class="primary-text-14-500">{{ index + 1 }}</div>
           </div>
           <div class="eco-item">
-            <div class="grey-text-12-300">名称</div>
+            <div class="grey-text-12-300">{{ $t('home.miner') }}</div>
             <div class="black-text-14-500">{{ item.miner }}</div>
           </div>
           <div class="eco-item">
-            <div class="grey-text-12-300">标签</div>
+            <div class="grey-text-12-300">{{ $t('home.tag') }}</div>
             <!--          <div class="black-text-14-500">{{ item.tag }}</div>-->
             <div class="black-text-14-500">Utility</div>
           </div>
           <div class="eco-item">
-            <div class="grey-text-12-300">有效算力 / 占比</div>
+            <div class="grey-text-12-300">{{ $t('home.eff_power_ratio') }}</div>
             <div class="eco-merge-value">
               <div v-if="item.effPer! > 0" class="second-text-12-500"
-                >+{{ item.effPer }}%</div
-              >
+                >+{{ item.effPer }}%
+              </div>
               <div v-else-if="item.effPer! <= 0" class="minus-text-12-500"
-                >{{ item.effPer }}%</div
-              >
+                >{{ item.effPer }}%
+              </div>
               <div class="black-text-14-500"
-                >&nbsp;{{ item.effPower }} TFLOPS</div
-              >
+                >&nbsp;{{ item.effPower }} TFLOPS
+              </div>
             </div>
           </div>
           <div class="eco-item">
-            <div class="grey-text-12-300">24小时出块奖励</div>
+            <div class="grey-text-12-300">{{
+              $t('home.day_block_reward')
+            }}</div>
             <div class="black-text-14-500">{{ item.dayReward }} UNC</div>
           </div>
           <div class="eco-item">
-            <div class="grey-text-12-300">24小时算力效率</div>
+            <div class="grey-text-12-300">{{
+              $t('home.day_compute_efficiency')
+            }}</div>
             <div class="black-text-14-500">{{ item.dayEff }} UNC/TFLOPS</div>
           </div>
           <div class="eco-item">
-            <div class="grey-text-12-300">24小时算力增量</div>
+            <div class="grey-text-12-300">{{
+              $t('home.day_compute_increment')
+            }}</div>
             <div class="black-text-14-500">{{ item.dayGrowth }} TFLOPS</div>
           </div>
           <!--        最后一条数据去除分隔线-->
@@ -184,7 +196,7 @@
         </div>
       </div>
     </div>
-    <div class="open_more">查看更多</div>
+    <div class="open_more">{{ $t('home.see_more') }}</div>
   </div>
 </template>
 <style scoped lang="scss">

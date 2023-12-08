@@ -10,9 +10,9 @@
         <div class="peak_content">
           <div class="peak_content_top">
             <div class="peak_content_top_side">
-              <div class="peak_content_top_side_title"
-                >Utility Chain Explorer</div
-              >
+              <div class="peak_content_top_side_title">{{
+                $t('nav.block')
+              }}</div>
               <div class="peak_content_top_side_search">
                 <!--                                <div class="peak_content_top_side_search_type">All Filters</div>-->
                 <img

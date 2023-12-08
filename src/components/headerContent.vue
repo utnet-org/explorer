@@ -36,17 +36,11 @@
     <div class="middle_content">
       <div class="peak_content_top">
         <div class="peak_content_top_side">
-          <div class="peak_content_top_side_title">Utility Chain Explorer</div>
+          <div class="peak_content_top_side_title">{{
+            $t('home.unc_explorer')
+          }}</div>
           <div class="peak_content_top_side_search">
-            <!--                <div class="peak_content_top_side_search_type">All Filters</div>-->
-            <!--                <img class="peak_content_top_side_search_type_icon"-->
-            <!--                     src="../assets/images/search_to_bottom.png" alt="">-->
-            <input
-              type="text"
-              name=""
-              id=""
-              placeholder="搜索账户/区块/地址/消息"
-            />
+            <input type="text" name="" id="" :placeholder="$t('home.search')" />
             <img
               class="peak_content_top_side_search_btn"
               src="../assets/images/home_search_icon.png"
@@ -54,20 +48,11 @@
             />
           </div>
         </div>
-        <!--          <div class="peak_content_top_right">-->
-        <!--            <img class="middle_image" src="../assets/images/header_middle_image.png" alt="">-->
-        <!--            <img class="lowest_image" src="../assets/images/header_lowest_image.png" alt="">-->
-        <!--            <div class="peak_content_top_right_lowest">-->
-        <!--              <div class="lowest_title">流动性质押</div>-->
-        <!--              <div class="lowest_text">The Ultimate Node Management Assistant</div>-->
-        <!--              <div class="lowest_btn">立即体验</div>-->
-        <!--            </div>-->
-        <!--          </div>-->
       </div>
       <div v-if="size !== Screen.Small" class="peak_content_section">
         <div class="peak_content_section_above">
           <div class="peak_content_section_item first_item">
-            <div>区块高度</div>
+            <div>{{ $t('home.height') }}</div>
             <div>{{ ovData.height }}</div>
           </div>
           <div
@@ -75,7 +60,7 @@
             class="peak_content_section_item_side"
           ></div>
           <div class="peak_content_section_item second_item">
-            <div>最新区块时间</div>
+            <div>{{ $t('home.latest_time') }}</div>
             <div>{{ lastTime }}</div>
           </div>
           <div
@@ -83,7 +68,7 @@
             class="peak_content_section_item_side"
           ></div>
           <div class="peak_content_section_item third_item">
-            <div>全网有效算力</div>
+            <div>{{ $t('home.total_power') }}</div>
             <div>{{ ovData.totalPower }} TFLOPS</div>
           </div>
           <div
@@ -91,7 +76,7 @@
             class="peak_content_section_item_side"
           ></div>
           <div class="peak_content_section_item fourth_item">
-            <div>活跃算力提供者</div>
+            <div>{{ $t('home.miner') }}</div>
             <div>{{ ovData.activeMiner }}</div>
           </div>
           <div
@@ -99,7 +84,7 @@
             class="peak_content_section_item_side"
           ></div>
           <div class="peak_content_section_item fifth_item">
-            <div>每区块奖励</div>
+            <div>{{ $t('home.block_reward') }}</div>
             <div>{{ ovData.blockReward }} UNC</div>
           </div>
         </div>
@@ -109,7 +94,7 @@
         ></div>
         <div class="peak_content_section_under">
           <div class="peak_content_section_item first_item">
-            <div>24h/T算力平均收益</div>
+            <div>{{ $t('home.average_revenue') }}</div>
             <div>{{ ovData.blockReward }} UNC/TFLOPS</div>
           </div>
           <div
@@ -117,7 +102,7 @@
             class="peak_content_section_item_side"
           ></div>
           <div class="peak_content_section_item second_item">
-            <div>近24h产出量</div>
+            <div>{{ $t('home.day_output') }}</div>
             <div>{{ ovData.dayProduction }} UNC</div>
           </div>
           <div
@@ -125,7 +110,7 @@
             class="peak_content_section_item_side"
           ></div>
           <div class="peak_content_section_item third_item">
-            <div>24h消息数</div>
+            <div>{{ $t('home.day_message') }}</div>
             <div>{{ ovData.dayMessage }}</div>
           </div>
           <div
@@ -133,7 +118,7 @@
             class="peak_content_section_item_side"
           ></div>
           <div class="peak_content_section_item fourth_item">
-            <div>总账户数</div>
+            <div>{{ $t('home.accounts') }}</div>
             <div>{{ ovData.totalAccount }}</div>
           </div>
           <div
@@ -141,78 +126,78 @@
             class="peak_content_section_item_side"
           ></div>
           <div class="peak_content_section_item fifth_item">
-            <div>平均区块间隔</div>
-            <div>{{ ovData.aveBlockInterval }} 秒</div>
+            <div>{{ $t('home.average_interval') }}</div>
+            <div>{{ ovData.aveBlockInterval }} {{ $t('home.second') }}</div>
           </div>
         </div>
       </div>
       <div v-else class="peak_content_section">
         <div class="peak_content_section_above">
           <div class="peak_content_section_item">
-            <div>区块高度</div>
+            <div>{{ $t('home.height') }}</div>
             <div>{{ ovData.height }}</div>
           </div>
         </div>
         <div class="peak_content_section_line"></div>
         <div class="peak_content_section_above">
           <div class="peak_content_section_item">
-            <div>最新区块时间</div>
+            <div>{{ $t('home.latest_time') }}</div>
             <div>{{ lastTime }}</div>
           </div>
         </div>
         <div class="peak_content_section_line"></div>
         <div class="peak_content_section_above">
           <div class="peak_content_section_item">
-            <div>全网有效算力</div>
+            <div>{{ $t('home.total_power') }}</div>
             <div>{{ ovData.totalPower }} TFLOPS</div>
           </div>
         </div>
         <div class="peak_content_section_line"></div>
         <div class="peak_content_section_above">
           <div class="peak_content_section_item">
-            <div>活跃算力提供者</div>
+            <div>{{ $t('home.miner') }}</div>
             <div>{{ ovData.activeMiner }}</div>
           </div>
         </div>
         <div class="peak_content_section_line"></div>
         <div class="peak_content_section_above">
           <div class="peak_content_section_item">
-            <div>每区块奖励</div>
+            <div>{{ $t('home.block_reward') }}</div>
             <div>{{ ovData.blockReward }} UNC</div>
           </div>
         </div>
         <div class="peak_content_section_line"></div>
         <div class="peak_content_section_above">
           <div class="peak_content_section_item first_item">
-            <div>24h/T算力平均收益</div>
-            <div>{{ ovData.blockReward }} UNC/TFLOPS</div>
+            <div>{{ $t('home.average_revenue') }}</div>
+            <div>{{ ovData.dayAveReward }} UNC/TFLOPS</div>
           </div>
         </div>
         <div class="peak_content_section_line"></div>
         <div class="peak_content_section_above">
           <div class="peak_content_section_item second_item">
-            <div>近24h产出量</div>
+            <div>{{ $t('home.day_output') }}</div>
             <div>{{ ovData.dayProduction }} UNC</div>
           </div>
         </div>
         <div class="peak_content_section_line"></div>
         <div class="peak_content_section_above">
           <div class="peak_content_section_item third_item">
-            <div>24h消息数</div>
+            <div>{{ $t('home.day_message') }}</div>
             <div>{{ ovData.dayMessage }}</div>
           </div>
           <div class="peak_content_section_line"></div>
           <div class="peak_content_section_above">
             <div class="peak_content_section_item fourth_item">
-              <div>总账户数</div>
+              <div>{{ $t('home.accounts') }}</div>
               <div>{{ ovData.totalAccount }}</div>
             </div>
           </div>
           <div class="peak_content_section_line"></div>
           <div class="peak_content_section_above">
             <div class="peak_content_section_item fifth_item">
-              <div>平均区块间隔</div>
-              <div>{{ ovData.aveBlockInterval }} 秒</div>
+              <div>{{ $t('home.average_interval') }}</div>
+              <div>{{ ovData.aveBlockInterval }} {{ $t('home.second') }}</div>
             </div>
           </div>
         </div>

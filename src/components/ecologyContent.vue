@@ -6,13 +6,13 @@
   /// 生态导览
   defineProps<{ viewportWidth: number }>();
   // 24h, week, month, year 时间相关数据及变量
-  const ecologyTimeTypeList = ['24小时', '周', '月', '年'];
+  // const ecologyTimeTypeList = ['24小时', '周', '月', '年'];
   const checkEcologyTimeType = ref('24h');
   const changeTimeType = (item: string) => {
     checkEcologyTimeType.value = item;
   };
   //tabs相关数据及变量
-  const ecologyTabsList = ['DeFi(12)', 'Community', 'Wallet(3)'];
+  // const ecologyTabsList = ['DeFi(12)', 'Community', 'Wallet(3)'];
   const checkEcologyTabs = ref('DeFi(12)');
   const changeTabsType = (item: string) => {
     checkEcologyTabs.value = item;
@@ -46,7 +46,7 @@
 <template>
   <div class="ecology_content">
     <div class="ecology_header">
-      <div class="ecology_title">生态导览</div>
+      <div class="ecology_title">{{ $t('home.eco_tour') }}</div>
       <div class="ecology_time">
         <el-button
           size="small"
@@ -58,7 +58,12 @@
             border: '0.5px solid #3EDFCF',
             borderRadius: '2px',
           }"
-          v-for="(timeItem, timeIndex) in ecologyTimeTypeList"
+          v-for="(timeItem, timeIndex) in [
+            $t('home.hour'),
+            $t('home.week'),
+            $t('home.month'),
+            $t('home.year'),
+          ]"
           :key="timeIndex"
           >{{ timeItem }}
         </el-button>
@@ -66,7 +71,11 @@
     </div>
     <div class="ecology_tabs">
       <div
-        v-for="(tabsItem, tabsIndex) in ecologyTabsList"
+        v-for="(tabsItem, tabsIndex) in [
+          $t('home.defi') + '(12)',
+          $t('home.community'),
+          $t('home.wallet') + '(3)',
+        ]"
         :key="tabsIndex"
         class="ecology_tabs_item"
         :class="checkEcologyTabs == tabsItem ? 'active' : ''"
@@ -98,9 +107,9 @@
             backgroundColor: '#F9F9F8',
           }"
         >
-          <el-table-column type="index" label="排名" width="48px" />
-          <el-table-column prop="name" label="名称" />
-          <el-table-column label="交易次数">
+          <el-table-column type="index" :label="$t('home.rank')" width="55px" />
+          <el-table-column prop="name" :label="$t('home.name')" />
+          <el-table-column :label="$t('home.transactions')">
             <template #default="scope">
               <div
                 style="
@@ -112,39 +121,41 @@
                 <div>{{ scope.row.trans }}</div>
                 <div style="margin-left: 7px">
                   <div v-if="scope.row.transPer > 0" style="color: #0facb6"
-                    >+{{ scope.row.transPer }}%</div
-                  >
+                    >+{{ scope.row.transPer }}%
+                  </div>
                   <div
                     v-else-if="scope.row.transPer <= 0"
                     style="color: palevioletred"
-                    >{{ scope.row.transPer }}%</div
-                  >
+                    >{{ scope.row.transPer }}%
+                  </div>
                 </div>
               </div>
             </template>
           </el-table-column>
-          <el-table-column label="独立地址数">
-            <div
-              style="
-                display: flex;
-                align-items: center;
-                justify-content: center;
-              "
-            >
-              <div>{{ scope.row.uniAddr }}</div>
-              <div style="margin-left: 7px">
-                <div v-if="scope.row.uniAddrPer > 0" style="color: #0facb6"
-                  >+{{ scope.row.uniAddrPer }}%</div
-                >
-                <div
-                  v-else-if="scope.row.uniAddrPer <= 0"
-                  style="color: palevioletred"
-                  >{{ scope.row.uniAddrPer }}%
+          <el-table-column :label="$t('home.address')">
+            <template #default="scope">
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                "
+              >
+                <div>{{ scope.row.uniAddr }}</div>
+                <div style="margin-left: 7px">
+                  <div v-if="scope.row.uniAddrPer > 0" style="color: #0facb6"
+                    >+{{ scope.row.uniAddrPer }}%
+                  </div>
+                  <div
+                    v-else-if="scope.row.uniAddrPer <= 0"
+                    style="color: palevioletred"
+                    >{{ scope.row.uniAddrPer }}%
+                  </div>
                 </div>
               </div>
-            </div>
+            </template>
           </el-table-column>
-          <el-table-column label="锁定UNC">
+          <el-table-column :label="$t('home.lock_UNC')">
             <template #default="scope">
               <div
                 style="
@@ -156,13 +167,13 @@
                 <div>${{ scope.row.locked }}M USD</div>
                 <div style="margin-left: 7px">
                   <div v-if="scope.row.lockedPer > 0" style="color: #0facb6"
-                    >+{{ scope.row.lockedPer }}%</div
-                  >
+                    >+{{ scope.row.lockedPer }}%
+                  </div>
                   <div
                     v-else-if="scope.row.lockedPer <= 0"
                     style="color: palevioletred"
-                    >{{ scope.row.lockedPer }}%</div
-                  >
+                    >{{ scope.row.lockedPer }}%
+                  </div>
                 </div>
               </div>
             </template>
@@ -179,13 +190,13 @@
                 <div>${{ scope.row.tvl }}M USD</div>
                 <div style="margin-left: 7px">
                   <div v-if="scope.row.tvlPer > 0" style="color: #0facb6"
-                    >+{{ scope.row.tvlPer }}%</div
-                  >
+                    >+{{ scope.row.tvlPer }}%
+                  </div>
                   <div
                     v-else-if="scope.row.tvlPer <= 0"
                     style="color: palevioletred"
-                    >{{ scope.row.tvlPer }}%</div
-                  >
+                    >{{ scope.row.tvlPer }}%
+                  </div>
                 </div>
               </div>
             </template>
@@ -194,71 +205,73 @@
       </div>
     </div>
     <div v-else-if="size === Screen.Small">
-      <div style="padding: 0 0 5px 18px" class="primary-text-14-500">排名</div>
+      <div style="padding: 0 0 5px 18px" class="primary-text-14-500"
+        >{{ $t('home.rank') }}
+      </div>
       <div v-for="(item, index) in ecoDatas" :key="index">
         <div class="eco-rank-item">
           <!--          <div class="black-text-14">{{ item.rank }}</div>-->
           <div class="primary-text-14-500">{{ index + 1 }}</div>
         </div>
         <div class="eco-item">
-          <div class="grey-text-12-300">名称</div>
+          <div class="grey-text-12-300">{{ $t('home.name') }}</div>
           <div class="black-text-14-500">{{ item.name }}</div>
         </div>
         <div class="eco-item">
-          <div class="grey-text-12-300">交易次数</div>
+          <div class="grey-text-12-300">{{ $t('home.transactions') }}</div>
           <div class="eco-merge-value">
             <div class="black-text-14-500">&nbsp;{{ item.trans }}&nbsp;</div>
             <div v-if="item.transPer! > 0" class="second-text-12-500"
-              >+{{ item.transPer }}%</div
-            >
+              >+{{ item.transPer }}%
+            </div>
             <div v-else-if="item.transPer! <= 0" class="minus-text-12-500"
-              >{{ item.transPer }}%</div
-            >
+              >{{ item.transPer }}%
+            </div>
           </div>
         </div>
         <div class="eco-item">
-          <div class="grey-text-12-300">独立地址数</div>
+          <div class="grey-text-12-300">{{ $t('home.address') }}</div>
           <div class="eco-merge-value">
             <div class="black-text-14-500">&nbsp;{{ item.uniAddr }}&nbsp;</div>
             <div v-if="item.uniAddrPer! > 0" class="second-text-12-500"
-              >+{{ item.uniAddrPer }}%</div
-            >
+              >+{{ item.uniAddrPer }}%
+            </div>
             <div v-else-if="item.uniAddrPer! <= 0" class="minus-text-12-500"
-              >{{ item.uniAddrPer }}%</div
-            >
+              >{{ item.uniAddrPer }}%
+            </div>
           </div>
         </div>
         <div class="eco-item">
-          <div class="grey-text-12-300">锁定UNC</div>
+          <div class="grey-text-12-300">{{ $t('home.lock_UNC') }}</div>
           <div class="eco-merge-value">
             <div class="black-text-14-500"
-              >&nbsp;{{ item.locked }}M USD&nbsp;</div
-            >
+              >&nbsp;{{ item.locked }}M USD&nbsp;
+            </div>
             <div v-if="item.lockedPer! > 0" class="second-text-12-500"
-              >+{{ item.lockedPer }}%</div
-            >
+              >+{{ item.lockedPer }}%
+            </div>
             <div v-else-if="item.lockedPer! <= 0" class="minus-text-12-500"
-              >{{ item.lockedPer }}%</div
-            >
+              >{{ item.lockedPer }}%
+            </div>
           </div>
         </div>
         <div class="eco-item">
-          <div class="grey-text-12-300">TVL</div>
+          <div class="grey-text-12-300">{{ $t('home.tvl') }}</div>
           <div class="eco-merge-value">
             <div class="black-text-14-500">&nbsp;{{ item.tvl }}M USD&nbsp;</div>
             <div v-if="item.tvlPer! > 0" class="second-text-12-500"
-              >+{{ item.tvlPer }}%</div
-            >
+              >+{{ item.tvlPer }}%
+            </div>
             <div v-else-if="item.tvlPer! <= 0" class="minus-text-12-500"
-              >{{ item.tvlPer }}%</div
-            >
+              >{{ item.tvlPer }}%
+            </div>
           </div>
         </div>
         <!--        最后一条数据去除分隔线-->
         <div v-if="index !== ecoDatas.length - 1" class="eco-line"></div>
       </div>
     </div>
-    <div class="open_more">查看更多</div>
+    <div class="open_more">{{ $t('home.see_more') }}</div>
   </div>
 </template>
 <style scoped lang="scss">

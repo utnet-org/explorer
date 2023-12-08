@@ -4,7 +4,7 @@
     <div class="computing">
       <div class="month_F">
         <div class="work_m">
-          <div class="trend">全网算力走势</div>
+          <div class="trend">{{ $t('home.power_trend') }}</div>
           <el-button
             class="custom_buttons"
             color="#3EDFCF"
@@ -17,7 +17,7 @@
               backgroundColor: selectedRange === 'week' ? '#3EDFCF' : '#fff',
               fontWeight: selectedRange === 'week' ? 500 : 300,
             }"
-            >周</el-button
+            >{{ $t('home.week') }}</el-button
           >
           <el-button
             class="custom_buttons"
@@ -32,7 +32,7 @@
               backgroundColor: selectedRange === 'month' ? '#3EDFCF' : '#fff',
               fontWeight: selectedRange === 'month' ? 500 : 300,
             }"
-            >月</el-button
+            >{{ $t('home.month') }}</el-button
           >
         </div>
         <div>
@@ -40,7 +40,7 @@
             color="#fff"
             class="custom-button"
             :size="viewportWidth > 834 ? 'default' : 'small'"
-            >查看更多</el-button
+            >{{ $t('home.see_more') }}</el-button
           >
         </div>
       </div>
@@ -51,9 +51,11 @@
     <!-- 右 -->
     <div class="rate_trend">
       <div class="month_F">
-        <div class="work_m">24h基础手续费率走势</div>
+        <div class="work_m">{{ $t('home.rate_trend') }}</div>
         <div>
-          <el-button color="#fff" class="custom-button">查看更多</el-button>
+          <el-button color="#fff" class="custom-button">{{
+            $t('home.see_more')
+          }}</el-button>
         </div>
       </div>
       <div ref="basic" class="chart_two" style="height: 360px"></div>

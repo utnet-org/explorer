@@ -6,50 +6,50 @@
         <div class="bg">
           <img src="../assets/images/logo.png" alt="" />
         </div>
-        <div class="black-text-15-600">Utility 公链提供支持</div>
+        <div class="black-text-15-600">{{ $t('home.chain_support') }}</div>
       </div>
       <div class="black-text-14">
-        UNCSCAN是公用事业链的区块链浏览器和分析平台。
+        {{ $t('home.scan_profile') }}
       </div>
     </div>
     <div class="link-content">
       <div>
         <div class="black-text-14-600">
-          <p>联系我们</p>
+          <p>{{ $t('home.contact_us') }}</p>
         </div>
         <div class="black-text-12">
           <div class="contact-item">
             <img src="../assets/images/twitter.png" alt="" />
-            <p style="margin: 0">Twitter</p>
+            <p style="margin: 0">{{ $t('home.twitter') }}</p>
           </div>
           <div class="contact-item">
             <img src="../assets/images/telegram.png" alt="" />
-            <p>Telegram</p>
+            <p>{{ $t('home.telegram') }}</p>
           </div>
           <div class="contact-item">
             <img src="../assets/images/email.png" alt="" />
-            <p style="margin: 0">邮箱</p>
+            <p style="margin: 0">{{ $t('home.mail') }}</p>
           </div>
         </div>
       </div>
       <div>
         <div class="black-text-14-600">
-          <p>社区</p>
+          <p>{{ $t('home.community') }}</p>
         </div>
         <div class="black-text-12">
-          <p>白皮书</p>
-          <p>API文档</p>
-          <p>开发指南</p>
+          <p>{{ $t('home.white_book') }}</p>
+          <p>{{ $t('home.api_doc') }}</p>
+          <p>{{ $t('home.dev_guide') }}</p>
         </div>
       </div>
       <div>
         <div class="black-text-14-600">
-          <p>产品服务</p>
+          <p>{{ $t('home.product_service') }}</p>
         </div>
         <div class="black-text-12">
-          <p>官网</p>
-          <p>App移动端</p>
-          <p>浏览器钱包</p>
+          <p>{{ $t('home.website') }}</p>
+          <p>{{ $t('home.app_mobile') }}</p>
+          <p>{{ $t('home.explorer_wallet') }}</p>
         </div>
       </div>
     </div>

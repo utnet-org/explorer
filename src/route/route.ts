@@ -12,7 +12,8 @@ import MemoryPool from '../page/blockchain/memoryPool.vue'; // 你的视图组�
 import ContractVerification from '../page/blockchain/contractVerification.vue'; // 你的视图组件路径
 import Contract from '../page/home/contract.vue'; // 你的视图组件路径
 import Statistics from '../page/home/statistics.vue'; // 你的视图组件路径
-import Resource from '../page/home/resource.vue'; // 你的视图组件路径
+import Resource from '../page/resource/index.vue'; // 你的视图组件路径
+import KnowledgeBase from '../page/resource/knowledgeBase.vue'; // 你的视图组件路径
 
 const routes = [
   {
@@ -63,6 +64,10 @@ const routes = [
       {
         path: '/blockchain/contractVerification',
         component: ContractVerification,
+      },
+      {
+        path: '/resource/knowledgeBase',
+        component: KnowledgeBase,
       },
     ],
   },

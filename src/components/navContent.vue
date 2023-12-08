@@ -108,7 +108,7 @@ const navSelectList = [
       },
       {
         title: '知识库',
-        link: '',
+        link: '/resource/knowledgeBase',
       },
     ],
   },

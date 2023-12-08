@@ -1,3 +1,4 @@
+import i18n from '@/lang';
 export const timeDifference = (dateString: string) => {
   const now = new Date();
   const pastDate = new Date(dateString);
@@ -14,6 +15,9 @@ export const updateTimeAgo = (seconds: number) => {
   const diff = now.getTime() - pastDate.getTime();
   const minutes = Math.floor(diff / 60000);
   const remainingSeconds = Math.floor((diff % 60000) / 1000);
+  const m = i18n.global.t('home.minute_abbreviate');
+  const s = i18n.global.t('home.second_abbreviate');
+  // const ago = i18n.global.t('home.ago');
 
-  return `${minutes}分${remainingSeconds}秒前`;
+  return `${minutes}${m} ${remainingSeconds}${s}`;
 };

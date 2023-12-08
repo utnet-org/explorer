@@ -5,6 +5,7 @@ import router from './route/route.ts';
 import ElementPlus from 'element-plus';
 import 'element-plus/dist/index.css';
 import axiosInstance from './servers/request.ts';
+import i18n from '@/lang';
 // import Mock from 'mockjs';
 import './mock';
 import * as ElementPlusIconsVue from '@element-plus/icons-vue';
@@ -20,4 +21,9 @@ if (process.env.NODE_ENV === 'development') {
   //     timeout: '300-6000',
   // });
 }
-app.use(router).use(ElementPlus).provide('axios', axiosInstance).mount('#app');
+app
+  .use(router)
+  .use(i18n)
+  .use(ElementPlus)
+  .provide('axios', axiosInstance)
+  .mount('#app');

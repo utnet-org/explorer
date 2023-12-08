@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, watchEffect } from 'vue';
 import { useRouter } from 'vue-router';
 import Wallet from '../wallet/connect.ts';
 import { ArrowDown } from '@element-plus/icons-vue';
 import { getPrice } from '../api/price.ts';
 import { getScreenSize, Screen } from '../utils/screen-size.ts';
+  import i18n from '@/lang';
+  // import { useI18n } from 'vue-i18n';
 
 const props = defineProps<{ viewportWidth: number }>();
 const router = useRouter();
@@ -16,7 +18,8 @@ if (props.viewportWidth > 834 && props.viewportWidth < 950) {
 if (props.viewportWidth > 430 && props.viewportWidth < 834) {
   scaleViewportWidth.value = props.viewportWidth / 834;
 }
-const navSelectList = [
+// const { t } = useI18n();
+  // constnavSelectList = [
   {
     title: '区块链',
     name: '2',
@@ -111,12 +114,18 @@ const navSelectList = [
   },
 ];
 const selectIndex = ref(-1);
-const address = ref('连接钱包');
+const address = ref(i18n.global.t('home.connect_wallet'));
 const isConnect = ref(false);
 const price = ref('---');
 const amount = ref('0.00');
-// let size =  reactive<Screen>();
-const size = getScreenSize().currentScreenSize;
+
+const size = getScreenSize().currentScreenSize;const langValue = ref('');
+
+  // 使用 watchEffect 来监听语言变化
+  watchEffect(() => {
+    // 每当语言变化时，重新获取翻译
+    address.value = i18n.global.t('home.connect_wallet');
+  });
 
 const changeSelectIndex = () => {
   activeName.value = '0';
@@ -128,10 +137,11 @@ const changeSelectIndex = () => {
 
 onMounted(() => {
   getP();
-  // size = getScreenSize().currentScreenSize.value;
-  // Object.assign(size, getScreenSize().currentScreenSize.value);
-  // console.log("size.value");
-  // console.log(size.value);
+  if (i18n.global.locale == 'en') {
+  langValue.value = 'English';
+  } else {
+      langValue.value = '简体中文';
+  }
 });
 
 async function getP() {
@@ -153,7 +163,7 @@ async function connectWallet() {
     wallet.registerAccountChangeCallback((newAccount: string) => {
       address.value = newAccount;
       // 这里可以更新UI以反映新的地址
-      console.log(`Address updated to: ${address.value}`);
+      //console.log(`Address updated to: ${address.value}`);
     });
   } catch (error) {
     console.error('连接 MetaMask 时发生错误', error);
@@ -182,6 +192,26 @@ const linkNextRoute = (link: string, navIndex: number) => {
   }
 };
 const linkUrl = ref('/');
+  const handleCommand = (command: string) => {
+    const wallet = new Wallet();
+    if (command === 'disconnect') {
+      address.value = wallet.disconnectWallet();
+    }
+  };
+
+  // 切换语言
+  const handleLang = (command: string) => {
+    if (command == 'en') {
+      langValue.value = 'English';
+    } else if (command == 'zh') {
+      langValue.value = '简体中文';
+    }
+    localStorage.setItem('language', command);
+    i18n.global.locale = command as 'en' | 'zh';
+    document
+      .querySelector('html')!
+      .setAttribute('language', localStorage.getItem('language') || 'en');
+  };
 </script>
 <template>
   <div class="nav_content">
@@ -191,7 +221,13 @@ const linkUrl = ref('/');
         <div class="nav_select_left_title">UNCSCAN</div>
         <div v-if="size === Screen.Large" class="select_list">
           <div class="select_list_item" :class="selectIndex == -1 ? 'active' : ''" @click="changeSelectIndex">首页</div>
-          <div v-for="(navItem, navIndex) in navSelectList" :key="navIndex">
+          <div v-for="(navItem, navIndex) in [
+              $t('nav.home'),
+              $t('nav.block'),
+              $t('nav.contract'),
+              $t('nav.statistic'),
+              $t('nav.resource'),
+            ]" :key="navIndex">
             <el-dropdown popper-class="drop-menu" trigger="click" placement="bottom-start">
               <div class="select_list_item" :class="selectIndex == navIndex ? 'active' : ''">
                 {{ navItem.title }}
@@ -220,10 +256,12 @@ const linkUrl = ref('/');
             </el-button>
             <template #dropdown>
               <el-dropdown-menu>
-                <el-dropdown-item> 钱包 </el-dropdown-item>
-                <el-dropdown-item> 最近交易 </el-dropdown-item>
+                <el-dropdown-item> {{ $t('home.wallet') }}</el-dropdown-item>
+                <el-dropdown-item>
+                  {{ $t('home.recent_trans') }}</el-dropdown-item
+                >
                 <el-dropdown-item command="disconnect">
-                  断开连接
+                  {{ $t('home.disconnect_wallet') }}
                 </el-dropdown-item>
               </el-dropdown-menu>
             </template>
@@ -238,8 +276,49 @@ const linkUrl = ref('/');
           <div class="wallet_address">Utility Mainnet</div>
         </div>
         <div v-if="size === Screen.Large" class="language-container">
-          <div class="language_title">简体中文</div>
-          <img class="language_icon" src="../assets/images/nav_to_bottom.png" alt="" srcset="" />
+          <!--          <el-select-->
+          <!--            v-model="langValue"-->
+          <!--            class="m-2"-->
+          <!--            placeholder="Select"-->
+          <!--            no-data-text="语言"-->
+          <!--          >-->
+          <!--            <el-option-->
+          <!--              v-for="item in langOptions"-->
+          <!--              :key="item.value"-->
+          <!--              :label="item.label"-->
+          <!--              :value="item.value"-->
+          <!--            />-->
+          <!--          </el-select>-->
+          <el-dropdown
+            popper-class="drop-menu"
+            trigger="click"
+            placement="bottom-start"
+            @command="handleLang"
+          >
+            <span class="el-dropdown-link language_title">
+              {{ langValue }}
+              <el-icon class="el-icon--right">
+                <arrow-down />
+              </el-icon>
+            </span>
+            <template #dropdown>
+              <el-dropdown-menu>
+                <el-dropdown-item command="en"
+                  >{{ $t('lang.en') }}
+                </el-dropdown-item>
+                <el-dropdown-item command="zh"
+                  >{{ $t('lang.zh') }}
+                </el-dropdown-item>
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
+          <!--          <div class="language_title">简体中文</div>-->
+          <!--          <img-->
+          <!-- class="language_icon"-->
+          <!-- src="../assets/images/nav_to_bottom.png"-->
+          <!-- alt=""-->
+          <!-- srcset=""-->
+          <!--          />-->
         </div>
         <div v-else class="phone_select_icon">
           <img src="../assets/images/phone_nav_select_icon.png" alt="" @click="showNavSelectType = !showNavSelectType" />
@@ -262,14 +341,14 @@ const linkUrl = ref('/');
     <div v-if="size === Screen.Large" class="nav_corner">
       <div class="nav_corner_item">
         <img src="../assets/images/price_icon.png" alt="" />
-        <div>UNC Price:</div>
+        <div>UNC {{ $t('home.price') }}:</div>
         <div>${{ price }}</div>
         <div>(+{{ amount }}%)</div>
       </div>
       <div class="nav_corner_item">
         <div class="nav_corner_item_side">
           <img src="@/assets/images/message_icon.png" alt="" />
-          <div>页面展示均为模拟数据，测试网上线后转换为真实数据。</div>
+          <div>{{ $t('home.mockTip') }}</div>
         </div>
       </div>
     </div>
@@ -277,7 +356,7 @@ const linkUrl = ref('/');
       <div class="nav_corner_item">
         <div class="nav_corner_item_side">
           <img src="@/assets/images/message_icon.png" alt="" />
-          <div>页面展示均为模拟数据，测试网上线后转换为真实数据。</div>
+          <div>{{ $t('home.mockTip') }}</div>
         </div>
       </div>
     </div>

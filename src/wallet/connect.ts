@@ -1,4 +1,5 @@
 import Web3 from 'web3';
+import i18n from '@/lang';
 
 type AccountChangeCallback = (newAccount: string) => void;
 
@@ -34,7 +35,7 @@ class Wallet {
 
   disconnectWallet(): string {
     // 断开连接的逻辑
-    this.currentAccount = 'Connect Wallet';
+    this.currentAccount = i18n.global.t('home.connect_wallet');
     return this.currentAccount;
   }
 

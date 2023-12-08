@@ -46,7 +46,9 @@
     :style="porps.fromPage == 'blockChain' ? 'margin-top:60px !important;' : ''"
   >
     <div class="new_block_content_header">
-      <div class="new_block_content_header_title">最新区块</div>
+      <div class="new_block_content_header_title">{{
+        $t('home.latest_block')
+      }}</div>
       <!--      <div class="new_block_content_header_button">查看更多</div>-->
     </div>
     <div v-if="size !== Screen.Large" class="eco-line"></div>
@@ -74,8 +76,7 @@
             backgroundColor: '#F9F9F8',
           }"
         >
-          <!--        <el-table-column prop="height" label="高度">-->
-          <el-table-column prop="height" label="高度">
+          <el-table-column prop="height" :label="$t('home.height')">
             <template #default="scope">
               <div style="color: #0facb6; margin-bottom: 8px; font-size: 14px"
                 >{{ heights[scope.$index] }}
@@ -85,34 +86,34 @@
               </div>
             </template>
           </el-table-column>
-          <el-table-column label="区块ID">
+          <el-table-column :label="$t('home.block_id')">
             <template #default="scope">
               <div v-for="(item, index) in scope.row.ids" :key="index"
                 >{{ item }}
               </div>
             </template>
           </el-table-column>
-          <el-table-column label="算力提供者">
+          <el-table-column :label="$t('home.miner')">
             <template #default="scope">
               <div v-for="(item, index) in scope.row.miners" :key="index"
                 >{{ item }}
               </div>
             </template>
           </el-table-column>
-          <el-table-column label="标签">
+          <el-table-column :label="$t('home.tag')">
             <template #default="scope">
               <!--                      <div v-for="(item, index) in scope.row.tags" :key="index">{{ item }}</div>-->
               <div v-for="index in scope.row.tags" :key="index">Utility</div>
             </template>
           </el-table-column>
-          <el-table-column label="消息">
+          <el-table-column :label="$t('home.message')">
             <template #default="scope">
               <div v-for="(item, index) in scope.row.msgs" :key="index"
                 >{{ item }}
               </div>
             </template>
           </el-table-column>
-          <el-table-column label="奖励">
+          <el-table-column :label="$t('home.reward')">
             <template #default="scope">
               <div v-for="(item, index) in scope.row.rewards" :key="index"
                 >{{ item }} UNC
@@ -128,9 +129,8 @@
           <div class="eco-item">
             <div class="eco-item2">
               <div class="grey-text-12-300" style="padding-right: 5px"
-                >高度
+                >{{ $t('home.height') }}
               </div>
-              <!--              <div class="second-text-14-500">{{ item.height }}</div>-->
               <div class="second-text-14-500">{{ heights[index] }}</div>
             </div>
             <div class="black-text-14-500"
@@ -162,7 +162,7 @@
         </div>
       </div>
     </div>
-    <div class="open_more">查看更多</div>
+    <div class="open_more">{{ $t('home.see_more') }}</div>
   </div>
 </template>
 <style scoped lang="scss">

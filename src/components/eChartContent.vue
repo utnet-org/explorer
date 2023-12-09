@@ -11,7 +11,7 @@
             @click="setTimeRange('week')"
             type="success"
             size="small"
-            :plain="selectedRange!=='week'"
+            :plain="selectedRange !== 'week'"
             :style="{
               color: selectedRange === 'week' ? ' #000' : ' rgba(0, 0, 0, 0.5)',
               backgroundColor: selectedRange === 'week' ? '#3EDFCF' : '#fff',
@@ -25,7 +25,7 @@
             color="#3EDFCF"
             @click="setTimeRange('month')"
             type="success"
-            :plain="selectedRange!=='month'"
+            :plain="selectedRange !== 'month'"
             :style="{
               color:
                 selectedRange === 'month' ? ' #000' : ' rgba(0, 0, 0, 0.5)',
@@ -436,7 +436,7 @@ const procedureRateTrend = () => {
       containLabel: true, // 确保坐标轴的标签完全显示
       left: -30,
       right: 35,
-      top: 15,
+      top: 20,
       bottom: 20,
     },
     color: ["#04BFDA"],
@@ -658,7 +658,7 @@ onUnmounted(() => {
   color: #191919;
 }
 
-@media (min-width: 1440px) {
+@media (min-width: 1025px) {
   .trend {
     margin-right: 19px;
   }
@@ -697,47 +697,47 @@ onUnmounted(() => {
     font-size: 16px;
   }
 }
-@media (min-width: 834px) and (max-width: 1439px) {
-  .trend {
-    margin-right: 13px;
-  }
-  .my_father {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 16px 14px;
-  }
+// @media (min-width: 834px) and (max-width: 1439px) {
+//   .trend {
+//     margin-right: 13px;
+//   }
+//   .my_father {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     margin: 24px 32px;
+//   }
 
-  .chart_one {
-    margin: 25px 22px 0px 23px;
-  }
-  .chart_two {
-    margin: 0px 22px 0 19px;
-  }
-  .computing {
-    margin-left: 14px;
-    margin-right: 13px;
-    width: 100%;
-    height: 380px;
-    margin-bottom: 16px;
-  }
+//   .chart_one {
+//     margin: 25px 22px 0px 23px;
+//   }
+//   .chart_two {
+//     margin: 0px 22px 0 19px;
+//   }
+//   .computing {
+//     margin-left: 14px;
+//     margin-right: 13px;
+//     width: 100%;
+//     height: 380px;
+//     margin-bottom: 16px;
+//   }
 
-  .rate_trend {
-    width: 100%;
-    height: 380px;
-    margin-left: 14px;
-    margin-right: 13px;
-  }
-  .work_m {
-    font-size: 14px;
-  }
+//   .rate_trend {
+//     width: 100%;
+//     height: 380px;
+//     margin-left: 14px;
+//     margin-right: 13px;
+//   }
+//   .work_m {
+//     font-size: 14px;
+//   }
 
-  .custom-button {
-    font-size: 12px;
-    font-weight: 400;
-  }
-}
-@media (max-width: 833px) {
+//   .custom-button {
+//     font-size: 12px;
+//     font-weight: 400;
+//   }
+// }
+@media (max-width: 1024px) {
   .trend {
     margin-right: 9px;
   }

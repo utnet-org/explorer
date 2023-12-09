@@ -8,6 +8,7 @@ import BlockChain from "../page/home/blockChain.vue"; // 你的视图组件路�
 import Contract from "../page/home/contract.vue"; // 你的视图组件路径
 import Statistics from "../page/home/statistics.vue"; // 你的视图组件路径
 import Resource from "../page/home/resource.vue"; // 你的视图组件路径
+import Uvm from "../page/home/uvmStatistics.vue"; // 你的视图组件路径
 
 const routes = [
   {
@@ -30,6 +31,7 @@ const routes = [
       {
         path: "/contract",
         component: Contract,
+
       },
       {
         path: "/statistics",
@@ -38,6 +40,10 @@ const routes = [
       {
         path: "/resource",
         component: Resource,
+      },
+      {
+        path: "/uvm",
+        component: Uvm,
       },
     ],
   },

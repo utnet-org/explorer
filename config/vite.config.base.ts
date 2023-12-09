@@ -24,7 +24,8 @@ export default defineConfig({
         replacement: 'vue/dist/vue.esm-bundler.js', // compile template
       },
     ],
-    extensions: [".mjs", ".js", ".ts", ".jsx", ".tsx", ".json", ".vue"]
+    // extensions: [".mjs", ".js", ".ts", ".jsx", ".tsx", ".json", ".vue"]
+    extensions: ['.ts', '.js'],
   },
   define: {
     'process.env': {},
@@ -33,16 +34,11 @@ export default defineConfig({
     https: false, // 是否开启 https
     open: false, // 是否自动在浏览器打开
     cors: true, // 允许跨域  8月更新
-    host: "0.0.0.0",
+    host: '0.0.0.0',
   },
   css: {
     preprocessorOptions: {
       scss: {
-        // modifyVars: {
-        //   hack: `true; @import (reference) "${resolve(
-        //     'src/assets/style/global.scss'
-        //   )}";`,
-        // },
         additionalData: `
         @import "@/assets/style/global.scss";
         @import "@/assets/style/common.scss";

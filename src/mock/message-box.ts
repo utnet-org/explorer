@@ -64,7 +64,7 @@ const getMessageList = () => {
       time: '今天 12:20:01',
       messageType: 0,
     },
-  ].map((item) => ({
+  ].map(item => ({
     ...item,
     status: haveReadIds.indexOf(item.id) === -1 ? 0 : 1,
   }));

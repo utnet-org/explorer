@@ -9,21 +9,20 @@ text 10
   opacity: 0.5;
 }
 
-
 /*
 text 12
 */
 
-.second-text-12{
-  color: #0FACB6;
+.second-text-12 {
+  color: #0facb6;
   font-family: $primary-font-family;
   font-size: 12px;
   font-style: normal;
   line-height: normal;
 }
 
-.second-text-12-500{
-  color: #0FACB6;
+.second-text-12-500 {
+  color: #0facb6;
   font-family: $primary-font-family;
   font-size: 12px;
   font-weight: 500;
@@ -31,7 +30,7 @@ text 12
   line-height: normal;
 }
 
-.minus-text-12{
+.minus-text-12 {
   color: $minus-color;
   font-family: $primary-font-family;
   font-size: 12px;
@@ -39,7 +38,7 @@ text 12
   line-height: normal;
 }
 
-.minus-text-12-500{
+.minus-text-12-500 {
   color: $minus-color;
   font-family: $primary-font-family;
   font-size: 12px;
@@ -77,33 +76,16 @@ text 12
 
 /// text 14
 
-.second-text-14{
-  color: #0FACB6;
+.second-text-14 {
+  color: #0facb6;
   font-family: $primary-font-family;
   font-size: 14px;
   font-style: normal;
   line-height: normal;
 }
 
-.second-text-14-500{
-  color: #0FACB6;
-  font-family: $primary-font-family;
-  font-size: 14px;
-  font-weight: 500;
-  font-style: normal;
-  line-height: normal;
-}
-
-.primary-text-14{
-  color: $primary-color;
-  font-family: $primary-font-family;
-  font-size: 14px;
-  font-style: normal;
-  line-height: normal;
-}
-
-.primary-text-14-500{
-  color: $primary-color;
+.second-text-14-500 {
+  color: #0facb6;
   font-family: $primary-font-family;
   font-size: 14px;
   font-weight: 500;
@@ -111,7 +93,24 @@ text 12
   line-height: normal;
 }
 
-.minus-text-14{
+.primary-text-14 {
+  color: $primary-color;
+  font-family: $primary-font-family;
+  font-size: 14px;
+  font-style: normal;
+  line-height: normal;
+}
+
+.primary-text-14-500 {
+  color: $primary-color;
+  font-family: $primary-font-family;
+  font-size: 14px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: normal;
+}
+
+.minus-text-14 {
   color: $minus-color;
   font-family: $primary-font-family;
   font-size: 14px;
@@ -119,7 +118,7 @@ text 12
   line-height: normal;
 }
 
-.minus-text-14-500{
+.minus-text-14-500 {
   color: $minus-color;
   font-family: $primary-font-family;
   font-size: 14px;

@@ -1,4 +1,5 @@
 import { mergeConfig } from 'vite';
+// import eslint from 'vite-plugin-eslint';
 import baseConfig from './vite.config.base';
 
 export default mergeConfig(
@@ -18,5 +19,5 @@ export default mergeConfig(
     //   }),
     // ],
   },
-  baseConfig
+  baseConfig,
 );

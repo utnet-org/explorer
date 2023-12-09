@@ -2,8 +2,6 @@
   import { ref } from 'vue';
   // defineProps<{ msg: string }>()
   // const count = ref(0)
-  import NavPage from '../components/navContent.vue';
-  import FooterPage from '../components/footerContent.vue';
   import { onMounted } from 'vue';
   const windowWidth = ref(document.documentElement.clientWidth);
   //监听窗口大小变化
@@ -15,18 +13,12 @@
   });
 </script>
 <template>
-  <div class="content">
-    <!-- 顶部导航栏 -->
-    <NavPage :viewportWidth="windowWidth" />
-    <router-view></router-view>
-    <!-- 底部 -->
-    <FooterPage :viewportWidth="windowWidth" />
-  </div>
+  <div class="content"> </div>
 </template>
 <style scoped lang="scss">
   .content {
     width: 100%;
     min-height: 100vh;
-    background: rgba(242, 240, 234, 1);
+    background: #f2f0ea;
   }
 </style>

@@ -14,7 +14,8 @@ import Contract from '../page/home/contract.vue'; // 你的视图组件路径
 import Statistics from '../page/home/statistics.vue'; // 你的视图组件路径
 import Resource from '../page/resource/index.vue'; // 你的视图组件路径
 import KnowledgeBase from '../page/resource/knowledgeBase.vue'; // 你的视图组件路径
-import Uvm from "../page/home/uvmStatistics.vue"; // 你的视图组件路径
+import Uvm from '../page/home/uvmStatistics.vue'; // 你的视图组件路径
+import Ranking from '../page/home/ranking.vue'; // 你的视图组件路径
 
 const routes = [
   {
@@ -37,7 +38,6 @@ const routes = [
       {
         path: '/contract',
         component: Contract,
-
       },
       {
         path: '/statistics',
@@ -72,8 +72,12 @@ const routes = [
         component: KnowledgeBase,
       },
       {
-        path: "/uvm",
+        path: '/contract/uvm',
         component: Uvm,
+      },
+      {
+        path: '/statistics/ranking',
+        component: Ranking,
       },
     ],
   },

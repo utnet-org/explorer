@@ -78,5 +78,21 @@ export default {
     website: 'Website',
     app_mobile: 'App Mobile',
     explorer_wallet: 'Explorer Wallet',
+
+    Miner: 'Miner',
+    Type_of_computing_power: 'Type of computing power',
+
+    Head_miner_computing_power_increment:
+      'Head miner computing power increment trend',
+    Change_of_service_income:
+      'Change of service income of computing power provider',
+    Base_rate_trend: 'Base rate trend',
+    Message_type: 'Message type',
+    Average_Gps_limit: 'Average Gps limit',
+    Average_Gps_consumption: 'Average Gps consumption',
+    Average_commission: 'Average commission',
+    Total_fee_or_percentage: 'Total fee/percentage',
+    Total_number_of_messages_or_proportion:
+      'Total number/percentage of messages',
   },
 };

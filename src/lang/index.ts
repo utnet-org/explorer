@@ -4,13 +4,17 @@ import { createI18n } from 'vue-i18n'; // 导入 vue-i18n
 // import elementZhLocale from 'element-ui/lib/locale/lang/zh-CN'; // element-ui lang
 import enLocale from './en'; // 导入项目中用到的英文语言包
 import zhLocale from './zh'; // 导入项目中用到的中文语言包
+import zhCn from 'element-plus/es/locale/lang/zh-cn';
+import en from 'element-plus/es/locale/lang/en';
 
 const messages = {
   en: {
+    ...en,
     ...enLocale,
     // ...elementEnLocale,
   },
   zh: {
+    ...zhCn,
     ...zhLocale,
     // ...elementZhLocale,
   },

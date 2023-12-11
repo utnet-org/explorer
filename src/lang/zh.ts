@@ -76,5 +76,17 @@ export default {
     website: '官网',
     app_mobile: 'App移动端',
     explorer_wallet: '浏览器钱包',
+
+    Miner: '矿工',
+    Type_of_computing_power: '算力类型',
+    Head_miner_computing_power_increment: '头部矿工算力增量走势',
+    Change_of_service_income: '算力提供者服务收益变化',
+    Base_rate_trend: '基础费率走势',
+    Message_type: '消息类型',
+    Average_Gps_limit: '平均Gps限额',
+    Average_Gps_consumption: '平均Gps消耗',
+    Average_commission: '平均手续费',
+    Total_fee_or_percentage: '手续费合计/占比',
+    Total_number_of_messages_or_proportion: '消息合计数/占比',
   },
 };

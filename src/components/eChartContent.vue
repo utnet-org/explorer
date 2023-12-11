@@ -245,8 +245,8 @@
           type: 'line', // 系列类型是折线图
           smooth: true, // 平滑的线
           showSymbol: false, // 不显示拐点
-          symbol: 'circle', //拐点的形状
-          symbolSize: 20, //拐点大小
+          symbol: 'circle', // 拐点的形状
+          symbolSize: 20, // 拐点大小
           data: seriesData, // 示例数据
           // 区域填充样式
           areaStyle: {
@@ -351,7 +351,7 @@
             },
             series: [
               {
-                symbolSize: 17, //拐点大小
+                symbolSize: 17, // 拐点大小
                 label: {
                   show: false, // 显示标签
                   fontWeight: 500, // 加粗文字
@@ -409,7 +409,7 @@
             },
             series: [
               {
-                symbolSize: 10, //拐点大小
+                symbolSize: 10, // 拐点大小
               },
             ],
           },
@@ -431,19 +431,19 @@
       return;
     }
 
-  myChart1 = echarts.getInstanceByDom(basic.value);
-  // 图表配置
-  const option = {
-    grid: {
-      containLabel: true, // 确保坐标轴的标签完全显示
-      left: -30,
-      right: 35,
-      top: 20,
-      bottom: 20,
-    },
-    color: ["#04BFDA"],
-    tooltip: {
-      trigger: "axis", // 悬浮在数据点上时显示工具提示
+    myChart1 = echarts.getInstanceByDom(basic.value);
+    // 图表配置
+    const option = {
+      grid: {
+        containLabel: true, // 确保坐标轴的标签完全显示
+        left: -30,
+        right: 35,
+        top: 20,
+        bottom: 20,
+      },
+      color: ['#04BFDA'],
+      tooltip: {
+        trigger: 'axis', // 悬浮在数据点上时显示工具提示
 
         axisPointer: {
           type: 'none',
@@ -662,30 +662,30 @@
     color: #191919;
   }
 
-@media (min-width: 1025px) {
-  .trend {
-    margin-right: 19px;
-  }
-  .my_father {
-    display: flex;
-    justify-content: space-between;
-    height: 380px;
-    margin: 24px 32px;
-  }
-  .chart_one {
-    margin: 8px 33px 0 26px;
-    padding-bottom: 6px;
-  }
-  .chart_two {
-    margin: 4px 36px 0 10px;
-    padding-bottom: 6px;
-  }
-  .computing {
-    flex: 2;
-    margin-right: 18px;
-    width: 100%;
-    height: 380px;
-  }
+  @media (min-width: 1025px) {
+    .trend {
+      margin-right: 19px;
+    }
+    .my_father {
+      display: flex;
+      justify-content: space-between;
+      height: 380px;
+      margin: 24px 32px;
+    }
+    .chart_one {
+      margin: 8px 33px 0 26px;
+      padding-bottom: 6px;
+    }
+    .chart_two {
+      margin: 4px 36px 0 10px;
+      padding-bottom: 6px;
+    }
+    .computing {
+      flex: 2;
+      margin-right: 18px;
+      width: 100%;
+      height: 380px;
+    }
 
     .rate_trend {
       flex: 1;
@@ -697,73 +697,73 @@
       font-size: 14px;
     }
 
-  .work_m {
-    font-size: 16px;
+    .work_m {
+      font-size: 16px;
+    }
   }
-}
-// @media (min-width: 834px) and (max-width: 1439px) {
-//   .trend {
-//     margin-right: 13px;
-//   }
-//   .my_father {
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-//     margin: 24px 32px;
-//   }
+  // @media (min-width: 834px) and (max-width: 1439px) {
+  //   .trend {
+  //     margin-right: 13px;
+  //   }
+  //   .my_father {
+  //     display: flex;
+  //     flex-direction: column;
+  //     align-items: center;
+  //     margin: 24px 32px;
+  //   }
 
-//   .chart_one {
-//     margin: 25px 22px 0px 23px;
-//   }
-//   .chart_two {
-//     margin: 0px 22px 0 19px;
-//   }
-//   .computing {
-//     margin-left: 14px;
-//     margin-right: 13px;
-//     width: 100%;
-//     height: 380px;
-//     margin-bottom: 16px;
-//   }
+  //   .chart_one {
+  //     margin: 25px 22px 0px 23px;
+  //   }
+  //   .chart_two {
+  //     margin: 0px 22px 0 19px;
+  //   }
+  //   .computing {
+  //     margin-left: 14px;
+  //     margin-right: 13px;
+  //     width: 100%;
+  //     height: 380px;
+  //     margin-bottom: 16px;
+  //   }
 
-//   .rate_trend {
-//     width: 100%;
-//     height: 380px;
-//     margin-left: 14px;
-//     margin-right: 13px;
-//   }
-//   .work_m {
-//     font-size: 14px;
-//   }
+  //   .rate_trend {
+  //     width: 100%;
+  //     height: 380px;
+  //     margin-left: 14px;
+  //     margin-right: 13px;
+  //   }
+  //   .work_m {
+  //     font-size: 14px;
+  //   }
 
-//   .custom-button {
-//     font-size: 12px;
-//     font-weight: 400;
-//   }
-// }
-@media (max-width: 1024px) {
-  .trend {
-    margin-right: 9px;
-  }
-  .my_father {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 16px 21px;
-  }
-  .chart_one {
-    margin: 20px 10px 0 9px;
-    padding-bottom: 6px;
-  }
-  .chart_two {
-    margin: 0 10px 0 9px;
-    padding-bottom: 6px;
-  }
-  .computing {
-    width: 100%;
-    height: 337px;
-    margin-bottom: 16px;
-  }
+  //   .custom-button {
+  //     font-size: 12px;
+  //     font-weight: 400;
+  //   }
+  // }
+  @media (max-width: 1024px) {
+    .trend {
+      margin-right: 9px;
+    }
+    .my_father {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 16px 21px;
+    }
+    .chart_one {
+      margin: 20px 10px 0 9px;
+      padding-bottom: 6px;
+    }
+    .chart_two {
+      margin: 0 10px 0 9px;
+      padding-bottom: 6px;
+    }
+    .computing {
+      width: 100%;
+      height: 337px;
+      margin-bottom: 16px;
+    }
 
     .rate_trend {
       width: 100%;

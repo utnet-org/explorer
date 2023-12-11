@@ -1,349 +1,374 @@
 <script setup lang="ts">
-import { ElMessage } from 'element-plus';
-import { onMounted, ref } from 'vue';
-import HeaderPage from '../../components/otherHeaderContent.vue';
-// import Mock from 'mockjs';
-import { getScreenSize, Screen } from '@/utils/screen-size.ts';
-// defineProps<{ msg: string }>()
-const size = getScreenSize().currentScreenSize;
-const address = ref('');
-const compilerVersion = ref(null);
-const CompilerVersionOptions = ref([
+  import { ElMessage } from 'element-plus';
+  import { onMounted, ref } from 'vue';
+  import HeaderPage from '../../components/otherHeaderContent.vue';
+  // import Mock from 'mockjs';
+  import { getScreenSize, Screen } from '@/utils/screen-size.ts';
+  // defineProps<{ msg: string }>()
+  const size = getScreenSize().currentScreenSize;
+  const address = ref('');
+  const compilerVersion = ref(null);
+  const CompilerVersionOptions = ref([
     {
-        value: 'v0.8.19+commit.7dd6d404',
-        label: 'v0.8.19+commit.7dd6d404',
+      value: 'v0.8.19+commit.7dd6d404',
+      label: 'v0.8.19+commit.7dd6d404',
     },
     {
-        value: 'v0.8.18+commit.87f61d96',
-        label: 'v0.8.18+commit.87f61d96',
+      value: 'v0.8.18+commit.87f61d96',
+      label: 'v0.8.18+commit.87f61d96',
     },
     {
-        value: 'v0.8.17+commit.8df45f5f',
-        label: 'v0.8.17+commit.8df45f5f',
+      value: 'v0.8.17+commit.8df45f5f',
+      label: 'v0.8.17+commit.8df45f5f',
     },
     {
-        value: 'v0.8.16+commit.07a7930e',
-        label: 'v0.8.16+commit.07a7930e',
+      value: 'v0.8.16+commit.07a7930e',
+      label: 'v0.8.16+commit.07a7930e',
     },
     {
-        value: 'v0.8.15+commit.e14f2714',
-        label: 'v0.8.15+commit.e14f2714',
+      value: 'v0.8.15+commit.e14f2714',
+      label: 'v0.8.15+commit.e14f2714',
     },
     {
-        value: 'v0.8.14+commit.80d49f37',
-        label: 'v0.8.14+commit.80d49f37',
+      value: 'v0.8.14+commit.80d49f37',
+      label: 'v0.8.14+commit.80d49f37',
     },
     {
-        value: 'v0.8.13+commit.abaa5c0e',
-        label: 'v0.8.13+commit.abaa5c0e',
+      value: 'v0.8.13+commit.abaa5c0e',
+      label: 'v0.8.13+commit.abaa5c0e',
     },
     {
-        value: 'v0.8.12+commit.f00d7308',
-        label: 'v0.8.12+commit.f00d7308',
+      value: 'v0.8.12+commit.f00d7308',
+      label: 'v0.8.12+commit.f00d7308',
     },
     {
-        value: 'v0.8.11+commit.d7f03943',
-        label: 'v0.8.11+commit.d7f03943',
+      value: 'v0.8.11+commit.d7f03943',
+      label: 'v0.8.11+commit.d7f03943',
     },
     {
-        value: 'v0.8.10+commit.fc410830',
-        label: 'v0.8.10+commit.fc410830',
+      value: 'v0.8.10+commit.fc410830',
+      label: 'v0.8.10+commit.fc410830',
     },
-])
-const openSourceLicenseTypes = ref(null);
-const openSourceLicenseTypesOptions = ref([
+  ]);
+  const openSourceLicenseTypes = ref(null);
+  const openSourceLicenseTypesOptions = ref([
     {
-        value: 'No License (None)',
-        label: 'No License (None)',
-    },
-    {
-        value: 'The Unlicense (Unlicense)',
-        label: 'The Unlicense (Unlicense)',
+      value: 'No License (None)',
+      label: 'No License (None)',
     },
     {
-        value: 'MIT License (MIT)',
-        label: 'MIT License (MIT)',
+      value: 'The Unlicense (Unlicense)',
+      label: 'The Unlicense (Unlicense)',
     },
     {
-        value: 'GNU General Public License v2.0 (GNU GPLv2)',
-        label: 'GNU General Public License v2.0 (GNU GPLv2)',
+      value: 'MIT License (MIT)',
+      label: 'MIT License (MIT)',
     },
     {
-        value: 'GNU General Public License v3.0 (GNU GPLv3)',
-        label: 'GNU General Public License v3.0 (GNU GPLv3)',
+      value: 'GNU General Public License v2.0 (GNU GPLv2)',
+      label: 'GNU General Public License v2.0 (GNU GPLv2)',
     },
     {
-        value: 'GNU Lesser General Public License v2.1 (GNU LGPLv2.1)',
-        label: 'GNU Lesser General Public License v2.1 (GNU LGPLv2.1)',
+      value: 'GNU General Public License v3.0 (GNU GPLv3)',
+      label: 'GNU General Public License v3.0 (GNU GPLv3)',
     },
     {
-        value: 'GNU Lesser General Public License v3.0 (GNU LGPLv3)',
-        label: 'GNU Lesser General Public License v3.0 (GNU LGPLv3)',
+      value: 'GNU Lesser General Public License v2.1 (GNU LGPLv2.1)',
+      label: 'GNU Lesser General Public License v2.1 (GNU LGPLv2.1)',
     },
     {
-        value: 'BSD 2-clause "Simplified" license (BSD-2-Clause)',
-        label: 'BSD 2-clause "Simplified" license (BSD-2-Clause)',
+      value: 'GNU Lesser General Public License v3.0 (GNU LGPLv3)',
+      label: 'GNU Lesser General Public License v3.0 (GNU LGPLv3)',
     },
     {
-        value: 'BSD 3-clause "New" Or "Revised" license (BSD-3-Clause)',
-        label: 'BSD 3-clause "New" Or "Revised" license (BSD-3-Clause)',
+      value: 'BSD 2-clause "Simplified" license (BSD-2-Clause)',
+      label: 'BSD 2-clause "Simplified" license (BSD-2-Clause)',
     },
     {
-        value: 'Mozilla Public License 2.0 (MPL-2.0)',
-        label: 'Mozilla Public License 2.0 (MPL-2.0)',
+      value: 'BSD 3-clause "New" Or "Revised" license (BSD-3-Clause)',
+      label: 'BSD 3-clause "New" Or "Revised" license (BSD-3-Clause)',
     },
-
-]);
-const checkTermsOfService = ref(false);
-const nextStep = () => {
+    {
+      value: 'Mozilla Public License 2.0 (MPL-2.0)',
+      label: 'Mozilla Public License 2.0 (MPL-2.0)',
+    },
+  ]);
+  const checkTermsOfService = ref(false);
+  const nextStep = () => {
     if (!address.value) {
-        return;
+      return;
     }
     if (!compilerVersion.value) {
-        return;
+      return;
     }
     if (!openSourceLicenseTypes.value) {
-        return;
+      return;
     }
     if (!checkTermsOfService.value) {
-        ElMessage.error('请同意服务条款');
-        return;
+      ElMessage.error('请同意服务条款');
+      return;
     }
-    console.log(address.value, compilerVersion.value, openSourceLicenseTypes.value, checkTermsOfService.value);
-}
-const resetAll = () => {
+    console.log(
+      address.value,
+      compilerVersion.value,
+      openSourceLicenseTypes.value,
+      checkTermsOfService.value,
+    );
+  };
+  const resetAll = () => {
     address.value = '';
     compilerVersion.value = null;
     openSourceLicenseTypes.value = null;
-}
-onMounted(() => {
-});
+  };
+  onMounted(() => {});
 </script>
 <template>
-    <div class="content">
-        <HeaderPage />
-        <div style="height: 200px;"></div>
-        <div class="block_list">
-            <div class="content_header">
-                <div class="main_title">
-                    验证并发布合约源代码
-                </div>
-                <div class="sub_title">
-                    编译器类型与版本选择
-                </div>
-            </div>
-            <div class="content_text">
-                源代码验证为与智能合约交互的用户提供了透明度。通过上传源代码，Filfox将把编译后的代码与区块链上的代码进行匹配。就像合同一样，“智能合同”应该为最终用户提供更多关于他们“数字签名”的信息，并让用户有机会审核代码，以独立验证代码是否确实完成了它应该做的事情。
-            </div>
-            <div class="setion_input">
-                <div class="setion_input_title">请输入您要验证的合约地址</div>
-                <el-input class="input_element" v-model="address" placeholder="请输入地址" clearable />
-            </div>
-            <div class="setion_input">
-                <div class="setion_input_title">请选择编译器版本</div>
-                <el-select-v2 v-model="compilerVersion" :options="CompilerVersionOptions" placeholder="请从列表选择"
-                    :style="size === Screen.Large ? 'width: 50%;' : 'width: 90%;'" filterable clearable />
-            </div>
-            <div class="setion_input">
-                <div class="setion_input_title">请选择开源许可证类型</div>
-                <el-select-v2 v-model="openSourceLicenseTypes" :options="openSourceLicenseTypesOptions" placeholder="请从列表选择"
-                    :style="size === Screen.Large ? 'width: 50%;' : 'width: 90%;'" filterable clearable />
-            </div>
-            <el-checkbox class="checkbox" v-model="checkTermsOfService">我同意服务条款</el-checkbox>
-            <div class="submit_botton_group">
-                <div class="continue" @click="nextStep">Continue</div>
-                <div class="reset" @click="resetAll">重置</div>
-            </div>
-            <div class="view_contract_list">查看合约列表</div>
-        </div>
+  <div class="content">
+    <HeaderPage />
+    <div style="height: 200px"></div>
+    <div class="block_list">
+      <div class="content_header">
+        <div class="main_title"> 验证并发布合约源代码 </div>
+        <div class="sub_title"> 编译器类型与版本选择 </div>
+      </div>
+      <div class="content_text">
+        源代码验证为与智能合约交互的用户提供了透明度。通过上传源代码，Filfox将把编译后的代码与区块链上的代码进行匹配。就像合同一样，“智能合同”应该为最终用户提供更多关于他们“数字签名”的信息，并让用户有机会审核代码，以独立验证代码是否确实完成了它应该做的事情。
+      </div>
+      <div class="setion_input">
+        <div class="setion_input_title">请输入您要验证的合约地址</div>
+        <el-input
+          class="input_element"
+          v-model="address"
+          placeholder="请输入地址"
+          clearable
+        />
+      </div>
+      <div class="setion_input">
+        <div class="setion_input_title">请选择编译器版本</div>
+        <el-select-v2
+          v-model="compilerVersion"
+          :options="CompilerVersionOptions"
+          placeholder="请从列表选择"
+          :style="size === Screen.Large ? 'width: 50%;' : 'width: 90%;'"
+          filterable
+          clearable
+        />
+      </div>
+      <div class="setion_input">
+        <div class="setion_input_title">请选择开源许可证类型</div>
+        <el-select-v2
+          v-model="openSourceLicenseTypes"
+          :options="openSourceLicenseTypesOptions"
+          placeholder="请从列表选择"
+          :style="size === Screen.Large ? 'width: 50%;' : 'width: 90%;'"
+          filterable
+          clearable
+        />
+      </div>
+      <el-checkbox class="checkbox" v-model="checkTermsOfService"
+        >我同意服务条款</el-checkbox
+      >
+      <div class="submit_botton_group">
+        <div class="continue" @click="nextStep">Continue</div>
+        <div class="reset" @click="resetAll">重置</div>
+      </div>
+      <div class="view_contract_list">查看合约列表</div>
     </div>
+  </div>
 </template>
 <style scoped lang="scss">
-.content {
+  .content {
     width: 100%;
     min-height: 100vh;
-    background: #F2F0EA;
+    background: #f2f0ea;
     position: relative;
 
     .block_list {
-        width: calc(100% - 125px);
-        border-radius: 8px;
-        background: #F9F9F8;
-        box-shadow: 0px 4px 15px 0px rgba(92, 255, 243, 0.10), 0px 4px 8px 0px rgba(0, 0, 0, 0.04);
-        position: relative;
-        z-index: 10;
-        margin: 35px auto 36px;
+      width: calc(100% - 125px);
+      border-radius: 8px;
+      background: #f9f9f8;
+      box-shadow:
+        0px 4px 15px 0px rgba(92, 255, 243, 0.1),
+        0px 4px 8px 0px rgba(0, 0, 0, 0.04);
+      position: relative;
+      z-index: 10;
+      margin: 35px auto 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      box-sizing: border-box;
+
+      .content_header {
+        width: calc(100% - 82px);
+        height: 155px;
+        margin: 0 41px;
         display: flex;
         flex-direction: column;
-        justify-content: center;
         align-items: center;
-        box-sizing: border-box;
+        justify-content: center;
+        border-bottom: 0.5px solid #3edfcf;
+
+        .main_title {
+          color: #000;
+          font-family: PingFang SC;
+          font-size: 24px;
+          font-weight: 500;
+          margin-bottom: 12px;
+        }
+
+        .sub_title {
+          color: #000;
+          font-family: PingFang SC;
+          font-size: 18px;
+          font-weight: 400;
+          opacity: 0.5;
+        }
+      }
+
+      .content_text {
+        width: calc(100% - 108px);
+        padding: 71px 54px 20px;
+        color: #000;
+        text-align: center;
+        font-family: PingFang SC;
+        font-size: 18px;
+        font-weight: 400;
+        opacity: 0.5;
+      }
+
+      .setion_input {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: 23px;
+
+        .setion_input_title {
+          color: #000;
+          font-family: PingFang SC;
+          font-size: 20px;
+          font-weight: 400;
+          margin-bottom: 8px;
+        }
+
+        .input_element {
+          width: 50%;
+        }
+      }
+
+      .checkbox {
+        margin: 43px 0;
+      }
+
+      .submit_botton_group {
+        display: flex;
+        justify-content: center;
+        color: #191919;
+        font-family: PingFang SC;
+        font-size: 20px;
+        font-weight: 400;
+
+        .continue {
+          width: 126px;
+          height: 42px;
+          line-height: 42px;
+          text-align: center;
+          flex-shrink: 0;
+          border-radius: 76px;
+          background: #3edfcf;
+          margin-right: 48px;
+          cursor: pointer;
+        }
+
+        .reset {
+          width: 126px;
+          height: 42px;
+          line-height: 42px;
+          text-align: center;
+          flex-shrink: 0;
+          border-radius: 76px;
+          background: linear-gradient(
+            180deg,
+            rgba(118, 221, 214, 0.25) 0%,
+            rgba(140, 180, 197, 0.31) 51.56%,
+            rgba(140, 180, 197, 0.5) 100%
+          );
+          cursor: pointer;
+        }
+      }
+
+      .view_contract_list {
+        margin: 94px 0 45px;
+        color: #0facb6;
+        font-family: PingFang SC;
+        font-size: 18px;
+        font-weight: 400;
+        text-decoration-line: underline;
+        cursor: pointer;
+      }
+    }
+  }
+
+  @media (min-width: 320px) and (max-width: 843px) {
+    .content {
+      .block_list {
+        width: calc(100% - 36px);
+        margin: 0 18px 36px;
 
         .content_header {
-            width: calc(100% - 82px);
-            height: 155px;
-            margin: 0 41px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            border-bottom: 0.5px solid #3EDFCF;
+          width: calc(100% - 44px);
+          margin: 0 22px;
 
-            .main_title {
-                color: #000;
-                font-family: PingFang SC;
-                font-size: 24px;
-                font-weight: 500;
-                margin-bottom: 12px;
-            }
+          .main_title {
+            font-size: 20px;
+            margin-bottom: 23px;
+          }
 
-            .sub_title {
-                color: #000;
-                font-family: PingFang SC;
-                font-size: 18px;
-                font-weight: 400;
-                opacity: 0.5;
-            }
+          .sub_title {
+            font-size: 16px;
+          }
         }
 
         .content_text {
-            width: calc(100% - 108px);
-            padding: 71px 54px 20px;
-            color: #000;
-            text-align: center;
-            font-family: PingFang SC;
-            font-size: 18px;
-            font-weight: 400;
-            opacity: 0.5;
+          width: calc(100% - 64px);
+          padding: 42px 32px;
+          font-size: 14px;
         }
 
         .setion_input {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            margin-top: 23px;
+          .setion_input_title {
+            font-size: 16px;
+            margin-bottom: 14px;
+          }
 
-            .setion_input_title {
-                color: #000;
-                font-family: PingFang SC;
-                font-size: 20px;
-                font-weight: 400;
-                margin-bottom: 8px;
-            }
-
-            .input_element {
-                width: 50%;
-            }
-        }
-
-        .checkbox {
-            margin: 43px 0;
+          .input_element {
+            width: 90%;
+          }
         }
 
         .submit_botton_group {
-            display: flex;
-            justify-content: center;
-            color: #191919;
-            font-family: PingFang SC;
-            font-size: 20px;
-            font-weight: 400;
-
-            .continue {
-                width: 126px;
-                height: 42px;
-                line-height: 42px;
-                text-align: center;
-                flex-shrink: 0;
-                border-radius: 76px;
-                background: #3EDFCF;
-                margin-right: 48px;
-                cursor: pointer;
-            }
-
-            .reset {
-                width: 126px;
-                height: 42px;
-                line-height: 42px;
-                text-align: center;
-                flex-shrink: 0;
-                border-radius: 76px;
-                background: linear-gradient(180deg, rgba(118, 221, 214, 0.25) 0%, rgba(140, 180, 197, 0.31) 51.56%, rgba(140, 180, 197, 0.50) 100%);
-                cursor: pointer;
-            }
+          .continue {
+            margin-right: 68px;
+          }
         }
 
         .view_contract_list {
-            margin: 94px 0 45px;
-            color: #0FACB6;
-            font-family: PingFang SC;
-            font-size: 18px;
-            font-weight: 400;
-            text-decoration-line: underline;
-            cursor: pointer;
+          margin: 51px 0 79px;
         }
+      }
     }
-}
+  }
 
-@media (min-width: 320px) and (max-width: 843px) {
-    .content {
-        .block_list {
-            width: calc(100% - 36px);
-            margin: 0 18px 36px;
+  // :global(.el-input .el-input__wrapper) {
+  //     padding: 11px;
+  // }
 
-            .content_header {
-                width: calc(100% - 44px);
-                margin: 0 22px;
-
-                .main_title {
-                    font-size: 20px;
-                    margin-bottom: 23px;
-                }
-
-                .sub_title {
-                    font-size: 16px;
-                }
-            }
-
-            .content_text {
-                width: calc(100% - 64px);
-                padding: 42px 32px;
-                font-size: 14px;
-            }
-
-            .setion_input {
-                .setion_input_title {
-                    font-size: 16px;
-                    margin-bottom: 14px;
-                }
-
-                .input_element {
-                    width: 90%;
-                }
-            }
-
-            .submit_botton_group {
-                .continue {
-                    margin-right: 68px;
-                }
-            }
-
-            .view_contract_list {
-                margin: 51px 0 79px;
-            }
-        }
-    }
-}
-
-// :global(.el-input .el-input__wrapper) {
-//     padding: 11px;
-// }
-
-// :global(.el-input__inner) {
-//     color: #000;
-//     font-family: PingFang SC;
-//     font-size: 20px;
-//     font-weight: 400;
-// }
+  // :global(.el-input__inner) {
+  //     color: #000;
+  //     font-family: PingFang SC;
+  //     font-size: 20px;
+  //     font-weight: 400;
+  // }
 </style>

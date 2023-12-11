@@ -1,17 +1,19 @@
 <script setup lang="ts">
   import { onMounted, onUnmounted, reactive, ref } from 'vue';
-  import { BlockInfo, getBlockInfo } from '@/api/block.ts';
+  import { type BlockInfo, getBlockInfo } from '@/api/block.ts';
   import Mock from 'mockjs';
   import { updateTimeAgo } from '@/utils/time.ts';
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   import { getScreenSize, Screen } from '@/utils/screen-size.ts';
 
   const porps = defineProps<{ fromPage: string }>();
   const size = getScreenSize().currentScreenSize;
   let intervalId: number | undefined;
 
-  let blockDatas = reactive<BlockInfo[]>([{}]);
-  let heights = ref<number[]>([]);
+  const blockDatas = reactive<BlockInfo[]>([{}]);
+  const heights = ref<number[]>([]);
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   async function fetchBlockInfo() {
     const res = await getBlockInfo();
     // console.log(res.data.data);
@@ -27,6 +29,7 @@
     );
     // 每3秒更新数据
     intervalId = window.setInterval(() => {
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
       fetchBlockInfo();
       // 更新数组：增加每个元素的值
       heights.value = heights.value.map(h => h + 1);

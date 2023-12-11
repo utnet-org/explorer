@@ -9,9 +9,6 @@ import i18n from '@/lang';
 // import Mock from 'mockjs';
 import './mock';
 import * as ElementPlusIconsVue from '@element-plus/icons-vue';
-import zhCn from 'element-plus/es/locale/lang/zh-cn';
-zhCn.el.pagination.goto = '前往';
-zhCn.el.pagination.pagesize = '页';
 
 const app = createApp(App);
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
@@ -28,8 +25,6 @@ if (process.env.NODE_ENV === 'development') {
 app
   .use(router)
   .use(i18n)
-  .use(ElementPlus, {
-    locale: zhCn
-})
+  .use(ElementPlus, {})
   .provide('axios', axiosInstance)
   .mount('#app');

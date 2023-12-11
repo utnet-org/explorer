@@ -1,3 +1,3 @@
 <template>
-    <div>知识库</div>
+  <div>知识库</div>
 </template>

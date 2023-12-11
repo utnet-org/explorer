@@ -6,7 +6,7 @@ export default {
   },
   nav: {
     home: '首页',
-    block_chain: '区块链',
+    block: '区块链',
     contract: '合约',
     statistic: '统计',
     resource: '资源',

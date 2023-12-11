@@ -21,7 +21,7 @@
   }
   const navSelectList = [
     {
-      title: 'nav.block_chain',
+      title: 'nav.block',
       name: '2',
       selectList: [
         {

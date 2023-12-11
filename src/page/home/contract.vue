@@ -5,7 +5,7 @@
   // const count = ref(0)
   import { onMounted } from 'vue';
   const windowWidth = ref(document.documentElement.clientWidth);
-  // 监听窗口大小变化
+  //监听窗口大小变化
   onMounted(() => {
     window.addEventListener('resize', () => {
       windowWidth.value = document.documentElement.clientWidth;

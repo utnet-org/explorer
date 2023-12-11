@@ -6,10 +6,11 @@ export default {
   },
   nav: {
     home: 'Home',
-    block: 'Block',
+    block_chain: 'Block',
     contract: 'Contract',
     statistic: 'Static',
     resource: 'Source',
+    language: 'Language',
   },
   home: {
     connect_wallet: 'Connect Wallet',
@@ -94,5 +95,28 @@ export default {
     Total_fee_or_percentage: 'Total fee/percentage',
     Total_number_of_messages_or_proportion:
       'Total number/percentage of messages',
+  },
+  blockChain: {
+    block: 'Block',
+    block_information: 'Information',
+    block_rich_list: 'Rich List',
+    block_order: 'Order',
+    block_memory_pool: 'Memory Pool',
+    block_contract_verification: 'Contract Verification',
+  },
+  contract: {
+    contract_UVM_statistics: 'UVM Statistics',
+    contract_verified_contract: 'Verified Contract',
+    contract_ecological_tour: 'Ecological Tour',
+    contract_pass: 'Pass',
+  },
+  static: {
+    static_computing_power_service_chart: 'Computing Power Service Chart',
+    static_gas_ranking: 'Gas Ranking',
+    static_computing_power_service_rankings: 'Computing Power Service Rankings',
+  },
+  source: {
+    source_common_tool: 'Common Tool',
+    source_knowledge_base: 'knowledge base',
   },
 };

@@ -1,116 +1,116 @@
 <script setup lang="ts">
-// 订单列表
-import { onMounted, ref } from 'vue';
-import HeaderPage from '../../components/otherHeaderContent.vue';
-// import Mock from 'mockjs';
-import { getScreenSize, Screen } from '@/utils/screen-size.ts';
-import { Search } from '@element-plus/icons-vue';
-// defineProps<{ msg: string }>()
-const size = getScreenSize().currentScreenSize;
-const searchMessage = ref('');
-onMounted(() => { });
-const tableData = [
-  {
-    orderId: '58185203',
-    createTime: '2020-10-21 11:13:30',
-    client: 'f3wc2vre...7hjss21iq',
-    custodian: 'f01923789',
-    fileSize: '32.00 Gib',
-    verified: 'true',
-    computingPowerFee: 'N/A',
-    status: 'N/A',
-  },
-  {
-    orderId: '58185203',
-    createTime: '2020-10-21 11:13:30',
-    client: 'f3wc2vre...7hjss21iq',
-    custodian: 'f01923789',
-    fileSize: '32.00 Gib',
-    verified: 'true',
-    computingPowerFee: 'N/A',
-    status: 'N/A',
-  },
-  {
-    orderId: '58185203',
-    createTime: '2020-10-21 11:13:30',
-    client: 'f3wc2vre...7hjss21iq',
-    custodian: 'f01923789',
-    fileSize: '32.00 Gib',
-    verified: 'true',
-    computingPowerFee: 'N/A',
-    status: 'N/A',
-  },
-  {
-    orderId: '58185203',
-    createTime: '2020-10-21 11:13:30',
-    client: 'f3wc2vre...7hjss21iq',
-    custodian: 'f01923789',
-    fileSize: '32.00 Gib',
-    verified: 'true',
-    computingPowerFee: 'N/A',
-    status: 'N/A',
-  },
-  {
-    orderId: '58185203',
-    createTime: '2020-10-21 11:13:30',
-    client: 'f3wc2vre...7hjss21iq',
-    custodian: 'f01923789',
-    fileSize: '32.00 Gib',
-    verified: 'true',
-    computingPowerFee: 'N/A',
-    status: 'N/A',
-  },
-  {
-    orderId: '58185203',
-    createTime: '2020-10-21 11:13:30',
-    client: 'f3wc2vre...7hjss21iq',
-    custodian: 'f01923789',
-    fileSize: '32.00 Gib',
-    verified: 'true',
-    computingPowerFee: 'N/A',
-    status: 'N/A',
-  },
-  {
-    orderId: '58185203',
-    createTime: '2020-10-21 11:13:30',
-    client: 'f3wc2vre...7hjss21iq',
-    custodian: 'f01923789',
-    fileSize: '32.00 Gib',
-    verified: 'true',
-    computingPowerFee: 'N/A',
-    status: 'N/A',
-  },
-  {
-    orderId: '58185203',
-    createTime: '2020-10-21 11:13:30',
-    client: 'f3wc2vre...7hjss21iq',
-    custodian: 'f01923789',
-    fileSize: '32.00 Gib',
-    verified: 'true',
-    computingPowerFee: 'N/A',
-    status: 'N/A',
-  },
-  {
-    orderId: '58185203',
-    createTime: '2020-10-21 11:13:30',
-    client: 'f3wc2vre...7hjss21iq',
-    custodian: 'f01923789',
-    fileSize: '32.00 Gib',
-    verified: 'true',
-    computingPowerFee: 'N/A',
-    status: 'N/A',
-  },
-  {
-    orderId: '58185203',
-    createTime: '2020-10-21 11:13:30',
-    client: 'f3wc2vre...7hjss21iq',
-    custodian: 'f01923789',
-    fileSize: '32.00 Gib',
-    verified: 'true',
-    computingPowerFee: 'N/A',
-    status: 'N/A',
-  },
-];
+  // 订单列表
+  import { onMounted, ref } from 'vue';
+  import HeaderPage from '../../components/otherHeaderContent.vue';
+  // import Mock from 'mockjs';
+  import { getScreenSize, Screen } from '@/utils/screen-size.ts';
+  import { Search } from '@element-plus/icons-vue';
+  // defineProps<{ msg: string }>()
+  const size = getScreenSize().currentScreenSize;
+  const searchMessage = ref('');
+  onMounted(() => {});
+  const tableData = [
+    {
+      orderId: '58185203',
+      createTime: '2020-10-21 11:13:30',
+      client: 'f3wc2vre...7hjss21iq',
+      custodian: 'f01923789',
+      fileSize: '32.00 Gib',
+      verified: 'true',
+      computingPowerFee: 'N/A',
+      status: 'N/A',
+    },
+    {
+      orderId: '58185203',
+      createTime: '2020-10-21 11:13:30',
+      client: 'f3wc2vre...7hjss21iq',
+      custodian: 'f01923789',
+      fileSize: '32.00 Gib',
+      verified: 'true',
+      computingPowerFee: 'N/A',
+      status: 'N/A',
+    },
+    {
+      orderId: '58185203',
+      createTime: '2020-10-21 11:13:30',
+      client: 'f3wc2vre...7hjss21iq',
+      custodian: 'f01923789',
+      fileSize: '32.00 Gib',
+      verified: 'true',
+      computingPowerFee: 'N/A',
+      status: 'N/A',
+    },
+    {
+      orderId: '58185203',
+      createTime: '2020-10-21 11:13:30',
+      client: 'f3wc2vre...7hjss21iq',
+      custodian: 'f01923789',
+      fileSize: '32.00 Gib',
+      verified: 'true',
+      computingPowerFee: 'N/A',
+      status: 'N/A',
+    },
+    {
+      orderId: '58185203',
+      createTime: '2020-10-21 11:13:30',
+      client: 'f3wc2vre...7hjss21iq',
+      custodian: 'f01923789',
+      fileSize: '32.00 Gib',
+      verified: 'true',
+      computingPowerFee: 'N/A',
+      status: 'N/A',
+    },
+    {
+      orderId: '58185203',
+      createTime: '2020-10-21 11:13:30',
+      client: 'f3wc2vre...7hjss21iq',
+      custodian: 'f01923789',
+      fileSize: '32.00 Gib',
+      verified: 'true',
+      computingPowerFee: 'N/A',
+      status: 'N/A',
+    },
+    {
+      orderId: '58185203',
+      createTime: '2020-10-21 11:13:30',
+      client: 'f3wc2vre...7hjss21iq',
+      custodian: 'f01923789',
+      fileSize: '32.00 Gib',
+      verified: 'true',
+      computingPowerFee: 'N/A',
+      status: 'N/A',
+    },
+    {
+      orderId: '58185203',
+      createTime: '2020-10-21 11:13:30',
+      client: 'f3wc2vre...7hjss21iq',
+      custodian: 'f01923789',
+      fileSize: '32.00 Gib',
+      verified: 'true',
+      computingPowerFee: 'N/A',
+      status: 'N/A',
+    },
+    {
+      orderId: '58185203',
+      createTime: '2020-10-21 11:13:30',
+      client: 'f3wc2vre...7hjss21iq',
+      custodian: 'f01923789',
+      fileSize: '32.00 Gib',
+      verified: 'true',
+      computingPowerFee: 'N/A',
+      status: 'N/A',
+    },
+    {
+      orderId: '58185203',
+      createTime: '2020-10-21 11:13:30',
+      client: 'f3wc2vre...7hjss21iq',
+      custodian: 'f01923789',
+      fileSize: '32.00 Gib',
+      verified: 'true',
+      computingPowerFee: 'N/A',
+      status: 'N/A',
+    },
+  ];
 </script>
 <template>
   <div class="content">
@@ -122,36 +122,56 @@ const tableData = [
           <div class="block_list_header_title">订单列表</div>
           <div class="block_list_header_text">共 1141606363 条消息</div>
         </div>
-        <el-input v-if="size === Screen.Large" style="width: 30%; height: 30px; margin-right: 20px"
-          v-model="searchMessage" placeholder="搜索客户/矿工" :suffix-icon="Search" clearable />
+        <el-input
+          v-if="size === Screen.Large"
+          style="width: 30%; height: 30px; margin-right: 20px"
+          v-model="searchMessage"
+          placeholder="搜索客户/矿工"
+          :suffix-icon="Search"
+          clearable
+        />
       </div>
       <div class="search" v-if="size === Screen.Small">
-        <el-input style="width: 50%; height: 40px" v-model="searchMessage" placeholder="搜索客户/矿工" :suffix-icon="Search"
-          clearable />
+        <el-input
+          style="width: 50%; height: 40px"
+          v-model="searchMessage"
+          placeholder="搜索客户/矿工"
+          :suffix-icon="Search"
+          clearable
+        />
       </div>
-      <el-table :data="tableData" table-layout="fixed" v-if="size === Screen.Large" :header-cell-style="{
-        textAlign: 'center',
-        color: 'rgba(0,0,0,0.5)',
-        fontSize: '12px',
-        fontWeight: '300',
-        borderBottom: 'none',
-        backgroundColor: '#F9F9F8',
-      }" :cell-style="{
-  color: '#000',
-  height: '36px',
-  fontSize: '14px',
-  fontWeight: '500',
-  textAlign: 'center',
-  borderBottom: '0.5px solid rgba(140, 233, 220,0.5)',
-  backgroundColor: '#F9F9F8',
-}">
+      <el-table
+        :data="tableData"
+        table-layout="fixed"
+        v-if="size === Screen.Large"
+        :header-cell-style="{
+          textAlign: 'center',
+          color: 'rgba(0,0,0,0.5)',
+          fontSize: '12px',
+          fontWeight: '300',
+          borderBottom: 'none',
+          backgroundColor: '#F9F9F8',
+        }"
+        :cell-style="{
+          color: '#000',
+          height: '36px',
+          fontSize: '14px',
+          fontWeight: '500',
+          textAlign: 'center',
+          borderBottom: '0.5px solid rgba(140, 233, 220,0.5)',
+          backgroundColor: '#F9F9F8',
+        }"
+      >
         <el-table-column prop="orderId" label="订单ID"></el-table-column>
         <el-table-column prop="createTime" label="创建时间"></el-table-column>
         <el-table-column prop="client" label="客户"></el-table-column>
         <el-table-column prop="custodian" label="托管者"></el-table-column>
         <el-table-column prop="fileSize" label="文件大小"></el-table-column>
         <el-table-column prop="verified" label="已验证"></el-table-column>
-        <el-table-column prop="computingPowerFee" label="算力费用"></el-table-column>
+        <el-table-column
+          prop="computingPowerFee"
+          label="算力费用"
+        ></el-table-column>
         <el-table-column prop="status" label="状态"></el-table-column>
       </el-table>
       <div v-else style="padding-bottom: 20px">
@@ -246,96 +266,96 @@ const tableData = [
   </div>
 </template>
 <style scoped lang="scss">
-.content {
-  width: 100%;
-  min-height: 100vh;
-  background: #f2f0ea;
-  position: relative;
-
-  .block_list {
-    width: calc(100% - 64px);
-    // height: 500px;
-    border-radius: 8px;
-    background: #f9f9f8;
-    box-shadow:
-      0px 4px 15px 0px rgba(92, 255, 243, 0.1),
-      0px 4px 8px 0px rgba(0, 0, 0, 0.04);
+  .content {
+    width: 100%;
+    min-height: 100vh;
+    background: #f2f0ea;
     position: relative;
-    z-index: 10;
-    // margin-left: 62px;
-    margin: 39px auto 36px;
 
-    .block_list_header {
-      height: 50px;
+    .block_list {
+      width: calc(100% - 64px);
+      // height: 500px;
       border-radius: 8px;
-      background: #fff;
-      padding-left: 26px;
+      background: #f9f9f8;
       box-shadow:
         0px 4px 15px 0px rgba(92, 255, 243, 0.1),
         0px 4px 8px 0px rgba(0, 0, 0, 0.04);
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      .block_list_header_side {
-        display: flex;
-        align-items: center;
-
-        .block_list_header_title {
-          color: #000;
-          font-family: PingFang SC;
-          font-size: 16px;
-          font-weight: 500;
-          margin-right: 26px;
-        }
-
-        .block_list_header_text {
-          color: #0facb6;
-          font-family: PingFang SC;
-          font-size: 14px;
-          font-weight: 400;
-          opacity: 0.7;
-        }
-      }
-    }
-
-    .search {
-      width: 100%;
-      padding: 22px 35px 20px 0;
-      box-sizing: border-box;
-      display: flex;
-      justify-content: flex-end;
-    }
-  }
-}
-
-@media (min-width: 320px) and (max-width: 843px) {
-  .content {
-    .block_list {
-      width: calc(100% - 36px);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      margin: 0 18px 36px;
-      box-sizing: border-box;
+      position: relative;
+      z-index: 10;
+      // margin-left: 62px;
+      margin: 39px auto 36px;
 
       .block_list_header {
-        .block_list_header_title {
-          font-size: 14px;
+        height: 50px;
+        border-radius: 8px;
+        background: #fff;
+        padding-left: 26px;
+        box-shadow:
+          0px 4px 15px 0px rgba(92, 255, 243, 0.1),
+          0px 4px 8px 0px rgba(0, 0, 0, 0.04);
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .block_list_header_side {
+          display: flex;
+          align-items: center;
+
+          .block_list_header_title {
+            color: #000;
+            font-family: PingFang SC;
+            font-size: 16px;
+            font-weight: 500;
+            margin-right: 26px;
+          }
+
+          .block_list_header_text {
+            color: #0facb6;
+            font-family: PingFang SC;
+            font-size: 14px;
+            font-weight: 400;
+            opacity: 0.7;
+          }
         }
       }
 
       .search {
-        padding: 10px 15px 15px 0;
+        width: 100%;
+        padding: 22px 35px 20px 0;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: flex-end;
       }
     }
+  }
 
-    .eco-item2 {
-      display: flex;
-      justify-content: start;
-      align-items: center;
+  @media (min-width: 320px) and (max-width: 843px) {
+    .content {
+      .block_list {
+        width: calc(100% - 36px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 0 18px 36px;
+        box-sizing: border-box;
+
+        .block_list_header {
+          .block_list_header_title {
+            font-size: 14px;
+          }
+        }
+
+        .search {
+          padding: 10px 15px 15px 0;
+        }
+      }
+
+      .eco-item2 {
+        display: flex;
+        justify-content: start;
+        align-items: center;
+      }
     }
   }
-}
 </style>

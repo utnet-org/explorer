@@ -1,4 +1,5 @@
 <script setup lang="ts">
+  // 验证并发布合约源代码
   import { ElMessage } from 'element-plus';
   import { onMounted, ref } from 'vue';
   import HeaderPage from '../../components/otherHeaderContent.vue';

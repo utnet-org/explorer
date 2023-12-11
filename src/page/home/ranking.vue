@@ -1,4 +1,5 @@
 <script setup lang="ts">
+  // 算力服务排行榜
   import HeaderPage from '../../components/otherHeaderContent.vue';
   import { onMounted, onUnmounted, reactive, ref } from 'vue';
   import { getPowerRank, PowerRank } from '@/api/power.ts';
@@ -51,7 +52,7 @@
   });
 
   const currentPage = ref(1); // 当前页码
-  const pageSize = ref(2); // 每页显示条目数
+  const pageSize = ref(5); // 每页显示条目数
   const totalItems = ref(poDatas.length); // 总条目数，即您数组的长度
   // 处理页码改变
   const handlePageChange = (page: number) => {
@@ -64,7 +65,7 @@
   // 页面滚动事件处理函数
   function handleScroll() {
     // 当页面滚动超过 600px 时显示按钮
-    showButton.value = window.scrollY > -1;
+    showButton.value = window.scrollY > 10;
   }
 </script>
 <template>

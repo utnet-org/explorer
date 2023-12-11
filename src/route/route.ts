@@ -1,22 +1,22 @@
 // router/index.js
 
 import { createRouter, createWebHistory } from 'vue-router';
-import Home from '../page/home/index.vue'; // 你的视图组件路径
-import DefaultHome from '../page/index.vue'; // 你的视图组件路径
+import Home from '../page/home/index.vue'; //  首页
+import DefaultHome from '../page/index.vue'; // 二级路由
 import Test from '../page/home/test.vue'; // 你的视图组件路径
-import BlockChain from '../page/blockchain/index.vue'; // 你的视图组件路径
-import Message from '../page/blockchain/message.vue'; // 你的视图组件路径
-import RichList from '../page/blockchain/richList.vue'; // 你的视图组件路径
-import OrderList from '../page/blockchain/order.vue'; // 你的视图组件路径
-import MemoryPool from '../page/blockchain/memoryPool.vue'; // 你的视图组件路径
-import ContractVerification from '../page/blockchain/contractVerification.vue'; // 你的视图组件路径
-import Contract from '../page/home/contract.vue'; // 你的视图组件路径
-import Statistics from '../page/home/statistics.vue'; // 你的视图组件路径
-import Resource from '../page/resource/index.vue'; // 你的视图组件路径
-import KnowledgeBase from '../page/resource/knowledgeBase.vue'; // 你的视图组件路径
-import Uvm from '../page/home/uvmStatistics.vue'; // 你的视图组件路径
-import Ranking from '../page/home/ranking.vue'; // 你的视图组件路径
+import BlockChain from '../page/blockchain/index.vue'; // 最新区块
+import Message from '../page/blockchain/message.vue'; // 消息列表
+import RichList from '../page/blockchain/richList.vue'; // 富豪榜
+import OrderList from '../page/blockchain/order.vue'; // 订单列表
+import MemoryPool from '../page/blockchain/memoryPool.vue'; // 内存池消息列表
+import ContractVerification from '../page/blockchain/contractVerification.vue'; // 验证并发布合约源代码
+import Contract from '../page/resource/contract.vue'; // UVM概览 常用工具
+import Statistics from '../page/home/statistics.vue'; // 算力服务图表
+import KnowledgeBase from '../page/resource/knowledgeBase.vue'; // 知识库
+import Uvm from '../page/pactpage/uvmStatistics.vue'; // uvm 统计
+import Ranking from '../page/home/ranking.vue'; // 算力服务排行榜
 
+// assets
 const routes = [
   {
     path: '/',
@@ -36,16 +36,12 @@ const routes = [
         component: BlockChain,
       },
       {
-        path: '/contract',
+        path: '/resource/commontool',
         component: Contract,
       },
       {
         path: '/statistics',
         component: Statistics,
-      },
-      {
-        path: '/resource',
-        component: Resource,
       },
       {
         path: '/blockchain/message',

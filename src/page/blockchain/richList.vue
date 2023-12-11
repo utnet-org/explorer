@@ -1,4 +1,5 @@
 <script setup lang="ts">
+  // 富豪榜
   import { onMounted } from 'vue';
   import HeaderPage from '../../components/otherHeaderContent.vue';
   // import Mock from 'mockjs';

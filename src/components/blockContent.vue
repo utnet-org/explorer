@@ -1,4 +1,5 @@
 <script setup lang="ts">
+  // 最新区块
   import { onMounted, onUnmounted, reactive, ref } from 'vue';
   import { type BlockInfo, getBlockInfo } from '@/api/block.ts';
   import Mock from 'mockjs';

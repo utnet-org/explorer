@@ -1,4 +1,5 @@
 <script setup lang="ts">
+  //  算力服务图表
   import HeaderPage from '../../components/otherHeaderContent.vue';
   import { onMounted, onUnmounted, ref } from 'vue';
   import * as echarts from 'echarts/core';
@@ -288,8 +289,8 @@
           type: 'line', // 系列类型是折线图
           smooth: true, // 平滑的线
           showSymbol: false, // 不显示拐点
-          symbol: 'circle', //拐点的形状
-          symbolSize: -1, //拐点大小
+          symbol: 'circle', // 拐点的形状
+          symbolSize: -1, // 拐点大小
           data: seriesData[1], // 示例数据
           // 区域填充样式
           areaStyle: {
@@ -373,7 +374,7 @@
             },
             series: [
               {
-                symbolSize: 10, //拐点大小
+                symbolSize: 10, // 拐点大小
                 emphasis: {
                   focus: 'series',
                   lineStyle: {

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+  // uvm统计
   import { onMounted, ref, watchEffect } from 'vue';
   import { useRouter } from 'vue-router';
   import Wallet from '../wallet/connect.ts';
@@ -55,7 +56,7 @@
       selectList: [
         {
           title: 'contract.contract_UVM_statistics',
-          link: '/contract',
+          link: '/contract/uvm',
         },
         {
           title: 'contract.contract_verified_contract',
@@ -93,7 +94,7 @@
         },
         {
           title: 'static.static_computing_power_service_rankings',
-          link: '',
+          link: '/statistics/ranking',
         },
       ],
     },
@@ -103,7 +104,7 @@
       selectList: [
         {
           title: 'source.source_common_tool',
-          link: '/resource',
+          link: '/resource/commontool',
         },
         {
           title: 'source.source_knowledge_base',

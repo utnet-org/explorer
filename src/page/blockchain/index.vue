@@ -1,4 +1,5 @@
 <script setup lang="ts">
+  // 最新区块
   import { onMounted, onUnmounted, reactive, ref } from 'vue';
   import HeaderPage from '../../components/otherHeaderContent.vue';
   import { BlockInfo, getBlockInfo } from '@/api/block.ts';

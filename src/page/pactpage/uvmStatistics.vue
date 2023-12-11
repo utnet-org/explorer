@@ -1,4 +1,5 @@
 <script setup lang="ts">
+  // uvm 统计
   import HeaderPage from '../../components/otherHeaderContent.vue';
   import { onMounted, onUnmounted, ref } from 'vue';
   import * as echarts from 'echarts/core';

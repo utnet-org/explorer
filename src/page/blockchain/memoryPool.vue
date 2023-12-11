@@ -1,4 +1,5 @@
 <script setup lang="ts">
+  // 内存池消息列表
   import { onMounted } from 'vue';
   import HeaderPage from '../../components/otherHeaderContent.vue';
   // import Mock from 'mockjs';

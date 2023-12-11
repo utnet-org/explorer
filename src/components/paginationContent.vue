@@ -1,9 +1,8 @@
 <script lang="ts" setup>
   import button_arrow from '@/assets/svgs/button_arrow.svg';
-  const size = getScreenSize().currentScreenSize;
-
   import { getScreenSize, Screen } from '@/utils/screen-size.ts';
-  //父组建传入数据
+  const size = getScreenSize().currentScreenSize;
+  // 父组建传入数据
   const props = defineProps({
     totalItems: {
       type: Number,
@@ -53,7 +52,7 @@
       </div>
     </div>
 
-    <div class="button_arrow" v-show="props.showButton" @click="scrollToTop">
+    <div v-show="props.showButton" class="button_arrow" @click="scrollToTop">
       <button_arrow />
     </div>
   </div>
@@ -65,12 +64,16 @@
     padding: 0;
     box-sizing: border-box;
   }
+  .pagss {
+    width: 1px;
+    height: 1px;
+  }
   .pag {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding-right: 100px;
+    padding: 0 100px;
   }
   .button_arrow {
     width: 45px;

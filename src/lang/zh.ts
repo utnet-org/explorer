@@ -6,10 +6,11 @@ export default {
   },
   nav: {
     home: '首页',
-    block: '区块链',
+    block_chain: '区块链',
     contract: '合约',
     statistic: '统计',
     resource: '资源',
+    language: '语言',
   },
   home: {
     connect_wallet: '连接钱包',
@@ -76,5 +77,28 @@ export default {
     website: '官网',
     app_mobile: 'App移动端',
     explorer_wallet: '浏览器钱包',
+  },
+  blockChain: {
+    block: '区块',
+    block_information: '消息',
+    block_rich_list: '富豪榜',
+    block_order: '订单',
+    block_memory_pool: '内存池',
+    block_contract_verification: '合约验证',
+  },
+  contract: {
+    contract_UVM_statistics: 'UVM统计',
+    contract_verified_contract: '已验证合约',
+    contract_ecological_tour: '生态导览',
+    contract_pass: '通证',
+  },
+  static: {
+    static_computing_power_service_chart: '算力服务图表',
+    static_gas_ranking: 'Gas排行',
+    static_computing_power_service_rankings: '算力服务排行榜',
+  },
+  source: {
+    source_common_tool: '常用工具',
+    source_knowledge_base: '知识库',
   },
 };

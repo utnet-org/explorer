@@ -20,31 +20,31 @@ if (props.viewportWidth > 430 && props.viewportWidth < 834) {
 }
 const navSelectList = [
   {
-    title: 'nav.block',
+    title: 'nav.block_chain',
     name: '2',
     selectList: [
       {
-        title: '区块',
+        title: 'blockChain.block',
         link: '/blockchain',
       },
       {
-        title: '消息',
+        title: 'blockChain.block_information',
         link: '/blockchain/message',
       },
       {
-        title: '富豪榜',
+        title: 'blockChain.block_rich_list',
         link: '/blockchain/richlist',
       },
       {
-        title: '订单',
+        title: 'blockChain.block_order',
         link: '/blockchain/order',
       },
       {
-        title: '内存池',
+        title: 'blockChain.block_memory_pool',
         link: '/blockchain/memoryPool',
       },
       {
-        title: '合约验证',
+        title: 'blockChain.block_contract_verification',
         link: '/blockchain/contractVerification',
       },
 
@@ -55,11 +55,11 @@ const navSelectList = [
     name: '3',
     selectList: [
       {
-        title: 'UVM统计',
+        title: 'contract.contract_UVM_statistics',
         link: '/contract',
       },
       {
-        title: '已验证合约',
+        title: 'contract.contract_verified_contract',
         link: '',
       },
       {
@@ -67,11 +67,11 @@ const navSelectList = [
         link: '',
       },
       {
-        title: '生态导览',
+        title: 'contract.contract_ecological_tour',
         link: '',
       },
       {
-        title: '通证',
+        title: 'contract.contract_pass',
         link: '',
       },
       {
@@ -85,15 +85,15 @@ const navSelectList = [
     name: '4',
     selectList: [
       {
-        title: '算力服务图表',
+        title: 'static.static_computing_power_service_chart',
         link: '/statistics',
       },
       {
-        title: 'Gas排行',
+        title: 'static.static_gas_ranking',
         link: '',
       },
       {
-        title: '算力服务排行榜',
+        title: 'static.static_computing_power_service_rankings',
         link: '',
       },
     ],
@@ -103,16 +103,20 @@ const navSelectList = [
     name: '5',
     selectList: [
       {
-        title: '常用工具',
+        title: 'source.source_common_tool',
         link: '/resource',
       },
       {
-        title: '知识库',
+        title: 'source.source_knowledge_base',
         link: '/resource/knowledgeBase',
       },
     ],
   },
 ];
+const languageList = [
+  'en',
+  'zh',
+]
 const selectIndex = ref(-1);
 const address = ref(i18n.global.t('home.connect_wallet'));
 const isConnect = ref(false);
@@ -234,7 +238,7 @@ const handleLang = (command: string) => {
                 <el-dropdown-menu>
                   <el-dropdown-item v-for="(navCitem, navCindex) in navItem.selectList" :key="navCindex"
                     @click="linkNextRoute(navCitem.link, navIndex)">
-                    {{ navCitem.title }}
+                    {{ $t(navCitem.title) }}
                   </el-dropdown-item>
                 </el-dropdown-menu>
               </template>
@@ -318,11 +322,16 @@ const handleLang = (command: string) => {
     <div class="demo-collapse" v-if="showNavSelectType && size === Screen.Small">
       <div class="first_collapse_item" @click="changeSelectIndex">首页</div>
       <el-collapse v-model="activeName" accordion @change="changeCollapse">
-        <el-collapse-item v-for="(item, index) in navSelectList" :key="index" :title="item.title" :name="item.name"
+        <el-collapse-item v-for="(item, index) in navSelectList" :key="index" :title="$t(item.title)" :name="item.name"
           :style="activeName == item.name ? 'background: #f1f9f2;' : ''">
           <div class="collapse_item" :style="linkUrl === citem.link ? 'font-weight: 600;color:#0FACB6;' : ''
             " v-for="(citem, cindex) in item.selectList" :key="cindex" @click="linkNextRoute(citem.link, index)">{{
-    citem.title }}
+    $t(citem.title) }}
+          </div>
+        </el-collapse-item>
+        <el-collapse-item :title="$t('nav.language')" name="6" :style="activeName == '6' ? 'background: #f1f9f2;' : ''">
+          <div class="collapse_item" v-for="(citem, cindex) in languageList" :key="cindex" @click="handleLang(citem)">{{
+            $t('lang.' + citem) }}
           </div>
         </el-collapse-item>
       </el-collapse>

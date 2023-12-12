@@ -68,7 +68,7 @@
           display: flex;
           align-items: flex-start;
           justify-content: space-between;
-          margin-left: 48px;
+          margin-left: 32px;
 
           .peak_content_top_side {
             margin-top: 70px;

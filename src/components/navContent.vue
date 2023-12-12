@@ -21,7 +21,7 @@
   }
   const navSelectList = [
     {
-      title: 'nav.block_chain',
+      title: 'nav.block',
       name: '2',
       selectList: [
         {
@@ -221,8 +221,15 @@
   <div class="nav_content">
     <div class="nav_select">
       <div class="nav_select_left">
-        <img src="../assets/images/logo.png" alt="" srcset="" />
-        <div class="nav_select_left_title">UNCSCAN</div>
+        <img
+          src="../assets/images/logo.png"
+          alt=""
+          srcset=""
+          @click="changeSelectIndex"
+        />
+        <div class="nav_select_left_title" @click="changeSelectIndex"
+          >UNCSCAN</div
+        >
         <div v-if="size === Screen.Large" class="select_list">
           <div
             class="select_list_item"
@@ -427,7 +434,7 @@
   .nav_select {
     display: flex;
     height: 37px;
-    padding: 11px 20px 11px 22px;
+    padding: 11px 32px 11px;
     justify-content: space-between;
 
     .nav_select_left {
@@ -437,6 +444,7 @@
       img {
         width: 32px;
         height: 37px;
+        cursor: pointer;
       }
 
       .nav_select_left_title {
@@ -445,6 +453,7 @@
         font-family: PingFang SC;
         font-weight: 600;
         color: #191919;
+        cursor: pointer;
       }
 
       .select_list {

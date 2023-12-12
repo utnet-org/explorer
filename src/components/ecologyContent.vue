@@ -308,7 +308,7 @@
       }
 
       .ecology_tabs {
-        width: 286px;
+        width: max-content;
         margin: 12px 22px 22px;
         display: flex;
         align-items: center;
@@ -376,7 +376,7 @@
       }
 
       .ecology_tabs {
-        width: 286px;
+        width: max-content;
         margin: 12px 22px 22px;
         display: flex;
         align-items: center;

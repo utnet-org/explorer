@@ -291,7 +291,7 @@
     position: relative;
 
     .block_list {
-      width: calc(100% - 124px);
+      width: calc(100% - 64px);
       // height: 500px;
       border-radius: 8px;
       background: #f9f9f8;

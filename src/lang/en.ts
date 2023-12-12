@@ -6,7 +6,7 @@ export default {
   },
   nav: {
     home: 'Home',
-    block_chain: 'Block',
+    block: 'Block',
     contract: 'Contract',
     statistic: 'Static',
     resource: 'Source',

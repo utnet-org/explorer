@@ -185,7 +185,7 @@
     position: relative;
 
     .block_list {
-      width: calc(100% - 125px);
+      width: calc(100% - 64px);
       border-radius: 8px;
       background: #f9f9f8;
       box-shadow:

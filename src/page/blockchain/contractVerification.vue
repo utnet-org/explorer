@@ -129,51 +129,61 @@
     <div style="height: 200px"></div>
     <div class="block_list">
       <div class="content_header">
-        <div class="main_title"> 验证并发布合约源代码 </div>
-        <div class="sub_title"> 编译器类型与版本选择 </div>
+        <div class="main_title"
+          >{{ $t('home.Verify_and_publish_contract_source_code') }}
+        </div>
+        <div class="sub_title">
+          {{ $t('home.Compiler_typeand_version_selection') }}
+        </div>
       </div>
       <div class="content_text">
-        源代码验证为与智能合约交互的用户提供了透明度。通过上传源代码，Filfox将把编译后的代码与区块链上的代码进行匹配。就像合同一样，“智能合同”应该为最终用户提供更多关于他们“数字签名”的信息，并让用户有机会审核代码，以独立验证代码是否确实完成了它应该做的事情。
+        {{ $t('home.Source_code_verification') }}
       </div>
       <div class="setion_input">
-        <div class="setion_input_title">请输入您要验证的合约地址</div>
+        <div class="setion_input_title">{{
+          $t('home.Please_enter_the_contract')
+        }}</div>
         <el-input
           class="input_element"
           v-model="address"
-          placeholder="请输入地址"
+          :placeholder="$t('home.Please_enter_address')"
           clearable
         />
       </div>
       <div class="setion_input">
-        <div class="setion_input_title">请选择编译器版本</div>
+        <div class="setion_input_title">{{
+          $t('home.Please_select_a_compiler')
+        }}</div>
         <el-select-v2
           v-model="compilerVersion"
           :options="CompilerVersionOptions"
-          placeholder="请从列表选择"
+          :placeholder="$t('home.Please_select_from')"
           :style="size === Screen.Large ? 'width: 50%;' : 'width: 90%;'"
           filterable
           clearable
         />
       </div>
       <div class="setion_input">
-        <div class="setion_input_title">请选择开源许可证类型</div>
+        <div class="setion_input_title">{{
+          $t('home.Please_select_an_open')
+        }}</div>
         <el-select-v2
           v-model="openSourceLicenseTypes"
           :options="openSourceLicenseTypesOptions"
-          placeholder="请从列表选择"
+          :placeholder="$t('home.Please_select_from')"
           :style="size === Screen.Large ? 'width: 50%;' : 'width: 90%;'"
           filterable
           clearable
         />
       </div>
-      <el-checkbox class="checkbox" v-model="checkTermsOfService"
-        >我同意服务条款</el-checkbox
-      >
+      <el-checkbox class="checkbox" v-model="checkTermsOfService">{{
+        $t('home.I_agree_to_the_terms_of_service')
+      }}</el-checkbox>
       <div class="submit_botton_group">
         <div class="continue" @click="nextStep">Continue</div>
-        <div class="reset" @click="resetAll">重置</div>
+        <div class="reset" @click="resetAll">{{ $t('home.reset') }}</div>
       </div>
-      <div class="view_contract_list">查看合约列表</div>
+      <div class="view_contract_list">{{ $t('home.View_contract_list') }}</div>
     </div>
   </div>
 </template>

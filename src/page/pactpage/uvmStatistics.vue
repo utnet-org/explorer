@@ -861,6 +861,9 @@
   }
 
   @media (min-width: 1025px) {
+    .echartAll {
+      padding: 0 35px;
+    }
     .trend {
       color: #000;
       font-family: PingFang SC;
@@ -873,7 +876,7 @@
 
     .computing_power_trend {
       height: 380px;
-      width: 90%;
+      width: 100%;
       padding: 0 64px;
     }
 

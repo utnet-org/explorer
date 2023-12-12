@@ -95,6 +95,63 @@ export default {
     Total_fee_or_percentage: 'Total fee/percentage',
     Total_number_of_messages_or_proportion:
       'Total number/percentage of messages',
+
+    high: 'Height',
+    Computing_power_provider: 'Computing power provider',
+    Message_list: 'Message list',
+    Search_for_clients_or_miner: 'Search for clients/miner',
+    message_id: 'Message ID',
+    time: 'Time',
+    sender: 'Sender',
+    receiver: 'Receiver',
+    method: 'Method',
+    Amount: 'Amount',
+    status: 'Status',
+
+    rich_list: 'Rich List',
+    ranking: 'Ranking',
+    account_name: 'Account Name',
+    balance: 'Balance',
+    Balance_ratio: 'Balance ratio',
+    type: 'Type',
+    creation_time: 'Creation Time',
+    Latest_transactions: 'Latest Transactions',
+
+    Order_List: 'Order List',
+    Order_ID: 'Order ID',
+    client: 'Client',
+    custodian: 'Custodian',
+    File_size: 'File Size',
+    Verified: 'Verified',
+    Computing_power_fee: 'Computing Power Fee',
+    state: 'State',
+
+    Memory_pool_message_list: 'Memory Pool Message List',
+    gas_limit: 'Gas Limit',
+
+    Verify_and_publish_contract_source_code:
+      'Verify and publish contract source code',
+    Compiler_typeand_version_selection: 'Compiler type and version selection',
+    Source_code_verification:
+      'Source code verification provides transparency to users interacting with smart contracts. By uploading the source code, Filfox will match the compiled code with the code on the blockchain. Just like contracts, "smart contracts" should provide end users with more information about their "digital signature" and give users the opportunity to audit the code to independently verify that the code actually does what it is supposed to do.',
+    Please_enter_the_contract:
+      'Please enter the contract address you want to verify',
+    Please_enter_address: 'Please enter address',
+    Please_select_a_compiler: 'Please select a compiler version',
+    Please_select_an_open: 'Please select an open source license type',
+    Please_select_from: 'Please select from the list',
+    I_agree_to_the_terms_of_service: 'I agree to the terms of service',
+    reset: 'reset',
+    View_contract_list: 'View contract list',
+
+
+    UVM_overview: 'UVM Overview',
+    Popular_contracts: 'Popular Contracts',
+    Contract_address: 'Contract Address',
+    Number_of_transactions: 'Number of transactions',
+    Number_of_unique_users: 'Number of unique users',
+    Gas_cost: 'Gas cost',
+    Contract_name: 'Contract name',
   },
   blockChain: {
     block: 'Block',

@@ -119,14 +119,14 @@
     <div class="block_list">
       <div class="block_list_header">
         <div class="block_list_header_side">
-          <div class="block_list_header_title">订单列表</div>
+          <div class="block_list_header_title">{{ $t('home.Order_List') }}</div>
           <div class="block_list_header_text">共 1141606363 条消息</div>
         </div>
         <el-input
           v-if="size === Screen.Large"
           style="width: 30%; height: 30px; margin-right: 20px"
           v-model="searchMessage"
-          placeholder="搜索客户/矿工"
+          :placeholder="$t('home.Search_for_clients_or_miner')"
           :suffix-icon="Search"
           clearable
         />
@@ -135,7 +135,7 @@
         <el-input
           style="width: 50%; height: 40px"
           v-model="searchMessage"
-          placeholder="搜索客户/矿工"
+          :placeholder="$t('home.Search_for_clients_or_miner')"
           :suffix-icon="Search"
           clearable
         />
@@ -162,17 +162,38 @@
           backgroundColor: '#F9F9F8',
         }"
       >
-        <el-table-column prop="orderId" label="订单ID"></el-table-column>
-        <el-table-column prop="createTime" label="创建时间"></el-table-column>
-        <el-table-column prop="client" label="客户"></el-table-column>
-        <el-table-column prop="custodian" label="托管者"></el-table-column>
-        <el-table-column prop="fileSize" label="文件大小"></el-table-column>
-        <el-table-column prop="verified" label="已验证"></el-table-column>
+        <el-table-column
+          prop="orderId"
+          :label="$t('home.Order_ID')"
+        ></el-table-column>
+        <el-table-column
+          prop="createTime"
+          :label="$t('home.creation_time')"
+        ></el-table-column>
+        <el-table-column
+          prop="client"
+          :label="$t('home.client')"
+        ></el-table-column>
+        <el-table-column
+          prop="custodian"
+          :label="$t('home.custodian')"
+        ></el-table-column>
+        <el-table-column
+          prop="fileSize"
+          :label="$t('home.File_size')"
+        ></el-table-column>
+        <el-table-column
+          prop="verified"
+          :label="$t('home.Verified')"
+        ></el-table-column>
         <el-table-column
           prop="computingPowerFee"
-          label="算力费用"
+          :label="$t('home.Computing_power_fee')"
         ></el-table-column>
-        <el-table-column prop="status" label="状态"></el-table-column>
+        <el-table-column
+          prop="status"
+          :label="$t('home.state')"
+        ></el-table-column>
       </el-table>
       <div v-else style="padding-bottom: 20px">
         <div>

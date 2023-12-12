@@ -116,7 +116,9 @@
     <div style="height: 200px"></div>
     <div class="block_list">
       <div class="block_list_header">
-        <div class="block_list_header_title">内存池消息列表</div>
+        <div class="block_list_header_title">{{
+          $t('home.Memory_pool_message_list')
+        }}</div>
         <div class="block_list_header_text">共 676 条消息</div>
       </div>
       <el-table
@@ -142,20 +144,32 @@
         }"
       >
         <el-table-column prop="memoryPoolId" label="ID" />
-        <el-table-column prop="createTime" label="创建时间"></el-table-column>
-        <el-table-column prop="sender" label="发送方"></el-table-column>
-        <el-table-column prop="receiver" label="接收方"></el-table-column>
-        <el-table-column label="方法">
+        <el-table-column
+          prop="createTime"
+          :label="$t('home.creation_time')"
+        ></el-table-column>
+        <el-table-column
+          prop="sender"
+          :label="$t('home.sender')"
+        ></el-table-column>
+        <el-table-column
+          prop="receiver"
+          :label="$t('home.receiver')"
+        ></el-table-column>
+        <el-table-column :label="$t('home.method')">
           <template #default="scope">
             <div style="color: #0facb6">{{ scope.row.method }}</div>
           </template>
         </el-table-column>
-        <el-table-column label="金额">
+        <el-table-column :label="$t('home.Amount')">
           <template #default="scope">
             <div>{{ scope.row.amount }} UNC</div>
           </template>
         </el-table-column>
-        <el-table-column prop="gasLimit" label="gas限额"></el-table-column>
+        <el-table-column
+          prop="gasLimit"
+          :label="$t('home.gas_limit')"
+        ></el-table-column>
         <el-table-column label="Gas Premium">
           <template #default="scope">
             <div>{{ scope.row.gasPremium }} attoFil</div>

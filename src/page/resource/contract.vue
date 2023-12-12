@@ -77,65 +77,67 @@
     <HeaderPage fromPage="contract" />
     <div style="height: 60px"></div>
     <div class="peak_content_section">
-      <div class="peak_content_section_header">UVM概览</div>
+      <div class="peak_content_section_header">{{
+        $t('home.UVM_overview')
+      }}</div>
       <div>
         <div class="peak_content_section_above">
           <div class="peak_content_section_item first_item">
-            <div>区块高度</div>
+            <div>{{ $t('home.height') }}</div>
             <div>3,290,404</div>
           </div>
           <div class="peak_content_section_item_side"></div>
           <div class="peak_content_section_item secound_item">
-            <div>最新区块时间</div>
+            <div>{{ $t('home.latest_time') }}</div>
             <div>1分15秒前</div>
           </div>
           <div class="peak_content_section_item_side"></div>
           <div class="peak_content_section_item third_item">
-            <div>全网有效算力</div>
+            <div>{{ $t('home.total_power') }}</div>
             <div>24.427 TFLOPS</div>
           </div>
           <div class="peak_content_section_item_side"></div>
           <div class="peak_content_section_item fourth_item">
-            <div>活跃算力提供者</div>
+            <div>{{ $t('home.miner') }}</div>
             <div>3366</div>
           </div>
           <div class="peak_content_section_item_side"></div>
           <div class="peak_content_section_item fifth_item">
-            <div>每区块奖励</div>
+            <div>{{ $t('home.block_reward') }}</div>
             <div>11.1898 UNC</div>
           </div>
         </div>
         <div class="peak_content_section_line"></div>
         <div class="peak_content_section_under">
           <div class="peak_content_section_item first_item">
-            <div>区块高度</div>
+            <div>{{ $t('home.height') }}</div>
             <div>3,290,404</div>
           </div>
           <div class="peak_content_section_item_side"></div>
           <div class="peak_content_section_item secound_item">
-            <div>区块高度</div>
+            <div>{{ $t('home.height') }}</div>
             <div>3,290,404</div>
           </div>
           <div class="peak_content_section_item_side"></div>
           <div class="peak_content_section_item third_item">
-            <div>区块高度</div>
+            <div>{{ $t('home.height') }}</div>
             <div>3,290,404</div>
           </div>
           <div class="peak_content_section_item_side"></div>
           <div class="peak_content_section_item fourth_item">
-            <div>区块高度</div>
+            <div>{{ $t('home.height') }}</div>
             <div>3,290,404</div>
           </div>
           <div class="peak_content_section_item_side"></div>
           <div class="peak_content_section_item fifth_item">
-            <div>区块高度</div>
+            <div>{{ $t('home.height') }}</div>
             <div>3,290,404</div>
           </div>
         </div>
       </div>
     </div>
     <div class="block_list">
-      <div class="block_list_header">热门合约</div>
+      <div class="block_list_header">{{ $t('home.Popular_contracts') }}</div>
       <div style="padding: 0 31px; margin-top: 22px">
         <el-table
           :data="tableData"
@@ -158,34 +160,34 @@
             backgroundColor: '#F9F9F8',
           }"
         >
-          <el-table-column prop="name" label="合约地址">
+          <el-table-column prop="name" :label="$t('home.Contract_address')">
             <template #default="">
               <div style="color: #6a6a69; font-size: 14px"
                 >f410fuulql35m2...56fbezvq5osbvq</div
               >
             </template>
           </el-table-column>
-          <el-table-column label="合约名称">
+          <el-table-column :label="$t('home.Contract_name')">
             <template #default="">
               <div style="color: #6a6a69; font-size: 14px">验证并发布</div>
             </template>
           </el-table-column>
-          <el-table-column label="交易数量">
+          <el-table-column :label="$t('home.Number_of_transactions')">
             <template #default="">
               <div style="color: #6a6a69; font-size: 14px">89</div>
             </template>
           </el-table-column>
-          <el-table-column label="独立用户数">
+          <el-table-column :label="$t('home.Number_of_unique_users')">
             <template #default="">
               <div style="color: #6a6a69; font-size: 14px">79</div>
             </template>
           </el-table-column>
-          <el-table-column label="余额">
+          <el-table-column :label="$t('home.balance')">
             <template #default="">
               <div style="color: #6a6a69; font-size: 14px">0 UNC</div>
             </template>
           </el-table-column>
-          <el-table-column label="Gas费用">
+          <el-table-column :label="$t('home.Gas_cost')">
             <template #default="">
               <div style="color: #6a6a69; font-size: 14px">0.01 UNC</div>
             </template>

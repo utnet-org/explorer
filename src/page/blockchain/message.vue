@@ -129,14 +129,16 @@
     <div class="block_list">
       <div class="block_list_header">
         <div class="block_list_header_side">
-          <div class="block_list_header_title">消息列表</div>
+          <div class="block_list_header_title">{{
+            $t('home.Message_list')
+          }}</div>
           <div class="block_list_header_text">共 1141606363 条消息</div>
         </div>
         <el-input
           v-if="size === Screen.Large"
           style="width: 30%; height: 30px; margin-right: 20px"
           v-model="searchMessage"
-          placeholder="搜索客户/矿工"
+          :placeholder="$t('home.Search_for_clients_or_miner')"
           :suffix-icon="Search"
           clearable
         />
@@ -145,7 +147,7 @@
         <el-input
           style="width: 50%; height: 40px"
           v-model="searchMessage"
-          placeholder="搜索客户/矿工"
+          :placeholder="$t('home.Search_for_clients_or_miner')"
           :suffix-icon="Search"
           clearable
         />
@@ -172,27 +174,39 @@
           backgroundColor: '#F9F9F8',
         }"
       >
-        <el-table-column prop="messageId" label="消息ID"></el-table-column>
-        <el-table-column label="区块高度">
+        <el-table-column
+          prop="messageId"
+          :label="$t('home.message_id')"
+        ></el-table-column>
+        <el-table-column :label="$t('home.height')">
           <template #default="scope">
             <div style="color: #0facb6">{{ scope.row.blockHeight }}</div>
           </template>
         </el-table-column>
-        <el-table-column prop="time" label="时间"></el-table-column>
-        <el-table-column prop="sender" label="发送方"></el-table-column>
-        <el-table-column prop="receiver" label="接收方"></el-table-column>
-        <el-table-column label="方法">
+        <el-table-column prop="time" :label="$t('home.time')"></el-table-column>
+        <el-table-column
+          prop="sender"
+          :label="$t('home.sender')"
+        ></el-table-column>
+        <el-table-column
+          prop="receiver"
+          :label="$t('home.receiver')"
+        ></el-table-column>
+        <el-table-column :label="$t('home.method')">
           <template #default="scope">
             <div style="color: #0facb6">{{ scope.row.method }}</div>
           </template>
         </el-table-column>
-        <el-table-column label="金额">
+        <el-table-column :label="$t('home.Amount')">
           <template #default="scope">
             <span>{{ scope.row.amount }}</span>
             <span>UNC</span>
           </template>
         </el-table-column>
-        <el-table-column prop="status" label="状态"></el-table-column>
+        <el-table-column
+          prop="status"
+          :label="$t('home.status')"
+        ></el-table-column>
       </el-table>
       <div v-else style="padding-bottom: 20px">
         <div>

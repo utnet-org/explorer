@@ -1244,6 +1244,9 @@
   }
 
   @media (min-width: 1025px) {
+    .echartAll {
+      padding: 0 35px;
+    }
     .trend {
       color: #000;
       font-family: PingFang SC;

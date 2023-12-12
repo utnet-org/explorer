@@ -119,7 +119,7 @@
     <HeaderPage />
     <div style="height: 200px"></div>
     <div class="block_list">
-      <div class="block_list_header">最新区块</div>
+      <div class="block_list_header">{{ $t('home.latest_block') }}</div>
       <el-table
         :data="tableData"
         table-layout="fixed"
@@ -142,7 +142,7 @@
           backgroundColor: '#F9F9F8',
         }"
       >
-        <el-table-column prop="name" label="高度">
+        <el-table-column prop="name" :label="$t('home.high')">
           <template #default="">
             <div style="color: #0facb6; margin-bottom: 8px; font-size: 14px"
               >3292964</div
@@ -150,31 +150,31 @@
             <div style="color: #6a6a69; font-size: 12px">1分13秒前</div>
           </template>
         </el-table-column>
-        <el-table-column label="区块ID">
+        <el-table-column :label="$t('home.block_id')">
           <template #default="scope">
             <div v-for="(item, index) in scope.row.newBlockList" :key="index">{{
               item
             }}</div>
           </template>
         </el-table-column>
-        <el-table-column label="算力提供者">
+        <el-table-column :label="$t('home.Computing_power_provider')">
           <template #default="scope">
             <div v-for="index in scope.row.newBlockList" :key="index"
               >f01234921</div
             >
           </template>
         </el-table-column>
-        <el-table-column label="标签">
+        <el-table-column :label="$t('home.tag')">
           <template #default="scope">
             <div v-for="index in scope.row.newBlockList" :key="index">---</div>
           </template>
         </el-table-column>
-        <el-table-column label="消息">
+        <el-table-column :label="$t('home.message')">
           <template #default="scope">
             <div v-for="index in scope.row.newBlockList" :key="index">66</div>
           </template>
         </el-table-column>
-        <el-table-column label="奖励">
+        <el-table-column :label="$t('home.reward')">
           <template #default="scope">
             <div v-for="index in scope.row.newBlockList" :key="index"
               >11.23 UNC</div

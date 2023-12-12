@@ -106,7 +106,7 @@
     <div style="height: 200px"></div>
     <div class="block_list">
       <div class="block_list_header">
-        <div class="block_list_header_title">富豪榜</div>
+        <div class="block_list_header_title">{{ $t('home.rich_list') }}</div>
         <div class="block_list_header_text">共 1141606363 个账户</div>
       </div>
       <el-table
@@ -131,20 +131,29 @@
           backgroundColor: '#F9F9F8',
         }"
       >
-        <el-table-column type="index" label="排行" />
-        <el-table-column prop="accountName" label="账户名"></el-table-column>
-        <el-table-column prop="label" label="标签"></el-table-column>
-        <el-table-column label="余额">
+        <el-table-column type="index" :label="$t('home.ranking')" />
+        <el-table-column
+          prop="accountName"
+          :label="$t('home.account_name')"
+        ></el-table-column>
+        <el-table-column prop="label" :label="$t('home.tag')"></el-table-column>
+        <el-table-column :label="$t('home.balance')">
           <template #default="scope">
             <div style="color: #0facb6">{{ scope.row.balance }} UNC</div>
           </template>
         </el-table-column>
-        <el-table-column prop="balanceRatio" label="余额占比"></el-table-column>
-        <el-table-column prop="type" label="类型"></el-table-column>
-        <el-table-column prop="createTime" label="创建时间"></el-table-column>
+        <el-table-column
+          prop="balanceRatio"
+          :label="$t('home.Balance_ratio')"
+        ></el-table-column>
+        <el-table-column prop="type" :label="$t('home.type')"></el-table-column>
+        <el-table-column
+          prop="createTime"
+          :label="$t('home.creation_time')"
+        ></el-table-column>
         <el-table-column
           prop="latestTransaction"
-          label="最新交易"
+          :label="$t('home.Latest_transactions')"
         ></el-table-column>
       </el-table>
       <div v-else style="padding-bottom: 20px">

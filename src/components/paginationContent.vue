@@ -1,3 +1,4 @@
+<!-- eslint-disable @typescript-eslint/explicit-function-return-type -->
 <script lang="ts" setup>
   import button_arrow from '@/assets/svgs/button_arrow.svg';
   import { getScreenSize, Screen } from '@/utils/screen-size.ts';
@@ -37,19 +38,16 @@
 </script>
 <template>
   <div class="pag">
-    <div></div>
-    <div v-if="size !== Screen.Small">
-      <div class="pagination">
-        <el-pagination
-          layout="prev, pager, next, jumper"
-          :total="props.totalItems"
-          :page-size="props.pageSize"
-          @current-change="handlePageChange"
-          prev-icon="CaretLeft"
-          next-icon="CaretRight"
-        >
-        </el-pagination>
-      </div>
+    <div v-if="size == Screen.Large" class="pagination">
+      <el-pagination
+        layout="prev, pager, next, jumper"
+        :total="props.totalItems"
+        :page-size="props.pageSize"
+        @current-change="handlePageChange"
+        prev-icon="CaretLeft"
+        next-icon="CaretRight"
+      >
+      </el-pagination>
     </div>
 
     <div v-show="props.showButton" class="button_arrow" @click="scrollToTop">
@@ -64,24 +62,25 @@
     padding: 0;
     box-sizing: border-box;
   }
-  .pagss {
-    width: 1px;
-    height: 1px;
-  }
+
   .pag {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+
     width: 100%;
     padding: 0 100px;
   }
   .button_arrow {
-    width: 45px;
-    height: 45px;
+    display: flex;
+    justify-content: flex-end;
     border-radius: 50%;
     flex-shrink: 0;
   }
   .pagination {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     .el-pagination {
       --el-pagination-bg-color: transparent;
       --el-pagination-hover-color: none;
@@ -146,9 +145,12 @@
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 1439px) {
     .pag {
       padding-right: 50px;
+    }
+    .button_arrow {
+      width: 100%;
     }
   }
 </style>

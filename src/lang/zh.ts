@@ -143,6 +143,7 @@ export default {
     Number_of_unique_users: '独立用户数',
     Gas_cost: 'Gas费用',
     Contract_name: '合约名称',
+    faucet: '水龙头',
   },
   blockChain: {
     block: '区块',
@@ -166,5 +167,15 @@ export default {
   source: {
     source_common_tool: '常用工具',
     source_knowledge_base: '知识库',
+  },
+  footer: {
+    official_community: '官网社区',
+    most_used_links: '常用链接',
+    development_tools: '开发工具',
+    gitHub_browser_repository: 'GitHub浏览器仓库',
+    official_x_address: '官方X地址',
+    learning_centre: '学习中心',
+    github_organization_homepage: 'Github组织主页',
+    dapp_tools: 'DApp工具',
   },
 };

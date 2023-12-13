@@ -144,7 +144,6 @@ export default {
     reset: 'reset',
     View_contract_list: 'View contract list',
 
-
     UVM_overview: 'UVM Overview',
     Popular_contracts: 'Popular Contracts',
     Contract_address: 'Contract Address',
@@ -152,6 +151,7 @@ export default {
     Number_of_unique_users: 'Number of unique users',
     Gas_cost: 'Gas cost',
     Contract_name: 'Contract name',
+    faucet: 'Faucet',
   },
   blockChain: {
     block: 'Block',
@@ -175,5 +175,15 @@ export default {
   source: {
     source_common_tool: 'Common Tool',
     source_knowledge_base: 'knowledge base',
+  },
+  footer: {
+    official_community: 'Official Community',
+    most_used_links: 'Most Used Link',
+    development_tools: 'Development Tools',
+    gitHub_browser_repository: 'GitHub browser repository',
+    official_x_address: 'Official X address',
+    learning_centre: 'Learning Centre',
+    github_organization_homepage: 'Github Organization Homepage',
+    dapp_tools: 'DApp Tools',
   },
 };

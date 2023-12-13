@@ -15,7 +15,7 @@ import Statistics from '../page/home/statistics.vue'; // 算力服务图表
 import KnowledgeBase from '../page/resource/knowledgeBase.vue'; // 知识库
 import Uvm from '../page/pactpage/uvmStatistics.vue'; // uvm 统计
 import Ranking from '../page/home/ranking.vue'; // 算力服务排行榜
-import NProgress from "nprogress"; // progress bar
+import NProgress from 'nprogress'; // progress bar
 NProgress.configure({ showSpinner: false });
 // assets
 const routes = [
@@ -89,7 +89,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   NProgress.start(); //进度条开始
   // 如果跳转到首页,则刷新页面
-  if (to.path === "/") {
+  if (to.path === '/') {
     // window.location.reload();
   } else {
     window.scrollTo(0, 0);

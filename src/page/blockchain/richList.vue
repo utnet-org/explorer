@@ -128,8 +128,9 @@
           fontWeight: '500',
           textAlign: 'center',
           borderBottom: '0.5px solid rgba(140, 233, 220,0.5)',
-          backgroundColor: '#F9F9F8',
+          // backgroundColor: '#F9F9F8',
         }"
+        :highlight-current-row="true"
       >
         <el-table-column type="index" :label="$t('home.ranking')" />
         <el-table-column

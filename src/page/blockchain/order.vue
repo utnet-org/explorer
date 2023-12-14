@@ -5,6 +5,8 @@
   // import Mock from 'mockjs';
   import { getScreenSize, Screen } from '@/utils/screen-size.ts';
   import { Search } from '@element-plus/icons-vue';
+  import paginationContent from '@/components/paginationContent.vue';
+
   // defineProps<{ msg: string }>()
   const size = getScreenSize().currentScreenSize;
   const searchMessage = ref('');
@@ -111,6 +113,18 @@
       status: 'N/A',
     },
   ];
+
+  const currentPage = ref(1); // 当前页码
+  const pageSize = ref(2); // 每页显示条目数
+  const totalItems = ref(tableData.length); // 总条目数，即您数组的长度
+  // 处理页码改变
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+  const handlePageChange = (page: number) => {
+    currentPage.value = page;
+  };
+
+  // 控制按钮显示隐藏的响应式变量
+  const showButton = ref(true);
 </script>
 <template>
   <div class="content">
@@ -141,7 +155,9 @@
         />
       </div>
       <el-table
-        :data="tableData"
+        :data="
+          tableData.slice((currentPage - 1) * pageSize, currentPage * pageSize)
+        "
         table-layout="fixed"
         v-if="size === Screen.Large"
         :header-cell-style="{
@@ -284,6 +300,13 @@
         </div>
       </div>
     </div>
+    <paginationContent
+      :total-items="totalItems"
+      :page-size="pageSize"
+      :current-page="currentPage"
+      :show-button="showButton"
+      @page-change="handlePageChange"
+    />
   </div>
 </template>
 <style scoped lang="scss">

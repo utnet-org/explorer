@@ -143,6 +143,8 @@ export default {
     Number_of_unique_users: '独立用户数',
     Gas_cost: 'Gas费用',
     Contract_name: '合约名称',
+
+    Faucet: '水龙头',
   },
   blockChain: {
     block: '区块',
@@ -151,6 +153,7 @@ export default {
     block_order: '订单',
     block_memory_pool: '内存池',
     block_contract_verification: '合约验证',
+
   },
   contract: {
     contract_UVM_statistics: 'UVM统计',

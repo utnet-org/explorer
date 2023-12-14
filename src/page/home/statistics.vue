@@ -126,9 +126,11 @@
 
   // ^切换时间范围并更新图表
   // ^函数用于切换数据
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const setTimeRange = (range: string) => {
     // ^更新时间范围(week/month)
     selectedRange.value = range;
+    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     if (!chart.value) {
       return;
     }
@@ -261,8 +263,8 @@
           type: 'line', // 系列类型是折线图
           smooth: true, // 平滑的线
           showSymbol: false, // 不显示拐点
-          symbol: 'circle', //拐点的形状
-          symbolSize: -1, //拐点大小
+          symbol: 'circle', // 拐点的形状
+          symbolSize: -1, // 拐点大小
           data: seriesData[0], // 示例数据
           // 区域填充样式
           areaStyle: {
@@ -388,7 +390,7 @@
                 },
               },
               {
-                symbolSize: 10, //拐点大小
+                symbolSize: 10, // 拐点大小
                 emphasis: {
                   focus: 'series',
                   lineStyle: {
@@ -408,11 +410,13 @@
     };
 
     // 设置图表选项
-    myChart!.setOption(option);
+    myChart?.setOption(option);
   };
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const setTimeRange1 = (range: string) => {
     // ^更新时间范围(week/month)
     selectedRange1.value = range;
+    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     if (!chart1.value) {
       return;
     }
@@ -545,8 +549,8 @@
           type: 'line', // 系列类型是折线图
           smooth: true, // 平滑的线
           showSymbol: false, // 不显示拐点
-          symbol: 'circle', //拐点的形状
-          symbolSize: -1, //拐点大小
+          symbol: 'circle', // 拐点的形状
+          symbolSize: -1, // 拐点大小
           data: seriesData[0], // 示例数据
           // 区域填充样式
           // areaStyle: {
@@ -573,8 +577,8 @@
           type: 'line', // 系列类型是折线图
           smooth: true, // 平滑的线
           showSymbol: false, // 不显示拐点
-          symbol: 'circle', //拐点的形状
-          symbolSize: -1, //拐点大小
+          symbol: 'circle', // 拐点的形状
+          symbolSize: -1, // 拐点大小
           data: seriesData[1], // 示例数据
           // 区域填充样式
           // areaStyle: {
@@ -601,8 +605,8 @@
           type: 'line', // 系列类型是折线图
           smooth: true, // 平滑的线
           showSymbol: false, // 不显示拐点
-          symbol: 'circle', //拐点的形状
-          symbolSize: -1, //拐点大小
+          symbol: 'circle', // 拐点的形状
+          symbolSize: -1, // 拐点大小
           data: seriesData[2], // 示例数据
           // 区域填充样式
           // areaStyle: {
@@ -686,7 +690,7 @@
             },
             series: [
               {
-                symbolSize: 10, //拐点大小
+                symbolSize: 10, // 拐点大小
                 emphasis: {
                   focus: 'series',
                   lineStyle: {
@@ -700,7 +704,7 @@
                 },
               },
               {
-                symbolSize: 10, //拐点大小
+                symbolSize: 10, // 拐点大小
                 emphasis: {
                   focus: 'series',
                   lineStyle: {
@@ -714,7 +718,7 @@
                 },
               },
               {
-                symbolSize: 10, //拐点大小
+                symbolSize: 10, // 拐点大小
                 emphasis: {
                   focus: 'series',
                   lineStyle: {
@@ -734,11 +738,13 @@
     };
 
     // 设置图表选项
-    myChart1!.setOption(option);
+    myChart1?.setOption(option);
   };
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const setTimeRange2 = (range: string) => {
     // ^更新时间范围(week/month)
     selectedRange2.value = range;
+    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     if (!chart2.value) {
       return;
     }
@@ -840,8 +846,8 @@
           type: 'line', // 系列类型是折线图
           smooth: true, // 平滑的线
           showSymbol: false, // 不显示拐点
-          symbol: 'circle', //拐点的形状
-          symbolSize: 10, //拐点大小
+          symbol: 'circle', // 拐点的形状
+          symbolSize: 10, // 拐点大小
           data: seriesData[0], // 示例数据
           // 区域填充样式
           areaStyle: {
@@ -936,28 +942,31 @@
     };
 
     // 设置图表选项
-    myChart2!.setOption(option);
+    myChart2?.setOption(option);
   };
 
   onMounted(() => {
+    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     if (chart.value) {
-      //初始化第一个图表
+      // 初始化第一个图表
       myChart = echarts.init(chart.value);
       setTimeRange('week'); // 默认显示周数据
 
       // 监听窗口大小变化，重新绘制图表
       window.addEventListener('resize', resizeChart);
     }
+    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     if (chart1.value) {
-      //初始化第二个图表
+      // 初始化第二个图表
       myChart1 = echarts.init(chart1.value);
       setTimeRange1('week'); // 默认显示周数据
 
       // 监听窗口大小变化，重新绘制图表
       window.addEventListener('resize', resizeChart);
     }
+    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     if (chart2.value) {
-      //初始化第三个图表
+      // 初始化第三个图表
       myChart2 = echarts.init(chart2.value);
       setTimeRange2('week'); // 默认显示周数据
 
@@ -965,24 +974,24 @@
       window.addEventListener('resize', resizeChart);
     }
 
-    //~监听窗口大小变化
+    // ~监听窗口大小变化
     window.addEventListener('resize', () => {
-      //获取到当前窗口的宽度
+      // 获取到当前窗口的宽度
       windowWidth.value = document.documentElement.clientWidth;
-      console.log(windowWidth.value);
     });
   });
   // ~重新绘制图表
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   function resizeChart() {
-    if (myChart) {
+    if (myChart != null) {
       // ~调用图表实例的 resize 方法
       myChart.resize();
     }
-    if (myChart1) {
+    if (myChart1 != null) {
       // ~调用图表实例的 resize 方法
       myChart1.resize();
     }
-    if (myChart2) {
+    if (myChart2 != null) {
       // ~调用图表实例的 resize 方法
       myChart2.resize();
     }
@@ -995,8 +1004,8 @@
 </script>
 
 <template>
-  <div class="statistics">
-    <HeaderPage :viewportWidth="windowWidth" />
+  <div class="user_statistics">
+    <HeaderPage :viewport-width="windowWidth" />
     <div style="height: 306px"></div>
     <div class="echartAll">
       <div class="computing_power_trend">
@@ -1014,10 +1023,8 @@
               <el-button
                 class="custom_buttons"
                 color="#3EDFCF"
-                @click="setTimeRange('week')"
                 type="success"
                 size="small"
-                :plain="selectedRange !== 'week'"
                 :style="{
                   color:
                     selectedRange === 'week' ? ' #000' : ' rgba(0, 0, 0, 0.5)',
@@ -1025,15 +1032,14 @@
                     selectedRange === 'week' ? '#3EDFCF' : '#fff',
                   fontWeight: selectedRange === 'week' ? 500 : 300,
                 }"
+                :plain="selectedRange !== 'week'"
+                @click="setTimeRange('week')"
                 >{{ $t('home.week') }}</el-button
               >
               <el-button
                 class="custom_buttons"
                 size="small"
                 color="#3EDFCF"
-                @click="setTimeRange('month')"
-                type="success"
-                :plain="selectedRange !== 'month'"
                 :style="{
                   color:
                     selectedRange === 'month' ? ' #000' : ' rgba(0, 0, 0, 0.5)',
@@ -1041,6 +1047,9 @@
                     selectedRange === 'month' ? '#3EDFCF' : '#fff',
                   fontWeight: selectedRange === 'month' ? 500 : 300,
                 }"
+                type="success"
+                :plain="selectedRange !== 'month'"
+                @click="setTimeRange('month')"
                 >{{ $t('home.month') }}</el-button
               >
             </div>
@@ -1075,10 +1084,6 @@
               <el-button
                 class="custom_buttons"
                 color="#3EDFCF"
-                @click="setTimeRange1('week')"
-                type="success"
-                size="small"
-                :plain="selectedRange1 !== 'week'"
                 :style="{
                   color:
                     selectedRange1 === 'week' ? ' #000' : ' rgba(0, 0, 0, 0.5)',
@@ -1086,15 +1091,16 @@
                     selectedRange1 === 'week' ? '#3EDFCF' : '#fff',
                   fontWeight: selectedRange1 === 'week' ? 500 : 300,
                 }"
+                type="success"
+                size="small"
+                :plain="selectedRange1 !== 'week'"
+                @click="setTimeRange1('week')"
                 >{{ $t('home.week') }}</el-button
               >
               <el-button
                 class="custom_buttons"
                 size="small"
                 color="#3EDFCF"
-                @click="setTimeRange1('month')"
-                type="success"
-                :plain="selectedRange1 !== 'month'"
                 :style="{
                   color:
                     selectedRange1 === 'month'
@@ -1104,6 +1110,9 @@
                     selectedRange1 === 'month' ? '#3EDFCF' : '#fff',
                   fontWeight: selectedRange1 === 'month' ? 500 : 300,
                 }"
+                type="success"
+                :plain="selectedRange1 !== 'month'"
+                @click="setTimeRange1('month')"
                 >{{ $t('home.month') }}</el-button
               >
             </div>
@@ -1138,10 +1147,7 @@
               <el-button
                 class="custom_buttons"
                 color="#3EDFCF"
-                @click="setTimeRange2('week')"
                 type="success"
-                size="small"
-                :plain="selectedRange2 !== 'week'"
                 :style="{
                   color:
                     selectedRange2 === 'week' ? ' #000' : ' rgba(0, 0, 0, 0.5)',
@@ -1149,15 +1155,15 @@
                     selectedRange2 === 'week' ? '#3EDFCF' : '#fff',
                   fontWeight: selectedRange2 === 'week' ? 500 : 300,
                 }"
+                size="small"
+                :plain="selectedRange2 !== 'week'"
+                @click="setTimeRange2('week')"
                 >{{ $t('home.week') }}</el-button
               >
               <el-button
                 class="custom_buttons"
                 size="small"
                 color="#3EDFCF"
-                @click="setTimeRange2('month')"
-                type="success"
-                :plain="selectedRange2 !== 'month'"
                 :style="{
                   color:
                     selectedRange2 === 'month'
@@ -1167,6 +1173,9 @@
                     selectedRange2 === 'month' ? '#3EDFCF' : '#fff',
                   fontWeight: selectedRange2 === 'month' ? 500 : 300,
                 }"
+                type="success"
+                :plain="selectedRange2 !== 'month'"
+                @click="setTimeRange2('month')"
                 >{{ $t('home.month') }}</el-button
               >
             </div>
@@ -1190,7 +1199,7 @@
   * {
     box-sizing: border-box;
   }
-  .statistics {
+  .user_statistics {
     width: 100%;
     min-height: 100vh;
     position: relative;

@@ -144,7 +144,6 @@ export default {
     reset: 'reset',
     View_contract_list: 'View contract list',
 
-
     UVM_overview: 'UVM Overview',
     Popular_contracts: 'Popular Contracts',
     Contract_address: 'Contract Address',
@@ -152,6 +151,9 @@ export default {
     Number_of_unique_users: 'Number of unique users',
     Gas_cost: 'Gas cost',
     Contract_name: 'Contract name',
+
+    Faucet: 'Faucet',
+
   },
   blockChain: {
     block: 'Block',

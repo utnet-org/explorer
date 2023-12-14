@@ -50,6 +50,7 @@
           <p>{{ $t('home.website') }}</p>
           <p>{{ $t('home.app_mobile') }}</p>
           <p>{{ $t('home.explorer_wallet') }}</p>
+          <p>{{ $t('home.Faucet') }}</p>
         </div>
       </div>
     </div>

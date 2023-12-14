@@ -65,9 +65,11 @@
 
   // ^切换时间范围并更新图表
   // ^函数用于切换数据
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const setTimeRange = (range: string) => {
     // ^更新时间范围(week/month)
     selectedRange.value = range;
+    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     if (!chart.value) {
       return;
     }
@@ -200,8 +202,8 @@
           type: 'line', // 系列类型是折线图
           smooth: true, // 平滑的线
           showSymbol: false, // 不显示拐点
-          symbol: 'circle', //拐点的形状
-          symbolSize: -1, //拐点大小
+          symbol: 'circle', // 拐点的形状
+          symbolSize: -1, // 拐点大小
           data: seriesData, // 示例数据
           // 区域填充样式
           areaStyle: {
@@ -285,7 +287,7 @@
             },
             series: [
               {
-                symbolSize: 10, //拐点大小
+                symbolSize: 10, // 拐点大小
                 emphasis: {
                   focus: 'series',
                   lineStyle: {
@@ -299,7 +301,7 @@
                 },
               },
               {
-                symbolSize: 10, //拐点大小
+                symbolSize: 10, // 拐点大小
                 emphasis: {
                   focus: 'series',
                   lineStyle: {
@@ -319,10 +321,11 @@
     };
 
     // 设置图表选项
-    myChart!.setOption(option);
+    myChart?.setOption(option);
   };
 
   onMounted(() => {
+    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     if (chart.value) {
       // 初始化第一个图表
       myChart = echarts.init(chart.value);
@@ -336,12 +339,12 @@
     window.addEventListener('resize', () => {
       // 获取到当前窗口的宽度
       windowWidth.value = document.documentElement.clientWidth;
-      console.log(windowWidth.value);
     });
   });
   // ~重新绘制图表
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   function resizeChart() {
-    if (myChart) {
+    if (myChart != null) {
       // ~调用图表实例的 resize 方法
       myChart.resize();
     }
@@ -360,6 +363,7 @@
     'home.year',
   ];
   const checkEcologyTimeType = ref('home.hour'); // 当前选中的时间类型
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const changeTimeType = (item: string) => {
     // 改变时间类型的方法
     checkEcologyTimeType.value = item;
@@ -485,6 +489,7 @@
   const pageSize = ref(2); // 每页显示条目数，您想要显示5个
   const totalItems = ref(tableData.value.length); // 总条目数，即您数组的长度
   // 处理页码改变
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const handlePageChange = (page: number) => {
     currentPage.value = page;
   };
@@ -493,6 +498,7 @@
   const showButton = ref(false);
 
   // 页面滚动事件处理函数
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   function handleScroll() {
     // 当页面滚动超过 600px 时显示按钮
     showButton.value = window.scrollY > 100;
@@ -511,7 +517,7 @@
 
 <template>
   <div class="statistics">
-    <HeaderPage :viewportWidth="windowWidth" />
+    <HeaderPage :viewport-width="windowWidth" />
     <div style="height: 306px"></div>
     <div class="echartAll">
       <div class="computing_power_trend">
@@ -529,10 +535,6 @@
               <el-button
                 class="custom_buttons"
                 color="#3EDFCF"
-                @click="setTimeRange('week')"
-                type="success"
-                size="small"
-                :plain="selectedRange !== 'week'"
                 :style="{
                   color:
                     selectedRange === 'week' ? ' #000' : ' rgba(0, 0, 0, 0.5)',
@@ -540,15 +542,16 @@
                     selectedRange === 'week' ? '#3EDFCF' : '#fff',
                   fontWeight: selectedRange === 'week' ? 500 : 300,
                 }"
+                type="success"
+                size="small"
+                :plain="selectedRange !== 'week'"
+                @click="setTimeRange('week')"
                 >{{ $t('home.week') }}</el-button
               >
               <el-button
                 class="custom_buttons"
                 size="small"
                 color="#3EDFCF"
-                @click="setTimeRange('month')"
-                type="success"
-                :plain="selectedRange !== 'month'"
                 :style="{
                   color:
                     selectedRange === 'month' ? ' #000' : ' rgba(0, 0, 0, 0.5)',
@@ -556,6 +559,9 @@
                     selectedRange === 'month' ? '#3EDFCF' : '#fff',
                   fontWeight: selectedRange === 'month' ? 500 : 300,
                 }"
+                type="success"
+                :plain="selectedRange !== 'month'"
+                @click="setTimeRange('month')"
                 >{{ $t('home.month') }}</el-button
               >
             </div>
@@ -580,17 +586,17 @@
           <div v-if="size !== Screen.Small">
             <div class="ecology_time">
               <el-button
+                v-for="(timeItem, timeIndex) in ecologyTimeTypeList"
+                :key="timeIndex"
                 size="small"
                 :color="checkEcologyTimeType == timeItem ? '#3EDFCF' : ''"
-                @click="changeTimeType(timeItem)"
                 :style="{
                   fontWeight: checkEcologyTimeType == timeItem ? '500' : '300',
                   fontSize: '14px',
                   border: '0.5px solid #3EDFCF',
                   borderRadius: '2px',
                 }"
-                v-for="(timeItem, timeIndex) in ecologyTimeTypeList"
-                :key="timeIndex"
+                @click="changeTimeType(timeItem)"
                 >{{ $t(timeItem) }}
               </el-button>
             </div></div
@@ -788,11 +794,11 @@
       </div>
 
       <paginationContent
-        :totalItems="totalItems"
-        :pageSize="pageSize"
-        :currentPage="currentPage"
-        :showButton="showButton"
-        @pageChange="handlePageChange"
+        :total-items="totalItems"
+        :page-size="pageSize"
+        :current-page="currentPage"
+        :show-button="showButton"
+        @page-change="handlePageChange"
       />
     </div>
   </div>

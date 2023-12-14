@@ -1,15 +1,17 @@
-<script setup lang="ts">
+<script setup lang="ts" name="user-ranking">
   // 算力服务排行榜
   import HeaderPage from '../../components/otherHeaderContent.vue';
   import { onMounted, onUnmounted, reactive, ref } from 'vue';
-  import { getPowerRank, PowerRank } from '@/api/power.ts';
+  import { getPowerRank, type PowerRank } from '@/api/power.ts';
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   import { getScreenSize, Screen } from '@/utils/screen-size.ts';
   import paginationContent from '@/components/paginationContent.vue';
 
   // defineProps<{ viewportWidth: number }>()
   const size = getScreenSize().currentScreenSize;
-  //表格相关数据及变脸
+  // 表格相关数据及变脸
   const dropdownText = ref('INT8');
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const changeDropdownText = (command: string) => {
     if (command === 'INT8') {
       dropdownText.value = 'INT8';
@@ -23,8 +25,9 @@
   };
   let intervalId: number | undefined;
 
-  let poDatas = reactive<PowerRank[]>([{}]);
+  const poDatas = reactive<PowerRank[]>([{}]);
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   async function fetchPowerRank() {
     const res = await getPowerRank();
     // console.log(res.data.data);
@@ -35,11 +38,11 @@
   onMounted(() => {
     // 每3秒更新数据
     intervalId = window.setInterval(() => {
-      fetchPowerRank();
+      void fetchPowerRank();
     }, 3000);
 
     // 添加滚动监听
-    window.addEventListener('scroll', handleScroll);
+    // window.addEventListener('scroll', handleScroll);
   });
 
   onUnmounted(() => {
@@ -48,29 +51,30 @@
     }
 
     // 移除滚动监听
-    window.removeEventListener('scroll', handleScroll);
+    // window.removeEventListener('scroll', handleScroll);
   });
 
   const currentPage = ref(1); // 当前页码
   const pageSize = ref(5); // 每页显示条目数
   const totalItems = ref(poDatas.length); // 总条目数，即您数组的长度
   // 处理页码改变
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const handlePageChange = (page: number) => {
     currentPage.value = page;
   };
 
   // 控制按钮显示隐藏的响应式变量
-  const showButton = ref(false);
+  const showButton = ref(true);
 
   // 页面滚动事件处理函数
-  function handleScroll() {
-    // 当页面滚动超过 600px 时显示按钮
-    showButton.value = window.scrollY > 10;
-  }
+  // function handleScroll() {
+  //   // 当页面滚动超过 600px 时显示按钮
+  //   // showButton.value = window.scrollY > -1;
+  // }
 </script>
 <template>
-  <div class="ranking">
-    <HeaderPage :viewportWidth="size" />
+  <div class="user_ranking">
+    <HeaderPage :viewport-width="size" />
     <div style="height: 309px"></div>
     <div class="computing_power_service_content">
       <div class="computing_power_service_header">
@@ -242,16 +246,16 @@
     </div>
 
     <paginationContent
-      :totalItems="totalItems"
-      :pageSize="pageSize"
-      :currentPage="currentPage"
-      :showButton="showButton"
-      @pageChange="handlePageChange"
+      :total-items="totalItems"
+      :page-size="pageSize"
+      :current-page="currentPage"
+      :show-button="showButton"
+      @page-change="handlePageChange"
     />
   </div>
 </template>
 <style scoped lang="scss">
-  .ranking {
+  .user_ranking {
     position: relative;
     width: 100%;
     padding-bottom: 52px;

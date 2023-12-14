@@ -8,7 +8,6 @@
           <el-button
             class="custom_buttons"
             color="#3EDFCF"
-            @click="setTimeRange('week')"
             type="success"
             size="small"
             :plain="selectedRange !== 'week'"
@@ -17,13 +16,13 @@
               backgroundColor: selectedRange === 'week' ? '#3EDFCF' : '#fff',
               fontWeight: selectedRange === 'week' ? 500 : 300,
             }"
+            @click="setTimeRange('week')"
             >{{ $t('home.week') }}</el-button
           >
           <el-button
             class="custom_buttons"
             size="small"
             color="#3EDFCF"
-            @click="setTimeRange('month')"
             type="success"
             :plain="selectedRange !== 'month'"
             :style="{
@@ -32,6 +31,7 @@
               backgroundColor: selectedRange === 'month' ? '#3EDFCF' : '#fff',
               fontWeight: selectedRange === 'month' ? 500 : 300,
             }"
+            @click="setTimeRange('month')"
             >{{ $t('home.month') }}</el-button
           >
         </div>
@@ -117,9 +117,11 @@
 
   // 切换时间范围并更新图表
   // 函数用于切换数据
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const setTimeRange = (range: string) => {
     selectedRange.value = range;
 
+    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     if (!chart.value) {
       return;
     }
@@ -418,7 +420,7 @@
     };
 
     // 设置图表选项
-    myChart!.setOption(option);
+    myChart?.setOption(option);
   };
   const basic = ref(null);
   let myChart1: echarts.ECharts | null | undefined = null;
@@ -426,7 +428,9 @@
     xAxisData: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00', '24:00'],
     seriesData: [0.1, 0.2, 0.15, 0.3, 0.25, 0.35, 0.3],
   };
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const procedureRateTrend = () => {
+    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     if (!basic.value) {
       return;
     }
@@ -526,8 +530,8 @@
           },
           smooth: true, // 平滑的线
           showSymbol: false, // 不显示拐点
-          symbol: 'circle', //拐点的形状
-          symbolSize: 10, //拐点大小
+          symbol: 'circle', // 拐点的形状
+          symbolSize: 10, // 拐点大小
           data: timeData.seriesData, // 示例数据
           // 区域填充样式
           areaStyle: {
@@ -580,26 +584,29 @@
       ],
     };
     // 设置图表选项
-    myChart1!.setOption(option);
+    myChart1?.setOption(option);
   };
 
   onMounted(() => {
+    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     if (chart.value) {
       myChart = echarts.init(chart.value);
       setTimeRange('week'); // 默认显示周数据
       window.addEventListener('resize', resizeChart);
     }
+    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     if (basic.value) {
       myChart1 = echarts.init(basic.value);
       procedureRateTrend();
       window.addEventListener('resize', resizeChart);
     }
   });
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   function resizeChart() {
-    if (myChart) {
+    if (myChart != null) {
       myChart.resize();
     }
-    if (myChart1) {
+    if (myChart1 != null) {
       myChart1.resize();
     }
   }

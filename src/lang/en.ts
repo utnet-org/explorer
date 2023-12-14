@@ -154,6 +154,7 @@ export default {
     faucet: 'Faucet',
 
     gas_tour: 'Gas Tour',
+    close: 'close',
   },
   blockChain: {
     block: 'Block',
@@ -185,12 +186,13 @@ export default {
   },
   footer: {
     official_community: 'Official Community',
+    official_blog: 'Official Blog',
     most_used_links: 'Most Used Link',
     development_tools: 'Development Tools',
-    gitHub_browser_repository: 'GitHub browser repository',
-    official_x_address: 'Official X address',
+    gitHub_browser_repository: 'UNCSCAN Browser',
+    official_x_address: 'X',
     learning_centre: 'Learning Centre',
-    github_organization_homepage: 'Github Organization Homepage',
+    github_organization_homepage: 'Github',
     dapp_tools: 'DApp Tools',
   },
 };

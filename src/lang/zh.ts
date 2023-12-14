@@ -146,6 +146,7 @@ export default {
     faucet: '水龙头',
 
     gas_tour: 'Gas导览',
+    close: '收起',
   },
   blockChain: {
     block: '区块',
@@ -176,13 +177,14 @@ export default {
     source_knowledge_base: '知识库',
   },
   footer: {
-    official_community: '官网社区',
+    official_community: '官方社区',
+    official_blog: '官方博客',
     most_used_links: '常用链接',
     development_tools: '开发工具',
-    gitHub_browser_repository: 'GitHub浏览器仓库',
-    official_x_address: '官方X地址',
+    gitHub_browser_repository: 'UNCSCAN浏览器',
+    official_x_address: 'X',
     learning_centre: '学习中心',
-    github_organization_homepage: 'Github组织主页',
+    github_organization_homepage: 'Github',
     dapp_tools: 'DApp工具',
   },
 };

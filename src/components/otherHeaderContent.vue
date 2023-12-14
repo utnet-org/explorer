@@ -21,7 +21,7 @@
                   type="text"
                   name=""
                   id=""
-                  placeholder="搜索账户/区块/地址/消息"
+                  :placeholder="$t('home.search')"
                 />
                 <img
                   class="peak_content_top_side_search_btn"
@@ -29,13 +29,13 @@
                   alt=""
                 />
               </div>
-              <div class="search_history">
+              <!-- <div class="search_history">
                 <div>Trending search:</div>
                 <div>内容1 </div>
                 <div>内容2</div>
                 <div>内容3</div>
                 <div>内容4</div>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>

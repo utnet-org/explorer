@@ -9,13 +9,10 @@
 
   const officialCommunityList = [
     {
-      title: 'footer.official_community',
+      title: 'footer.official_blog',
       link: 'https://wiki.utlab.io/zh-cn/blog',
     },
-    {
-      title: 'footer.gitHub_browser_repository',
-      link: 'https://github.com/utnet-org/explorer',
-    },
+
     {
       title: 'footer.official_x_address',
       link: 'https://x.com/UtilityNet_',
@@ -53,6 +50,10 @@
     {
       title: 'home.faucet',
       link: 'https://faucet.utlab.io/',
+    },
+    {
+      title: 'footer.gitHub_browser_repository',
+      link: 'https://github.com/utnet-org/explorer',
     },
   ];
   const developmentToolsList = [

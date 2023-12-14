@@ -30,6 +30,10 @@
       clearInterval(intervalId);
     }
   });
+  const showMore = ref(false);
+  const goToMore = (type: boolean) => {
+    showMore.value = type;
+  };
 </script>
 <template>
   <div class="lowest_content">
@@ -106,6 +110,39 @@
             <div>{{ ovData.aveBlockInterval }} {{ $t('home.second') }}</div>
           </div>
         </div>
+        <div class="peak_content_section_line" v-if="showMore"></div>
+        <div class="peak_content_section_under" v-if="showMore">
+          <div class="peak_content_section_item first_item">
+            <div>{{ $t('home.average_revenue') }}</div>
+            <div>{{ ovData.blockReward }} UNC/TFLOPS</div>
+          </div>
+          <div class="peak_content_section_item_side"></div>
+          <div class="peak_content_section_item second_item">
+            <div>{{ $t('home.day_output') }}</div>
+            <div>{{ ovData.dayProduction }} UNC</div>
+          </div>
+          <div class="peak_content_section_item_side"></div>
+          <div class="peak_content_section_item third_item">
+            <div>{{ $t('home.day_message') }}</div>
+            <div>{{ ovData.dayMessage }}</div>
+          </div>
+          <div class="peak_content_section_item_side"></div>
+          <div class="peak_content_section_item fourth_item">
+            <div>{{ $t('home.accounts') }}</div>
+            <div>{{ ovData.totalAccount }}</div>
+          </div>
+          <div class="peak_content_section_item_side"></div>
+          <div class="peak_content_section_item fifth_item">
+            <div>{{ $t('home.average_interval') }}</div>
+            <div>{{ ovData.aveBlockInterval }} {{ $t('home.second') }}</div>
+          </div>
+        </div>
+        <div class="open_more" @click="goToMore(true)" v-if="!showMore">{{
+          $t('home.see_more')
+        }}</div>
+        <div class="open_more" @click="goToMore(false)" v-if="showMore">{{
+          $t('home.close')
+        }}</div>
       </div>
       <div
         v-if="fromPage == 'home' && size == Screen.Small"
@@ -345,7 +382,7 @@
           margin: 17.19px 32px 0px;
           padding: 0 36px;
           box-sizing: border-box;
-          height: 207px;
+          // height: 207px;
           border-radius: 8px;
           background: #f9f9f8;
           box-shadow:

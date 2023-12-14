@@ -6,7 +6,6 @@
   import { getScreenSize, Screen } from '@/utils/screen-size.ts';
   import { Search } from '@element-plus/icons-vue';
   import paginationContent from '@/components/paginationContent.vue';
-
   // defineProps<{ msg: string }>()
   const size = getScreenSize().currentScreenSize;
   const searchMessage = ref('');
@@ -113,23 +112,20 @@
       status: 'N/A',
     },
   ];
-
   const currentPage = ref(1); // 当前页码
-  const pageSize = ref(2); // 每页显示条目数
+  const pageSize = ref(10); // 每页显示条目数，您想要显示5个
   const totalItems = ref(tableData.length); // 总条目数，即您数组的长度
   // 处理页码改变
-  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const handlePageChange = (page: number) => {
     currentPage.value = page;
   };
-
-  // 控制按钮显示隐藏的响应式变量
-  const showButton = ref(true);
 </script>
 <template>
   <div class="content">
     <HeaderPage />
-    <div style="height: 200px"></div>
+    <div
+      :style="size === Screen.Large ? 'height: 160px' : 'height: 180px'"
+    ></div>
     <div class="block_list">
       <div class="block_list_header">
         <div class="block_list_header_side">
@@ -170,7 +166,7 @@
         }"
         :cell-style="{
           color: '#000',
-          height: '36px',
+          height: '52px',
           fontSize: '14px',
           fontWeight: '500',
           textAlign: 'center',
@@ -302,11 +298,11 @@
       </div>
     </div>
     <paginationContent
-      :total-items="totalItems"
-      :page-size="pageSize"
-      :current-page="currentPage"
-      :show-button="showButton"
-      @page-change="handlePageChange"
+      :totalItems="totalItems"
+      :pageSize="pageSize"
+      :currentPage="currentPage"
+      :showButton="true"
+      @pageChange="handlePageChange"
     />
   </div>
 </template>
@@ -328,7 +324,7 @@
       position: relative;
       z-index: 10;
       // margin-left: 62px;
-      margin: 39px auto 36px;
+      margin: 39px auto 0px;
 
       .block_list_header {
         height: 50px;

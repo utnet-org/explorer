@@ -126,7 +126,9 @@
 <template>
   <div class="content">
     <HeaderPage />
-    <div style="height: 200px"></div>
+    <div
+      :style="size === Screen.Large ? 'height: 160px' : 'height: 180px'"
+    ></div>
     <div class="block_list">
       <div class="content_header">
         <div class="main_title"
@@ -203,7 +205,7 @@
         0px 4px 8px 0px rgba(0, 0, 0, 0.04);
       position: relative;
       z-index: 10;
-      margin: 35px auto 36px;
+      margin: 35px auto 0px;
       display: flex;
       flex-direction: column;
       justify-content: center;

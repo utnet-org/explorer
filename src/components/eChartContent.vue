@@ -35,7 +35,7 @@
             >{{ $t('home.month') }}</el-button
           >
         </div>
-        <div>
+        <div @click="router.push('/statistics')">
           <el-button
             color="#fff"
             class="custom-button"
@@ -52,7 +52,7 @@
     <div class="rate_trend">
       <div class="month_F">
         <div class="work_m">{{ $t('home.rate_trend') }}</div>
-        <div>
+        <div @click="router.push('/statistics/gas')">
           <el-button color="#fff" class="custom-button">{{
             $t('home.see_more')
           }}</el-button>
@@ -75,6 +75,8 @@
   } from 'echarts/components';
   import { LineChart } from 'echarts/charts';
   import { CanvasRenderer } from 'echarts/renderers';
+  import { useRouter } from 'vue-router';
+  const router = useRouter();
   defineProps<{ viewportWidth: number }>();
   echarts.use([
     TitleComponent,

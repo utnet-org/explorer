@@ -582,7 +582,7 @@
     <div>
       <div class="tabulation">
         <div class="ecology_header">
-          <div class="ecology_title">{{ $t('home.eco_tour') }}</div>
+          <div class="ecology_title">{{ $t('home.gas_tour') }}</div>
           <div v-if="size !== Screen.Small">
             <div class="ecology_time">
               <el-button

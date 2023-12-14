@@ -152,6 +152,8 @@ export default {
     Gas_cost: 'Gas cost',
     Contract_name: 'Contract name',
     faucet: 'Faucet',
+
+    gas_tour: 'Gas Tour',
   },
   blockChain: {
     block: 'Block',

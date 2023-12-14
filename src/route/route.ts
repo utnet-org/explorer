@@ -11,10 +11,10 @@ import OrderList from '../page/blockchain/order.vue'; // 订单列表
 import MemoryPool from '../page/blockchain/memoryPool.vue'; // 内存池消息列表
 import ContractVerification from '../page/blockchain/contractVerification.vue'; // 验证并发布合约源代码
 import Contract from '../page/resource/contract.vue'; // UVM概览 常用工具
-import Statistics from '../page/home/statistics.vue'; // 算力服务图表
+import Statistics from '../page/Statistics/statistics.vue'; // 算力服务图表
 import KnowledgeBase from '../page/resource/knowledgeBase.vue'; // 知识库
-import Uvm from '../page/pactpage/uvmStatistics.vue'; // uvm 统计
-import Ranking from '../page/home/ranking.vue'; // 算力服务排行榜
+import Gas from '../page/Statistics/gasRanking.vue'; // Gas 排行
+import Ranking from '../page/Statistics/ranking.vue'; // 算力服务排行榜
 import NProgress from 'nprogress'; // progress bar
 import 'nprogress/nprogress.css'; // progress bar style
 NProgress.configure({ showSpinner: false });
@@ -70,8 +70,8 @@ const routes = [
         component: KnowledgeBase,
       },
       {
-        path: '/contract/uvm',
-        component: Uvm,
+        path: '/statistics/gas',
+        component: Gas,
       },
       {
         path: '/statistics/ranking',

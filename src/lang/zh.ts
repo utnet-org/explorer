@@ -144,6 +144,8 @@ export default {
     Gas_cost: 'Gas费用',
     Contract_name: '合约名称',
     faucet: '水龙头',
+
+    gas_tour: 'Gas导览',
   },
   blockChain: {
     block: '区块',

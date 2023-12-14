@@ -6,7 +6,7 @@ import { getScreenSize, Screen } from '@/utils/screen-size.ts';
 /// 生态导览
 defineProps<{ viewportWidth: number }>();
 // 24h, week, month, year 时间相关数据及变量
-// const ecologyTimeTypeList = ['24小时', '周', '月', '年'];
+const ecologyTimeTypeList = ['24h', 'home.week', 'home.month', 'home.year'];
 const checkEcologyTimeType = ref('24h');
 const changeTimeType = (item: string) => {
   checkEcologyTimeType.value = item;
@@ -54,12 +54,7 @@ onUnmounted(() => {
             fontSize: '14px',
             border: '0.5px solid #3EDFCF',
             borderRadius: '2px',
-          }" v-for="(timeItem, timeIndex) in [
-  $t('home.hour'),
-  $t('home.week'),
-  $t('home.month'),
-  $t('home.year'),
-]" :key="timeIndex">{{ timeItem }}
+          }" v-for="(timeItem, timeIndex) in ecologyTimeTypeList" :key="timeIndex">{{ $t(timeItem) }}
         </el-button>
       </div>
     </div>
@@ -287,7 +282,7 @@ onUnmounted(() => {
 
     .ecology_table {
       width: 100%;
-      padding: 0 22px;
+      // padding: 0 22px;
       box-sizing: border-box;
     }
   }

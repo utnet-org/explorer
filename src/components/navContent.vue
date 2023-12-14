@@ -114,7 +114,7 @@ const navSelectList = [
   },
 ];
 const languageList = ['en', 'zh'];
-const selectIndex = ref(-1);
+const selectIndex = ref(localStorage.getItem('navSelectIndex') == null ? -1 : Number(localStorage.getItem('navSelectIndex')));
 const address = ref(i18n.global.t('home.connect_wallet'));
 const isConnect = ref(false);
 const price = ref('---');
@@ -133,6 +133,7 @@ const changeSelectIndex = () => {
   activeName.value = '0';
   linkUrl.value = '/';
   selectIndex.value = -1;
+  localStorage.setItem('navSelectIndex', '-1');
   showNavSelectType.value = false;
   router.push('/');
 };
@@ -195,6 +196,7 @@ const changeCollapse = (index: any) => {
 };
 const linkNextRoute = (link: string, navIndex: number) => {
   selectIndex.value = navIndex;
+  localStorage.setItem('navSelectIndex', navIndex.toString());
   showNavSelectType.value = false;
   if (link != '') {
     linkUrl.value = link;

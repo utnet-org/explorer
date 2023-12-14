@@ -1,12 +1,25 @@
 <script setup lang="ts">
 // 富豪榜
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 import HeaderPage from '../../components/otherHeaderContent.vue';
 // import Mock from 'mockjs';
 import { getScreenSize, Screen } from '@/utils/screen-size.ts';
+import paginationContent from '@/components/paginationContent.vue';
 // defineProps<{ msg: string }>()
 const size = getScreenSize().currentScreenSize;
 onMounted(() => { });
+const dropdownText = ref('INT8');
+const changeDropdownText = (command: string) => {
+  if (command === 'INT8') {
+    dropdownText.value = 'INT8';
+  }
+  if (command === 'FP16') {
+    dropdownText.value = 'FP16';
+  }
+  if (command === 'FP32') {
+    dropdownText.value = 'FP32';
+  }
+};
 const tableData = [
   {
     model: 'BM1684',
@@ -141,24 +154,48 @@ const tableData = [
     belongingToTheMiner: 'f01923786'
   },
 ];
+const currentPage = ref(1); // 当前页码
+const pageSize = ref(10); // 每页显示条目数，您想要显示5个
+const totalItems = ref(tableData.length); // 总条目数，即您数组的长度
+// 处理页码改变
+const handlePageChange = (page: number) => {
+  currentPage.value = page;
+};
 </script>
 <template>
   <div class="content">
     <HeaderPage />
-    <div style="height: 200px"></div>
+    <div :style="size === Screen.Large ? 'height: 160px' : 'height: 180px'"></div>
     <div class="block_list">
       <div class="block_list_header">
         <div class="block_list_header_title">{{ $t('home.chip_list') }}</div>
         <div class="block_list_header_text">共 1141606363 条芯片信息</div>
       </div>
-      <el-table :data="tableData" table-layout="fixed" v-if="size === Screen.Large" :header-cell-style="{
-        textAlign: 'center',
-        color: 'rgba(0,0,0,0.5)',
-        fontSize: '12px',
-        fontWeight: '300',
-        borderBottom: 'none',
-        backgroundColor: '#F9F9F8',
-      }" :cell-style="{
+      <div v-if="size === Screen.Large" class="dropdown">
+        <div class="dropdown_title">{{ $t('home.power_type') }}
+        </div>
+        <el-dropdown @command="changeDropdownText">
+          <div class="dropdown_text">{{ dropdownText }}</div>
+          <template #dropdown>
+            <el-dropdown-menu>
+              <el-dropdown-item command="INT8">INT8</el-dropdown-item>
+              <el-dropdown-item command="FP16">FP16</el-dropdown-item>
+              <el-dropdown-item command="FP32">FP32</el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
+      </div>
+      <el-table :data="tableData.slice(
+        (currentPage - 1) * pageSize,
+        currentPage * pageSize,
+      )" table-layout="fixed" v-if="size === Screen.Large" :header-cell-style="{
+  textAlign: 'center',
+  color: 'rgba(0,0,0,0.5)',
+  fontSize: '12px',
+  fontWeight: '300',
+  borderBottom: 'none',
+  backgroundColor: '#F9F9F8',
+}" :cell-style="{
   color: '#000',
   height: '52px',
   fontSize: '14px',
@@ -289,6 +326,8 @@ const tableData = [
         </div>
       </div>
     </div>
+    <paginationContent :totalItems="totalItems" :pageSize="pageSize" :currentPage="currentPage" :showButton="true"
+      @pageChange="handlePageChange" />
   </div>
 </template>
 <style scoped lang="scss">
@@ -309,7 +348,7 @@ const tableData = [
     position: relative;
     z-index: 10;
     // margin-left: 62px;
-    margin: 39px auto 36px;
+    margin: 39px auto 0px;
 
     .block_list_header {
       height: 40px;
@@ -337,6 +376,39 @@ const tableData = [
         font-size: 14px;
         font-weight: 400;
         opacity: 0.7;
+      }
+    }
+
+    .dropdown {
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      margin-right: 48px;
+
+      .dropdown_title {
+        color: #000;
+        opacity: 0.5;
+        font-family: PingFang SC;
+        font-size: 12px;
+        font-weight: 400;
+        padding: 2px 16px;
+        margin-right: 6px;
+        border-radius: 38px;
+        border: 0.5px solid #3edfcf;
+      }
+
+      .dropdown_text {
+        width: 65px;
+        height: 21px;
+        line-height: 21px;
+        text-align: center;
+        color: #191919;
+        font-family: PingFang SC;
+        font-size: 12px;
+        font-weight: 600;
+        border-radius: 38px;
+        background: #3edfcf;
       }
     }
   }

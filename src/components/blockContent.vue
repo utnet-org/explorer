@@ -6,7 +6,8 @@ import Mock from 'mockjs';
 import { updateTimeAgo } from '@/utils/time.ts';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { getScreenSize, Screen } from '@/utils/screen-size.ts';
-
+import { useRouter } from 'vue-router';
+const router = useRouter();
 const porps = defineProps<{ fromPage: string }>();
 const size = getScreenSize().currentScreenSize;
 let intervalId: number | undefined;
@@ -43,6 +44,11 @@ onUnmounted(() => {
     clearInterval(intervalId);
   }
 });
+const goToMore = () => {
+  localStorage.setItem('navSelectIndex', '0');
+  window.location.reload();
+  window.location.href = '/blockchain';
+}
 </script>
 <template>
   <div class="new_block_content" :style="porps.fromPage == 'blockChain' ? 'margin-top:60px !important;' : ''">
@@ -141,7 +147,7 @@ onUnmounted(() => {
         </div>
       </div>
     </div>
-    <div class="open_more">{{ $t('home.see_more') }}</div>
+    <div class="open_more" @click="goToMore">{{ $t('home.see_more') }}</div>
   </div>
 </template>
 <style scoped lang="scss">

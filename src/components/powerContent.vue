@@ -2,7 +2,8 @@
 import { onMounted, onUnmounted, reactive, ref } from 'vue';
 import { getPowerRank, PowerRank } from '@/api/power.ts';
 import { getScreenSize, Screen } from '@/utils/screen-size.ts';
-
+import { useRouter } from 'vue-router';
+const router = useRouter();
 // defineProps<{ viewportWidth: number }>()
 const size = getScreenSize().currentScreenSize;
 //表格相关数据及变脸
@@ -40,6 +41,11 @@ onUnmounted(() => {
     clearInterval(intervalId);
   }
 });
+const goToMore = () => {
+  localStorage.setItem('navSelectIndex', '2');
+  window.location.reload();
+  window.location.href = '/statistics/ranking';
+}
 </script>
 <template>
   <div class="computing_power_service_content">
@@ -54,7 +60,9 @@ onUnmounted(() => {
         <div class="computing_power_service_tabs_dropdown_title">{{ $t('home.power_type') }}
         </div>
         <el-dropdown @command="changeDropdownText">
-          <div class="dropdown_text">{{ dropdownText }}</div>
+          <div class="dropdown_text">{{ dropdownText }}<el-icon class="el-icon--right">
+              <arrow-down />
+            </el-icon></div>
           <template #dropdown>
             <el-dropdown-menu>
               <el-dropdown-item command="INT8">INT8</el-dropdown-item>
@@ -177,7 +185,7 @@ onUnmounted(() => {
         </div>
       </div>
     </div>
-    <div class="open_more">{{ $t('home.see_more') }}</div>
+    <div class="open_more" @click="goToMore">{{ $t('home.see_more') }}</div>
   </div>
 </template>
 <style scoped lang="scss">
@@ -254,7 +262,7 @@ onUnmounted(() => {
 
     .ecology_table {
       width: 100%;
-      padding: 0 21px;
+      // padding: 0 21px;
       box-sizing: border-box;
     }
   }

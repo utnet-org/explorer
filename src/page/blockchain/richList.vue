@@ -1,104 +1,146 @@
 <script setup lang="ts">
-  // 富豪榜
-  import { onMounted } from 'vue';
-  import HeaderPage from '../../components/otherHeaderContent.vue';
-  // import Mock from 'mockjs';
-  import { getScreenSize, Screen } from '@/utils/screen-size.ts';
-  // defineProps<{ msg: string }>()
-  const size = getScreenSize().currentScreenSize;
-  onMounted(() => {});
-  const tableData = [
-    {
-      accountName: 'f3wc2vre...7hjss21iq',
-      label: 'Utility',
-      balance: '64,999.21',
-      balanceRatio: '7.21%',
-      type: '普通账户',
-      createTime: '2020-10-21 11:13:30',
-      latestTransaction: '2023-10-12 16:23:00',
-    },
-    {
-      accountName: 'f3wc2vre...7hjss21iq',
-      label: 'Utility',
-      balance: '64,999.21',
-      balanceRatio: '7.21%',
-      type: '普通账户',
-      createTime: '2020-10-21 11:13:30',
-      latestTransaction: '2023-10-12 16:23:00',
-    },
-    {
-      accountName: 'f3wc2vre...7hjss21iq',
-      label: 'Utility',
-      balance: '64,999.21',
-      balanceRatio: '7.21%',
-      type: '普通账户',
-      createTime: '2020-10-21 11:13:30',
-      latestTransaction: '2023-10-12 16:23:00',
-    },
-    {
-      accountName: 'f3wc2vre...7hjss21iq',
-      label: 'Utility',
-      balance: '64,999.21',
-      balanceRatio: '7.21%',
-      type: '普通账户',
-      createTime: '2020-10-21 11:13:30',
-      latestTransaction: '2023-10-12 16:23:00',
-    },
-    {
-      accountName: 'f3wc2vre...7hjss21iq',
-      label: 'Utility',
-      balance: '64,999.21',
-      balanceRatio: '7.21%',
-      type: '普通账户',
-      createTime: '2020-10-21 11:13:30',
-      latestTransaction: '2023-10-12 16:23:00',
-    },
-    {
-      accountName: 'f3wc2vre...7hjss21iq',
-      label: 'Utility',
-      balance: '64,999.21',
-      balanceRatio: '7.21%',
-      type: '普通账户',
-      createTime: '2020-10-21 11:13:30',
-      latestTransaction: '2023-10-12 16:23:00',
-    },
-    {
-      accountName: 'f3wc2vre...7hjss21iq',
-      label: 'Utility',
-      balance: '64,999.21',
-      balanceRatio: '7.21%',
-      type: '普通账户',
-      createTime: '2020-10-21 11:13:30',
-      latestTransaction: '2023-10-12 16:23:00',
-    },
-    {
-      accountName: 'f3wc2vre...7hjss21iq',
-      label: 'Utility',
-      balance: '64,999.21',
-      balanceRatio: '7.21%',
-      type: '普通账户',
-      createTime: '2020-10-21 11:13:30',
-      latestTransaction: '2023-10-12 16:23:00',
-    },
-    {
-      accountName: 'f3wc2vre...7hjss21iq',
-      label: 'Utility',
-      balance: '64,999.21',
-      balanceRatio: '7.21%',
-      type: '普通账户',
-      createTime: '2020-10-21 11:13:30',
-      latestTransaction: '2023-10-12 16:23:00',
-    },
-    {
-      accountName: 'f3wc2vre...7hjss21iq',
-      label: 'Utility',
-      balance: '64,999.21',
-      balanceRatio: '7.21%',
-      type: '普通账户',
-      createTime: '2020-10-21 11:13:30',
-      latestTransaction: '2023-10-12 16:23:00',
-    },
-  ];
+// 富豪榜
+import { onMounted } from 'vue';
+import HeaderPage from '../../components/otherHeaderContent.vue';
+// import Mock from 'mockjs';
+import { getScreenSize, Screen } from '@/utils/screen-size.ts';
+// defineProps<{ msg: string }>()
+const size = getScreenSize().currentScreenSize;
+onMounted(() => { });
+const tableData = [
+  {
+    model: 'BM1684',
+    id: '000000',
+    snCode: '0000000',
+    priKey1: '0x425ad…9972B',
+    priKey2: '0x425ad…9972B',
+    pubKey1: '0x425ad…9972B',
+    pubKey2: '0x425ad…9972B',
+    computingPowerType: 'int8',
+    computingPowerValue: '32.00 TiB',
+    belongingToTheMiner: 'f01923786'
+  },
+  {
+    model: 'BM1684',
+    id: '000000',
+    snCode: '0000000',
+    priKey1: '0x425ad…9972B',
+    priKey2: '0x425ad…9972B',
+    pubKey1: '0x425ad…9972B',
+    pubKey2: '0x425ad…9972B',
+    computingPowerType: 'int8',
+    computingPowerValue: '32.00 TiB',
+    belongingToTheMiner: 'f01923786'
+  },
+  {
+    model: 'BM1684',
+    id: '000000',
+    snCode: '0000000',
+    priKey1: '0x425ad…9972B',
+    priKey2: '0x425ad…9972B',
+    pubKey1: '0x425ad…9972B',
+    pubKey2: '0x425ad…9972B',
+    computingPowerType: 'int8',
+    computingPowerValue: '32.00 TiB',
+    belongingToTheMiner: 'f01923786'
+  },
+  {
+    model: 'BM1684',
+    id: '000000',
+    snCode: '0000000',
+    priKey1: '0x425ad…9972B',
+    priKey2: '0x425ad…9972B',
+    pubKey1: '0x425ad…9972B',
+    pubKey2: '0x425ad…9972B',
+    computingPowerType: 'int8',
+    computingPowerValue: '32.00 TiB',
+    belongingToTheMiner: 'f01923786'
+  },
+  {
+    model: 'BM1684',
+    id: '000000',
+    snCode: '0000000',
+    priKey1: '0x425ad…9972B',
+    priKey2: '0x425ad…9972B',
+    pubKey1: '0x425ad…9972B',
+    pubKey2: '0x425ad…9972B',
+    computingPowerType: 'int8',
+    computingPowerValue: '32.00 TiB',
+    belongingToTheMiner: 'f01923786'
+  },
+  {
+    model: 'BM1684',
+    id: '000000',
+    snCode: '0000000',
+    priKey1: '0x425ad…9972B',
+    priKey2: '0x425ad…9972B',
+    pubKey1: '0x425ad…9972B',
+    pubKey2: '0x425ad…9972B',
+    computingPowerType: 'int8',
+    computingPowerValue: '32.00 TiB',
+    belongingToTheMiner: 'f01923786'
+  },
+  {
+    model: 'BM1684',
+    id: '000000',
+    snCode: '0000000',
+    priKey1: '0x425ad…9972B',
+    priKey2: '0x425ad…9972B',
+    pubKey1: '0x425ad…9972B',
+    pubKey2: '0x425ad…9972B',
+    computingPowerType: 'int8',
+    computingPowerValue: '32.00 TiB',
+    belongingToTheMiner: 'f01923786'
+  },
+  {
+    model: 'BM1684',
+    id: '000000',
+    snCode: '0000000',
+    priKey1: '0x425ad…9972B',
+    priKey2: '0x425ad…9972B',
+    pubKey1: '0x425ad…9972B',
+    pubKey2: '0x425ad…9972B',
+    computingPowerType: 'int8',
+    computingPowerValue: '32.00 TiB',
+    belongingToTheMiner: 'f01923786'
+  },
+  {
+    model: 'BM1684',
+    id: '000000',
+    snCode: '0000000',
+    priKey1: '0x425ad…9972B',
+    priKey2: '0x425ad…9972B',
+    pubKey1: '0x425ad…9972B',
+    pubKey2: '0x425ad…9972B',
+    computingPowerType: 'int8',
+    computingPowerValue: '32.00 TiB',
+    belongingToTheMiner: 'f01923786'
+  },
+  {
+    model: 'BM1684',
+    id: '000000',
+    snCode: '0000000',
+    priKey1: '0x425ad…9972B',
+    priKey2: '0x425ad…9972B',
+    pubKey1: '0x425ad…9972B',
+    pubKey2: '0x425ad…9972B',
+    computingPowerType: 'int8',
+    computingPowerValue: '32.00 TiB',
+    belongingToTheMiner: 'f01923786'
+  },
+  {
+    model: 'BM1684',
+    id: '000000',
+    snCode: '0000000',
+    priKey1: '0x425ad…9972B',
+    priKey2: '0x425ad…9972B',
+    pubKey1: '0x425ad…9972B',
+    pubKey2: '0x425ad…9972B',
+    computingPowerType: 'int8',
+    computingPowerValue: '32.00 TiB',
+    belongingToTheMiner: 'f01923786'
+  },
+];
 </script>
 <template>
   <div class="content">
@@ -106,136 +148,138 @@
     <div style="height: 200px"></div>
     <div class="block_list">
       <div class="block_list_header">
-        <div class="block_list_header_title">{{ $t('home.rich_list') }}</div>
-        <div class="block_list_header_text">共 1141606363 个账户</div>
+        <div class="block_list_header_title">{{ $t('home.chip_list') }}</div>
+        <div class="block_list_header_text">共 1141606363 条芯片信息</div>
       </div>
-      <el-table
-        :data="tableData"
-        table-layout="fixed"
-        v-if="size === Screen.Large"
-        :header-cell-style="{
-          textAlign: 'center',
-          color: 'rgba(0,0,0,0.5)',
-          fontSize: '12px',
-          fontWeight: '300',
-          borderBottom: 'none',
-          backgroundColor: '#F9F9F8',
-        }"
-        :cell-style="{
-          color: '#000',
-          height: '36px',
-          fontSize: '14px',
-          fontWeight: '500',
-          textAlign: 'center',
-          borderBottom: '0.5px solid rgba(140, 233, 220,0.5)',
-          backgroundColor: '#F9F9F8',
-        }"
-      >
-        <el-table-column type="index" :label="$t('home.ranking')" />
-        <el-table-column
-          prop="accountName"
-          :label="$t('home.account_name')"
-        ></el-table-column>
-        <el-table-column prop="label" :label="$t('home.tag')"></el-table-column>
-        <el-table-column :label="$t('home.balance')">
-          <template #default="scope">
-            <div style="color: #0facb6">{{ scope.row.balance }} UNC</div>
-          </template>
-        </el-table-column>
-        <el-table-column
-          prop="balanceRatio"
-          :label="$t('home.Balance_ratio')"
-        ></el-table-column>
-        <el-table-column prop="type" :label="$t('home.type')"></el-table-column>
-        <el-table-column
-          prop="createTime"
-          :label="$t('home.creation_time')"
-        ></el-table-column>
-        <el-table-column
-          prop="latestTransaction"
-          :label="$t('home.Latest_transactions')"
-        ></el-table-column>
+      <el-table :data="tableData" table-layout="fixed" v-if="size === Screen.Large" :header-cell-style="{
+        textAlign: 'center',
+        color: 'rgba(0,0,0,0.5)',
+        fontSize: '12px',
+        fontWeight: '300',
+        borderBottom: 'none',
+        backgroundColor: '#F9F9F8',
+      }" :cell-style="{
+  color: '#000',
+  height: '52px',
+  fontSize: '14px',
+  fontWeight: '500',
+  textAlign: 'center',
+  borderBottom: '0.5px solid rgba(140, 233, 220,0.5)',
+  // backgroundColor: '#F9F9F8',
+}" :highlight-current-row="true">
+        <el-table-column prop="model" :label="$t('blockChain.chip_model')" />
+        <el-table-column prop="id" label="ID"></el-table-column>
+        <el-table-column prop="snCode" :label="$t('blockChain.chip_sn_code')"></el-table-column>
+        <el-table-column prop="priKey1" label="Pri Key1"></el-table-column>
+        <el-table-column prop="priKey2" label="Pri Key2"></el-table-column>
+        <el-table-column prop="pubKey1" label="Pub Key1"></el-table-column>
+        <el-table-column prop="pubKey2" label="Pub Key2"></el-table-column>
+        <el-table-column prop="computingPowerType" :label="$t('blockChain.chip_computing_power_type')"></el-table-column>
+        <el-table-column prop="computingPowerValue"
+          :label="$t('blockChain.chip_computing_power_value')"></el-table-column>
+        <el-table-column prop="belongingToTheMiner"
+          :label="$t('blockChain.chip_belonging_to_the_miner')"></el-table-column>
       </el-table>
       <div v-else style="padding-bottom: 20px">
         <div>
           <div v-for="(item, index) in tableData" :key="index">
             <div class="eco-item">
               <div>
-                <div class="grey-text-12-300"> 排行 </div>
+                <div class="grey-text-12-300"> {{ $t('blockChain.chip_model') }} </div>
               </div>
               <div>
                 <div class="black-text-14">
-                  {{ index + 1 }}
+                  {{ item.model }}
                 </div>
               </div>
             </div>
             <div class="eco-item">
               <div>
-                <div class="grey-text-12-300"> 账户名 </div>
+                <div class="grey-text-12-300"> ID </div>
               </div>
               <div>
                 <div class="black-text-14">
-                  {{ item.accountName }}
+                  {{ item.id }}
                 </div>
               </div>
             </div>
             <div class="eco-item">
               <div>
-                <div class="grey-text-12-300"> 标签 </div>
+                <div class="grey-text-12-300"> {{ $t('blockChain.chip_sn_code') }} </div>
               </div>
               <div>
                 <div class="black-text-14">
-                  {{ item.label }}
+                  {{ item.snCode }}
                 </div>
               </div>
             </div>
             <div class="eco-item">
               <div>
-                <div class="grey-text-14-300"> 余额 </div>
+                <div class="grey-text-14-300"> Pri Key1 </div>
               </div>
               <div>
-                <div class="black-text-14" style="color: #0facb6">
-                  {{ item.balance }} UNC
+                <div class="black-text-14">
+                  {{ item.priKey1 }}
                 </div>
               </div>
             </div>
             <div class="eco-item">
               <div>
-                <div class="grey-text-14-300"> 余额占比 </div>
+                <div class="grey-text-14-300"> Pri Key2 </div>
               </div>
               <div>
                 <div class="black-text-14">
-                  {{ item.balanceRatio }}
+                  {{ item.priKey2 }}
                 </div>
               </div>
             </div>
             <div class="eco-item">
               <div>
-                <div class="grey-text-14-300"> 类型 </div>
+                <div class="grey-text-14-300"> Pub Key1 </div>
               </div>
               <div>
                 <div class="black-text-14">
-                  {{ item.type }}
+                  {{ item.pubKey1 }}
                 </div>
               </div>
             </div>
             <div class="eco-item">
               <div>
-                <div class="grey-text-14-300"> 创建时间 </div>
+                <div class="grey-text-14-300"> Pub Key2 </div>
               </div>
               <div>
                 <div class="black-text-14">
-                  {{ item.createTime }}
+                  {{ item.pubKey2 }}
                 </div>
               </div>
             </div>
             <div class="eco-item">
               <div>
-                <div class="grey-text-14-300"> 最新交易 </div>
+                <div class="grey-text-14-300"> {{ $t('blockChain.chip_computing_power_type') }} </div>
               </div>
               <div>
                 <div class="black-text-14">
-                  {{ item.latestTransaction }}
+                  {{ item.computingPowerType }}
+                </div>
+              </div>
+            </div>
+            <div class="eco-item">
+              <div>
+                <div class="grey-text-14-300"> {{ $t('blockChain.chip_computing_power_value') }} </div>
+              </div>
+              <div>
+                <div class="black-text-14">
+                  {{ item.computingPowerValue }}
+                </div>
+              </div>
+            </div>
+            <div class="eco-item">
+              <div>
+                <div class="grey-text-14-300"> {{ $t('blockChain.chip_belonging_to_the_miner') }} </div>
+              </div>
+              <div>
+                <div class="black-text-14">
+                  {{ item.belongingToTheMiner }}
                 </div>
               </div>
             </div>
@@ -248,78 +292,78 @@
   </div>
 </template>
 <style scoped lang="scss">
-  .content {
-    width: 100%;
-    min-height: 100vh;
-    background: #f2f0ea;
-    position: relative;
+.content {
+  width: 100%;
+  min-height: 100vh;
+  background: #f2f0ea;
+  position: relative;
 
-    .block_list {
-      width: calc(100% - 64px);
-      // height: 500px;
+  .block_list {
+    width: calc(100% - 64px);
+    // height: 500px;
+    border-radius: 8px;
+    background: #f9f9f8;
+    box-shadow:
+      0px 4px 15px 0px rgba(92, 255, 243, 0.1),
+      0px 4px 8px 0px rgba(0, 0, 0, 0.04);
+    position: relative;
+    z-index: 10;
+    // margin-left: 62px;
+    margin: 39px auto 36px;
+
+    .block_list_header {
+      height: 40px;
       border-radius: 8px;
-      background: #f9f9f8;
+      background: #fff;
+      padding-left: 26px;
       box-shadow:
         0px 4px 15px 0px rgba(92, 255, 243, 0.1),
         0px 4px 8px 0px rgba(0, 0, 0, 0.04);
-      position: relative;
-      z-index: 10;
-      // margin-left: 62px;
-      margin: 39px auto 36px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+
+      .block_list_header_title {
+        color: #000;
+        font-family: PingFang SC;
+        font-size: 16px;
+        font-weight: 500;
+        margin-right: 26px;
+      }
+
+      .block_list_header_text {
+        color: #0facb6;
+        font-family: PingFang SC;
+        font-size: 14px;
+        font-weight: 400;
+        opacity: 0.7;
+      }
+    }
+  }
+}
+
+@media (min-width: 320px) and (max-width: 843px) {
+  .content {
+    .block_list {
+      width: calc(100% - 36px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin: 0 18px 36px;
+      box-sizing: border-box;
 
       .block_list_header {
-        height: 40px;
-        border-radius: 8px;
-        background: #fff;
-        padding-left: 26px;
-        box-shadow:
-          0px 4px 15px 0px rgba(92, 255, 243, 0.1),
-          0px 4px 8px 0px rgba(0, 0, 0, 0.04);
-        margin-bottom: 10px;
-        display: flex;
-        align-items: center;
-
         .block_list_header_title {
-          color: #000;
-          font-family: PingFang SC;
-          font-size: 16px;
-          font-weight: 500;
-          margin-right: 26px;
-        }
-
-        .block_list_header_text {
-          color: #0facb6;
-          font-family: PingFang SC;
           font-size: 14px;
-          font-weight: 400;
-          opacity: 0.7;
         }
       }
     }
-  }
 
-  @media (min-width: 320px) and (max-width: 843px) {
-    .content {
-      .block_list {
-        width: calc(100% - 36px);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        margin: 0 18px 36px;
-        box-sizing: border-box;
-
-        .block_list_header {
-          .block_list_header_title {
-            font-size: 14px;
-          }
-        }
-      }
-
-      .eco-item2 {
-        display: flex;
-        justify-content: start;
-        align-items: center;
-      }
+    .eco-item2 {
+      display: flex;
+      justify-content: start;
+      align-items: center;
     }
   }
+}
 </style>

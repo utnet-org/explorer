@@ -102,7 +102,7 @@ export default {
     Amount: '金额',
     status: '状态',
 
-    rich_list: '富豪榜',
+    chip_list: '芯片列表',
     ranking: '排行',
     account_name: '账户名',
     balance: '余额',
@@ -143,17 +143,20 @@ export default {
     Number_of_unique_users: '独立用户数',
     Gas_cost: 'Gas费用',
     Contract_name: '合约名称',
-
-    Faucet: '水龙头',
+    faucet: '水龙头',
   },
   blockChain: {
     block: '区块',
     block_information: '消息',
-    block_rich_list: '富豪榜',
+    block_rich_list: '芯片列表',
     block_order: '订单',
     block_memory_pool: '内存池',
     block_contract_verification: '合约验证',
-
+    chip_model: '型号',
+    chip_sn_code: 'SN编码',
+    chip_computing_power_type: '算力类型',
+    chip_computing_power_value: '算力值',
+    chip_belonging_to_the_miner: '所属矿工',
   },
   contract: {
     contract_UVM_statistics: 'UVM统计',
@@ -169,5 +172,15 @@ export default {
   source: {
     source_common_tool: '常用工具',
     source_knowledge_base: '知识库',
+  },
+  footer: {
+    official_community: '官网社区',
+    most_used_links: '常用链接',
+    development_tools: '开发工具',
+    gitHub_browser_repository: 'GitHub浏览器仓库',
+    official_x_address: '官方X地址',
+    learning_centre: '学习中心',
+    github_organization_homepage: 'Github组织主页',
+    dapp_tools: 'DApp工具',
   },
 };

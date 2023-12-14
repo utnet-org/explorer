@@ -108,7 +108,7 @@ export default {
     Amount: 'Amount',
     status: 'Status',
 
-    rich_list: 'Rich List',
+    chip_list: 'Chip List',
     ranking: 'Ranking',
     account_name: 'Account Name',
     balance: 'Balance',
@@ -151,17 +151,20 @@ export default {
     Number_of_unique_users: 'Number of unique users',
     Gas_cost: 'Gas cost',
     Contract_name: 'Contract name',
-
-    Faucet: 'Faucet',
-
+    faucet: 'Faucet',
   },
   blockChain: {
     block: 'Block',
     block_information: 'Information',
-    block_rich_list: 'Rich List',
+    block_rich_list: 'Chip List',
     block_order: 'Order',
     block_memory_pool: 'Memory Pool',
     block_contract_verification: 'Contract Verification',
+    chip_model: 'Model',
+    chip_sn_code: 'SN Code',
+    chip_computing_power_type: 'Computing Power Type',
+    chip_computing_power_value: 'Computing Power Value',
+    chip_belonging_to_the_miner: 'Belonging to the Miner',
   },
   contract: {
     contract_UVM_statistics: 'UVM Statistics',
@@ -177,5 +180,15 @@ export default {
   source: {
     source_common_tool: 'Common Tool',
     source_knowledge_base: 'knowledge base',
+  },
+  footer: {
+    official_community: 'Official Community',
+    most_used_links: 'Most Used Link',
+    development_tools: 'Development Tools',
+    gitHub_browser_repository: 'GitHub browser repository',
+    official_x_address: 'Official X address',
+    learning_centre: 'Learning Centre',
+    github_organization_homepage: 'Github Organization Homepage',
+    dapp_tools: 'DApp Tools',
   },
 };

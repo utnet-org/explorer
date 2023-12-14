@@ -1,4 +1,8 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+  const routeLink = (url: string) => {
+    window.open(url);
+  };
+</script>
 <template>
   <div class="footer_content">
     <div class="footer-header">
@@ -18,15 +22,23 @@
           <p>{{ $t('home.contact_us') }}</p>
         </div>
         <div class="black-text-12">
-          <div class="contact-item">
+          <div
+            class="contact-item"
+            @click="routeLink('https://x.com/UtilityNet_')"
+          >
             <img src="../assets/images/twitter.png" alt="" />
             <p style="margin: 0">{{ $t('home.twitter') }}</p>
           </div>
-          <div class="contact-item">
+          <div class="contact-item" @click="routeLink('https://telegram.org/')">
             <img src="../assets/images/telegram.png" alt="" />
             <p>{{ $t('home.telegram') }}</p>
           </div>
-          <div class="contact-item">
+          <div
+            class="contact-item"
+            @click="
+              routeLink('https://www.google.com/intl/zh-CN_cn/gmail/about/')
+            "
+          >
             <img src="../assets/images/email.png" alt="" />
             <p style="margin: 0">{{ $t('home.mail') }}</p>
           </div>
@@ -37,9 +49,18 @@
           <p>{{ $t('home.community') }}</p>
         </div>
         <div class="black-text-12">
-          <p>{{ $t('home.white_book') }}</p>
-          <p>{{ $t('home.api_doc') }}</p>
-          <p>{{ $t('home.dev_guide') }}</p>
+          <p
+            @click="
+              routeLink('http://oss2.xuanwoo.com/UtilityNetWhitePaper.pdf')
+            "
+            >{{ $t('home.white_book') }}</p
+          >
+          <p @click="routeLink('https://wiki.utlab.io/')">{{
+            $t('home.api_doc')
+          }}</p>
+          <p @click="routeLink('https://wiki.utlab.io/')">{{
+            $t('home.dev_guide')
+          }}</p>
         </div>
       </div>
       <div>
@@ -47,10 +68,12 @@
           <p>{{ $t('home.product_service') }}</p>
         </div>
         <div class="black-text-12">
-          <p>{{ $t('home.website') }}</p>
+          <p @click="routeLink('https://utlab.io')">{{ $t('home.website') }}</p>
           <p>{{ $t('home.app_mobile') }}</p>
           <p>{{ $t('home.explorer_wallet') }}</p>
-          <p>{{ $t('home.Faucet') }}</p>
+          <p @click="routeLink('https://faucet.utlab.io/')">{{
+            $t('home.faucet')
+          }}</p>
         </div>
       </div>
     </div>
@@ -130,6 +153,7 @@
       margin: 0 16px;
     }
   }
+
   //@media (min-width: 1024px) {
   //  .footer_content {
   //    width: 100%;

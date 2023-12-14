@@ -43,12 +43,14 @@
   });
   const tableData = [
     {
+      id: 1,
       date: '+8.34%',
       name: 'MineFi',
       address: 'No. 189, Grove St, Los Angeles',
       newBlockList: ['baf...azy', 'baf...azy', 'baf...azy'],
     },
     {
+      id: 2,
       date: '+8.34%',
       name: 'MineFi',
       address: 'No. 189, Grove St, Los Angeles',
@@ -61,54 +63,63 @@
       ],
     },
     {
+      id: 3,
       date: '+8.34%',
       name: 'MineFi',
       address: 'No. 189, Grove St, Los Angeles',
       newBlockList: ['baf...azy', 'baf...azy', 'baf...azy'],
     },
     {
+      id: 4,
       date: '+8.34%',
       name: 'MineFi',
       address: 'No. 189, Grove St, Los Angeles',
       newBlockList: ['baf...azy', 'baf...azy', 'baf...azy'],
     },
     {
+      id: 5,
       date: '+8.34%',
       name: 'MineFi',
       address: 'No. 189, Grove St, Los Angeles',
       newBlockList: ['baf...azy', 'baf...azy', 'baf...azy'],
     },
     {
+      id: 6,
       date: '+8.34%',
       name: 'MineFi',
       address: 'No. 189, Grove St, Los Angeles',
       newBlockList: ['baf...azy', 'baf...azy', 'baf...azy'],
     },
     {
+      id: 7,
       date: '+8.34%',
       name: 'MineFi',
       address: 'No. 189, Grove St, Los Angeles',
       newBlockList: ['baf...azy', 'baf...azy', 'baf...azy'],
     },
     {
+      id: 8,
       date: '+8.34%',
       name: 'MineFi',
       address: 'No. 189, Grove St, Los Angeles',
       newBlockList: ['baf...azy', 'baf...azy', 'baf...azy'],
     },
     {
+      id: 9,
       date: '+8.34%',
       name: 'MineFi',
       address: 'No. 189, Grove St, Los Angeles',
       newBlockList: ['baf...azy', 'baf...azy', 'baf...azy'],
     },
     {
+      id: 10,
       date: '+8.34%',
       name: 'MineFi',
       address: 'No. 189, Grove St, Los Angeles',
       newBlockList: ['baf...azy', 'baf...azy', 'baf...azy'],
     },
     {
+      id: 11,
       date: '+8.34%',
       name: 'MineFi',
       address: 'No. 189, Grove St, Los Angeles',
@@ -156,8 +167,9 @@
           fontWeight: '500',
           textAlign: 'center',
           borderBottom: '0.5px solid rgba(140, 233, 220,0.5)',
-          backgroundColor: '#F9F9F8',
+          // backgroundColor: '#F9F9F8',
         }"
+        :highlight-current-row="true"
       >
         <el-table-column prop="name" :label="$t('home.high')">
           <template #default="">

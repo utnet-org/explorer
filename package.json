@@ -22,9 +22,11 @@
     "vue": "^3.3.4",
     "vue-i18n": "^9.8.0",
     "vue-router": "^4.2.5",
-    "web3": "^4.2.2"
+    "web3": "^4.2.2",
+    "nprogress": "^0.2.0"
   },
   "devDependencies": {
+    "@types/nprogress": "^0.2.0",
     "@types/mockjs": "^1.0.10",
     "@types/node": "^18.18.9",
     "@typescript-eslint/eslint-plugin": "^6.13.2",

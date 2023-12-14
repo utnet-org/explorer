@@ -108,7 +108,7 @@ export default {
     Amount: 'Amount',
     status: 'Status',
 
-    rich_list: 'Rich List',
+    chip_list: 'Chip List',
     ranking: 'Ranking',
     account_name: 'Account Name',
     balance: 'Balance',
@@ -156,10 +156,15 @@ export default {
   blockChain: {
     block: 'Block',
     block_information: 'Information',
-    block_rich_list: 'Rich List',
+    block_rich_list: 'Chip List',
     block_order: 'Order',
     block_memory_pool: 'Memory Pool',
     block_contract_verification: 'Contract Verification',
+    chip_model: 'Model',
+    chip_sn_code: 'SN Code',
+    chip_computing_power_type: 'Computing Power Type',
+    chip_computing_power_value: 'Computing Power Value',
+    chip_belonging_to_the_miner: 'Belonging to the Miner',
   },
   contract: {
     contract_UVM_statistics: 'UVM Statistics',

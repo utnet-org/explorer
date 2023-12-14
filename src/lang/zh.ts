@@ -102,7 +102,7 @@ export default {
     Amount: '金额',
     status: '状态',
 
-    rich_list: '富豪榜',
+    chip_list: '芯片列表',
     ranking: '排行',
     account_name: '账户名',
     balance: '余额',
@@ -148,10 +148,15 @@ export default {
   blockChain: {
     block: '区块',
     block_information: '消息',
-    block_rich_list: '富豪榜',
+    block_rich_list: '芯片列表',
     block_order: '订单',
     block_memory_pool: '内存池',
     block_contract_verification: '合约验证',
+    chip_model: '型号',
+    chip_sn_code: 'SN编码',
+    chip_computing_power_type: '算力类型',
+    chip_computing_power_value: '算力值',
+    chip_belonging_to_the_miner: '所属矿工',
   },
   contract: {
     contract_UVM_statistics: 'UVM统计',

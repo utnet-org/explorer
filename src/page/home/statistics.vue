@@ -1268,7 +1268,7 @@
 
     .computing_power_trend {
       height: 380px;
-      width: 90%;
+      width: 100%;
       padding: 0 64px;
     }
 

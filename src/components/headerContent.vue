@@ -137,10 +137,10 @@
             <div>{{ ovData.aveBlockInterval }} {{ $t('home.second') }}</div>
           </div>
         </div>
-        <div class="open_more" @click="goToMore(true)" v-if="!showMore">{{
+        <div class="more" @click="goToMore(true)" v-if="!showMore">{{
           $t('home.see_more')
         }}</div>
-        <div class="open_more" @click="goToMore(false)" v-if="showMore">{{
+        <div class="more" @click="goToMore(false)" v-if="showMore">{{
           $t('home.close')
         }}</div>
       </div>
@@ -380,9 +380,8 @@
 
         .peak_content_section {
           margin: 17.19px 32px 0px;
-          padding: 0 36px;
+          // padding: 0 36px;
           box-sizing: border-box;
-          // height: 207px;
           border-radius: 8px;
           background: #f9f9f8;
           box-shadow:
@@ -459,7 +458,7 @@
           }
 
           .peak_content_section_line {
-            width: 100%;
+            width: calc(100% - 72px);
             height: 0.5px;
             background: #bed2d9;
           }
@@ -468,6 +467,19 @@
             display: flex;
             align-items: center;
             justify-content: center;
+          }
+
+          .more {
+            width: 100%;
+            height: 32px;
+            line-height: 32px;
+            text-align: center;
+            color: #000;
+            font-size: 14px;
+            cursor: pointer;
+            font-weight: 400;
+            border-radius: 0 0 8px 8px;
+            background: rgba(255, 255, 255, 0.8);
           }
         }
       }

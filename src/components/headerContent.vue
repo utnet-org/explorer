@@ -474,7 +474,7 @@
     }
   }
 
-  @media screen and (min-width: 320px) and (max-width: 843px) {
+  @media screen and (min-width: 320px) and (max-width: 1439px) {
     .lowest_content {
       width: 100%;
       height: 100%;

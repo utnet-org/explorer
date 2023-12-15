@@ -1006,7 +1006,7 @@
 <template>
   <div class="user_statistics">
     <HeaderPage :viewport-width="windowWidth" />
-    <div style="height: 306px"></div>
+    <div :style="{ height: windowWidth > 842 ? '306px' : '206px' }"></div>
     <div class="echartAll">
       <div class="computing_power_trend">
         <div class="month_F">
@@ -1203,7 +1203,6 @@
     width: 100%;
     min-height: 100vh;
     position: relative;
-    background: #f2f0ea;
   }
   .echartAll {
     width: 100%;
@@ -1282,7 +1281,7 @@
     }
   }
 
-  @media (max-width: 1024px) {
+  @media (max-width: 1023px) {
     .trend {
       color: #000;
       font-family: PingFang SC;
@@ -1294,6 +1293,7 @@
     }
     .echartAll {
       padding: 0 18px;
+      margin-bottom: 15px;
     }
     .computing_power_trend {
       width: 100%;

@@ -75,7 +75,7 @@
 <template>
   <div class="user_ranking">
     <HeaderPage :viewport-width="size" />
-    <div style="height: 309px"></div>
+    <div :style="{ height: size === Screen.Large ? '306px' : '206px' }"></div>
     <div class="computing_power_service_content">
       <div class="computing_power_service_header">
         <div class="computing_power_service_title"
@@ -205,9 +205,11 @@
               <div class="black-text-14-500">Utility</div>
             </div>
             <div class="eco-item">
-              <div class="grey-text-12-300">{{
-                $t('home.eff_power_ratio')
-              }}</div>
+              <div
+                :style="{ width: size === Screen.Small ? '110px' : '190px' }"
+                class="grey-text-12-300"
+                >{{ $t('home.eff_power_ratio') }}</div
+              >
               <div class="eco-merge-value">
                 <div class="black-text-14-500"
                   >{{ item.effPower }} TFLOPS&nbsp;
@@ -345,7 +347,19 @@
     }
   }
 
-  @media screen and (min-width: 320px) and (max-width: 1023px) {
+  @media screen and (max-width: 1023px) {
+    .black-text-14-500 {
+      font-size: 12px;
+    }
+    .eco-merge-value {
+      display: flex;
+      align-items: center;
+    }
+    .user_ranking {
+      position: relative;
+      z-index: 1;
+      padding-bottom: 0px !important;
+    }
     .computing_power_service_content {
       border-radius: 8px;
       background: #f9f9f8;

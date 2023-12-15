@@ -518,7 +518,7 @@
 <template>
   <div class="statistics">
     <HeaderPage :viewport-width="windowWidth" />
-    <div style="height: 306px"></div>
+    <div :style="{ height: size === Screen.Large ? '306px' : '206px' }"></div>
     <div class="echartAll">
       <div class="computing_power_trend">
         <div class="month_F">
@@ -813,13 +813,12 @@
     width: 100%;
     // min-height: 100vh;
     position: relative;
-    background: #f2f0ea;
     padding-bottom: 67px;
   }
   .echartAll {
     width: 100%;
     position: relative;
-    z-index: 10;
+    z-index: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -866,7 +865,7 @@
     margin-bottom: 60px;
   }
 
-  @media (min-width: 1025px) {
+  @media (min-width: 1024px) {
     .echartAll {
       padding: 0 35px;
     }
@@ -935,7 +934,16 @@
     }
   }
 
-  @media (max-width: 1024px) {
+  @media (max-width: 1023px) {
+    .black-text-14-500 {
+      font-size: 12px;
+    }
+    .statistics {
+      padding-bottom: 0px;
+    }
+    .ecology_table {
+      margin-bottom: 0;
+    }
     .trend {
       color: #000;
       font-family: PingFang SC;
@@ -947,6 +955,7 @@
     }
     .echartAll {
       padding: 0 18px;
+      margin-bottom: 16px;
     }
     .computing_power_trend {
       width: 100%;

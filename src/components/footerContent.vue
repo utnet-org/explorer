@@ -1,4 +1,5 @@
 <script setup lang="ts">
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const routeLink = (url: string) => {
     window.open(url);
   };
@@ -121,7 +122,7 @@
     }
 
     .link-content {
-      width: 65%;
+      // width: 65%;
       max-width: 800px;
       padding: 0 32px 20px 32px;
       display: flex;

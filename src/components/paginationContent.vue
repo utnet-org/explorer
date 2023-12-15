@@ -68,7 +68,7 @@
     justify-content: space-between;
 
     width: 100%;
-    padding: 0 100px;
+    padding: 0 35px;
   }
   .button_arrow {
     display: flex;
@@ -147,7 +147,7 @@
 
   @media (max-width: 1439px) {
     .pag {
-      padding-right: 50px;
+      padding-right: 20px;
     }
     .button_arrow {
       width: 100%;

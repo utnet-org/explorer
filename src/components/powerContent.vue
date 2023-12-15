@@ -2,8 +2,6 @@
   import { onMounted, onUnmounted, reactive, ref } from 'vue';
   import { getPowerRank, PowerRank } from '@/api/power.ts';
   import { getScreenSize, Screen } from '@/utils/screen-size.ts';
-  import { useRouter } from 'vue-router';
-  const router = useRouter();
   // defineProps<{ viewportWidth: number }>()
   const size = getScreenSize().currentScreenSize;
   //表格相关数据及变脸
@@ -210,6 +208,13 @@
   </div>
 </template>
 <style scoped lang="scss">
+  :deep(.el-dropdown-menu__item:not(.is-disabled):focus) {
+    background-color: rgba(25, 157, 167, 0.1);
+    /* 鼠标悬停时的背景颜色 */
+    color: #0facb6;
+    /* 鼠标悬停时的字体颜色 */
+  }
+
   @media screen and (min-width: 1024px) {
     .computing_power_service_content {
       // height: 393px;

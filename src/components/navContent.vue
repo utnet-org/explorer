@@ -429,6 +429,13 @@
   </div>
 </template>
 <style scoped lang="scss">
+  :deep(.el-dropdown-menu__item:not(.is-disabled):focus) {
+    background-color: rgba(25, 157, 167, 0.1);
+    /* 鼠标悬停时的背景颜色 */
+    color: #0facb6;
+    /* 鼠标悬停时的字体颜色 */
+  }
+
   //大屏样式
   @media screen and (min-width: 1024px) {
     .nav_content {

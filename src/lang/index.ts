@@ -10,11 +10,13 @@ import en from 'element-plus/es/locale/lang/en';
 const messages = {
   en: {
     ...en,
+
     ...enLocale,
     // ...elementEnLocale,
   },
   zh: {
     ...zhCn,
+
     ...zhLocale,
     // ...elementZhLocale,
   },

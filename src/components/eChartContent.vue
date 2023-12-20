@@ -35,7 +35,7 @@
             >{{ $t('home.month') }}</el-button
           >
         </div>
-        <div @click="router.push('/statistics')">
+        <div @click="goToMore">
           <el-button
             color="#fff"
             class="custom-button"
@@ -52,7 +52,7 @@
     <div class="rate_trend">
       <div class="month_F">
         <div class="work_m">{{ $t('home.rate_trend') }}</div>
-        <div @click="router.push('/statistics/gas')">
+        <div @click="goToMore1">
           <el-button color="#fff" class="custom-button">{{
             $t('home.see_more')
           }}</el-button>
@@ -75,8 +75,6 @@
   } from 'echarts/components';
   import { LineChart } from 'echarts/charts';
   import { CanvasRenderer } from 'echarts/renderers';
-  import { useRouter } from 'vue-router';
-  const router = useRouter();
   defineProps<{ viewportWidth: number }>();
   echarts.use([
     TitleComponent,
@@ -616,11 +614,21 @@
   onUnmounted(() => {
     window.removeEventListener('resize', resizeChart);
   });
+
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+  const goToMore = () => {
+    // localStorage.setItem('navSelectIndex', '1');
+    window.location.reload();
+    window.location.href = '/statistics';
+  };
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+  const goToMore1 = () => {
+    // localStorage.setItem('navSelectIndex', '1');
+    window.location.reload();
+    window.location.href = '/statistics/gas';
+  };
 </script>
 <style scoped lang="scss">
-  //.my_father {
-  //  margin: 15px 0px;
-  //}
   .custom_buttons:hover {
     background-color: #3edfcf !important;
   }
@@ -710,46 +718,7 @@
       font-size: 16px;
     }
   }
-  // @media (min-width: 834px) and (max-width: 1439px) {
-  //   .trend {
-  //     margin-right: 13px;
-  //   }
-  //   .my_father {
-  //     display: flex;
-  //     flex-direction: column;
-  //     align-items: center;
-  //     margin: 24px 32px;
-  //   }
 
-  //   .chart_one {
-  //     margin: 25px 22px 0px 23px;
-  //   }
-  //   .chart_two {
-  //     margin: 0px 22px 0 19px;
-  //   }
-  //   .computing {
-  //     margin-left: 14px;
-  //     margin-right: 13px;
-  //     width: 100%;
-  //     height: 380px;
-  //     margin-bottom: 16px;
-  //   }
-
-  //   .rate_trend {
-  //     width: 100%;
-  //     height: 380px;
-  //     margin-left: 14px;
-  //     margin-right: 13px;
-  //   }
-  //   .work_m {
-  //     font-size: 14px;
-  //   }
-
-  //   .custom-button {
-  //     font-size: 12px;
-  //     font-weight: 400;
-  //   }
-  // }
   @media (max-width: 1024px) {
     .trend {
       margin-right: 9px;

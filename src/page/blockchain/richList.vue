@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  // 富豪榜
+  // 芯片列表
   import { onMounted, ref } from 'vue';
   import HeaderPage from '../../components/otherHeaderContent.vue';
   // import Mock from 'mockjs';
@@ -21,6 +21,54 @@
     }
   };
   const tableData = [
+    {
+      model: 'BM1684',
+      id: '000000',
+      snCode: '0000000',
+      priKey1: '0x425ad…9972B',
+      priKey2: '0x425ad…9972B',
+      pubKey1: '0x425ad…9972B',
+      pubKey2: '0x425ad…9972B',
+      computingPowerType: 'int8',
+      computingPowerValue: '32.00 TiB',
+      belongingToTheMiner: 'f01923786',
+    },
+    {
+      model: 'BM1684',
+      id: '000000',
+      snCode: '0000000',
+      priKey1: '0x425ad…9972B',
+      priKey2: '0x425ad…9972B',
+      pubKey1: '0x425ad…9972B',
+      pubKey2: '0x425ad…9972B',
+      computingPowerType: 'int8',
+      computingPowerValue: '32.00 TiB',
+      belongingToTheMiner: 'f01923786',
+    },
+    {
+      model: 'BM1684',
+      id: '000000',
+      snCode: '0000000',
+      priKey1: '0x425ad…9972B',
+      priKey2: '0x425ad…9972B',
+      pubKey1: '0x425ad…9972B',
+      pubKey2: '0x425ad…9972B',
+      computingPowerType: 'int8',
+      computingPowerValue: '32.00 TiB',
+      belongingToTheMiner: 'f01923786',
+    },
+    {
+      model: 'BM1684',
+      id: '000000',
+      snCode: '0000000',
+      priKey1: '0x425ad…9972B',
+      priKey2: '0x425ad…9972B',
+      pubKey1: '0x425ad…9972B',
+      pubKey2: '0x425ad…9972B',
+      computingPowerType: 'int8',
+      computingPowerValue: '32.00 TiB',
+      belongingToTheMiner: 'f01923786',
+    },
     {
       model: 'BM1684',
       id: '000000',
@@ -353,16 +401,23 @@
         </div>
       </div>
     </div>
-    <paginationContent
-      :totalItems="totalItems"
-      :pageSize="pageSize"
-      :currentPage="currentPage"
-      :showButton="true"
-      @pageChange="handlePageChange"
-    />
+    <div class="pagin">
+      <paginationContent
+        :total-items="totalItems"
+        :page-size="pageSize"
+        :current-page="currentPage"
+        :show-button="true"
+        @page-change="handlePageChange"
+      />
+    </div>
   </div>
 </template>
 <style scoped lang="scss">
+  .pagin {
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+  }
   :deep(.el-dropdown-menu__item:not(.is-disabled):focus) {
     background-color: rgba(25, 157, 167, 0.1);
     /* 鼠标悬停时的背景颜色 */
@@ -375,7 +430,7 @@
     min-height: 100vh;
     background: #f2f0ea;
     position: relative;
-
+    padding-bottom: 100px;
     .block_list {
       width: calc(100% - 64px);
       // height: 500px;

@@ -1,7 +1,12 @@
 <!-- eslint-disable @typescript-eslint/explicit-function-return-type -->
 <script lang="ts" setup>
+  import { computed, ref, watch } from 'vue';
   import button_arrow from '@/assets/svgs/button_arrow.svg';
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   import { getScreenSize, Screen } from '@/utils/screen-size.ts';
+  import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
+  import en from 'element-plus/dist/locale/en.mjs';
+  import i18n from '@/lang';
   const size = getScreenSize().currentScreenSize;
   // 父组建传入数据
   const props = defineProps({
@@ -35,19 +40,40 @@
     // 使用原生的 window.scrollTo 方法
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  // 从 vue-i18n 实例获取当前语言设置
+  const language = ref(i18n.global.locale);
+  // 根据 language 值决定使用哪个 Element Plus 本地化对象
+  const locale = computed(() => (language.value === 'zh' ? zhCn : en));
+
+  // 当 vue-i18n 的 locale 变化时，更新 language
+  watch(
+    () => i18n.global.locale,
+    newLocale => {
+      language.value = newLocale;
+    },
+  );
+
+  // 当 language 变化时，更新 vue-i18n 的 locale 和 Element Plus 的 locale
+  watch(language, newLanguage => {
+    i18n.global.locale = newLanguage;
+    // 由于 locale 是计算属性，它会自动根据 language 的新值重新计算
+  });
 </script>
 <template>
   <div class="pag">
     <div v-if="size == Screen.Large" class="pagination">
-      <el-pagination
-        layout="prev, pager, next, jumper"
-        :total="props.totalItems"
-        :page-size="props.pageSize"
-        @current-change="handlePageChange"
-        prev-icon="CaretLeft"
-        next-icon="CaretRight"
-      >
-      </el-pagination>
+      <el-config-provider :locale="locale">
+        <el-pagination
+          layout="prev, pager, next, jumper"
+          :total="props.totalItems"
+          :page-size="props.pageSize"
+          prev-icon="CaretLeft"
+          next-icon="CaretRight"
+          @current-change="handlePageChange"
+        >
+        </el-pagination>
+      </el-config-provider>
     </div>
 
     <div v-show="props.showButton" class="button_arrow" @click="scrollToTop">
@@ -57,10 +83,19 @@
 </template>
 
 <style scoped lang="scss">
+  :deep(.pagination .el-pager li) {
+    color: rgba(25, 25, 25, 0.3);
+  }
+
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+  }
+  .pagin {
+    position: absolute;
+    z-index: 10;
+    width: 100%;
   }
 
   .pag {
@@ -106,6 +141,7 @@
       min-width: 24px;
     }
     :deep(li.number) {
+      color: rgba(25, 25, 25, 0.3);
       padding: 0;
       margin: 10px;
       width: 23px;
@@ -115,7 +151,6 @@
     :deep(.btn-prev) {
       width: 40px;
       height: 40px;
-      color: #000;
       .el-icon {
         font-size: 20px;
       }
@@ -125,7 +160,6 @@
     :deep(.btn-next) {
       width: 40px;
       height: 40px;
-      color: #000;
       .el-icon {
         font-size: 20px;
       }
@@ -141,7 +175,7 @@
       height: 17px;
       border-radius: 31px;
       border: 0.5px solid #3edfcf;
-      background: var#fff;
+      background: #fff;
     }
   }
 

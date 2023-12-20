@@ -1,5 +1,4 @@
 <script setup lang="ts">
-  // uvm 统计
   import HeaderPage from '../../components/otherHeaderContent.vue';
   import { onMounted, onUnmounted, ref } from 'vue';
   import * as echarts from 'echarts/core';
@@ -18,6 +17,7 @@
   import { getScreenSize, Screen } from '@/utils/screen-size.ts';
   import paginationContent from '@/components/paginationContent.vue';
 
+  // ! 获取屏幕尺寸
   const windowWidth = ref(document.documentElement.clientWidth);
 
   defineProps<{ viewportWidth: number }>();
@@ -98,7 +98,7 @@
         top: 15,
         bottom: 20,
       },
-      color: ['#04BFDA'],
+      color: ['#04BFDA'], // 线的颜色
       tooltip: {
         trigger: 'axis', // 悬浮在数据点上时显示工具提示
         confine: true, // 将提示框限制在图表的区域内
@@ -324,23 +324,6 @@
     myChart?.setOption(option);
   };
 
-  onMounted(() => {
-    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-    if (chart.value) {
-      // 初始化第一个图表
-      myChart = echarts.init(chart.value);
-      setTimeRange('week'); // 默认显示周数据
-
-      // 监听窗口大小变化，重新绘制图表
-      window.addEventListener('resize', resizeChart);
-    }
-
-    // 监听窗口大小变化
-    window.addEventListener('resize', () => {
-      // 获取到当前窗口的宽度
-      windowWidth.value = document.documentElement.clientWidth;
-    });
-  });
   // ~重新绘制图表
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   function resizeChart() {
@@ -349,11 +332,6 @@
       myChart.resize();
     }
   }
-
-  onUnmounted(() => {
-    // ~移除监听
-    window.removeEventListener('resize', resizeChart);
-  });
 
   // 定义可选的时间类型数组
   const ecologyTimeTypeList = [
@@ -507,17 +485,34 @@
   onMounted(() => {
     // 添加滚动监听
     window.addEventListener('scroll', handleScroll);
+    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+    if (chart.value) {
+      // 初始化第一个图表
+      myChart = echarts.init(chart.value);
+      setTimeRange('week'); // 默认显示周数据
+
+      // 监听窗口大小变化，重新绘制图表
+      window.addEventListener('resize', resizeChart);
+    }
+
+    // 监听窗口大小变化
+    window.addEventListener('resize', () => {
+      // 获取到当前窗口的宽度
+      windowWidth.value = document.documentElement.clientWidth;
+    });
   });
 
   onUnmounted(() => {
     // 移除滚动监听
     window.removeEventListener('scroll', handleScroll);
+    // ~移除监听
+    window.removeEventListener('resize', resizeChart);
   });
 </script>
 
 <template>
   <div class="statistics">
-    <HeaderPage :viewport-width="windowWidth" />
+    <HeaderPage :viewport-width="size" />
     <div :style="{ height: size === Screen.Large ? '306px' : '206px' }"></div>
     <div class="echartAll">
       <div class="computing_power_trend">
@@ -809,9 +804,19 @@
     box-sizing: border-box;
   }
 
+  :deep(.el-table__body-wrapper tbody tr:last-of-type td) {
+    border: none !important;
+  }
+
+  :deep(.el-table--enable-row-hover .el-table__body tr:hover > td) {
+    background-color: rgba(191, 251, 236, 0.3) !important;
+  }
+  :deep(.el-table__inner-wrapper::before) {
+    display: none !important;
+    background-color: transparent !important;
+  }
   .statistics {
     width: 100%;
-    // min-height: 100vh;
     position: relative;
     padding-bottom: 67px;
   }
@@ -833,7 +838,7 @@
     font-weight: 500;
     background-color: #fff;
     color: #191919; /* 默认颜色 */
-    border-color: #fff; /* 如果需要，还可以设置边框颜色 */
+    border-color: #fff;
   }
 
   .computing_power_trend {

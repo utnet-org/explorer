@@ -109,9 +109,109 @@
       gasLimit: '80,234.092',
       gasPremium: '100,400',
     },
+    {
+      memoryPoolId: 'f3wc2vre...7hjss21iq',
+      createTime: '2020-10-21 11:13:30',
+      sender: 'f3wc2vre...7hjss21iq',
+      receiver: 'f10232129',
+      method: 'ProveCommitSector',
+      amount: '0',
+      gasLimit: '80,234.092',
+      gasPremium: '100,400',
+    },
+    {
+      memoryPoolId: 'f3wc2vre...7hjss21iq',
+      createTime: '2020-10-21 11:13:30',
+      sender: 'f3wc2vre...7hjss21iq',
+      receiver: 'f10232129',
+      method: 'ProveCommitSector',
+      amount: '0',
+      gasLimit: '80,234.092',
+      gasPremium: '100,400',
+    },
+    {
+      memoryPoolId: 'f3wc2vre...7hjss21iq',
+      createTime: '2020-10-21 11:13:30',
+      sender: 'f3wc2vre...7hjss21iq',
+      receiver: 'f10232129',
+      method: 'ProveCommitSector',
+      amount: '0',
+      gasLimit: '80,234.092',
+      gasPremium: '100,400',
+    },
+    {
+      memoryPoolId: 'f3wc2vre...7hjss21iq',
+      createTime: '2020-10-21 11:13:30',
+      sender: 'f3wc2vre...7hjss21iq',
+      receiver: 'f10232129',
+      method: 'ProveCommitSector',
+      amount: '0',
+      gasLimit: '80,234.092',
+      gasPremium: '100,400',
+    },
+    {
+      memoryPoolId: 'f3wc2vre...7hjss21iq',
+      createTime: '2020-10-21 11:13:30',
+      sender: 'f3wc2vre...7hjss21iq',
+      receiver: 'f10232129',
+      method: 'ProveCommitSector',
+      amount: '0',
+      gasLimit: '80,234.092',
+      gasPremium: '100,400',
+    },
+    {
+      memoryPoolId: 'f3wc2vre...7hjss21iq',
+      createTime: '2020-10-21 11:13:30',
+      sender: 'f3wc2vre...7hjss21iq',
+      receiver: 'f10232129',
+      method: 'ProveCommitSector',
+      amount: '0',
+      gasLimit: '80,234.092',
+      gasPremium: '100,400',
+    },
+    {
+      memoryPoolId: 'f3wc2vre...7hjss21iq',
+      createTime: '2020-10-21 11:13:30',
+      sender: 'f3wc2vre...7hjss21iq',
+      receiver: 'f10232129',
+      method: 'ProveCommitSector',
+      amount: '0',
+      gasLimit: '80,234.092',
+      gasPremium: '100,400',
+    },
+    {
+      memoryPoolId: 'f3wc2vre...7hjss21iq',
+      createTime: '2020-10-21 11:13:30',
+      sender: 'f3wc2vre...7hjss21iq',
+      receiver: 'f10232129',
+      method: 'ProveCommitSector',
+      amount: '0',
+      gasLimit: '80,234.092',
+      gasPremium: '100,400',
+    },
+    {
+      memoryPoolId: 'f3wc2vre...7hjss21iq',
+      createTime: '2020-10-21 11:13:30',
+      sender: 'f3wc2vre...7hjss21iq',
+      receiver: 'f10232129',
+      method: 'ProveCommitSector',
+      amount: '0',
+      gasLimit: '80,234.092',
+      gasPremium: '100,400',
+    },
+    {
+      memoryPoolId: 'f3wc2vre...7hjss21iq',
+      createTime: '2020-10-21 11:13:30',
+      sender: 'f3wc2vre...7hjss21iq',
+      receiver: 'f10232129',
+      method: 'ProveCommitSector',
+      amount: '0',
+      gasLimit: '80,234.092',
+      gasPremium: '100,400',
+    },
   ];
   const currentPage = ref(1); // 当前页码
-  const pageSize = ref(10); // 每页显示条目数，您想要显示5个
+  const pageSize = ref(20); // 每页显示条目数，您想要显示5个
   const totalItems = ref(tableData.length); // 总条目数，即您数组的长度
   // 处理页码改变
   const handlePageChange = (page: number) => {
@@ -274,22 +374,29 @@
         </div>
       </div>
     </div>
-    <paginationContent
-      :totalItems="totalItems"
-      :pageSize="pageSize"
-      :currentPage="currentPage"
-      :showButton="true"
-      @pageChange="handlePageChange"
-    />
+    <div class="pagin">
+      <paginationContent
+        :total-items="totalItems"
+        :page-size="pageSize"
+        :current-page="currentPage"
+        :show-button="true"
+        @page-change="handlePageChange"
+      />
+    </div>
   </div>
 </template>
 <style scoped lang="scss">
+  .pagin {
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+  }
   .content {
     width: 100%;
     min-height: 100vh;
     background: #f2f0ea;
     position: relative;
-
+    padding-bottom: 100px;
     .block_list {
       width: calc(100% - 64px);
       // height: 500px;

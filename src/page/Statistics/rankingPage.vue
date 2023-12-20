@@ -55,7 +55,7 @@
   });
 
   const currentPage = ref(1); // 当前页码
-  const pageSize = ref(5); // 每页显示条目数
+  const pageSize = ref(2); // 每页显示条目数
   const totalItems = ref(poDatas.length); // 总条目数，即您数组的长度
   // 处理页码改变
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
@@ -191,7 +191,9 @@
           <div v-for="(item, index) in poDatas" :key="index">
             <div class="eco-rank-item">
               <!--          <div class="black-text-14">{{ item.rank }}</div>-->
-              <div class="primary-text-14-500">{{ index + 1 }}</div>
+              <div class="primary-text-14-500" style="color: #000">{{
+                index + 1
+              }}</div>
             </div>
             <div class="eco-item">
               <div class="grey-text-12-300">{{ $t('home.Miner') }}</div>
@@ -257,6 +259,18 @@
   </div>
 </template>
 <style scoped lang="scss">
+  :deep(.el-table__body-wrapper tbody tr:last-of-type td) {
+    border: none !important;
+  }
+
+  :deep(.el-table--enable-row-hover .el-table__body tr:hover > td) {
+    background-color: rgba(191, 251, 236, 0.3) !important;
+  }
+  :deep(.el-table__inner-wrapper::before) {
+    display: none !important;
+    background-color: transparent !important;
+  }
+
   .user_ranking {
     position: relative;
     width: 100%;
@@ -343,6 +357,7 @@
         width: 100%;
         padding: 0 21px;
         box-sizing: border-box;
+        padding-bottom: 30px;
       }
     }
   }

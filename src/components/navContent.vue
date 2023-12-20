@@ -1,5 +1,4 @@
 <script setup lang="ts">
-  // uvm统计
   import { onMounted, ref, watchEffect } from 'vue';
   import { useRouter } from 'vue-router';
   import Wallet from '../wallet/connect.ts';
@@ -56,7 +55,7 @@
       selectList: [
         {
           title: 'contract.contract_UVM_statistics',
-          link: '/contract/uvm',
+          link: '',
         },
         {
           title: 'contract.contract_verified_contract',

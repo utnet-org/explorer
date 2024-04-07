@@ -14,5 +14,10 @@ export interface OverviewInfo {
 }
 
 export function getOverviewInfo() {
+  // return axios.post<OverviewInfo>('/api/mock/overview/info');
   return axios.post<OverviewInfo>('/api/overview/info');
+}
+
+export function getSearchFilter() {
+  return axios.post('/api/search/filter');
 }

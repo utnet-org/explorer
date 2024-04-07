@@ -123,6 +123,7 @@
               .peak_content_top_side_search_btn {
                 width: 40px;
                 height: 40px;
+                cursor: pointer;
               }
             }
 

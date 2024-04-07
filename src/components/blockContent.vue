@@ -1,9 +1,14 @@
 <script setup lang="ts">
   // 最新区块
   import { onMounted, onUnmounted, reactive, ref } from 'vue';
-  import { type BlockInfo, getBlockInfo } from '@/api/block.ts';
+  import {
+    type BlockInfo,
+    getBlockInfo,
+    getLastBlock,
+    LastBlock,
+  } from '@/api/block.ts';
   import Mock from 'mockjs';
-  import { updateTimeAgo } from '@/utils/time.ts';
+  import { getTimeDiffFromTimestamp, updateTimeAgo } from '@/utils/time.ts';
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   import { getScreenSize, Screen } from '@/utils/screen-size.ts';
   import { useRouter } from 'vue-router';
@@ -13,6 +18,7 @@
   let intervalId: number | undefined;
 
   const blockDatas = reactive<BlockInfo[]>([{}]);
+  const lastBlocks = reactive<LastBlock[]>([{}]);
   const heights = ref<number[]>([]);
 
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
@@ -22,6 +28,13 @@
     Object.assign(blockDatas, res.data.data);
   }
 
+  async function fetchLastBlock() {
+    const res = await getLastBlock();
+    console.log('fetchLastBlock');
+    console.log(res.data.data);
+    Object.assign(lastBlocks, res.data.data['last_block_list']);
+  }
+
   onMounted(() => {
     const initialHeight = Mock.Random.integer(3000000, 4000000);
     // 从大到小排列
@@ -29,6 +42,7 @@
       { length: 10 },
       (_, index) => initialHeight - index,
     );
+    fetchLastBlock();
     // 每3秒更新数据
     intervalId = window.setInterval(() => {
       // eslint-disable-next-line @typescript-eslint/no-floating-promises
@@ -65,7 +79,7 @@
     <div v-if="size === Screen.Large">
       <div>
         <el-table
-          :data="blockDatas"
+          :data="lastBlocks"
           table-layout="fixed"
           height="404px"
           :header-cell-style="{
@@ -93,23 +107,13 @@
                 >{{ heights[scope.$index] }}
               </div>
               <div style="color: #6a6a69; font-size: 12px"
-                >{{ updateTimeAgo(scope.row.latest) }}
+                >{{ getTimeDiffFromTimestamp(scope.row.timestamp) }}
               </div>
             </template>
           </el-table-column>
-          <el-table-column :label="$t('home.block_id')">
-            <template #default="scope">
-              <div v-for="(item, index) in scope.row.ids" :key="index"
-                >{{ item }}
-              </div>
-            </template>
+          <el-table-column :label="$t('home.block_id')" prop="hash">
           </el-table-column>
-          <el-table-column :label="$t('home.miner')">
-            <template #default="scope">
-              <div v-for="(item, index) in scope.row.miners" :key="index"
-                >{{ item }}
-              </div>
-            </template>
+          <el-table-column :label="$t('home.miner')" prop="author">
           </el-table-column>
           <el-table-column :label="$t('home.tag')">
             <template #default="scope">

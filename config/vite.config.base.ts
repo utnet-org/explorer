@@ -34,7 +34,19 @@ export default defineConfig({
     https: false, // 是否开启 https
     open: false, // 是否自动在浏览器打开
     cors: true, // 允许跨域  8月更新
-    host: '0.0.0.0',
+    // host: '0.0.0.0',
+    proxy: {
+      '/api/mock': {
+        target: 'http://localhost:5173', // MockJS 服务器地址
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/api\/mock/, ''), // 去掉代理路径中的/api/mock
+      },
+      '/api': {
+        target: 'http://192.168.64.1:1080', // 后端真实数据服务地址
+        changeOrigin: true,
+        // rewrite: path => path.replace(/^\/api/, ''), // 去掉代理路径中的/api
+      },
+    },
   },
   css: {
     preprocessorOptions: {

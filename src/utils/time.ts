@@ -21,3 +21,21 @@ export const updateTimeAgo = (seconds: number) => {
 
   return `${minutes}${m} ${remainingSeconds}${s}`;
 };
+
+export function getTimeDiffFromTimestamp(timestampStr: string): string {
+  debugger;
+  const timestamp = BigInt(timestampStr);
+  const currentTime = BigInt(Date.now());
+  const timeDiff = currentTime - timestamp;
+
+  // 转换为秒
+  const seconds = Math.floor(Number(timeDiff) / 1000);
+
+  if (seconds >= 60) {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${minutes} 分 ${remainingSeconds} 秒前`;
+  } else {
+    return '刚刚';
+  }
+}

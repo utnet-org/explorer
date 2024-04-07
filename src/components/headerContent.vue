@@ -1,5 +1,9 @@
 <script setup lang="ts">
-  import { getOverviewInfo, OverviewInfo } from '@/api/overview.ts';
+  import {
+    getOverviewInfo,
+    getSearchFilter,
+    OverviewInfo,
+  } from '@/api/overview.ts';
   import { onMounted, onUnmounted, reactive, ref } from 'vue';
   import { updateTimeAgo } from '@/utils/time.ts';
   import { getScreenSize, Screen } from '@/utils/screen-size.ts';
@@ -13,6 +17,12 @@
 
   async function fetchOverviewInfo() {
     const response = await getOverviewInfo();
+    Object.assign(ovData, response.data.data);
+    lastTime.value = updateTimeAgo(ovData.latestBlock);
+  }
+
+  async function fetchSearchFilter() {
+    const response = await getSearchFilter();
     Object.assign(ovData, response.data.data);
     lastTime.value = updateTimeAgo(ovData.latestBlock);
   }
@@ -49,6 +59,7 @@
               class="peak_content_top_side_search_btn"
               src="../assets/images/home_search_icon.png"
               alt=""
+              @click=""
             />
           </div>
         </div>
@@ -295,6 +306,7 @@
               .peak_content_top_side_search_btn {
                 width: 40px;
                 height: 40px;
+                cursor: pointer;
               }
             }
           }
@@ -548,6 +560,7 @@
             .peak_content_top_side_search_btn {
               width: 40px;
               height: 40px;
+              cursor: pointer;
             }
           }
         }

@@ -158,6 +158,7 @@ export default {
   },
   blockChain: {
     block: 'Block',
+    transactionList: 'Transaction List',
     block_information: 'Information',
     block_rich_list: 'Chip List',
     block_order: 'Order',

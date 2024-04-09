@@ -63,6 +63,13 @@
     window.location.reload();
     window.location.href = '/blockchain';
   };
+
+   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+   const heightClick = (height: number) => {
+    console.log(height);
+    // 跳转详情
+    router.push('/blockchain/details');
+  };
 </script>
 <template>
   <div
@@ -103,12 +110,14 @@
         >
           <el-table-column prop="height" :label="$t('home.height')">
             <template #default="scope">
-              <div style="color: #0facb6; margin-bottom: 8px; font-size: 14px"
+           <div @click="heightClick(1)" style="cursor: pointer;">
+            <div style="color: #0facb6; margin-bottom: 8px; font-size: 14px"
                 >{{ heights[scope.$index] }}
               </div>
               <div style="color: #6a6a69; font-size: 12px"
                 >{{ getTimeDiffFromTimestamp(scope.row.timestamp) }}
               </div>
+           </div>
             </template>
           </el-table-column>
           <el-table-column :label="$t('home.block_id')" prop="hash">

@@ -150,6 +150,7 @@ export default {
   },
   blockChain: {
     block: '区块',
+    transactionList: '交易列表',
     block_information: '消息',
     block_rich_list: '芯片列表',
     block_order: '订单',

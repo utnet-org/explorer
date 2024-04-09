@@ -7,6 +7,8 @@
   import { updateTimeAgo } from '@/utils/time.ts';
   import { getScreenSize, Screen } from '@/utils/screen-size.ts';
   import paginationContent from '@/components/paginationContent.vue';
+  import { useRouter } from 'vue-router';
+  const router = useRouter();
   // defineProps<{ msg: string }>()
   // const count = ref(0)
   // const windowWidth = ref(document.documentElement.clientWidth);
@@ -37,6 +39,7 @@
   onUnmounted(() => {
     if (intervalId !== undefined) {
       clearInterval(intervalId);
+      
     }
   });
   const tableData = [
@@ -131,6 +134,12 @@
   const handlePageChange = (page: number) => {
     currentPage.value = page;
   };
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+  const heightClick = (height: number) => {
+    console.log(height);
+    // 跳转详情
+    router.push('/blockchain/details');
+  };
 </script>
 <template>
   <div class="content">
@@ -166,12 +175,20 @@
         }"
         :highlight-current-row="true"
       >
-        <el-table-column prop="name" :label="$t('home.high')">
+        <el-table-column 
+        prop="name" 
+        :label="$t('home.high')"       
+           
+        >
           <template #default="">
-            <div style="color: #0facb6; margin-bottom: 8px; font-size: 14px"
+          <div @click="heightClick(1)" style=" cursor: pointer;
+
+          ">
+              <div style="color: #0facb6; margin-bottom: 8px; font-size: 14px"
               >3292964</div
             >
             <div style="color: #6a6a69; font-size: 12px">1分13秒前</div>
+          </div>
           </template>
         </el-table-column>
         <el-table-column :label="$t('home.block_id')">

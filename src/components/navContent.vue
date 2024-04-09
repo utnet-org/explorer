@@ -47,6 +47,10 @@
           title: 'blockChain.block_contract_verification',
           link: '/blockchain/contractVerification',
         },
+        {
+          title: 'blockChain.transactionList',
+          link: '/blockchain/transaction',
+        },
       ],
     },
     {
@@ -796,5 +800,6 @@
     :global(button:focus, button:focus-visible) {
       outline: none;
     }
+    
   }
 </style>

@@ -23,7 +23,6 @@ export const updateTimeAgo = (seconds: number) => {
 };
 
 export function getTimeDiffFromTimestamp(timestampStr: string): string {
-  debugger;
   const timestamp = BigInt(timestampStr);
   const currentTime = BigInt(Date.now());
   const timeDiff = currentTime - timestamp;

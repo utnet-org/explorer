@@ -18,13 +18,13 @@
   async function fetchOverviewInfo() {
     const response = await getOverviewInfo();
     Object.assign(ovData, response.data.data);
-    lastTime.value = updateTimeAgo(ovData.latestBlock);
+    lastTime.value = updateTimeAgo(ovData.latest_block);
   }
 
   async function fetchSearchFilter() {
     const response = await getSearchFilter();
     Object.assign(ovData, response.data.data);
-    lastTime.value = updateTimeAgo(ovData.latestBlock);
+    lastTime.value = updateTimeAgo(ovData.latest_block);
   }
 
   onMounted(() => {
@@ -86,7 +86,7 @@
           <div class="peak_content_section_item_side"></div>
           <div class="peak_content_section_item fourth_item">
             <div>{{ $t('home.miner') }}</div>
-            <div>{{ ovData.activeMiner }}</div>
+            <div>{{ ovData.active_miner }}</div>
           </div>
           <div class="peak_content_section_item_side"></div>
           <div class="peak_content_section_item fifth_item">
@@ -113,7 +113,7 @@
           <div class="peak_content_section_item_side"></div>
           <div class="peak_content_section_item fourth_item">
             <div>{{ $t('home.accounts') }}</div>
-            <div>{{ ovData.totalAccount }}</div>
+            <div>{{ ovData.total_account }}</div>
           </div>
           <div class="peak_content_section_item_side"></div>
           <div class="peak_content_section_item fifth_item">

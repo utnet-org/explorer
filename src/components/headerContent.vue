@@ -5,7 +5,7 @@
     OverviewInfo,
   } from '@/api/overview.ts';
   import { onMounted, onUnmounted, reactive, ref } from 'vue';
-  import { updateTimeAgo } from '@/utils/time.ts';
+  import { compareTimestampNano, updateTimeAgo } from '@/utils/time.ts';
   import { getScreenSize, Screen } from '@/utils/screen-size.ts';
 
   let intervalId: number | undefined;
@@ -18,13 +18,13 @@
   async function fetchOverviewInfo() {
     const response = await getOverviewInfo();
     Object.assign(ovData, response.data.data);
-    lastTime.value = updateTimeAgo(ovData.latest_block);
+    lastTime.value = compareTimestampNano(ovData.latest_block);
   }
 
   async function fetchSearchFilter() {
     const response = await getSearchFilter();
     Object.assign(ovData, response.data.data);
-    lastTime.value = updateTimeAgo(ovData.latest_block);
+    lastTime.value = compareTimestampNano(ovData.latest_block);
   }
 
   onMounted(() => {

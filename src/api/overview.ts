@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export interface OverviewInfo {
   height?: number; //高度
-  latest_block?: string; //最新区块
+  latest_block?: number; //最新区块时间
   totalPower?: number; //全网算力
   active_miner?: number; //活跃矿工
   blockReward?: number; //区块奖励

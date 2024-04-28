@@ -39,7 +39,7 @@ export default {
     minute: 'minute',
     second: 'second',
     minute_abbreviate: 'min',
-    second_abbreviate: 'sec',
+    second_abbreviate: 's',
     ago: 'ago',
     see_more: 'more',
     rate_trend: '24h basic procedure rate trend',

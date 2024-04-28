@@ -38,3 +38,17 @@ export function getTimeDiffFromTimestamp(timestampStr: string): string {
     return '刚刚';
   }
 }
+
+export function compareTimestampNano(timestamp: number): string {
+  const currentTime = Math.floor(Date.now() / 1000); // 当前时间戳（秒）
+  const difference = Math.floor(currentTime - timestamp / 1e9); // 将纳秒转换为秒，并计算时间差
+  const m = i18n.global.t('home.minute_abbreviate');
+  const s = i18n.global.t('home.second_abbreviate');
+  if (difference >= 60) {
+    const minutes = Math.floor(difference / 60);
+    const seconds = difference % 60;
+    return `${minutes}${m} ${seconds}${s}`;
+  } else {
+    return '刚刚';
+  }
+}

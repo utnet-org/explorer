@@ -5,7 +5,7 @@
     OverviewInfo,
   } from '@/api/overview.ts';
   import { onMounted, onUnmounted, reactive, ref } from 'vue';
-  import { compareTimestampNano, updateTimeAgo } from '@/utils/time.ts';
+  import { compareTimestampNano } from '@/utils/time.ts';
   import { getScreenSize, Screen } from '@/utils/screen-size.ts';
 
   let intervalId: number | undefined;
@@ -81,7 +81,7 @@
           <div class="peak_content_section_item_side"></div>
           <div class="peak_content_section_item third_item">
             <div>{{ $t('home.total_power') }}</div>
-            <div>{{ ovData.totalPower }} TFLOPS</div>
+            <div>{{ ovData.total_power }} TFLOPS</div>
           </div>
           <div class="peak_content_section_item_side"></div>
           <div class="peak_content_section_item fourth_item">
@@ -91,14 +91,14 @@
           <div class="peak_content_section_item_side"></div>
           <div class="peak_content_section_item fifth_item">
             <div>{{ $t('home.block_reward') }}</div>
-            <div>{{ ovData.blockReward }} UNC</div>
+            <div>{{ ovData.block_reward }} UNC</div>
           </div>
         </div>
         <div class="peak_content_section_line"></div>
         <div class="peak_content_section_under">
           <div class="peak_content_section_item first_item">
             <div>{{ $t('home.average_revenue') }}</div>
-            <div>{{ ovData.blockReward }} UNC/TFLOPS</div>
+            <div>{{ ovData.day_ave_reward }} UNC/TFLOPS</div>
           </div>
           <div class="peak_content_section_item_side"></div>
           <div class="peak_content_section_item second_item">
@@ -125,7 +125,7 @@
         <div class="peak_content_section_under" v-if="showMore">
           <div class="peak_content_section_item first_item">
             <div>{{ $t('home.average_revenue') }}</div>
-            <div>{{ ovData.blockReward }} UNC/TFLOPS</div>
+            <div>{{ ovData.day_ave_reward }} UNC/TFLOPS</div>
           </div>
           <div class="peak_content_section_item_side"></div>
           <div class="peak_content_section_item second_item">
@@ -140,7 +140,7 @@
           <div class="peak_content_section_item_side"></div>
           <div class="peak_content_section_item fourth_item">
             <div>{{ $t('home.accounts') }}</div>
-            <div>{{ ovData.totalAccount }}</div>
+            <div>{{ ovData.total_account }}</div>
           </div>
           <div class="peak_content_section_item_side"></div>
           <div class="peak_content_section_item fifth_item">
@@ -176,28 +176,28 @@
         <div class="peak_content_section_above">
           <div class="peak_content_section_item">
             <div>{{ $t('home.total_power') }}</div>
-            <div>{{ ovData.totalPower }} TFLOPS</div>
+            <div>{{ ovData.total_power }} TFLOPS</div>
           </div>
         </div>
         <div class="peak_content_section_line"></div>
         <div class="peak_content_section_above">
           <div class="peak_content_section_item">
             <div>{{ $t('home.miner') }}</div>
-            <div>{{ ovData.activeMiner }}</div>
+            <div>{{ ovData.active_miner }}</div>
           </div>
         </div>
         <div class="peak_content_section_line"></div>
         <div class="peak_content_section_above">
           <div class="peak_content_section_item">
             <div>{{ $t('home.block_reward') }}</div>
-            <div>{{ ovData.blockReward }} UNC</div>
+            <div>{{ ovData.block_reward }} UNC</div>
           </div>
         </div>
         <div class="peak_content_section_line"></div>
         <div class="peak_content_section_above">
           <div class="peak_content_section_item first_item">
             <div>{{ $t('home.average_revenue') }}</div>
-            <div>{{ ovData.dayAveReward }} UNC/TFLOPS</div>
+            <div>{{ ovData.day_ave_reward }} UNC/TFLOPS</div>
           </div>
         </div>
         <div class="peak_content_section_line"></div>
@@ -217,7 +217,7 @@
           <div class="peak_content_section_above">
             <div class="peak_content_section_item fourth_item">
               <div>{{ $t('home.accounts') }}</div>
-              <div>{{ ovData.totalAccount }}</div>
+              <div>{{ ovData.total_account }}</div>
             </div>
           </div>
           <div class="peak_content_section_line"></div>

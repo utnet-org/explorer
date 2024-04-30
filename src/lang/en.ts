@@ -23,7 +23,7 @@ export default {
     block_reward: 'Block Reward',
     average_revenue: 'Average revenue of 24h/T',
     day_output: '24h Output',
-    day_message: '24h Messages',
+    day_messages: '24h Messages',
     accounts: 'Accounts',
     average_interval: 'Average Interval',
     price: 'Price',

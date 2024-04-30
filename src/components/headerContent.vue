@@ -107,8 +107,8 @@
           </div>
           <div class="peak_content_section_item_side"></div>
           <div class="peak_content_section_item third_item">
-            <div>{{ $t('home.day_message') }}</div>
-            <div>{{ ovData.dayMessage }}</div>
+            <div>{{ $t('home.day_messages') }}</div>
+            <div>{{ ovData.day_messages }}</div>
           </div>
           <div class="peak_content_section_item_side"></div>
           <div class="peak_content_section_item fourth_item">
@@ -134,8 +134,8 @@
           </div>
           <div class="peak_content_section_item_side"></div>
           <div class="peak_content_section_item third_item">
-            <div>{{ $t('home.day_message') }}</div>
-            <div>{{ ovData.dayMessage }}</div>
+            <div>{{ $t('home.day_messages') }}</div>
+            <div>{{ ovData.day_messages }}</div>
           </div>
           <div class="peak_content_section_item_side"></div>
           <div class="peak_content_section_item fourth_item">
@@ -210,8 +210,8 @@
         <div class="peak_content_section_line"></div>
         <div class="peak_content_section_above">
           <div class="peak_content_section_item third_item">
-            <div>{{ $t('home.day_message') }}</div>
-            <div>{{ ovData.dayMessage }}</div>
+            <div>{{ $t('home.day_messages') }}</div>
+            <div>{{ ovData.day_messages }}</div>
           </div>
           <div class="peak_content_section_line"></div>
           <div class="peak_content_section_above">

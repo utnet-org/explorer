@@ -23,7 +23,7 @@ export default {
     block_reward: '每区块奖励',
     average_revenue: '24h/T算力平均收益',
     day_output: '近24h产出量',
-    day_message: '24h消息数',
+    day_messages: '24h消息数',
     accounts: '总账户数',
     average_interval: '平均区块间隔',
     price: '价格',

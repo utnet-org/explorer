@@ -1,15 +1,13 @@
 <script setup lang="ts">
   // 最新区块
-  import { onMounted, onUnmounted, reactive, ref } from 'vue';
+  import { onMounted, onUnmounted, reactive } from 'vue';
   import {
     type BlockInfo,
     getBlockInfo,
     getLastBlock,
     LastBlock,
   } from '@/api/block.ts';
-  import Mock from 'mockjs';
   import { getTimeDiffFromTimestamp, updateTimeAgo } from '@/utils/time.ts';
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   import { getScreenSize, Screen } from '@/utils/screen-size.ts';
   import { useRouter } from 'vue-router';
   const router = useRouter();
@@ -19,38 +17,23 @@
 
   const blockDatas = reactive<BlockInfo[]>([{}]);
   const lastBlocks = reactive<LastBlock[]>([{}]);
-  const heights = ref<number[]>([]);
 
-  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   async function fetchBlockInfo() {
     const res = await getBlockInfo();
-    // console.log(res.data.data);
     Object.assign(blockDatas, res.data.data);
   }
 
   async function fetchLastBlock() {
     const res = await getLastBlock();
-    console.log('fetchLastBlock');
-    console.log(res.data.data);
-    Object.assign(lastBlocks, res.data.data['last_block_list']);
+    Object.assign(lastBlocks, res.data.data);
   }
 
   onMounted(() => {
-    const initialHeight = Mock.Random.integer(3000000, 4000000);
-    // 从大到小排列
-    heights.value = Array.from(
-      { length: 10 },
-      (_, index) => initialHeight - index,
-    );
-    fetchLastBlock();
-    // 每3秒更新数据
+    // 每5秒更新数据
     intervalId = window.setInterval(() => {
-      // eslint-disable-next-line @typescript-eslint/no-floating-promises
       fetchBlockInfo();
-      // 更新数组：增加每个元素的值
-      heights.value = heights.value.map(h => h + 1);
-      // height.value += 1;
-    }, 3000);
+      fetchLastBlock();
+    }, 5000);
   });
 
   onUnmounted(() => {
@@ -64,11 +47,8 @@
     window.location.href = '/blockchain';
   };
 
-  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const heightClick = (height: number) => {
-    console.log(height);
-    // 跳转详情
-    router.push('/blockchain/details');
+    router.push({ path: '/blockchain/details', query: { height } });
   };
 </script>
 <template>
@@ -110,9 +90,12 @@
         >
           <el-table-column prop="height" :label="$t('home.height')">
             <template #default="scope">
-              <div @click="heightClick(1)" style="cursor: pointer">
+              <div
+                @click="heightClick(scope.row.height)"
+                style="cursor: pointer"
+              >
                 <div style="color: #0facb6; margin-bottom: 8px; font-size: 14px"
-                  >{{ heights[scope.$index] }}
+                  >{{ scope.row.height }}
                 </div>
                 <div style="color: #6a6a69; font-size: 12px"
                   >{{ getTimeDiffFromTimestamp(scope.row.timestamp) }}
@@ -156,7 +139,7 @@
               <div class="grey-text-12-300" style="padding-right: 5px"
                 >{{ $t('home.height') }}
               </div>
-              <div class="second-text-14-500">{{ heights[index] }}</div>
+              <div class="second-text-14-500">{{ index }}</div>
             </div>
             <div class="black-text-14-500"
               >{{ updateTimeAgo(item.latest) }}

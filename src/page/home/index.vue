@@ -27,7 +27,7 @@
     <!-- 可视化视图 -->
     <EChartPage :viewportWidth="windowWidth" />
     <!-- 生态导览 -->
-    <EcologyPage :viewportWidth="windowWidth" />
+    <!--    <EcologyPage :viewportWidth="windowWidth" />-->
     <!-- 算力服务排行榜 -->
     <PowerPage />
     <!-- 最新区块 -->

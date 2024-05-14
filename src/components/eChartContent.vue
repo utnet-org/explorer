@@ -75,6 +75,7 @@
   } from 'echarts/components';
   import { LineChart } from 'echarts/charts';
   import { CanvasRenderer } from 'echarts/renderers';
+  import { PosttChartData, PosttgasData } from '@/api/chart'
   defineProps<{ viewportWidth: number }>();
   echarts.use([
     TitleComponent,
@@ -91,34 +92,11 @@
   let myChart: echarts.ECharts | null | undefined = null;
   const selectedRange = ref('week');
 
-  // 周数据和月数据的示例
-  const weekData = {
-    xAxisData: ['09-20', '09-21', '09-22', '09-23', '09-24', '09-25', '09-26'],
-    seriesData: [12, 20, 15, 8, 7, 11, 13],
-  };
-
-  const monthData = {
-    xAxisData: [
-      '1月',
-      '2月',
-      '3月',
-      '4月',
-      '5月',
-      '6月',
-      '7月',
-      '8月',
-      '9月',
-      '10月',
-      '11月',
-      '12月',
-    ],
-    seriesData: [22, 18, 19, 23, 29, 33, 31, 12, 44, 32, 9, 14],
-  };
-
-  // 切换时间范围并更新图表
   // 函数用于切换数据
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-  const setTimeRange = (range: string) => {
+  const setTimeRange = async (range: string) => {
+  
+   
     selectedRange.value = range;
 
     // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
@@ -127,15 +105,27 @@
     }
 
     myChart = echarts.getInstanceByDom(chart.value);
-    let xAxisData = [];
-    let seriesData = [];
+    const xAxisData = [];
+    const seriesData = [];
 
     if (range === 'week') {
-      xAxisData = weekData.xAxisData;
-      seriesData = weekData.seriesData;
+      const res = await PosttChartData({ days: 7, month: 0 });
+      for (let i = 0; i < res.data.data.length; i++) {
+        xAxisData.push(res.data.data[i].date);
+      }
+      for (let i = 0; i < res.data.data.length; i++) {
+        seriesData.push(res.data.data[i].power);
+      }
+
+      // seriesData = res.data.data.power;
     } else {
-      xAxisData = monthData.xAxisData;
-      seriesData = monthData.seriesData;
+      const res1 = await PosttChartData({ days: 0, month: 12 });
+      for (let i = 0; i < res1.data.data.length; i++) {
+        xAxisData.push(res1.data.data[i].date);
+      }
+      for (let i = 0; i < res1.data.data.length; i++) {
+        seriesData.push(res1.data.data[i].power);
+      }
     }
 
     // 图表配置
@@ -143,7 +133,7 @@
       grid: {
         containLabel: true, // 确保坐标轴的标签完全显示
         left: 0,
-        right: 40,
+        right: 70,
         top: 15,
         bottom: 20,
       },
@@ -164,7 +154,7 @@
           color: '#fff', // 提示框文本颜色
         },
 
-        formatter: function () {
+        formatter: function (value: any) {
           return `
           <div style="
               width: 232px;
@@ -176,19 +166,13 @@
               backdrop-filter: blur(2px);
               border-radius: 8px;">
               <div style="z-index:1000">
-                <div style="color: rgba(25, 25, 25, 0.5);font-size: 10px" ;font-weight: 500>星期四 27/09/2023</div>
-                <div style="display: flex; justify-content: space-between ; margin-top:13px ">
-                   <div style="color: #191919; font-size: 12px">当日算力新增：</div>
-                   <div style="color: #191919; font-size: 12px; font-weight: 600">21,21 TFLOPS</div>
-                </div>
+                <div style="color: rgba(25, 25, 25, 0.5);font-size: 10px" ;font-weight: 500>${value[0].axisValue}</div>
+               
                 <div style="display: flex; justify-content: space-between">
                   <div style="color: #191919; font-size: 12px">全网有效算力：</div>
-                  <div style="color: #191919; font-size: 12px; font-weight: 600">123K TFLOPS</div>
+                  <div style="color: #191919; font-size: 12px; font-weight: 600">${value[0].value} T</div>
                 </div>
-                <div style="display: flex; justify-content: space-between">
-                  <div style="color: #191919; font-size: 12px">当日平均服务收益：</div>
-                  <div style="color: #191919; font-size: 12px; font-weight: 600">0.015 UNC/TFLOPS</div>
-                </div>
+               
                 </div>
           </div>`;
         },
@@ -208,8 +192,8 @@
         },
 
         axisLabel: {
-          align: 'left', // 设置标签左对齐
-          interval: 0,
+          align: 'center', // 设置标签左对齐
+          interval: 0, // 标签间隔为 0，标签全部显示
           fontWeight: 500, // 加粗文字
           fontSize: 12, // 设置 X 轴标签的文字大小
           color: 'rgba(25, 25, 25, 0.5)',
@@ -222,7 +206,7 @@
         splitNumber: 5, // 默认通常是 5
 
         axisLabel: {
-          formatter: '{value}K TFLOPS', // 这里放置你的 Y 轴数据
+          formatter: '{value} T', // 这里放置你的 Y 轴数据
           interval: 0,
           fontWeight: 500, // 加粗文字
           fontSize: 12, // 设置 X 轴标签的文字大小
@@ -248,7 +232,7 @@
           smooth: true, // 平滑的线
           showSymbol: false, // 不显示拐点
           symbol: 'circle', // 拐点的形状
-          symbolSize: 20, // 拐点大小
+          symbolSize: 15, // 拐点大小
           data: seriesData, // 示例数据
           // 区域填充样式
           areaStyle: {
@@ -271,6 +255,13 @@
             minWidth: 808,
           },
           option: {
+            grid: {
+        containLabel: true, // 确保坐标轴的标签完全显示
+        left: 0,
+        right: 40,
+        top: 15,
+        bottom: 20,
+      },
             xAxis: {
               axisLabel: {
                 fontSize: 12, // 设置 X 轴标签的文字大小
@@ -291,8 +282,15 @@
             minWidth: 393,
           },
           option: {
+            grid: {
+        containLabel: true, // 确保坐标轴的标签完全显示
+        left: 0,
+        right: 40,
+        top: 15,
+        bottom: 20,
+      },
             tooltip: {
-              formatter: function () {
+              formatter: function (value: any) {
                 return `
           
   <div
@@ -312,27 +310,16 @@
       <div
         style="color: rgba(25, 25, 25, 0.5); font-size: 10px; font-weight: 500"
       >
-        星期四 27/09/2023
+        ${value[0].axisValue}
       </div>
-      <div
-        style="display: flex; justify-content: space-between; margin-top: 13px"
-      >
-        <div style="color: #191919; font-size: 12px">当日算力新增：</div>
-        <div style="color: #191919; font-size: 12px; font-weight: 600">
-          21,21 TFLOPS
-        </div>
-      </div>
+      
       <div style="display: flex; justify-content: space-between">
         <div style="color: #191919; font-size: 12px">全网有效算力：</div>
         <div style="color: #191919; font-size: 12px; font-weight: 600">
-          123K TFLOPS
+          ${value[0].value} T
         </div>
       </div>
-      <div style="display: flex; justify-content: space-between">
-        <div style="color: #191919; font-size: 12px">当日平均服务收益：</div>
-        <div style="color: #191919; font-size: 12px; font-weight: 600">
-          0.015 UNC/TFLOPS
-        </div>
+     
       </div>
     </div>
  
@@ -379,7 +366,7 @@
               },
             },
             tooltip: {
-              formatter: function () {
+              formatter: function (value: any) {
                 return `
           <div style="
               width: 199px;
@@ -392,19 +379,13 @@
               backdrop-filter: blur(2px);
               border-radius: 8px;">
   
-              <div style="color: rgba(25, 25, 25, 0.5); font-size:8px ;font-weight: 500">星期四 27/09/2023</div>
-                <div style="display: flex; justify-content: space-between">
-                   <div style="color: #191919; font-size: 10px">当日算力新增：</div>
-                   <div style="color: #191919; font-size: 10px; font-weight: 600">21,21 TFLOPS</div>
-                </div>
+              <div style="color: rgba(25, 25, 25, 0.5); font-size:8px ;font-weight: 500">${value[0].axisValue}</div>
+                
                 <div style="display: flex; justify-content: space-between">
                   <div style="color: #191919; font-size: 10px">全网有效算力：</div>
-                  <div style="color: #191919; font-size: 10px; font-weight: 600">123K TFLOPS</div>
+                  <div style="color: #191919; font-size: 10px; font-weight: 600">${value[0].value} T</div>
                 </div>
-                <div style="display: flex; justify-content: space-between">
-                  <div style="color: #191919; font-size: 10px">当日平均服务收益：</div>
-                  <div style="color: #191919; font-size: 10px; font-weight: 600">0.015 UNC/TFLOPS</div>
-                </div>
+               
               <div style=""></div>
           </div>`;
               },
@@ -424,12 +405,19 @@
   };
   const basic = ref(null);
   let myChart1: echarts.ECharts | null | undefined = null;
-  const timeData = {
-    xAxisData: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00', '24:00'],
-    seriesData: [0.1, 0.2, 0.15, 0.3, 0.25, 0.35, 0.3],
-  };
+
+  const timeData: unknown[] = [];
+  const timeDate: unknown[] = [];
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-  const procedureRateTrend = () => {
+  const procedureRateTrend = async () => {
+    const res = await PosttgasData();
+    for (let i = 0; i < res.data.data.length; i++) {
+      timeDate.push(res.data.data[i].date);
+    }
+    for (let i = 0; i < res.data.data.length; i++) {
+      timeData.push(res.data.data[i].gas);
+    }
+
     // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     if (!basic.value) {
       return;
@@ -440,7 +428,7 @@
     const option = {
       grid: {
         containLabel: true, // 确保坐标轴的标签完全显示
-        left: -30,
+        left: 0,
         right: 35,
         top: 20,
         bottom: 20,
@@ -457,7 +445,7 @@
       xAxis: {
         type: 'category', // X轴为类别类型
         boundaryGap: false, // 数据点会在边缘开始
-        data: timeData.xAxisData, // 这里放置你的 X 轴数据
+        data: timeDate, // 这里放置你的 X 轴数据
         axisLine: {
           show: false, // 不显示轴线
           onZero: true, // X 轴的线会与 Y 轴的 0 刻度线对齐
@@ -490,7 +478,7 @@
           margin: 60, // 调整标签距离Y轴的距离: -10,
           formatter: function (value: number) {
             // 使用 '\n' 换行符来创建两行文本
-            return value + '\nnanoUNC';
+            return value + 'UNC';
           },
         },
         axisLine: {
@@ -519,8 +507,9 @@
             fontSize: 12, // 设置 X 轴标签的文字大小
             color: '#0FACB6',
             position: 'top',
-            formatter: function () {
-              return '0.142 nanoUNC';
+            formatter: function (value: { value: string; }) {
+              // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+              return value.value + 'UNC';
             },
           },
           type: 'line', // 系列类型是折线图
@@ -532,7 +521,7 @@
           showSymbol: false, // 不显示拐点
           symbol: 'circle', // 拐点的形状
           symbolSize: 10, // 拐点大小
-          data: timeData.seriesData, // 示例数据
+          data: timeData, // 示例数据
           // 区域填充样式
           areaStyle: {
             color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
@@ -587,11 +576,11 @@
     myChart1?.setOption(option);
   };
 
-  onMounted(() => {
+  onMounted( () => {
     // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     if (chart.value) {
       myChart = echarts.init(chart.value);
-      setTimeRange('week'); // 默认显示周数据
+       void setTimeRange('week'); // 默认显示周数据
       window.addEventListener('resize', resizeChart);
     }
     // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
@@ -600,7 +589,9 @@
       procedureRateTrend();
       window.addEventListener('resize', resizeChart);
     }
-  });
+   
+    
+    });
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   function resizeChart() {
     if (myChart != null) {
@@ -719,7 +710,7 @@
     }
   }
 
-  @media (max-width: 1024px) {
+  @media (max-width: 1144px) {
     .trend {
       margin-right: 9px;
     }

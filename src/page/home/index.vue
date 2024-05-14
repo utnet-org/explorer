@@ -29,7 +29,7 @@
     <!-- 生态导览 -->
     <!--    <EcologyPage :viewportWidth="windowWidth" />-->
     <!-- 算力服务排行榜 -->
-    <PowerPage />
+    <!--    <PowerPage />-->
     <!-- 最新区块 -->
     <BlockPage fromPage="home" />
   </div>

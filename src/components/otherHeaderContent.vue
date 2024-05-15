@@ -1,7 +1,30 @@
 <script setup lang="ts">
-  // import { ref } from 'vue';
-  // defineProps<{ viewportWidth: number }>()
+import { ApiMetworkValidator } from '@/api/chart';
+import router from '@/route/route';
+import { ref } from 'vue';
+
+const searchMessage = ref('');
   // const count = ref(0)
+  const inputChange = async () => {
+    const height = searchMessage.value.trim();
+    console.log('searchMessage.value',searchMessage.value);
+    if (searchMessage.value.trim() !== '') {
+      console.log('search', searchMessage.value.trim());
+      // const res = await getBlockDetails({ query_word: height, query_type: 1 });
+      const res = await ApiMetworkValidator({ account_id: height });
+      console.log('res',res);
+
+      if (res.data.code !== -1) {
+        void router.push({
+          path: '/blockChain/mine',
+          query: { query_word: height },
+        });
+      } else {
+        console.log('res.data.message', res.data.data.message);
+      }
+    }
+  };
+
 </script>
 <template>
   <div class="header_content">
@@ -22,11 +45,13 @@
                   name=""
                   id=""
                   :placeholder="$t('home.search')"
+                  v-model="searchMessage"
                 />
                 <img
                   class="peak_content_top_side_search_btn"
                   src="../assets/images/home_search_icon.png"
                   alt=""
+                  @click="inputChange()"
                 />
               </div>
               <!-- <div class="search_history">

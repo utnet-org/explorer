@@ -25,3 +25,12 @@ export function ApiMetworkValidators() {
     });
 
 }
+export function ApiMetworkValidator(data: any) {
+    // return request.get("/chart/data", { params });
+    return request({
+        url: "/api/network/validator",
+        method: "post",
+        data
+    });
+
+}

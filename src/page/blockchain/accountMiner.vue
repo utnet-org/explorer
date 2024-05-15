@@ -6,188 +6,30 @@
   import { getScreenSize, Screen } from '@/utils/screen-size.ts';
   import { Search } from '@element-plus/icons-vue';
   import paginationContent from '@/components/paginationContent.vue';
+import { BlockDetailsId } from '@/api/block';
+import { ApiMetworkValidators } from '@/api/chart';
+import router from '@/route/route';
   // defineProps<{ msg: string }>()
   const size = getScreenSize().currentScreenSize;
   const searchMessage = ref('');
-  onMounted(() => {});
-  const tableData = [
-    {
-      messageId: 'baf...azy',
-      blockHeight: '3292964',
-      time: '1分13秒前',
-      sender: 'f3wc2vre...7hjss21iq',
-      receiver: 'f10923786',
-      method: 'SubmitWindowedPoSt',
-      amount: '0',
-      status: 'OK',
-    },
-    {
-      messageId: 'baf...azy',
-      blockHeight: '3292964',
-      time: '1分13秒前',
-      sender: 'f3wc2vre...7hjss21iq',
-      receiver: 'f10923786',
-      method: 'SubmitWindowedPoSt',
-      amount: '0',
-      status: 'OK',
-    },
-    {
-      messageId: 'baf...azy',
-      blockHeight: '3292964',
-      time: '1分13秒前',
-      sender: 'f3wc2vre...7hjss21iq',
-      receiver: 'f10923786',
-      method: 'SubmitWindowedPoSt',
-      amount: '0',
-      status: 'OK',
-    },
-    {
-      messageId: 'baf...azy',
-      blockHeight: '3292964',
-      time: '1分13秒前',
-      sender: 'f3wc2vre...7hjss21iq',
-      receiver: 'f10923786',
-      method: 'SubmitWindowedPoSt',
-      amount: '0',
-      status: 'OK',
-    },
-    {
-      messageId: 'baf...azy',
-      blockHeight: '3292964',
-      time: '1分13秒前',
-      sender: 'f3wc2vre...7hjss21iq',
-      receiver: 'f10923786',
-      method: 'SubmitWindowedPoSt',
-      amount: '0',
-      status: 'OK',
-    },
-    {
-      messageId: 'baf...azy',
-      blockHeight: '3292964',
-      time: '1分13秒前',
-      sender: 'f3wc2vre...7hjss21iq',
-      receiver: 'f10923786',
-      method: 'SubmitWindowedPoSt',
-      amount: '0',
-      status: 'OK',
-    },
-    {
-      messageId: 'baf...azy',
-      blockHeight: '3292964',
-      time: '1分13秒前',
-      sender: 'f3wc2vre...7hjss21iq',
-      receiver: 'f10923786',
-      method: 'SubmitWindowedPoSt',
-      amount: '0',
-      status: 'OK',
-    },
-    {
-      messageId: 'baf...azy',
-      blockHeight: '3292964',
-      time: '1分13秒前',
-      sender: 'f3wc2vre...7hjss21iq',
-      receiver: 'f10923786',
-      method: 'SubmitWindowedPoSt',
-      amount: '0',
-      status: 'OK',
-    },
-    {
-      messageId: 'baf...azy',
-      blockHeight: '3292964',
-      time: '1分13秒前',
-      sender: 'f3wc2vre...7hjss21iq',
-      receiver: 'f10923786',
-      method: 'SubmitWindowedPoSt',
-      amount: '0',
-      status: 'OK',
-    },
-    {
-      messageId: 'baf...azy',
-      blockHeight: '3292964',
-      time: '1分13秒前',
-      sender: 'f3wc2vre...7hjss21iq',
-      receiver: 'f10923786',
-      method: 'SubmitWindowedPoSt',
-      amount: '0',
-      status: 'OK',
-    },
-    {
-      messageId: 'baf...azy',
-      blockHeight: '3292964',
-      time: '1分13秒前',
-      sender: 'f3wc2vre...7hjss21iq',
-      receiver: 'f10923786',
-      method: 'SubmitWindowedPoSt',
-      amount: '0',
-      status: 'OK',
-    },
-    {
-      messageId: 'baf...azy',
-      blockHeight: '3292964',
-      time: '1分13秒前',
-      sender: 'f3wc2vre...7hjss21iq',
-      receiver: 'f10923786',
-      method: 'SubmitWindowedPoSt',
-      amount: '0',
-      status: 'OK',
-    },
-    {
-      messageId: 'baf...azy',
-      blockHeight: '3292964',
-      time: '1分13秒前',
-      sender: 'f3wc2vre...7hjss21iq',
-      receiver: 'f10923786',
-      method: 'SubmitWindowedPoSt',
-      amount: '0',
-      status: 'OK',
-    },
-    {
-      messageId: 'baf...azy',
-      blockHeight: '3292964',
-      time: '1分13秒前',
-      sender: 'f3wc2vre...7hjss21iq',
-      receiver: 'f10923786',
-      method: 'SubmitWindowedPoSt',
-      amount: '0',
-      status: 'OK',
-    },
-    {
-      messageId: 'baf...azy',
-      blockHeight: '3292964',
-      time: '1分13秒前',
-      sender: 'f3wc2vre...7hjss21iq',
-      receiver: 'f10923786',
-      method: 'SubmitWindowedPoSt',
-      amount: '0',
-      status: 'OK',
-    },
-    {
-      messageId: 'baf...azy',
-      blockHeight: '3292964',
-      time: '1分13秒前',
-      sender: 'f3wc2vre...7hjss21iq',
-      receiver: 'f10923786',
-      method: 'SubmitWindowedPoSt',
-      amount: '0',
-      status: 'OK',
-    },
-    {
-      messageId: 'baf...azy',
-      blockHeight: '3292964',
-      time: '1分13秒前',
-      sender: 'f3wc2vre...7hjss21iq',
-      receiver: 'f10923786',
-      method: 'SubmitWindowedPoSt',
-      amount: '0',
-      status: 'OK',
-    },
-  ];
+  onMounted(async () => {
+    const res = await ApiMetworkValidators();
+    tableData.value = res.data.data.current_validators;
+    totalItems.value = tableData.value.length;
+    console.log(res.data.data);
+  });
+  const tableData = ref<BlockDetailsId[]>([]);
   const currentPage = ref(1); // 当前页码
   const pageSize = ref(20); // 每页显示条目数，您想要显示5个
-  const totalItems = ref(tableData.length); // 总条目数，即您数组的长度
+  const totalItems = ref(tableData.value.length); // 总条目数，即您数组的长度
   // 处理页码改变
   const handlePageChange = (page: number) => {
     currentPage.value = page;
+  };
+
+  const handleClick = (account_id: string) => {
+    console.log(account_id);
+    router.push({ path: '/blockChain/mine', query: { query_word: account_id}, });
   };
 </script>
 <template>
@@ -202,7 +44,7 @@
           <div class="block_list_header_title">{{
             $t('home.Miner')
           }}</div>
-          <div class="block_list_header_text">共 1141606363 条消息</div>
+          <div class="block_list_header_text">共 {{ totalItems }} 条消息</div>
         </div>
         <el-input
           v-if="size === Screen.Large"
@@ -248,37 +90,42 @@
         :highlight-current-row="true"
       >
         <el-table-column
-          prop="messageId"
-          :label="$t('home.message_id')"
-        ></el-table-column>
-        <el-table-column :label="$t('home.height')">
+          prop="account_id"
+          :label="$t('blockChain.Account_ID')"
+        >  <template #default="scope">
+            <div style="cursor: pointer;" @click="handleClick(scope.row.account_id)">{{ scope.row.account_id }}</div>
+          </template></el-table-column>
+        <el-table-column :label="$t('blockChain.whether_to_punish')">
           <template #default="scope">
-            <div style="color: #0facb6">{{ scope.row.blockHeight }}</div>
+            <div>{{ scope.row.is_slashed }}</div>
           </template>
         </el-table-column>
-        <el-table-column prop="time" :label="$t('home.time')"></el-table-column>
+        <el-table-column prop="num_expected_blocks" :label="$t('blockChain.Expected_Block')"></el-table-column>
         <el-table-column
-          prop="sender"
-          :label="$t('home.sender')"
+          prop="num_expected_chunks"
+          :label="$t('blockChain.Expected_Chunk')"
         ></el-table-column>
         <el-table-column
-          prop="receiver"
-          :label="$t('home.receiver')"
+          prop="num_produced_blocks"
+          :label="$t('blockChain.Output_Block')"
         ></el-table-column>
-        <el-table-column :label="$t('home.method')">
+        <el-table-column :label="$t('blockChain.Output_Chunk')">
           <template #default="scope">
-            <div style="color: #0facb6">{{ scope.row.method }}</div>
+            <div>{{ scope.row.num_produced_chunks }}</div>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('home.Amount')">
+        <el-table-column :label="$t('blockChain.Pledge_amount')">
           <template #default="scope">
-            <span>{{ scope.row.amount }}</span>
-            <span>UNC</span>
+            <span>{{ scope.row.pledge }}</span>
           </template>
         </el-table-column>
         <el-table-column
-          prop="status"
-          :label="$t('home.status')"
+          prop="power"
+          :label="$t('blockChain.Computing_power')"
+        ></el-table-column>
+        <el-table-column
+          prop="public_key"
+          :label="$t('blockChain.public_key')"
         ></el-table-column>
       </el-table>
       <div v-else style="padding-bottom: 20px">

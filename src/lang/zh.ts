@@ -164,10 +164,12 @@ export default {
     Account_ID: '账户 ID',
     whether_to_punish: '是否惩罚',
     Expected_Block: '预计 Block',
-    Expected_Chunk: '预计Chunk',
+    Expected_Chunk: '预计 Chunk',
     Output_Block: '产出 Block',
-
-
+    Output_Chunk: '产出 Chunk',
+    Pledge_amount: '质押量',
+    Computing_power: '算力',
+    public_key: '公钥',
   },
   contract: {
     contract_UVM_statistics: 'UVM统计',

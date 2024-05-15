@@ -47,7 +47,6 @@ export interface BlockDetailsId {
   power?: string; // 算力
   public_key?: string; // 公钥
 }
-
 export interface BlockDetailsReq {
   query_type?: number; // 1 block height 2 block hash
   query_word?: string;

@@ -30,10 +30,11 @@ import { getBlockDetails } from '@/api/block';
   }
 
   onMounted(() => {
+    fetchOverviewInfo();
     intervalId = window.setInterval(() => {
       fetchOverviewInfo();
       // timeDifference();
-    }, 10000);
+    }, 5000);
   });
 
   onUnmounted(() => {

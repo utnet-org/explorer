@@ -27,6 +27,8 @@ export interface BlockDetails {
   chunk_hash?: string; // chunkHash
   timestamp?: number; // 时间
   timestamp_nanosec?: string; // 时间
+  transactions?: number; // 交易
+  receipts?: number; // 回执
   author?: string; // 矿工
   gas_used?: number; // Gas价格
   gas_price?: number; // Gas价格

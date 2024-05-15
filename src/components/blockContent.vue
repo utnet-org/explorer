@@ -29,11 +29,10 @@
   }
 
   onMounted(() => {
-    // 每5秒更新数据
     intervalId = window.setInterval(() => {
-      fetchBlockInfo();
+      // fetchBlockInfo();
       fetchLastBlock();
-    }, 5000);
+    }, 10000);
   });
 
   onUnmounted(() => {

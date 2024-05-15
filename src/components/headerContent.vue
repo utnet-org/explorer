@@ -28,11 +28,10 @@
   }
 
   onMounted(() => {
-    // 每3秒更新数据
     intervalId = window.setInterval(() => {
       fetchOverviewInfo();
       // timeDifference();
-    }, 3000);
+    }, 10000);
   });
 
   onUnmounted(() => {

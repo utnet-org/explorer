@@ -55,7 +55,10 @@
         <div class="card_data">
           <div class="card_title">交易</div>
           <div class="content_father">
-            <div class="card_content">NaN</div>
+            <div class="card_content"
+              >{{ blockDetails.transactions }} 交易 和
+              {{ blockDetails.receipts }} 回执</div
+            >
           </div>
         </div>
         <div class="card_data">

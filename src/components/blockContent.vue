@@ -29,10 +29,11 @@
   }
 
   onMounted(() => {
+    fetchLastBlock();
     intervalId = window.setInterval(() => {
       // fetchBlockInfo();
       fetchLastBlock();
-    }, 10000);
+    }, 5000);
   });
 
   onUnmounted(() => {

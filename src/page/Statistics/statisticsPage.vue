@@ -13,6 +13,7 @@
   } from 'echarts/components';
   import { LineChart } from 'echarts/charts';
   import { CanvasRenderer } from 'echarts/renderers';
+import { PosttChartData } from '@/api/chart';
 
   const windowWidth = ref(document.documentElement.clientWidth);
 
@@ -43,34 +44,6 @@
   const selectedRange2 = ref('week');
 
   // ^全网算力走势 周数据和月数据的示例
-  const weekData = {
-    xAxisData: ['09-20', '09-21', '09-22', '09-23', '09-24', '09-25', '09-26'],
-    seriesData: [
-      [12, 20, 15, 8, 27, 11, 13],
-      [22, 18, 19, 23, 11, 33, 11],
-    ],
-  };
-
-  const monthData = {
-    xAxisData: [
-      '1月',
-      '2月',
-      '3月',
-      '4月',
-      '5月',
-      '6月',
-      '7月',
-      '8月',
-      '9月',
-      '10月',
-      '11月',
-      '12月',
-    ],
-    seriesData: [
-      [22, 18, 19, 23, 29, 33, 31, 12, 44, 32, 9, 14],
-      [12, 20, 15, 8, 27, 11, 13, 21, 44, 12, 29, 18],
-    ],
-  };
   // ~ 头部矿工算力增量走势
   const weekData1 = {
     xAxisData: ['09-20', '09-21', '09-22', '09-23', '09-24', '09-25', '09-26'],
@@ -127,7 +100,7 @@
   // ^切换时间范围并更新图表
   // ^函数用于切换数据
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-  const setTimeRange = (range: string) => {
+  const setTimeRange = async (range: string) => {
     // ^更新时间范围(week/month)
     selectedRange.value = range;
     // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
@@ -138,16 +111,28 @@
     // ^获取图表实例
     myChart = echarts.getInstanceByDom(chart.value);
     // ^x轴数据和系列数据
-    let xAxisData = [];
-    let seriesData = [];
+    const xAxisData = [];
+    const seriesData = [];
 
     // ^根据时间范围选择数据
     if (range === 'week') {
-      xAxisData = weekData.xAxisData;
-      seriesData = weekData.seriesData;
+      const res = await PosttChartData({ days: 7, month: 0 });
+      for (let i = 0; i < res.data.data.length; i++) {
+        xAxisData.push(res.data.data[i].date);
+      }
+      for (let i = 0; i < res.data.data.length; i++) {
+        seriesData.push(res.data.data[i].power);
+      }
+
+      // seriesData = res.data.data.power;
     } else {
-      xAxisData = monthData.xAxisData;
-      seriesData = monthData.seriesData;
+      const res1 = await PosttChartData({ days: 0, month: 12 });
+      for (let i = 0; i < res1.data.data.length; i++) {
+        xAxisData.push(res1.data.data[i].date);
+      }
+      for (let i = 0; i < res1.data.data.length; i++) {
+        seriesData.push(res1.data.data[i].power);
+      }
     }
 
     // 图表配置
@@ -155,7 +140,7 @@
       grid: {
         containLabel: true, // 确保坐标轴的标签完全显示
         left: 0,
-        right: 40,
+        right: 90,
         top: 15,
         bottom: 20,
       },
@@ -182,33 +167,28 @@
           color: '#fff', // 提示框文本颜色
         },
 
-        formatter: function () {
+     
+        formatter: function (value: any) {
           return `
-            <div style="
-                width: 232px;
-                height: 98px;
-                padding: 11px;
-                overflow: hidden;
-                border : 1px solid #3EDFCF;
-                background-color:rgba(217, 217, 217, 0.7);
-                backdrop-filter: blur(2px);
-                border-radius: 8px;">
-                <div style="z-index:1000">
-                  <div style="color: rgba(25, 25, 25, 0.5);font-size: 10px" ;font-weight: 500>星期四 27/09/2023</div>
-                  <div style="display: flex; justify-content: space-between ; margin-top:13px ">
-                     <div style="color: #191919; font-size: 12px">当日算力新增：</div>
-                     <div style="color: #191919; font-size: 12px; font-weight: 600">21,21 TFLOPS</div>
-                  </div>
-                  <div style="display: flex; justify-content: space-between">
-                    <div style="color: #191919; font-size: 12px">全网有效算力：</div>
-                    <div style="color: #191919; font-size: 12px; font-weight: 600">123K TFLOPS</div>
-                  </div>
-                  <div style="display: flex; justify-content: space-between">
-                    <div style="color: #191919; font-size: 12px">当日平均服务收益：</div>
-                    <div style="color: #191919; font-size: 12px; font-weight: 600">0.015 UNC/TFLOPS</div>
-                  </div>
-                  </div>
-            </div>`;
+          <div style="
+              width: 232px;
+              height: 98px;
+              padding: 11px;
+              overflow: hidden;
+              border : 1px solid #3EDFCF;
+              background-color:rgba(217, 217, 217, 0.7);
+              backdrop-filter: blur(2px);
+              border-radius: 8px;">
+              <div style="z-index:1000">
+                <div style="color: rgba(25, 25, 25, 0.5);font-size: 10px" ;font-weight: 500>${value[0].axisValue}</div>
+               
+                <div style="display: flex; justify-content: space-between">
+                  <div style="color: #191919; font-size: 12px">全网有效算力：</div>
+                  <div style="color: #191919; font-size: 12px; font-weight: 600">${value[0].value} T</div>
+                </div>
+               
+                </div>
+          </div>`;
         },
       },
       xAxis: {
@@ -238,7 +218,7 @@
         splitNumber: 3, // 默认通常是 5
         axisLabel: {
           margin: 50,
-          formatter: '{value}K TFLOPS', // 这里放置你的 Y 轴数据
+          formatter: '{value} T', // 这里放置你的 Y 轴数据
           interval: 0,
           fontWeight: 500, // 加粗文字
           fontSize: 12, // 设置 X 轴标签的文字大小
@@ -265,35 +245,7 @@
           showSymbol: false, // 不显示拐点
           symbol: 'circle', // 拐点的形状
           symbolSize: -1, // 拐点大小
-          data: seriesData[0], // 示例数据
-          // 区域填充样式
-          areaStyle: {
-            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-              {
-                offset: 0,
-                color: 'rgba(10, 225, 239, 0.4)',
-              },
-              {
-                offset: 1,
-                color: 'rgba(4, 191, 218, 0)',
-              },
-            ]),
-          },
-        },
-        {
-          lineStyle: {
-            width: 2, // 线的宽度
-            color: 'rgba(25, 25, 25, 0.3)',
-          },
-          itemStyle: {
-            color: '#3EDFCF',
-          },
-          type: 'line', // 系列类型是折线图
-          smooth: true, // 平滑的线
-          showSymbol: false, // 不显示拐点
-          symbol: 'circle', // 拐点的形状
-          symbolSize: -1, // 拐点大小
-          data: seriesData[1], // 示例数据
+          data: seriesData, // 示例数据
           // 区域填充样式
           areaStyle: {
             color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
@@ -344,34 +296,42 @@
               axisPointer: {
                 type: 'none', // 显示一条竖线作为指示器
               },
-              formatter: function () {
+              formatter: function (value: any) {
                 return `
-            <div style="
-                width: 199px;
-                height: 96px;
-                overflow: hidden;
-                padding-left: 11px;
-                padding-right: 11px;
-                border : 1px solid #3EDFCF;
-              background-color:rgba(217, 217, 217, 0.7);
-                backdrop-filter: blur(2px);
-                border-radius: 8px;">
-
-                <div style="color: rgba(25, 25, 25, 0.5); font-size:8px ;font-weight: 500">星期四 27/09/2023</div>
-                  <div style="display: flex; justify-content: space-between">
-                     <div style="color: #191919; font-size: 10px">当日算力新增：</div>
-                     <div style="color: #191919; font-size: 10px; font-weight: 600">21,21 TFLOPS</div>
-                  </div>
-                  <div style="display: flex; justify-content: space-between">
-                    <div style="color: #191919; font-size: 10px">全网有效算力：</div>
-                    <div style="color: #191919; font-size: 10px; font-weight: 600">123K TFLOPS</div>
-                  </div>
-                  <div style="display: flex; justify-content: space-between">
-                    <div style="color: #191919; font-size: 10px">当日平均服务收益：</div>
-                    <div style="color: #191919; font-size: 10px; font-weight: 600">0.015 UNC/TFLOPS</div>
-                  </div>
-                <div style=""></div>
-            </div>`;
+          
+  <div
+    style="
+      width: 232px;
+      height: 98px;
+      padding: 11px;
+      border: 1px solid #3edfcf;
+      background-color: rgba(217, 217, 217, 0.7);
+      backdrop-filter: blur(2px);
+      border-radius: 8px;
+      position: relative;
+     
+    "
+  >
+    <div style="z-index: 1000">
+      <div
+        style="color: rgba(25, 25, 25, 0.5); font-size: 10px; font-weight: 500"
+      >
+        ${value[0].axisValue}
+      </div>
+      
+      <div style="display: flex; justify-content: space-between">
+        <div style="color: #191919; font-size: 12px">全网有效算力：</div>
+        <div style="color: #191919; font-size: 12px; font-weight: 600">
+          ${value[0].value} T
+        </div>
+      </div>
+     
+      </div>
+    </div>
+ 
+  </div>
+          
+          `;
               },
             },
             series: [

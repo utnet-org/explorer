@@ -7,6 +7,8 @@
   import { onMounted, onUnmounted, reactive, ref } from 'vue';
   import { compareTimestampNano } from '@/utils/time.ts';
   import { getScreenSize, Screen } from '@/utils/screen-size.ts';
+import router from '@/route/route';
+import { getBlockDetails } from '@/api/block';
 
   let intervalId: number | undefined;
   defineProps<{ fromPage: string }>();
@@ -43,6 +45,26 @@
   const goToMore = (type: boolean) => {
     showMore.value = type;
   };
+  const searchFilter = ref('');
+  const searchClick = async () => {
+    const height = searchFilter.value.trim();
+    if (searchFilter.value.trim() !== '') {
+      console.log('search', searchFilter.value.trim());
+      const res = await getBlockDetails({query_word: height, query_type: 1});
+
+ if(res.data.code !== -1){
+     void router.push({
+        path: '/blockchain/details',
+        query: { query_word: height, query_type: 1 },
+      });
+}else{
+  console.log('res.data.message',res.data.data.message);
+  
+}
+
+      
+    }
+  };
 </script>
 <template>
   <div class="lowest_content">
@@ -53,12 +75,12 @@
             $t('home.unc_explorer')
           }}</div>
           <div class="peak_content_top_side_search">
-            <input type="text" name="" id="" :placeholder="$t('home.search')" />
+            <input type="text" v-model="searchFilter" name="" id="" :placeholder="$t('home.search')" />
             <img
               class="peak_content_top_side_search_btn"
               src="../assets/images/home_search_icon.png"
               alt=""
-              @click=""
+              @click="searchClick()"
             />
           </div>
         </div>

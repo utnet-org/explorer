@@ -21,6 +21,7 @@ export interface LastBlock {
 }
 
 export interface BlockDetails {
+  data(blockDetails: { height?: number | undefined; hash?: string | undefined; chunk_hash?: string | undefined; timestamp?: number | undefined; timestamp_nanosec?: string | undefined; author?: string | undefined; gas_used?: number | undefined; gas_price?: number | undefined; gas_limit?: number | undefined; gas_fee?: number | undefined; prev_hash?: number | undefined; }, data: any): unknown;
   height?: number; // 高度
   hash?: string; // 交易Hash
   chunk_hash?: string; // chunkHash

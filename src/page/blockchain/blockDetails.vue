@@ -9,19 +9,25 @@
   import { getTimeDiffFromTimestamp } from '@/utils/time.ts';
 
   const route = useRoute();
-  const height = route.query.height ?? '';
+  const height = route.query.query_word ?? '';
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  const query_type = route.query.query_type ?? 1;
   const blockDetails = reactive<BlockDetails>({});
 
-  async function fetchBlockInfo(height: string) {
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type, @typescript-eslint/naming-convention
+  async function fetchBlockInfo(height: string, query_type: number) {
     var params: BlockDetailsReq = {
-      query_type: 1,
+      query_type: query_type,
       query_word: height,
     };
     const res = await getBlockDetails(params);
     Object.assign(blockDetails, res.data.data);
+    console.log('query_type',query_type);
+    console.log('height',height);
+    console.log('res',res);
   }
   onMounted(() => {
-    fetchBlockInfo(height as string);
+    void fetchBlockInfo(height as string, query_type as number);
   });
 </script>
 <template>

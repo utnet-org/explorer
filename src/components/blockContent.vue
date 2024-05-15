@@ -47,7 +47,17 @@
   };
 
   const heightClick = (height: number) => {
-    router.push({ path: '/blockchain/details', query: { height } });
+    void router.push({
+      path: '/blockchain/details',
+      query: { query_word: height, query_type: 1 },
+    });
+  };
+  const BlockClick = (height: string) => {
+    void router.push({
+      path: '/blockchain/details',
+      query: { query_word: height, query_type: 2 },
+    });
+    console.log('heightClick', height);
   };
 </script>
 <template>
@@ -102,7 +112,16 @@
               </div>
             </template>
           </el-table-column>
-          <el-table-column :label="$t('home.block_id')" prop="hash">
+          <el-table-column
+            :label="$t('home.block_id')"
+            prop="hash"
+          >
+          <template #default="scope">
+        <!-- 使用 @click 事件处理函数来监听点击事件 -->
+        <div  style="cursor: pointer" @click="BlockClick(scope.row.author)">
+          {{ scope.row.hash }}
+        </div>
+      </template>
           </el-table-column>
           <el-table-column :label="$t('home.miner')" prop="author">
           </el-table-column>

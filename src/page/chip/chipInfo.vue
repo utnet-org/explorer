@@ -1,123 +1,64 @@
 <script setup lang="ts">
   import { onMounted, reactive } from 'vue';
   import { useRoute } from 'vue-router';
-  import {
-    BlockDetailsReq,
-    BlockDetails,
-    getBlockDetails,
-  } from '@/api/block.ts';
-  import { getTimeDiffFromTimestamp } from '@/utils/time.ts';
-  import router from '@/route/route';
+  import { ChipInfo, getChipInfo } from '@/api/chip.ts';
 
   const route = useRoute();
-  const height = route.query.condition ?? '';
+  const key = route.query.query_word ?? '';
 
-  const query_type = route.query.query_type ?? 1;
-  const blockDetails = reactive<BlockDetails>({});
+  const infos = reactive<ChipInfo>({});
 
-  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type, @typescript-eslint/naming-convention
-  async function fetchBlockInfo(height: string, query_type: number) {
-    var params: BlockDetailsReq = {
-      query_type: Number(query_type),
-      query_word: height,
-    };
-    const res = await getBlockDetails(params);
-    // eslint-disable-next-line @typescript-eslint/unbound-method
-    Object.assign(blockDetails, res.data.data);
-
-    console.log('query_type', query_type);
-    console.log('height', height);
-    console.log('res', res);
+  async function fetchChipInfo(key: string) {
+    const res = await getChipInfo(key);
+    Object.assign(infos, res.data.data[0]);
   }
   onMounted(() => {
-    void fetchBlockInfo(height as string, query_type as number);
+    fetchChipInfo(key as string);
   });
-  // const BlockClick = (query: string) => {
-  //    router.push({
-  //     path: '/blockchain/details',
-  //     query: { query_word: query, query_type: 2 },
-  //   });
-  //   void fetchBlockInfo(query as string, query_type as number);
-
-  //   console.log('heightClick', query);
-  // };
 </script>
 <template>
   <div class="content">
     <div class="details">
-      <div class="details_title">区块 {{ height }}</div>
+      <div class="details_title">芯片</div>
       <div class="card">
-        <!--        <div class="card_data" v-for="(item, index) in cardData" :key="index">-->
         <div class="card_data">
-          <div class="card_title">高度</div>
+          <div class="card_title">类型</div>
           <div class="content_father">
-            <div class="card_content">{{ blockDetails.height }}</div>
+            <div class="card_content">{{ infos.chip_type }}</div>
           </div>
         </div>
         <div class="card_data">
-          <div class="card_title">哈希</div>
+          <div class="card_title">算力</div>
           <div class="content_father">
-            <div class="card_content">{{ blockDetails.hash }}</div>
+            <div class="card_content">{{ infos.power }}</div>
           </div>
         </div>
         <div class="card_data">
-          <div class="card_title">时间</div>
+          <div class="card_title">序列号</div>
+          <div class="content_father">
+            <div class="card_content">{{ infos.serial_number }}</div>
+          </div>
+        </div>
+        <div class="card_data">
+          <div class="card_title">卡槽号</div>
           <div class="content_father">
             <div class="card_content">
-              {{
-                getTimeDiffFromTimestamp(blockDetails.timestamp_nanosec ?? '')
-              }}
+              {{ infos.bus_id }}
             </div>
           </div>
         </div>
         <div class="card_data">
-          <div class="card_title">交易</div>
+          <div class="card_title">p2key</div>
           <div class="content_father">
-            <div class="card_content"
-              >{{ blockDetails.transactions }} 交易 和
-              {{ blockDetails.receipts }} 回执</div
-            >
+            <div class="card_content">
+              {{ infos.p2key }}
+            </div>
           </div>
         </div>
         <div class="card_data">
-          <div class="card_title">矿工</div>
+          <div class="card_title">公钥</div>
           <div class="content_father">
-            <div class="card_content">{{ blockDetails.author }}</div>
-          </div>
-        </div>
-        <div class="card_data">
-          <div class="card_title">使用的 Gas</div>
-          <div class="content_father">
-            <div class="card_content">{{ blockDetails.gas_used }}</div>
-          </div>
-        </div>
-        <div class="card_data">
-          <div class="card_title">Gas 限制</div>
-          <div class="content_father">
-            <div class="card_content">{{ blockDetails.gas_limit }}</div>
-          </div>
-        </div>
-        <div class="card_data">
-          <div class="card_title">Gas 价格</div>
-          <div class="content_father">
-            <div class="card_content">{{ blockDetails.gas_price }}</div>
-          </div>
-        </div>
-        <div class="card_data">
-          <div class="card_title">Gas 费</div>
-          <div class="content_father">
-            <div class="card_content">{{ blockDetails.gas_fee }}</div>
-          </div>
-        </div>
-        <div class="card_data">
-          <div class="card_title">父哈希</div>
-          <div
-            class="content_father"
-            @click="BlockClick(blockDetails.prev_hash)"
-          >
-            <div class="card_content" style="color: #0687a4">{{
-              blockDetails.prev_hash
-            }}</div>
+            <div class="card_content">{{ infos.public_key }}</div>
           </div>
         </div>
       </div>

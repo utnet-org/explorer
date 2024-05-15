@@ -10,7 +10,7 @@
   import router from '@/route/route';
 
   const route = useRoute();
-  const height = route.query.query_word ?? '';
+  const height = route.query.condition ?? '';
 
   const query_type = route.query.query_type ?? 1;
   const blockDetails = reactive<BlockDetails>({});

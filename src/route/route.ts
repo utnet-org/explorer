@@ -19,6 +19,7 @@ import NProgress from 'nprogress'; // progress bar
 import BlockDetails from '../page/blockchain/blockDetails.vue'; // 区块详情
 import MineDetails from '../page/blockchain/MineDetails.vue'; // 区块详情
 import AccountMiner from '../page/blockchain/accountMiner.vue'; // 区块详情
+import ChipInfo from '../page/chip/chipInfo.vue';
 
 import TransactionList from '../page/blockchain/transactionList.vue'; // 交易列表
 import TransactionDetails from '../page/blockchain/transactionDetail.vue'; // 交易详情
@@ -102,6 +103,10 @@ const routes = [
       {
         path: '/statistics/ranking',
         component: Ranking,
+      },
+      {
+        path: '/chip/chipInfo',
+        component: ChipInfo,
       },
     ],
   },

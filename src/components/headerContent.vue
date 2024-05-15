@@ -7,8 +7,8 @@
   import { onMounted, onUnmounted, reactive, ref } from 'vue';
   import { compareTimestampNano } from '@/utils/time.ts';
   import { getScreenSize, Screen } from '@/utils/screen-size.ts';
-import router from '@/route/route';
-import { getBlockDetails } from '@/api/block';
+  import router from '@/route/route';
+  import { getBlockDetails } from '@/api/block';
 
   let intervalId: number | undefined;
   defineProps<{ fromPage: string }>();
@@ -24,9 +24,32 @@ import { getBlockDetails } from '@/api/block';
   }
 
   async function fetchSearchFilter() {
-    const response = await getSearchFilter();
+    const keyword = searchFilter.value.trim();
+    const response = await getSearchFilter(keyword);
     Object.assign(ovData, response.data.data);
-    lastTime.value = compareTimestampNano(ovData.latest_block);
+    // lastTime.value = compareTimestampNano(ovData.latest_block);
+    if (response.data.code === 0) {
+      // 搜索type 1账户 2块高度 3块哈希 4地址 5交易 6消息 7芯片
+      if (response.data.query_type == 2) {
+        void router.push({
+          path: '/blockchain/details',
+          query: { query_word: keyword },
+        });
+      }
+      if (response.data.query_type == 3) {
+        void router.push({
+          path: '/blockchain/details',
+          // block详情type 1高度 2哈希
+          query: { query_word: keyword, query_type: 2 },
+        });
+      }
+      if (response.data.query_type == 7) {
+        void router.push({
+          path: '/chip/chipInfo',
+          query: { query_word: keyword },
+        });
+      }
+    }
   }
 
   onMounted(() => {
@@ -51,19 +74,16 @@ import { getBlockDetails } from '@/api/block';
     const height = searchFilter.value.trim();
     if (searchFilter.value.trim() !== '') {
       console.log('search', searchFilter.value.trim());
-      const res = await getBlockDetails({query_word: height, query_type: 1});
+      const res = await getBlockDetails({ query_word: height, query_type: 1 });
 
- if(res.data.code !== -1){
-     void router.push({
-        path: '/blockchain/details',
-        query: { query_word: height, query_type: 1 },
-      });
-}else{
-  console.log('res.data.message',res.data.data.message);
-  
-}
-
-      
+      if (res.data.code !== -1) {
+        void router.push({
+          path: '/blockchain/details',
+          query: { query_word: height, query_type: 1 },
+        });
+      } else {
+        console.log('res.data.message', res.data.data.message);
+      }
     }
   };
 </script>
@@ -76,12 +96,18 @@ import { getBlockDetails } from '@/api/block';
             $t('home.unc_explorer')
           }}</div>
           <div class="peak_content_top_side_search">
-            <input type="text" v-model="searchFilter" name="" id="" :placeholder="$t('home.search')" />
+            <input
+              type="text"
+              v-model="searchFilter"
+              name=""
+              id=""
+              :placeholder="$t('home.search')"
+            />
             <img
               class="peak_content_top_side_search_btn"
               src="../assets/images/home_search_icon.png"
               alt=""
-              @click="searchClick()"
+              @click="fetchSearchFilter()"
             />
           </div>
         </div>

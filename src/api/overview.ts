@@ -18,6 +18,6 @@ export function getOverviewInfo() {
   return axios.post<OverviewInfo>('/api/overview');
 }
 
-export function getSearchFilter() {
-  return axios.post('/api/search/filter');
+export function getSearchFilter(keyword: any) {
+  return axios.post('/api/query/filter', { keyword });
 }

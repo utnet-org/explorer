@@ -51,6 +51,10 @@
           title: 'blockChain.transactionList',
           link: '/blockchain/transaction',
         },
+        {
+          title: 'home.Miner',
+          link: '/blockchain/account',
+        },
       ],
     },
     {

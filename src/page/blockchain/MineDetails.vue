@@ -5,6 +5,7 @@
     BlockDetailsReq,
     BlockDetails,
     getBlockDetails,
+    BlockDetailsId,
   } from '@/api/block.ts';
   import { getTimeDiffFromTimestamp } from '@/utils/time.ts';
 import router from '@/route/route';
@@ -13,7 +14,7 @@ import router from '@/route/route';
   const height = route.query.query_word ?? '';
 
   const query_type = route.query.query_type ?? 1;
-  const blockDetails = reactive<BlockDetails>({});
+  const blockDetails = reactive<BlockDetailsId>({});
 
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type, @typescript-eslint/naming-convention
   async function fetchBlockInfo(height: string, query_type: number) {
@@ -21,7 +22,7 @@ import router from '@/route/route';
       query_type: Number(query_type),
       query_word: height,
     };
-    const res = await getBlockDetails(params);
+    // const res = await getBlockDetails(params);
     // eslint-disable-next-line @typescript-eslint/unbound-method
     Object.assign(blockDetails, res.data.data);
    
@@ -30,95 +31,77 @@ import router from '@/route/route';
     console.log('res', res);
   }
   onMounted(() => {
+    // ApiMetworkValidators
     void fetchBlockInfo(height as string, query_type as number);
   });
-  // const BlockClick = (query: string) => {
-  //    router.push({
-  //     path: '/blockchain/details',
-  //     query: { query_word: query, query_type: 2 },
-  //   });
-  //   void fetchBlockInfo(query as string, query_type as number);
 
-  //   console.log('heightClick', query);
-  // };
 </script>
 <template>
   <div class="content">
     <div class="details">
-      <div class="details_title">区块 {{ height }}</div>
+      <div class="details_title"> {{ $t('home.Miner') + height }}</div>
       <div class="card">
         <!--        <div class="card_data" v-for="(item, index) in cardData" :key="index">-->
         <div class="card_data">
-          <div class="card_title">高度</div>
+          <div class="card_title">账户ID</div>
           <div class="content_father">
-            <div class="card_content">{{ blockDetails.height }}</div>
+            <div class="card_content">{{ blockDetails.account_id }}</div>
           </div>
         </div>
         <div class="card_data">
-          <div class="card_title">哈希</div>
+          <div class="card_title">是否惩罚</div>
           <div class="content_father">
-            <div class="card_content">{{ blockDetails.hash }}</div>
+            <div class="card_content">{{ blockDetails.is_slashed }}</div>
           </div>
         </div>
         <div class="card_data">
-          <div class="card_title">时间</div>
+          <div class="card_title">预计Block</div>
           <div class="content_father">
             <div class="card_content">
-              {{
-                getTimeDiffFromTimestamp(blockDetails.timestamp_nanosec ?? '')
-              }}
+              {{ blockDetails.num_expected_blocks }}
             </div>
           </div>
         </div>
         <div class="card_data">
-          <div class="card_title">交易</div>
+          <div class="card_title">预计Chunk</div>
           <div class="content_father">
-            <div class="card_content"
-              >{{ blockDetails.transactions }} 交易 和
-              {{ blockDetails.receipts }} 回执</div
-            >
-          </div>
-        </div>
-        <div class="card_data">
-          <div class="card_title">矿工</div>
-          <div class="content_father">
-            <div class="card_content">{{ blockDetails.author }}</div>
-          </div>
-        </div>
-        <div class="card_data">
-          <div class="card_title">使用的 Gas</div>
-          <div class="content_father">
-            <div class="card_content">{{ blockDetails.gas_used }}</div>
-          </div>
-        </div>
-        <div class="card_data">
-          <div class="card_title">Gas 限制</div>
-          <div class="content_father">
-            <div class="card_content">{{ blockDetails.gas_limit }}</div>
-          </div>
-        </div>
-        <div class="card_data">
-          <div class="card_title">Gas 价格</div>
-          <div class="content_father">
-            <div class="card_content">{{ blockDetails.gas_price }}</div>
-          </div>
-        </div>
-        <div class="card_data">
-          <div class="card_title">Gas 费</div>
-          <div class="content_father">
-            <div class="card_content">{{ blockDetails.gas_fee }}</div>
-          </div>
-        </div>
-        <div class="card_data">
-          <div class="card_title">父哈希</div>
-          <div
-            class="content_father"
-            @click="BlockClick(blockDetails.prev_hash)"
-
-          >
-            <div class="card_content" style="color: #0687a4">{{
-              blockDetails.prev_hash
+            <div class="card_content">{{
+              blockDetails.num_expected_Chunks
             }}</div>
+          </div>
+        </div>
+        <div class="card_data">
+          <div class="card_title">产出Block</div>
+          <div class="content_father">
+            <div class="card_content">{{
+              blockDetails.num_produced_blocks
+            }}</div>
+          </div>
+        </div>
+        <div class="card_data">
+          <div class="card_title">产出Chunk</div>
+          <div class="content_father">
+            <div class="card_content">{{
+              blockDetails.num_produced_chunks
+            }}</div>
+          </div>
+        </div>
+        <div class="card_data">
+          <div class="card_title">质押量</div>
+          <div class="content_father">
+            <div class="card_content">{{ blockDetails.pledge }}</div>
+          </div>
+        </div>
+        <div class="card_data">
+          <div class="card_title">算力</div>
+          <div class="content_father">
+            <div class="card_content">{{ blockDetails.power }}</div>
+          </div>
+        </div>
+        <div class="card_data">
+          <div class="card_title">公钥</div>
+          <div class="content_father">
+            <div class="card_content">{{ blockDetails.public_key }}</div>
           </div>
         </div>
       </div>

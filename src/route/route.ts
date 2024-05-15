@@ -17,6 +17,9 @@ import Gas from '../page/Statistics/gasRanking.vue'; // Gas 排行
 import Ranking from '../page/Statistics/rankingPage.vue'; // 算力服务排行榜
 import NProgress from 'nprogress'; // progress bar
 import BlockDetails from '../page/blockchain/blockDetails.vue'; // 区块详情
+import MineDetails from '../page/blockchain/MineDetails.vue'; // 区块详情
+import AccountMiner from '../page/blockchain/accountMiner.vue'; // 区块详情
+
 import TransactionList from '../page/blockchain/transactionList.vue'; // 交易列表
 import TransactionDetails from '../page/blockchain/transactionDetail.vue'; // 交易详情
 import 'nprogress/nprogress.css'; // progress bar style
@@ -43,6 +46,14 @@ const routes = [
       {
         path: '/blockchain/details',
         component: BlockDetails,
+      },
+      {
+        path: '/blockchain/account',
+        component: AccountMiner,
+      },
+      {
+        path: '/blockchain/mine',
+        component: MineDetails,
       },
       {
         path: '/blockchain/transaction',

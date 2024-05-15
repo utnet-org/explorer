@@ -169,6 +169,11 @@ export default {
     chip_computing_power_type: 'Computing Power Type',
     chip_computing_power_value: 'Computing Power Value',
     chip_belonging_to_the_miner: 'Belonging to the Miner',
+    Account_ID: 'Account ID',
+    whether_to_punish: 'Whether to Punish',
+    Expected_Chunk: 'Expected Chunk',
+    Expected_Block: 'Expected Block',
+    Output_Block: 'Output Block',
   },
   contract: {
     contract_UVM_statistics: 'UVM Statistics',

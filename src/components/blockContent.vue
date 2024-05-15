@@ -53,12 +53,12 @@
       query: { query_word: height, query_type: 1 },
     });
   };
-  const BlockClick = (height: string) => {
+  const BlockClick = (query_word: string) => {
     void router.push({
       path: '/blockchain/details',
-      query: { query_word: height, query_type: 2 },
+      query: { query_word: query_word, query_type: 2 },
     });
-    console.log('heightClick', height);
+    console.log('heightClick', query_word);
   };
 </script>
 <template>
@@ -119,7 +119,7 @@
           >
           <template #default="scope">
         <!-- 使用 @click 事件处理函数来监听点击事件 -->
-        <div  style="cursor: pointer" @click="BlockClick(scope.row.author)">
+        <div  style="cursor: pointer" @click="BlockClick(scope.row.hash)">
           {{ scope.row.hash }}
         </div>
       </template>

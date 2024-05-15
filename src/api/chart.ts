@@ -17,3 +17,11 @@ export function PosttgasData() {
     });
 
 }
+export function ApiMetworkValidators() {
+    // return request.get("/chart/data", { params });
+    return request({
+        url: "/api/network/validators",
+        method: "post",
+    });
+
+}

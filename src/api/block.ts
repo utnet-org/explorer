@@ -34,7 +34,18 @@ export interface BlockDetails {
   gas_price?: number; // Gas价格
   gas_limit?: number; // Gas限制
   gas_fee?: number; // Gas限制
-  prev_hash?: number; // 父Hash
+  prev_hash?: string; // 父Hash
+}
+export interface BlockDetailsId {
+  account_id?: string; // 账户iD
+  is_slashed?: boolean; // 是否惩罚
+  num_expected_blocks?: number; // 预计Block
+  num_expected_Chunks?: number; // 预计Chunk
+  num_produced_blocks?: number; // 产出Block
+  num_produced_chunks?: number; // 产出Chunk
+  pledge?: string; // 质押量
+  power?: string; // 算力
+  public_key?: string; // 公钥
 }
 
 export interface BlockDetailsReq {

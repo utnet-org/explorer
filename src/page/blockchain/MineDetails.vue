@@ -2,60 +2,51 @@
   import { onMounted, reactive } from 'vue';
   import { useRoute } from 'vue-router';
   import {
-    BlockDetailsReq,
-    BlockDetails,
-    getBlockDetails,
     BlockDetailsId,
   } from '@/api/block.ts';
-  import { getTimeDiffFromTimestamp } from '@/utils/time.ts';
-import router from '@/route/route';
+import { ApiMetworkValidator } from '@/api/chart';
 
   const route = useRoute();
-  const height = route.query.query_word ?? '';
+  const Account_ID = route.query.query_word ?? '';
 
-  const query_type = route.query.query_type ?? 1;
   const blockDetails = reactive<BlockDetailsId>({});
 
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type, @typescript-eslint/naming-convention
-  async function fetchBlockInfo(height: string, query_type: number) {
-    var params: BlockDetailsReq = {
-      query_type: Number(query_type),
-      query_word: height,
-    };
-    // const res = await getBlockDetails(params);
+  async function fetchBlockInfo(Account_ID: string) {
+    const res = await ApiMetworkValidator({ account_id: Account_ID });
     // eslint-disable-next-line @typescript-eslint/unbound-method
     Object.assign(blockDetails, res.data.data);
    
     console.log('query_type', query_type);
-    console.log('height', height);
+    console.log('Account_ID', Account_ID);
     console.log('res', res);
   }
   onMounted(() => {
     // ApiMetworkValidators
-    void fetchBlockInfo(height as string, query_type as number);
+    void fetchBlockInfo(Account_ID as string);
   });
 
 </script>
 <template>
   <div class="content">
     <div class="details">
-      <div class="details_title"> {{ $t('home.Miner') + height }}</div>
+      <div class="details_title"> {{ $t('home.Miner') + '  ' + Account_ID }}</div>
       <div class="card">
         <!--        <div class="card_data" v-for="(item, index) in cardData" :key="index">-->
         <div class="card_data">
-          <div class="card_title">账户ID</div>
+          <div class="card_title">{{ $t('blockChain.Account_ID') }}</div>
           <div class="content_father">
             <div class="card_content">{{ blockDetails.account_id }}</div>
           </div>
         </div>
         <div class="card_data">
-          <div class="card_title">是否惩罚</div>
+          <div class="card_title">{{ $t('blockChain.whether_to_punish') }}</div>
           <div class="content_father">
             <div class="card_content">{{ blockDetails.is_slashed }}</div>
           </div>
         </div>
         <div class="card_data">
-          <div class="card_title">预计Block</div>
+          <div class="card_title">{{ $t('blockChain.Expected_Block') }}</div>
           <div class="content_father">
             <div class="card_content">
               {{ blockDetails.num_expected_blocks }}
@@ -63,23 +54,7 @@ import router from '@/route/route';
           </div>
         </div>
         <div class="card_data">
-          <div class="card_title">预计Chunk</div>
-          <div class="content_father">
-            <div class="card_content">{{
-              blockDetails.num_expected_Chunks
-            }}</div>
-          </div>
-        </div>
-        <div class="card_data">
-          <div class="card_title">产出Block</div>
-          <div class="content_father">
-            <div class="card_content">{{
-              blockDetails.num_produced_blocks
-            }}</div>
-          </div>
-        </div>
-        <div class="card_data">
-          <div class="card_title">产出Chunk</div>
+          <div class="card_title">{{ $t('blockChain.Expected_Chunk') }}</div>
           <div class="content_father">
             <div class="card_content">{{
               blockDetails.num_produced_chunks
@@ -87,19 +62,35 @@ import router from '@/route/route';
           </div>
         </div>
         <div class="card_data">
-          <div class="card_title">质押量</div>
+          <div class="card_title">{{ $t('blockChain.Output_Block') }}</div>
+          <div class="content_father">
+            <div class="card_content">{{
+              blockDetails.num_produced_blocks
+            }}</div>
+          </div>
+        </div>
+        <div class="card_data">
+          <div class="card_title">{{ $t('blockChain.Output_Chunk') }}</div>
+          <div class="content_father">
+            <div class="card_content">{{
+              blockDetails.num_produced_chunks
+            }}</div>
+          </div>
+        </div>
+        <div class="card_data">
+          <div class="card_title">{{ $t('blockChain.Pledge_amount') }}</div>
           <div class="content_father">
             <div class="card_content">{{ blockDetails.pledge }}</div>
           </div>
         </div>
         <div class="card_data">
-          <div class="card_title">算力</div>
+          <div class="card_title">{{ $t('blockChain.Computing_power') }}</div>
           <div class="content_father">
             <div class="card_content">{{ blockDetails.power }}</div>
           </div>
         </div>
         <div class="card_data">
-          <div class="card_title">公钥</div>
+          <div class="card_title">{{ $t('blockChain.public_key') }}</div>
           <div class="content_father">
             <div class="card_content">{{ blockDetails.public_key }}</div>
           </div>

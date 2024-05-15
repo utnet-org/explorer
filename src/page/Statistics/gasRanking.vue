@@ -16,6 +16,7 @@
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   import { getScreenSize, Screen } from '@/utils/screen-size.ts';
   import paginationContent from '@/components/paginationContent.vue';
+import { PosttgasData } from '@/api/chart';
 
   // ! 获取屏幕尺寸
   const windowWidth = ref(document.documentElement.clientWidth);
@@ -40,35 +41,28 @@
   const selectedRange = ref('week');
 
   // ^基础费率走势 周数据和月数据的示例
-  const weekData = {
-    xAxisData: ['09-20', '09-21', '09-22', '09-23', '09-24', '09-25', '09-26'],
-    seriesData: [12, 20, 15, 8, 27, 11, 13],
-  };
-
-  const monthData = {
-    xAxisData: [
-      '1月',
-      '2月',
-      '3月',
-      '4月',
-      '5月',
-      '6月',
-      '7月',
-      '8月',
-      '9月',
-      '10月',
-      '11月',
-      '12月',
-    ],
-    seriesData: [22, 18, 19, 23, 29, 33, 31, 12, 44, 32, 9, 14],
-  };
+  // const weekData = {
+  //   xAxisData: ['09-20', '09-21', '09-22', '09-23', '09-24', '09-25', '09-26'],
+  //   seriesData: [12, 20, 15, 8, 27, 11, 13],
+  // };
 
   // ^切换时间范围并更新图表
   // ^函数用于切换数据
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-  const setTimeRange = (range: string) => {
+  const setTimeRange = async (range: string) => {
+      // ^x轴数据和系列数据
+      const xAxisData = [];
+    const seriesData = [];
     // ^更新时间范围(week/month)
     selectedRange.value = range;
+
+    const res = await PosttgasData();
+    for (let i = 0; i < res.data.data.length; i++) {
+      xAxisData.push(res.data.data[i].date);
+    }
+    for (let i = 0; i < res.data.data.length; i++) {
+      seriesData.push(res.data.data[i].gas);
+    }
     // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     if (!chart.value) {
       return;
@@ -76,18 +70,16 @@
 
     // ^获取图表实例
     myChart = echarts.getInstanceByDom(chart.value);
-    // ^x轴数据和系列数据
-    let xAxisData = [];
-    let seriesData = [];
+  
 
     // ^根据时间范围选择数据
-    if (range === 'week') {
-      xAxisData = weekData.xAxisData;
-      seriesData = weekData.seriesData;
-    } else {
-      xAxisData = monthData.xAxisData;
-      seriesData = monthData.seriesData;
-    }
+    // if (range === 'week') {
+    //   xAxisData = weekData.xAxisData;
+    //   seriesData = weekData.seriesData;
+    // } else {
+    //   xAxisData = monthData.xAxisData;
+    //   seriesData = monthData.seriesData;
+    // }
 
     // 图表配置
     const option = {
@@ -121,33 +113,27 @@
           color: '#fff', // 提示框文本颜色
         },
 
-        formatter: function () {
+        formatter: function (value: any) {
           return `
-            <div style="
-                width: 232px;
-                height: 98px;
-                padding: 11px;
-                overflow: hidden;
-                border : 1px solid #3EDFCF;
-                background-color:rgba(217, 217, 217, 0.7);
-                backdrop-filter: blur(2px);
-                border-radius: 8px;">
-                <div style="z-index:1000">
-                  <div style="color: rgba(25, 25, 25, 0.5);font-size: 10px" ;font-weight: 500>星期四 27/09/2023</div>
-                  <div style="display: flex; justify-content: space-between ; margin-top:13px ">
-                     <div style="color: #191919; font-size: 12px">当日算力新增：</div>
-                     <div style="color: #191919; font-size: 12px; font-weight: 600">21,21 TFLOPS</div>
-                  </div>
-                  <div style="display: flex; justify-content: space-between">
-                    <div style="color: #191919; font-size: 12px">全网有效算力：</div>
-                    <div style="color: #191919; font-size: 12px; font-weight: 600">123K TFLOPS</div>
-                  </div>
-                  <div style="display: flex; justify-content: space-between">
-                    <div style="color: #191919; font-size: 12px">当日平均服务收益：</div>
-                    <div style="color: #191919; font-size: 12px; font-weight: 600">0.015 UNC/TFLOPS</div>
-                  </div>
-                  </div>
-            </div>`;
+          <div style="
+              width: 232px;
+              height: 98px;
+              padding: 11px;
+              overflow: hidden;
+              border : 1px solid #3EDFCF;
+              background-color:rgba(217, 217, 217, 0.7);
+              backdrop-filter: blur(2px);
+              border-radius: 8px;">
+              <div style="z-index:1000">
+                <div style="color: rgba(25, 25, 25, 0.5);font-size: 10px" ;font-weight: 500>${value[0].axisValue}</div>
+               
+                <div style="display: flex; justify-content: space-between">
+                  <div style="color: #191919; font-size: 12px">全网有效算力：</div>
+                  <div style="color: #191919; font-size: 12px; font-weight: 600">${value[0].value} T</div>
+                </div>
+               
+                </div>
+          </div>`;
         },
       },
       xAxis: {
@@ -177,7 +163,7 @@
         splitNumber: 3, // 默认通常是 5
         axisLabel: {
           margin: 50,
-          formatter: '{value}K TFLOPS', // 这里放置你的 Y 轴数据
+          formatter: '{value} T', // 这里放置你的 Y 轴数据
           interval: 0,
           fontWeight: 500, // 加粗文字
           fontSize: 12, // 设置 X 轴标签的文字大小
@@ -255,34 +241,28 @@
               axisPointer: {
                 type: 'none', // 显示一条竖线作为指示器
               },
-              formatter: function () {
+              formatter: function (value: any) {
                 return `
-            <div style="
-                width: 199px;
-                height: 96px;
-                overflow: hidden;
-                padding-left: 11px;
-                padding-right: 11px;
-                border : 1px solid #3EDFCF;
-              background-color:rgba(217, 217, 217, 0.7);
-                backdrop-filter: blur(2px);
-                border-radius: 8px;">
-
-                <div style="color: rgba(25, 25, 25, 0.5); font-size:8px ;font-weight: 500">星期四 27/09/2023</div>
-                  <div style="display: flex; justify-content: space-between">
-                     <div style="color: #191919; font-size: 10px">当日算力新增：</div>
-                     <div style="color: #191919; font-size: 10px; font-weight: 600">21,21 TFLOPS</div>
-                  </div>
-                  <div style="display: flex; justify-content: space-between">
-                    <div style="color: #191919; font-size: 10px">全网有效算力：</div>
-                    <div style="color: #191919; font-size: 10px; font-weight: 600">123K TFLOPS</div>
-                  </div>
-                  <div style="display: flex; justify-content: space-between">
-                    <div style="color: #191919; font-size: 10px">当日平均服务收益：</div>
-                    <div style="color: #191919; font-size: 10px; font-weight: 600">0.015 UNC/TFLOPS</div>
-                  </div>
-                <div style=""></div>
-            </div>`;
+          <div style="
+              width: 199px;
+              height: 96px;
+              overflow: hidden;
+              padding-left: 11px;
+              padding-right: 11px;
+              border : 1px solid #3EDFCF;
+            background-color:rgba(217, 217, 217, 0.7);
+              backdrop-filter: blur(2px);
+              border-radius: 8px;">
+  
+              <div style="color: rgba(25, 25, 25, 0.5); font-size:8px ;font-weight: 500">${value[0].axisValue}</div>
+                
+                <div style="display: flex; justify-content: space-between">
+                  <div style="color: #191919; font-size: 10px">全网有效算力：</div>
+                  <div style="color: #191919; font-size: 10px; font-weight: 600">${value[0].value} T</div>
+                </div>
+               
+              <div style=""></div>
+          </div>`;
               },
             },
             series: [
@@ -527,7 +507,7 @@
             "
           >
             <div class="work_m">
-              <el-button
+              <!-- <el-button
                 class="custom_buttons"
                 color="#3EDFCF"
                 :style="{
@@ -558,7 +538,7 @@
                 :plain="selectedRange !== 'month'"
                 @click="setTimeRange('month')"
                 >{{ $t('home.month') }}</el-button
-              >
+              > -->
             </div>
 
             <el-button

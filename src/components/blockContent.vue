@@ -189,7 +189,7 @@
         </div>
       </div>
     </div>
-    <div class="open_more" @click="goToMore">{{ $t('home.see_more') }}</div>
+    <!-- <div class="open_more" @click="goToMore">{{ $t('home.see_more') }}</div> -->
   </div>
 </template>
 <style scoped lang="scss">

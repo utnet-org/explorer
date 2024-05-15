@@ -170,7 +170,7 @@ export default {
     chip_computing_power_value: 'Computing Power Value',
     chip_belonging_to_the_miner: 'Belonging to the Miner',
     Account_ID: 'Account ID',
-    whether_to_punish: 'Whether to Punish',
+    whether_to_punish: ' Is slashedh',
     Expected_Block: 'Expected Block',
     Expected_Chunk: 'Expected Chunk',
     Output_Block: 'Output Block',

@@ -49,6 +49,9 @@
           query: { query_word: keyword },
         });
       }
+    }else{
+      console.log('res.data.message', response.data.data);
+        alert(response.data.data.message_zh);
     }
   }
 
@@ -82,7 +85,8 @@
           query: { query_word: height, query_type: 1 },
         });
       } else {
-        console.log('res.data.message', res.data.data.message);
+        
+
       }
     }
   };

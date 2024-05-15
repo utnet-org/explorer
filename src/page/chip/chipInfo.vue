@@ -108,15 +108,32 @@
   }
 
   .card_title {
-    flex: 1;
+    width: 340px;
+    flex-shrink: 0;
   }
 
   .content_father {
-    flex: 3;
-    display: flex;
+    white-space: nowrap; /* 防止文本换行 */
+    overflow: hidden; /* 隐藏超出容器的内容 */
+    text-overflow: ellipsis; /* 显示省略号 */
+    max-width: 100%;
+    // flex: 0 0 auto; /* 右边盒子不扩展 */
+    // flex: 3;
+    // display: flex;
   }
 
   .card_content {
+    width: 100%;
+    // 超出显示省略号
+    white-space: nowrap; /* 防止文本换行 */
+    overflow: hidden; /* 隐藏超出容器的内容 */
+    text-overflow: ellipsis; /* 显示省略号 */
+
+   &:hover{
+  
+    white-space: normal; /* 允许文本换行 */
+  overflow-wrap: break-word; /* 单词内换行 */
+   }
   }
 
   .content_button {

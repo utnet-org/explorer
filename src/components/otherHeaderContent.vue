@@ -20,7 +20,8 @@ const searchMessage = ref('');
           query: { query_word: height },
         });
       } else {
-        console.log('res.data.message', res.data.data.message);
+        console.log('res.data.message', res.data.data);
+        alert(res.data.data.message);
       }
     }
   };

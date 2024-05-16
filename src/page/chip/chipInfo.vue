@@ -1,16 +1,18 @@
 <script setup lang="ts">
-  import { onMounted, reactive } from 'vue';
+  import { onMounted, reactive, ref } from 'vue';
   import { useRoute } from 'vue-router';
   import { ChipInfo, getChipInfo } from '@/api/chip.ts';
 
   const route = useRoute();
   const key = route.query.query_word ?? '';
 
-  const infos = reactive<ChipInfo>({});
+  const infos = reactive<ChipInfo[]>([{}]);
+  // const info = reactive<ChipInfo>({});
 
   async function fetchChipInfo(key: string) {
     const res = await getChipInfo(key);
-    Object.assign(infos, res.data.data[0]);
+    // Object.assign(info, res.data.data[0]);
+    Object.assign(infos, res.data.data);
   }
   onMounted(() => {
     fetchChipInfo(key as string);
@@ -24,41 +26,44 @@
         <div class="card_data">
           <div class="card_title">类型</div>
           <div class="content_father">
-            <div class="card_content">{{ infos.chip_type }}</div>
+            <div class="card_content">{{ infos[0].chip_type }}</div>
+          </div>
+        </div>
+
+        <div class="card_data">
+          <div class="card_title">序列号</div>
+          <div class="content_father">
+            <div class="card_content">{{ infos[0].serial_number }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="card" v-for="(item, index) in infos" :key="index">
+        <div class="card_data">
+          <div class="card_title" style="color: #0facb6">卡槽号</div>
+          <div class="content_father">
+            <div class="card_content">
+              {{ item.bus_id }}
+            </div>
           </div>
         </div>
         <div class="card_data">
           <div class="card_title">算力</div>
           <div class="content_father">
-            <div class="card_content">{{ infos.power }}</div>
-          </div>
-        </div>
-        <div class="card_data">
-          <div class="card_title">序列号</div>
-          <div class="content_father">
-            <div class="card_content">{{ infos.serial_number }}</div>
-          </div>
-        </div>
-        <div class="card_data">
-          <div class="card_title">卡槽号</div>
-          <div class="content_father">
-            <div class="card_content">
-              {{ infos.bus_id }}
-            </div>
+            <div class="card_content">{{ item.power }}</div>
           </div>
         </div>
         <div class="card_data">
           <div class="card_title">p2key</div>
           <div class="content_father">
             <div class="card_content">
-              {{ infos.p2key }}
+              {{ item.p2key }}
             </div>
           </div>
         </div>
         <div class="card_data">
           <div class="card_title">公钥</div>
           <div class="content_father">
-            <div class="card_content">{{ infos.public_key }}</div>
+            <div class="card_content">{{ item.public_key }}</div>
           </div>
         </div>
       </div>
@@ -129,11 +134,10 @@
     overflow: hidden; /* 隐藏超出容器的内容 */
     text-overflow: ellipsis; /* 显示省略号 */
 
-   &:hover{
-  
-    white-space: normal; /* 允许文本换行 */
-  overflow-wrap: break-word; /* 单词内换行 */
-   }
+    &:hover {
+      white-space: normal; /* 允许文本换行 */
+      overflow-wrap: break-word; /* 单词内换行 */
+    }
   }
 
   .content_button {

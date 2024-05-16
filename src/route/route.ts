@@ -6,7 +6,7 @@ import DefaultHome from '../page/index.vue'; // 二级路由
 import Test from '../page/home/test.vue'; // 你的视图组件路径
 import BlockChain from '../page/blockchain/index.vue'; // 最新区块
 import Message from '../page/blockchain/message.vue'; // 消息列表
-import RichList from '../page/blockchain/richList.vue'; // 富豪榜
+import ChipList from '../page/blockchain/chipList.vue'; // 芯片列表
 import OrderList from '../page/blockchain/order.vue'; // 订单列表
 import MemoryPool from '../page/blockchain/memoryPool.vue'; // 内存池消息列表
 import ContractVerification from '../page/blockchain/contractVerification.vue'; // 验证并发布合约源代码
@@ -77,8 +77,8 @@ const routes = [
         component: Message,
       },
       {
-        path: '/blockchain/richlist',
-        component: RichList,
+        path: '/blockchain/chipList',
+        component: ChipList,
       },
       {
         path: '/blockchain/order',

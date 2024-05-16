@@ -3,7 +3,7 @@
   import { useRouter } from 'vue-router';
   import Wallet from '../wallet/connect.ts';
   import { ArrowDown } from '@element-plus/icons-vue';
-  import { getPrice } from '../api/price.ts';
+  import { getCoinPrice } from '../api/price.ts';
   import { getScreenSize, Screen } from '../utils/screen-size.ts';
   import i18n from '@/lang';
   // import { useI18n } from 'vue-i18n';
@@ -27,26 +27,26 @@
           title: 'blockChain.block',
           link: '/blockchain',
         },
+        // {
+        //   title: 'blockChain.block_information',
+        //   link: '/blockchain/message',
+        // },
+        // {
+        //   title: 'blockChain.block_order',
+        //   link: '/blockchain/order',
+        // },
+        // {
+        //   title: 'blockChain.block_memory_pool',
+        //   link: '/blockchain/memoryPool',
+        // },
         {
-          title: 'blockChain.block_information',
-          link: '/blockchain/message',
+          title: 'blockChain.block_chip_list',
+          link: '/blockchain/chipList',
         },
-        {
-          title: 'blockChain.block_order',
-          link: '/blockchain/order',
-        },
-        {
-          title: 'blockChain.block_memory_pool',
-          link: '/blockchain/memoryPool',
-        },
-        {
-          title: 'blockChain.block_rich_list',
-          link: '/blockchain/richlist',
-        },
-        {
-          title: 'blockChain.block_contract_verification',
-          link: '/blockchain/contractVerification',
-        },
+        // {
+        //   title: 'blockChain.block_contract_verification',
+        //   link: '/blockchain/contractVerification',
+        // },
         {
           title: 'blockChain.transactionList',
           link: '/blockchain/transaction',
@@ -57,36 +57,36 @@
         },
       ],
     },
-    {
-      title: 'nav.contract',
-      name: '3',
-      selectList: [
-        {
-          title: 'contract.contract_UVM_statistics',
-          link: '',
-        },
-        {
-          title: 'contract.contract_verified_contract',
-          link: '',
-        },
-        {
-          title: 'FNS LOOK UP',
-          link: '',
-        },
-        {
-          title: 'contract.contract_ecological_tour',
-          link: '',
-        },
-        {
-          title: 'contract.contract_pass',
-          link: '',
-        },
-        {
-          title: 'NFTs',
-          link: '',
-        },
-      ],
-    },
+    // {
+    //   title: 'nav.contract',
+    //   name: '3',
+    //   selectList: [
+    //     {
+    //       title: 'contract.contract_UVM_statistics',
+    //       link: '',
+    //     },
+    //     {
+    //       title: 'contract.contract_verified_contract',
+    //       link: '',
+    //     },
+    //     {
+    //       title: 'FNS LOOK UP',
+    //       link: '',
+    //     },
+    //     {
+    //       title: 'contract.contract_ecological_tour',
+    //       link: '',
+    //     },
+    //     {
+    //       title: 'contract.contract_pass',
+    //       link: '',
+    //     },
+    //     {
+    //       title: 'NFTs',
+    //       link: '',
+    //     },
+    //   ],
+    // },
     {
       title: 'nav.statistic',
       name: '4',
@@ -168,9 +168,10 @@
 
   async function getP() {
     console.log('start get price');
-    const response = await getPrice();
-    price.value = response.data.data.price;
-    amount.value = response.data.data.amount;
+    // const response = await getPrice();
+    const response = await getCoinPrice();
+    price.value = response.data.data.price.toFixed(6);
+    amount.value = response.data.data.amount.toFixed(2);
   }
 
   async function connectWallet() {
@@ -804,6 +805,5 @@
     :global(button:focus, button:focus-visible) {
       outline: none;
     }
-    
   }
 </style>

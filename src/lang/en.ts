@@ -27,8 +27,7 @@ export default {
     accounts: 'Accounts',
     average_interval: 'Average Interval',
     price: 'Price',
-    mockTip:
-      'The page display is simulated data, after the test online converted to real data',
+    mockTip: 'The page display is testnet data',
     unc_explorer: 'UNC SCAN Explorer',
     search: 'Account / Block / Address / Message',
     power_trend: 'Whole network power trend',
@@ -160,7 +159,7 @@ export default {
     block: 'Block',
     transactionList: 'Transaction List',
     block_information: 'Information',
-    block_rich_list: 'Chip List',
+    block_chip_list: 'Chip List',
     block_order: 'Order',
     block_memory_pool: 'Memory Pool',
     block_contract_verification: 'Contract Verification',

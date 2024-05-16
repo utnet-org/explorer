@@ -49,9 +49,9 @@
           query: { query_word: keyword },
         });
       }
-    }else{
+    } else {
       console.log('res.data.message', response.data.data);
-        alert(response.data.data.message_zh);
+      alert(response.data.data.message_zh);
     }
   }
 
@@ -84,9 +84,6 @@
           path: '/blockchain/details',
           query: { query_word: height, query_type: 1 },
         });
-      } else {
-        
-
       }
     }
   };
@@ -200,12 +197,12 @@
             <div>{{ ovData.aveBlockInterval }} {{ $t('home.second') }}</div>
           </div>
         </div>
-        <div class="more" @click="goToMore(true)" v-if="!showMore">{{
-          $t('home.see_more')
-        }}</div>
-        <div class="more" @click="goToMore(false)" v-if="showMore">{{
-          $t('home.close')
-        }}</div>
+        <!--        <div class="more" @click="goToMore(true)" v-if="!showMore">{{-->
+        <!--          $t('home.see_more')-->
+        <!--        }}</div>-->
+        <!--        <div class="more" @click="goToMore(false)" v-if="showMore">{{-->
+        <!--          $t('home.close')-->
+        <!--        }}</div>-->
       </div>
       <div
         v-if="fromPage == 'home' && size == Screen.Small"

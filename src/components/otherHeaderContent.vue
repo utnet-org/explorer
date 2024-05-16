@@ -1,18 +1,19 @@
 <script setup lang="ts">
-import { ApiMetworkValidator } from '@/api/chart';
-import router from '@/route/route';
-import { ref } from 'vue';
+  import { ApiMetworkValidator } from '@/api/chart';
+  import router from '@/route/route';
+  import { ref } from 'vue';
+  import SearchBox from '@/components/searchBox.vue';
 
-const searchMessage = ref('');
+  const searchMessage = ref('');
   // const count = ref(0)
   const inputChange = async () => {
     const height = searchMessage.value.trim();
-    console.log('searchMessage.value',searchMessage.value);
+    console.log('searchMessage.value', searchMessage.value);
     if (searchMessage.value.trim() !== '') {
       console.log('search', searchMessage.value.trim());
       // const res = await getBlockDetails({ query_word: height, query_type: 1 });
       const res = await ApiMetworkValidator({ account_id: height });
-      console.log('res',res);
+      console.log('res', res);
 
       if (res.data.code !== -1) {
         void router.push({
@@ -25,7 +26,6 @@ const searchMessage = ref('');
       }
     }
   };
-
 </script>
 <template>
   <div class="header_content">
@@ -37,31 +37,7 @@ const searchMessage = ref('');
               <div class="peak_content_top_side_title">{{
                 $t('nav.block')
               }}</div>
-              <div class="peak_content_top_side_search">
-                <!-- <div class="peak_content_top_side_search_type">All Filters</div> -->
-                <!-- <img class="peak_content_top_side_search_type_icon"
-                                    src="../assets/images/search_to_bottom.png" alt=""> -->
-                <input
-                  type="text"
-                  name=""
-                  id=""
-                  :placeholder="$t('home.search')"
-                  v-model="searchMessage"
-                />
-                <img
-                  class="peak_content_top_side_search_btn"
-                  src="../assets/images/home_search_icon.png"
-                  alt=""
-                  @click="inputChange()"
-                />
-              </div>
-              <!-- <div class="search_history">
-                <div>Trending search:</div>
-                <div>内容1 </div>
-                <div>内容2</div>
-                <div>内容3</div>
-                <div>内容4</div>
-              </div> -->
+              <SearchBox />
             </div>
           </div>
         </div>
@@ -104,53 +80,6 @@ const searchMessage = ref('');
               font-family: PingFang SC;
               font-size: 20px;
               font-weight: 600;
-            }
-
-            .peak_content_top_side_search {
-              width: 683px;
-              height: 50px;
-              border-radius: 8px;
-              background: #fff;
-              margin: 14px 0 9px;
-              padding: 0 6px 0 9px;
-              box-sizing: border-box;
-              display: flex;
-              align-items: center;
-
-              .peak_content_top_side_search_type {
-                color: #000;
-                font-family: PingFang SC;
-                font-size: 14px;
-                font-weight: 400;
-                margin-right: 8px;
-              }
-
-              .peak_content_top_side_search_type_icon {
-                width: 12px;
-                height: 8px;
-              }
-
-              input {
-                flex: 1;
-                margin: 0 22px;
-                background-color: transparent;
-                border: none;
-                outline: none;
-                color: #000;
-              }
-
-              // .input_placeholder_style {
-              //     color: #000;
-              //     font-family: PingFang SC;
-              //     font-size: 14px;
-              //     font-weight: 300;
-              //     opacity: 0.5;
-              // }
-              .peak_content_top_side_search_btn {
-                width: 40px;
-                height: 40px;
-                cursor: pointer;
-              }
             }
 
             .search_history {
@@ -357,27 +286,6 @@ const searchMessage = ref('');
 
                 .peak_content_top_side_title {
                   font-size: 16px;
-                }
-
-                .peak_content_top_side_search {
-                  width: 100%;
-                  height: 50px;
-                  border-radius: 8px;
-                  background: #fff;
-                  margin: 14px 0 9px;
-                  padding: 0 6px 0 0;
-                  box-sizing: border-box;
-                  display: flex;
-                  align-items: center;
-
-                  input {
-                    flex: 1;
-                    margin: 0 22px;
-                    background-color: transparent;
-                    border: none;
-                    outline: none;
-                    color: #000;
-                  }
                 }
 
                 .search_history {

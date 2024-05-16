@@ -417,7 +417,7 @@
         <img src="../assets/images/price_icon.png" alt="" />
         <div>UNC {{ $t('home.price') }}:</div>
         <div>${{ price }}</div>
-        <div>(+{{ amount }}%)</div>
+        <div>({{ amount }}%)</div>
       </div>
       <div class="nav_corner_item">
         <div class="nav_corner_item_side">

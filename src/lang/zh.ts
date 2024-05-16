@@ -13,6 +13,14 @@ export default {
     language: '语言',
   },
   home: {
+    Gas_price: 'Gas 价格',
+    Gas_fee: 'Gas 费',
+    Gas_used: '使用的 Gas',
+    Gas_limit: 'Gas 限制',
+    parent_hash: '父哈希',
+    and: '和',
+    receipt: '回执',
+    trade: '交易',
     connect_wallet: '连接钱包',
     recent_trans: '最近交易',
     disconnect_wallet: '断开连接',
@@ -91,6 +99,7 @@ export default {
     Total_number_of_messages_or_proportion: '消息合计数/占比',
 
     high: '高度',
+    hash: '哈希',
     Computing_power_provider: '算力提供者',
     Message_list: '消息列表',
     Search_for_clients_or_miner: '搜索客户/矿工',

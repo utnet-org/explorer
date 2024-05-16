@@ -45,23 +45,23 @@
 <template>
   <div class="content">
     <div class="details">
-      <div class="details_title">区块 {{ height }}</div>
+      <div class="details_title">{{ $t('blockChain.block') }} {{ height }}</div>
       <div class="card">
         <!--        <div class="card_data" v-for="(item, index) in cardData" :key="index">-->
         <div class="card_data">
-          <div class="card_title">高度</div>
+          <div class="card_title">{{ $t('home.high') }}</div>
           <div class="content_father">
             <div class="card_content">{{ blockDetails.height }}</div>
           </div>
         </div>
         <div class="card_data">
-          <div class="card_title">哈希</div>
+          <div class="card_title">{{ $t('home.hash') }}</div>
           <div class="content_father">
             <div class="card_content">{{ blockDetails.hash }}</div>
           </div>
         </div>
         <div class="card_data">
-          <div class="card_title">时间</div>
+          <div class="card_title">{{ $t('home.time') }}</div>
           <div class="content_father">
             <div class="card_content">
               {{
@@ -71,46 +71,47 @@
           </div>
         </div>
         <div class="card_data">
-          <div class="card_title">交易</div>
+          <div class="card_title">{{ $t('home.trade') }}</div>
           <div class="content_father">
             <div class="card_content"
-              >{{ blockDetails.transactions }} 交易 和
-              {{ blockDetails.receipts }} 回执</div
+              >{{ blockDetails.transactions }} {{ $t('home.trade') }}
+              {{ $t('home.and') }} {{ blockDetails.receipts }}
+              {{ $t('home.receipt') }}</div
             >
           </div>
         </div>
         <div class="card_data">
-          <div class="card_title">矿工</div>
+          <div class="card_title">{{ $t('home.Miner') }}</div>
           <div class="content_father">
             <div class="card_content">{{ blockDetails.author }}</div>
           </div>
         </div>
         <div class="card_data">
-          <div class="card_title">使用的 Gas</div>
+          <div class="card_title">{{ $t('home.Gas_used') }}</div>
           <div class="content_father">
             <div class="card_content">{{ blockDetails.gas_used }}</div>
           </div>
         </div>
         <div class="card_data">
-          <div class="card_title">Gas 限制</div>
+          <div class="card_title">{{ $t('home.Gas_limit') }}</div>
           <div class="content_father">
             <div class="card_content">{{ blockDetails.gas_limit }}</div>
           </div>
         </div>
         <div class="card_data">
-          <div class="card_title">Gas 价格</div>
+          <div class="card_title">{{ $t('home.Gas_price') }}</div>
           <div class="content_father">
             <div class="card_content">{{ blockDetails.gas_price }}</div>
           </div>
         </div>
         <div class="card_data">
-          <div class="card_title">Gas 费</div>
+          <div class="card_title">{{ $t('home.Gas_fee') }}</div>
           <div class="content_father">
             <div class="card_content">{{ blockDetails.gas_fee }}</div>
           </div>
         </div>
         <div class="card_data">
-          <div class="card_title">父哈希</div>
+          <div class="card_title">{{ $t('home.parent_hash') }}</div>
           <div
             class="content_father"
             @click="BlockClick(blockDetails.prev_hash)"

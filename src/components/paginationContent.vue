@@ -26,6 +26,10 @@
       type: Boolean,
       required: true,
     },
+    pageChange: {
+      type: Function,
+      required: true,
+    }
   });
   const emit = defineEmits(['pageChange']);
 
@@ -33,6 +37,7 @@
   const handlePageChange = (page: number) => {
     // 发出页面更改事件，携带新的页面索引
     emit('pageChange', page);
+    props.pageChange(page);
   };
 
   // 回到顶部的方法
@@ -70,7 +75,8 @@
           :page-size="props.pageSize"
           prev-icon="CaretLeft"
           next-icon="CaretRight"
-          @current-change="handlePageChange"
+          :current-page="props.currentPage"
+          @current-change="handlePageChange($event)"
         >
         </el-pagination>
       </el-config-provider>

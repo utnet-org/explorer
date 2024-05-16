@@ -4,10 +4,12 @@
   import HeaderPage from '../../components/otherHeaderContent.vue';
   import { BlockInfo, getBlockInfo } from '@/api/block.ts';
   import Mock from 'mockjs';
-  import { updateTimeAgo } from '@/utils/time.ts';
+  import { getTimeDiffFromTimestamp,updateTimeAgo } from '@/utils/time.ts';
   import { getScreenSize, Screen } from '@/utils/screen-size.ts';
   import paginationContent from '@/components/paginationContent.vue';
   import { useRouter } from 'vue-router';
+import { ApiBlockList } from '@/api/chart';
+
   const router = useRouter();
   // defineProps<{ msg: string }>()
   // const count = ref(0)
@@ -21,8 +23,12 @@
     // console.log(res.data.data);
     Object.assign(blockDatas, res.data.data);
   }
-  //监听窗口大小变化
-  onMounted(() => {
+  const blockList = ref([]);
+  const currentPage = ref(1); // 当前页码
+  const pageSize = ref(20); // 每页显示条目数，您想要显示5个
+  const totalItems = ref(0); // 总条目数，即您数组的长度
+  // 监听窗口大小变化
+  onMounted(async () => {
     const initialHeight = Mock.Random.integer(3000000, 4000000);
     // 从大到小排列
     heights.value = Array.from(
@@ -35,6 +41,14 @@
       heights.value = heights.value.map(h => h + 1);
       // height.value += 1;
     }, 3000);
+
+    const res = await ApiBlockList({
+      page_num: currentPage,
+      page_size: pageSize,
+    })
+    console.log('res',res.data.data);
+    totalItems.value = res.data.data.total;
+    blockList.value = res.data.data.block_list;
   });
   onUnmounted(() => {
     if (intervalId !== undefined) {
@@ -42,103 +56,26 @@
       
     }
   });
-  const tableData = [
-    {
-      id: 1,
-      date: '+8.34%',
-      name: 'MineFi',
-      address: 'No. 189, Grove St, Los Angeles',
-      newBlockList: ['baf...azy', 'baf...azy', 'baf...azy'],
-    },
-    {
-      id: 2,
-      date: '+8.34%',
-      name: 'MineFi',
-      address: 'No. 189, Grove St, Los Angeles',
-      newBlockList: [
-        'baf...azy',
-        'baf...azy',
-        'baf...azy',
-        'baf...azy',
-        'baf...azy',
-      ],
-    },
-    {
-      id: 3,
-      date: '+8.34%',
-      name: 'MineFi',
-      address: 'No. 189, Grove St, Los Angeles',
-      newBlockList: ['baf...azy', 'baf...azy', 'baf...azy'],
-    },
-    {
-      id: 4,
-      date: '+8.34%',
-      name: 'MineFi',
-      address: 'No. 189, Grove St, Los Angeles',
-      newBlockList: ['baf...azy', 'baf...azy', 'baf...azy'],
-    },
-    {
-      id: 5,
-      date: '+8.34%',
-      name: 'MineFi',
-      address: 'No. 189, Grove St, Los Angeles',
-      newBlockList: ['baf...azy', 'baf...azy', 'baf...azy'],
-    },
-    {
-      id: 6,
-      date: '+8.34%',
-      name: 'MineFi',
-      address: 'No. 189, Grove St, Los Angeles',
-      newBlockList: ['baf...azy', 'baf...azy', 'baf...azy'],
-    },
-    {
-      id: 7,
-      date: '+8.34%',
-      name: 'MineFi',
-      address: 'No. 189, Grove St, Los Angeles',
-      newBlockList: ['baf...azy', 'baf...azy', 'baf...azy'],
-    },
-    {
-      id: 8,
-      date: '+8.34%',
-      name: 'MineFi',
-      address: 'No. 189, Grove St, Los Angeles',
-      newBlockList: ['baf...azy', 'baf...azy', 'baf...azy'],
-    },
-    {
-      id: 9,
-      date: '+8.34%',
-      name: 'MineFi',
-      address: 'No. 189, Grove St, Los Angeles',
-      newBlockList: ['baf...azy', 'baf...azy', 'baf...azy'],
-    },
-    {
-      id: 10,
-      date: '+8.34%',
-      name: 'MineFi',
-      address: 'No. 189, Grove St, Los Angeles',
-      newBlockList: ['baf...azy', 'baf...azy', 'baf...azy'],
-    },
-    {
-      id: 11,
-      date: '+8.34%',
-      name: 'MineFi',
-      address: 'No. 189, Grove St, Los Angeles',
-      newBlockList: ['baf...azy', 'baf...azy', 'baf...azy'],
-    },
-  ];
-  const currentPage = ref(1); // 当前页码
-  const pageSize = ref(10); // 每页显示条目数，您想要显示5个
-  const totalItems = ref(tableData.length); // 总条目数，即您数组的长度
+
+
   // 处理页码改变
-  const handlePageChange = (page: number) => {
-    currentPage.value = page;
+  const handlePageChange = async (page: number) => {
+    console.log('page', page, pageSize.value);
+    
+    const res = await ApiBlockList({
+      page_num: page,
+      page_size: pageSize,
+    })
+    console.log('res', res.data.data);
+    totalItems.value = res.data.data.total;
+    blockList.value = res.data.data.block_list;
   };
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const heightClick = (height: number) => {
-    console.log(height);
-    // 跳转详情
-    router.push('/blockchain/details');
+    void router.push({
+      path: '/blockchain/details',
+      query: { query_word: height, query_type: 1 },
+    });
   };
 </script>
 <template>
@@ -152,7 +89,7 @@
       <div class="block_list_header">{{ $t('home.latest_block') }}</div>
       <el-table
         :data="
-          tableData.slice((currentPage - 1) * pageSize, currentPage * pageSize)
+          blockList.slice((currentPage - 1) * pageSize, currentPage * pageSize)
         "
         table-layout="fixed"
         v-if="size === Screen.Large"
@@ -175,52 +112,51 @@
         }"
         :highlight-current-row="true"
       >
-        <el-table-column 
-        prop="name" 
-        :label="$t('home.high')"       
-           
-        >
-          <template #default="">
-          <div @click="heightClick(1)" style=" cursor: pointer;
-
-          ">
-              <div style="color: #0facb6; margin-bottom: 8px; font-size: 14px"
-              >3292964</div
+        <el-table-column prop="height" :label="$t('home.high')">
+          <template #default="scope">
+            <div style="cursor: pointer" @click="heightClick(scope.row.height)">
+              <div
+                style="color: #0facb6; margin-bottom: 8px; font-size: 14px"
+                >{{ scope.row.height }}</div
+              >
+            </div>
+          </template>
+        </el-table-column>
+        <el-table-column prop="hash" :label="$t('home.hash')">
+        </el-table-column>
+        <el-table-column prop="timestamp" :label="$t('home.time')">
+          <template #default="scope">
+            <div
+              style="
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              "
             >
-            <div style="color: #6a6a69; font-size: 12px">1分13秒前</div>
-          </div>
+              {{ getTimeDiffFromTimestamp(scope.row.timestamp) }}
+            </div>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('home.block_id')">
-          <template #default="scope">
-            <div v-for="(item, index) in scope.row.newBlockList" :key="index">{{
-              item
-            }}</div>
-          </template>
+        <el-table-column prop="transactions" :label="$t('home.trade')">
+          
         </el-table-column>
-        <el-table-column :label="$t('home.Computing_power_provider')">
-          <template #default="scope">
-            <div v-for="index in scope.row.newBlockList" :key="index"
-              >f01234921</div
-            >
-          </template>
+        <el-table-column prop="author" :label="$t('home.Miner')">
+         
         </el-table-column>
-        <el-table-column :label="$t('home.tag')">
-          <template #default="scope">
-            <div v-for="index in scope.row.newBlockList" :key="index">---</div>
-          </template>
+        <el-table-column prop="gas_used" :label="$t('home.Gas_used')">
+        
         </el-table-column>
-        <el-table-column :label="$t('home.message')">
-          <template #default="scope">
-            <div v-for="index in scope.row.newBlockList" :key="index">66</div>
-          </template>
+        <el-table-column prop="gas_limit" :label="$t('home.Gas_limit')">
+         
         </el-table-column>
-        <el-table-column :label="$t('home.reward')">
-          <template #default="scope">
-            <div v-for="index in scope.row.newBlockList" :key="index"
-              >11.23 UNC</div
-            >
-          </template>
+        <el-table-column prop="gas_price" :label="$t('home.Gas_price')">
+        
+        </el-table-column>
+        <el-table-column prop="gas_fee" :label="$t('home.Gas_fee')">
+        
+        </el-table-column>
+        <el-table-column prop="prev_hash" :label="$t('home.parent_hash')">
+         
         </el-table-column>
       </el-table>
       <div v-else style="padding-bottom: 20px">
@@ -270,7 +206,7 @@
         :page-size="pageSize"
         :current-page="currentPage"
         :show-button="true"
-        @page-change="handlePageChange"
+        :page-change="handlePageChange"
       />
     </div>
   </div>

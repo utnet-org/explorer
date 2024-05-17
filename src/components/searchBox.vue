@@ -30,9 +30,6 @@
   const fetchSearchFilter = async () => {
     const keyword = searchFilter.value.trim();
     const response = await getSearchFilter(keyword);
-    // const sData = {};
-    // Object.assign(sData, response.data.data);
-    // lastTime.value = compareTimestampNano(ovData.latest_block);
     if (response.data.code === 0) {
       // 搜索type 1账户 2块高度 3块哈希 4地址 5交易 6消息 7芯片
       if (response.data.query_type == 2) {
@@ -55,7 +52,6 @@
         });
       }
     } else {
-      console.log('res.data.message', response.data.data);
       alert(response.data.data.message_zh);
     }
     return response.data.data;
@@ -96,14 +92,6 @@
         outline: none;
         color: #000;
       }
-
-      // .input_placeholder_style {
-      //     color: #000;
-      //     font-family: PingFang SC;
-      //     font-size: 14px;
-      //     font-weight: 300;
-      //     opacity: 0.5;
-      // }
 
       .peak_content_top_side_search_btn {
         width: 40px;

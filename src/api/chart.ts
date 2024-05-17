@@ -1,4 +1,4 @@
-import request from "../utils/request";
+import request from '../utils/request';
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export async function PosttChartData(data: any) {
@@ -28,14 +28,6 @@ export async function ApiMetworkValidator(data: any) {
   return await request({
     url: '/api/network/validator',
     method: 'post',
-    data,
-  });
-}
-export async function ApiBlockList(data: any) {
-  // return request.get("/chart/data", { params });
-  return await request({
-    url: '/api/block/list',
-    method: 'get',
     data,
   });
 }

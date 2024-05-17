@@ -1,16 +1,33 @@
-<!-- eslint-disable @typescript-eslint/explicit-function-return-type -->
+<template>
+  <div class="pag">
+    <div v-if="size == Screen.Large" class="pagination">
+      <el-config-provider>
+        <el-pagination
+          layout="prev, pager, next, jumper"
+          :total="total"
+          :page-size="props.pageSize"
+          prev-icon="CaretLeft"
+          next-icon="CaretRight"
+          :current-page="currentPage"
+          @current-change="handlePageChange"
+        >
+        </el-pagination>
+      </el-config-provider>
+    </div>
+
+    <div v-show="props.showButton" class="button_arrow" @click="scrollToTop">
+      <button_arrow />
+    </div>
+  </div>
+</template>
 <script lang="ts" setup>
-  import { computed, ref, watch } from 'vue';
+  import { toRefs } from 'vue';
   import button_arrow from '@/assets/svgs/button_arrow.svg';
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   import { getScreenSize, Screen } from '@/utils/screen-size.ts';
-  import zhCn from 'element-plus/dist/locale/zh-cn.mjs';
-  import en from 'element-plus/dist/locale/en.mjs';
-  import i18n from '@/lang';
+
   const size = getScreenSize().currentScreenSize;
-  // 父组建传入数据
   const props = defineProps({
-    totalItems: {
+    total: {
       type: Number,
       required: true,
     },
@@ -26,18 +43,16 @@
       type: Boolean,
       required: true,
     },
-    pageChange: {
+    onPageChange: {
       type: Function,
       required: true,
-    }
+    },
   });
-  const emit = defineEmits(['pageChange']);
 
-  // 处理分页更改
+  const { currentPage } = toRefs(props);
+
   const handlePageChange = (page: number) => {
-    // 发出页面更改事件，携带新的页面索引
-    emit('pageChange', page);
-    props.pageChange(page);
+    props.onPageChange(page);
   };
 
   // 回到顶部的方法
@@ -45,48 +60,7 @@
     // 使用原生的 window.scrollTo 方法
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
-
-  // 从 vue-i18n 实例获取当前语言设置
-  const language = ref(i18n.global.locale);
-  // 根据 language 值决定使用哪个 Element Plus 本地化对象
-  const locale = computed(() => (language.value === 'zh' ? zhCn : en));
-
-  // 当 vue-i18n 的 locale 变化时，更新 language
-  watch(
-    () => i18n.global.locale,
-    newLocale => {
-      language.value = newLocale;
-    },
-  );
-
-  // 当 language 变化时，更新 vue-i18n 的 locale 和 Element Plus 的 locale
-  watch(language, newLanguage => {
-    i18n.global.locale = newLanguage;
-    // 由于 locale 是计算属性，它会自动根据 language 的新值重新计算
-  });
 </script>
-<template>
-  <div class="pag">
-    <div v-if="size == Screen.Large" class="pagination">
-      <el-config-provider :locale="locale">
-        <el-pagination
-          layout="prev, pager, next, jumper"
-          :total="props.totalItems"
-          :page-size="props.pageSize"
-          prev-icon="CaretLeft"
-          next-icon="CaretRight"
-          :current-page="props.currentPage"
-          @current-change="handlePageChange($event)"
-        >
-        </el-pagination>
-      </el-config-provider>
-    </div>
-
-    <div v-show="props.showButton" class="button_arrow" @click="scrollToTop">
-      <button_arrow />
-    </div>
-  </div>
-</template>
 
 <style scoped lang="scss">
   :deep(.pagination .el-pager li) {

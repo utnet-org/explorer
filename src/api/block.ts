@@ -21,7 +21,22 @@ export interface LastBlock {
 }
 
 export interface BlockDetails {
-  data(blockDetails: { height?: number | undefined; hash?: string | undefined; chunk_hash?: string | undefined; timestamp?: number | undefined; timestamp_nanosec?: string | undefined; author?: string | undefined; gas_used?: number | undefined; gas_price?: number | undefined; gas_limit?: number | undefined; gas_fee?: number | undefined; prev_hash?: number | undefined; }, data: any): unknown;
+  data(
+    blockDetails: {
+      height?: number | undefined;
+      hash?: string | undefined;
+      chunk_hash?: string | undefined;
+      timestamp?: number | undefined;
+      timestamp_nanosec?: string | undefined;
+      author?: string | undefined;
+      gas_used?: number | undefined;
+      gas_price?: number | undefined;
+      gas_limit?: number | undefined;
+      gas_fee?: number | undefined;
+      prev_hash?: number | undefined;
+    },
+    data: any,
+  ): unknown;
   height?: number; // 高度
   hash?: string; // 交易Hash
   chunk_hash?: string; // chunkHash
@@ -62,4 +77,13 @@ export function getLastBlock() {
 
 export function getBlockDetails(data: BlockDetailsReq) {
   return axios.post<BlockDetails>('/api/block/details', data);
+}
+
+export async function apiBlockList(num: number, size: number) {
+  return axios.get('/api/block/list', {
+    params: {
+      page_num: num,
+      page_size: size,
+    },
+  });
 }

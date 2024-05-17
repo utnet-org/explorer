@@ -2,25 +2,22 @@
   // 最新区块
   import { onMounted, onUnmounted, reactive, ref } from 'vue';
   import HeaderPage from '../../components/otherHeaderContent.vue';
-  import { BlockInfo, getBlockInfo } from '@/api/block.ts';
+  import { apiBlockList, BlockInfo, getBlockInfo } from '@/api/block.ts';
   import Mock from 'mockjs';
-  import { getTimeDiffFromTimestamp,updateTimeAgo } from '@/utils/time.ts';
+  import { getTimeDiffFromTimestamp, updateTimeAgo } from '@/utils/time.ts';
   import { getScreenSize, Screen } from '@/utils/screen-size.ts';
   import paginationContent from '@/components/paginationContent.vue';
   import { useRouter } from 'vue-router';
-import { ApiBlockList } from '@/api/chart';
 
   const router = useRouter();
-  // defineProps<{ msg: string }>()
-  // const count = ref(0)
-  // const windowWidth = ref(document.documentElement.clientWidth);
+
   const size = getScreenSize().currentScreenSize;
   let intervalId: number | undefined;
   let heights = ref<number[]>([]);
   let blockDatas = reactive<BlockInfo[]>([{}]);
+
   async function fetchBlockInfo() {
     const res = await getBlockInfo();
-    // console.log(res.data.data);
     Object.assign(blockDatas, res.data.data);
   }
   const blockList = ref([]);
@@ -42,35 +39,27 @@ import { ApiBlockList } from '@/api/chart';
       // height.value += 1;
     }, 3000);
 
-    const res = await ApiBlockList({
-      page_num: currentPage,
-      page_size: pageSize,
-    })
-    console.log('res',res.data.data);
-    totalItems.value = res.data.data.total;
-    blockList.value = res.data.data.block_list;
+    await fetchBlockList(currentPage.value, pageSize.value);
   });
   onUnmounted(() => {
     if (intervalId !== undefined) {
       clearInterval(intervalId);
-      
     }
   });
 
-
   // 处理页码改变
   const handlePageChange = async (page: number) => {
-    console.log('page', page, pageSize.value);
-    
-    const res = await ApiBlockList({
-      page_num: page,
-      page_size: pageSize,
-    })
-    console.log('res', res.data.data);
+    currentPage.value = page;
+    await fetchBlockList(currentPage.value, pageSize.value);
+  };
+
+  // fetch block list data
+  const fetchBlockList = async (page: number, size: number) => {
+    const res = await apiBlockList(page, size);
     totalItems.value = res.data.data.total;
     blockList.value = res.data.data.block_list;
   };
-  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+
   const heightClick = (height: number) => {
     void router.push({
       path: '/blockchain/details',
@@ -88,9 +77,7 @@ import { ApiBlockList } from '@/api/chart';
     <div class="block_list">
       <div class="block_list_header">{{ $t('home.latest_block') }}</div>
       <el-table
-        :data="
-          blockList.slice((currentPage - 1) * pageSize, currentPage * pageSize)
-        "
+        :data="blockList"
         table-layout="fixed"
         v-if="size === Screen.Large"
         :header-cell-style="{
@@ -138,25 +125,18 @@ import { ApiBlockList } from '@/api/chart';
           </template>
         </el-table-column>
         <el-table-column prop="transactions" :label="$t('home.trade')">
-          
         </el-table-column>
         <el-table-column prop="author" :label="$t('home.Miner')">
-         
         </el-table-column>
         <el-table-column prop="gas_used" :label="$t('home.Gas_used')">
-        
         </el-table-column>
         <el-table-column prop="gas_limit" :label="$t('home.Gas_limit')">
-         
         </el-table-column>
         <el-table-column prop="gas_price" :label="$t('home.Gas_price')">
-        
         </el-table-column>
         <el-table-column prop="gas_fee" :label="$t('home.Gas_fee')">
-        
         </el-table-column>
         <el-table-column prop="prev_hash" :label="$t('home.parent_hash')">
-         
         </el-table-column>
       </el-table>
       <div v-else style="padding-bottom: 20px">
@@ -202,11 +182,11 @@ import { ApiBlockList } from '@/api/chart';
     </div>
     <div class="pagin">
       <paginationContent
-        :total-items="totalItems"
+        :total="totalItems"
         :page-size="pageSize"
         :current-page="currentPage"
         :show-button="true"
-        :page-change="handlePageChange"
+        :onPageChange="handlePageChange"
       />
     </div>
   </div>

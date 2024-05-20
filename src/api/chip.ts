@@ -16,3 +16,12 @@ export interface BlockDetailsReq {
 export function getChipInfo(key: string) {
   return axios.post<ChipInfo[]>('/api/query/chipinfo', { search_key: key });
 }
+
+export async function getChipList(num: number, size: number) {
+  return axios.get<ChipInfo[]>('/api/chip/list', {
+    params: {
+      page_num: num,
+      page_size: size,
+    },
+  });
+}

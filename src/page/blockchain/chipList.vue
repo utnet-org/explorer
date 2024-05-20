@@ -1,213 +1,49 @@
 <script setup lang="ts">
   // 芯片列表
-  import { onMounted, ref } from 'vue';
+  import { onMounted, onUnmounted, ref } from 'vue';
   import HeaderPage from '../../components/otherHeaderContent.vue';
-  // import Mock from 'mockjs';
   import { getScreenSize, Screen } from '@/utils/screen-size.ts';
   import paginationContent from '@/components/paginationContent.vue';
-  // defineProps<{ msg: string }>()
+  import { getChipList } from '@/api/chip.ts';
   const size = getScreenSize().currentScreenSize;
-  onMounted(() => {});
-  const dropdownText = ref('INT8');
-  const changeDropdownText = (command: string) => {
-    if (command === 'INT8') {
-      dropdownText.value = 'INT8';
+  let intervalId: number | undefined;
+  onMounted(() => {
+    intervalId = window.setInterval(() => {
+      fetchChipList(currentPage.value, pageSize.value);
+    }, 5000);
+  });
+  onUnmounted(() => {
+    if (intervalId !== undefined) {
+      clearInterval(intervalId);
     }
-    if (command === 'FP16') {
-      dropdownText.value = 'FP16';
-    }
-    if (command === 'FP32') {
-      dropdownText.value = 'FP32';
-    }
-  };
-  const tableData = [
-    {
-      model: 'BM1684',
-      id: '000000',
-      snCode: '0000000',
-      priKey1: '0x425ad…9972B',
-      priKey2: '0x425ad…9972B',
-      pubKey1: '0x425ad…9972B',
-      pubKey2: '0x425ad…9972B',
-      computingPowerType: 'int8',
-      computingPowerValue: '32.00 TiB',
-      belongingToTheMiner: 'f01923786',
-    },
-    {
-      model: 'BM1684',
-      id: '000000',
-      snCode: '0000000',
-      priKey1: '0x425ad…9972B',
-      priKey2: '0x425ad…9972B',
-      pubKey1: '0x425ad…9972B',
-      pubKey2: '0x425ad…9972B',
-      computingPowerType: 'int8',
-      computingPowerValue: '32.00 TiB',
-      belongingToTheMiner: 'f01923786',
-    },
-    {
-      model: 'BM1684',
-      id: '000000',
-      snCode: '0000000',
-      priKey1: '0x425ad…9972B',
-      priKey2: '0x425ad…9972B',
-      pubKey1: '0x425ad…9972B',
-      pubKey2: '0x425ad…9972B',
-      computingPowerType: 'int8',
-      computingPowerValue: '32.00 TiB',
-      belongingToTheMiner: 'f01923786',
-    },
-    {
-      model: 'BM1684',
-      id: '000000',
-      snCode: '0000000',
-      priKey1: '0x425ad…9972B',
-      priKey2: '0x425ad…9972B',
-      pubKey1: '0x425ad…9972B',
-      pubKey2: '0x425ad…9972B',
-      computingPowerType: 'int8',
-      computingPowerValue: '32.00 TiB',
-      belongingToTheMiner: 'f01923786',
-    },
-    {
-      model: 'BM1684',
-      id: '000000',
-      snCode: '0000000',
-      priKey1: '0x425ad…9972B',
-      priKey2: '0x425ad…9972B',
-      pubKey1: '0x425ad…9972B',
-      pubKey2: '0x425ad…9972B',
-      computingPowerType: 'int8',
-      computingPowerValue: '32.00 TiB',
-      belongingToTheMiner: 'f01923786',
-    },
-    {
-      model: 'BM1684',
-      id: '000000',
-      snCode: '0000000',
-      priKey1: '0x425ad…9972B',
-      priKey2: '0x425ad…9972B',
-      pubKey1: '0x425ad…9972B',
-      pubKey2: '0x425ad…9972B',
-      computingPowerType: 'int8',
-      computingPowerValue: '32.00 TiB',
-      belongingToTheMiner: 'f01923786',
-    },
-    {
-      model: 'BM1684',
-      id: '000000',
-      snCode: '0000000',
-      priKey1: '0x425ad…9972B',
-      priKey2: '0x425ad…9972B',
-      pubKey1: '0x425ad…9972B',
-      pubKey2: '0x425ad…9972B',
-      computingPowerType: 'int8',
-      computingPowerValue: '32.00 TiB',
-      belongingToTheMiner: 'f01923786',
-    },
-    {
-      model: 'BM1684',
-      id: '000000',
-      snCode: '0000000',
-      priKey1: '0x425ad…9972B',
-      priKey2: '0x425ad…9972B',
-      pubKey1: '0x425ad…9972B',
-      pubKey2: '0x425ad…9972B',
-      computingPowerType: 'int8',
-      computingPowerValue: '32.00 TiB',
-      belongingToTheMiner: 'f01923786',
-    },
-    {
-      model: 'BM1684',
-      id: '000000',
-      snCode: '0000000',
-      priKey1: '0x425ad…9972B',
-      priKey2: '0x425ad…9972B',
-      pubKey1: '0x425ad…9972B',
-      pubKey2: '0x425ad…9972B',
-      computingPowerType: 'int8',
-      computingPowerValue: '32.00 TiB',
-      belongingToTheMiner: 'f01923786',
-    },
-    {
-      model: 'BM1684',
-      id: '000000',
-      snCode: '0000000',
-      priKey1: '0x425ad…9972B',
-      priKey2: '0x425ad…9972B',
-      pubKey1: '0x425ad…9972B',
-      pubKey2: '0x425ad…9972B',
-      computingPowerType: 'int8',
-      computingPowerValue: '32.00 TiB',
-      belongingToTheMiner: 'f01923786',
-    },
-    {
-      model: 'BM1684',
-      id: '000000',
-      snCode: '0000000',
-      priKey1: '0x425ad…9972B',
-      priKey2: '0x425ad…9972B',
-      pubKey1: '0x425ad…9972B',
-      pubKey2: '0x425ad…9972B',
-      computingPowerType: 'int8',
-      computingPowerValue: '32.00 TiB',
-      belongingToTheMiner: 'f01923786',
-    },
-    {
-      model: 'BM1684',
-      id: '000000',
-      snCode: '0000000',
-      priKey1: '0x425ad…9972B',
-      priKey2: '0x425ad…9972B',
-      pubKey1: '0x425ad…9972B',
-      pubKey2: '0x425ad…9972B',
-      computingPowerType: 'int8',
-      computingPowerValue: '32.00 TiB',
-      belongingToTheMiner: 'f01923786',
-    },
-    {
-      model: 'BM1684',
-      id: '000000',
-      snCode: '0000000',
-      priKey1: '0x425ad…9972B',
-      priKey2: '0x425ad…9972B',
-      pubKey1: '0x425ad…9972B',
-      pubKey2: '0x425ad…9972B',
-      computingPowerType: 'int8',
-      computingPowerValue: '32.00 TiB',
-      belongingToTheMiner: 'f01923786',
-    },
-    {
-      model: 'BM1684',
-      id: '000000',
-      snCode: '0000000',
-      priKey1: '0x425ad…9972B',
-      priKey2: '0x425ad…9972B',
-      pubKey1: '0x425ad…9972B',
-      pubKey2: '0x425ad…9972B',
-      computingPowerType: 'int8',
-      computingPowerValue: '32.00 TiB',
-      belongingToTheMiner: 'f01923786',
-    },
-    {
-      model: 'BM1684',
-      id: '000000',
-      snCode: '0000000',
-      priKey1: '0x425ad…9972B',
-      priKey2: '0x425ad…9972B',
-      pubKey1: '0x425ad…9972B',
-      pubKey2: '0x425ad…9972B',
-      computingPowerType: 'int8',
-      computingPowerValue: '32.00 TiB',
-      belongingToTheMiner: 'f01923786',
-    },
-  ];
+  });
+  // const dropdownText = ref('INT8');
+  const tableData = ref([]);
   const currentPage = ref(1); // 当前页码
-  const pageSize = ref(10); // 每页显示条目数，您想要显示5个
-  const totalItems = ref(tableData.length); // 总条目数，即您数组的长度
+  const pageSize = ref(20);
+  const totalItems = ref(0);
+
+  const fetchChipList = async (page: number, size: number) => {
+    const res = await getChipList(page, size);
+    totalItems.value = res.data.data.total;
+    tableData.value = res.data.data.chip_list;
+  };
+  // const changeDropdownText = (command: string) => {
+  //   if (command === 'INT8') {
+  //     dropdownText.value = 'INT8';
+  //   }
+  //   if (command === 'FP16') {
+  //     dropdownText.value = 'FP16';
+  //   }
+  //   if (command === 'FP32') {
+  //     dropdownText.value = 'FP32';
+  //   }
+  // };
+
   // 处理页码改变
-  const handlePageChange = (page: number) => {
+  const handlePageChange = async (page: number) => {
     currentPage.value = page;
+    await fetchChipList(currentPage.value, pageSize.value);
   };
 </script>
 <template>
@@ -219,25 +55,23 @@
     <div class="block_list">
       <div class="block_list_header">
         <div class="block_list_header_title">{{ $t('home.chip_list') }}</div>
-        <div class="block_list_header_text">共 1141606363 条芯片信息</div>
+        <div class="block_list_header_text">共 {{ totalItems }} 条芯片信息</div>
       </div>
-      <div v-if="size === Screen.Large" class="dropdown">
-        <div class="dropdown_title">{{ $t('home.power_type') }} </div>
-        <el-dropdown @command="changeDropdownText">
-          <div class="dropdown_text">{{ dropdownText }}</div>
-          <template #dropdown>
-            <el-dropdown-menu>
-              <el-dropdown-item command="INT8">INT8</el-dropdown-item>
-              <el-dropdown-item command="FP16">FP16</el-dropdown-item>
-              <el-dropdown-item command="FP32">FP32</el-dropdown-item>
-            </el-dropdown-menu>
-          </template>
-        </el-dropdown>
-      </div>
+      <!--      <div v-if="size === Screen.Large" class="dropdown">-->
+      <!--        <div class="dropdown_title">{{ $t('home.power_type') }} </div>-->
+      <!--        <el-dropdown @command="changeDropdownText">-->
+      <!--          <div class="dropdown_text">{{ dropdownText }}</div>-->
+      <!--          <template #dropdown>-->
+      <!--            <el-dropdown-menu>-->
+      <!--              <el-dropdown-item command="INT8">INT8</el-dropdown-item>-->
+      <!--              <el-dropdown-item command="FP16">FP16</el-dropdown-item>-->
+      <!--              <el-dropdown-item command="FP32">FP32</el-dropdown-item>-->
+      <!--            </el-dropdown-menu>-->
+      <!--          </template>-->
+      <!--        </el-dropdown>-->
+      <!--      </div>-->
       <el-table
-        :data="
-          tableData.slice((currentPage - 1) * pageSize, currentPage * pageSize)
-        "
+        :data="tableData"
         table-layout="fixed"
         v-if="size === Screen.Large"
         :header-cell-style="{
@@ -255,27 +89,39 @@
           fontWeight: '500',
           textAlign: 'center',
           borderBottom: '0.5px solid rgba(140, 233, 220,0.5)',
-          // backgroundColor: '#F9F9F8',
         }"
         :highlight-current-row="true"
       >
-        <el-table-column prop="model" :label="$t('blockChain.chip_model')" />
-        <el-table-column prop="id" label="ID"></el-table-column>
         <el-table-column
-          prop="snCode"
+          prop="chip_type"
+          :label="$t('blockChain.chip_model')"
+        />
+        <el-table-column prop="bus_id" label="ID"></el-table-column>
+        <el-table-column
+          prop="serial_number"
           :label="$t('blockChain.chip_sn_code')"
         ></el-table-column>
-        <el-table-column prop="priKey1" label="Pri Key1"></el-table-column>
-        <el-table-column prop="priKey2" label="Pri Key2"></el-table-column>
-        <el-table-column prop="pubKey1" label="Pub Key1"></el-table-column>
-        <el-table-column prop="pubKey2" label="Pub Key2"></el-table-column>
+        <el-table-column prop="p2key" label="Pri Key2">
+          <template #default="{ row }">
+            <el-tooltip effect="dark" :content="row.p2key" placement="top">
+              <div class="text-ellipsis">{{ row.p2key }}</div>
+            </el-tooltip>
+          </template>
+        </el-table-column>
+        <el-table-column prop="public_key" label="Pub Key1">
+          <template #default="{ row }">
+            <el-tooltip effect="dark" :content="row.public_key" placement="top">
+              <div class="text-ellipsis">{{ row.public_key }}</div>
+            </el-tooltip>
+          </template>
+        </el-table-column>
+        <!--        <el-table-column-->
+        <!--          prop="computingPowerType"-->
+        <!--          :label="$t('blockChain.chip_computing_power_type')"-->
+        <!--        ></el-table-column>-->
         <el-table-column
-          prop="computingPowerType"
-          :label="$t('blockChain.chip_computing_power_type')"
-        ></el-table-column>
-        <el-table-column
-          prop="computingPowerValue"
-          :label="$t('blockChain.chip_computing_power_value')"
+          prop="power"
+          :label="$t('blockChain.chip_computing_power_value') + ' (T)'"
         ></el-table-column>
         <el-table-column
           prop="belongingToTheMiner"
@@ -293,7 +139,7 @@
               </div>
               <div>
                 <div class="black-text-14">
-                  {{ item.model }}
+                  {{ item.chip_type }}
                 </div>
               </div>
             </div>
@@ -303,7 +149,7 @@
               </div>
               <div>
                 <div class="black-text-14">
-                  {{ item.id }}
+                  {{ item.bus_id }}
                 </div>
               </div>
             </div>
@@ -315,62 +161,62 @@
               </div>
               <div>
                 <div class="black-text-14">
-                  {{ item.snCode }}
+                  {{ item.serial_number }}
                 </div>
               </div>
             </div>
             <div class="eco-item">
-              <div>
-                <div class="grey-text-14-300"> Pri Key1 </div>
-              </div>
-              <div>
-                <div class="black-text-14">
-                  {{ item.priKey1 }}
-                </div>
+              <div class="grey-text-14-300"> Pri Key1 </div>
+              <div class="black-text-14 text-ellipsis" style="width: 200px">
+                <el-tooltip effect="dark" :content="item.p2key" placement="top">
+                  {{ item.p2key }}
+                </el-tooltip>
               </div>
             </div>
+            <!--            <div class="eco-item">-->
+            <!--              <div>-->
+            <!--                <div class="grey-text-14-300"> Pri Key2 </div>-->
+            <!--              </div>-->
+            <!--              <div>-->
+            <!--                <div class="black-text-14">-->
+            <!--                  {{ item.priKey2 }}-->
+            <!--                </div>-->
+            <!--              </div>-->
+            <!--            </div>-->
             <div class="eco-item">
-              <div>
-                <div class="grey-text-14-300"> Pri Key2 </div>
-              </div>
-              <div>
-                <div class="black-text-14">
-                  {{ item.priKey2 }}
-                </div>
-              </div>
-            </div>
-            <div class="eco-item">
-              <div>
-                <div class="grey-text-14-300"> Pub Key1 </div>
-              </div>
-              <div>
-                <div class="black-text-14">
-                  {{ item.pubKey1 }}
-                </div>
+              <div class="grey-text-14-300"> Pub Key1 </div>
+              <div class="black-text-14 text-ellipsis" style="width: 200px">
+                <el-tooltip
+                  effect="dark"
+                  :content="item.public_key"
+                  placement="top"
+                >
+                  {{ item.public_key }}
+                </el-tooltip>
               </div>
             </div>
-            <div class="eco-item">
-              <div>
-                <div class="grey-text-14-300"> Pub Key2 </div>
-              </div>
-              <div>
-                <div class="black-text-14">
-                  {{ item.pubKey2 }}
-                </div>
-              </div>
-            </div>
-            <div class="eco-item">
-              <div>
-                <div class="grey-text-14-300">
-                  {{ $t('blockChain.chip_computing_power_type') }}
-                </div>
-              </div>
-              <div>
-                <div class="black-text-14">
-                  {{ item.computingPowerType }}
-                </div>
-              </div>
-            </div>
+            <!--            <div class="eco-item">-->
+            <!--              <div>-->
+            <!--                <div class="grey-text-14-300"> Pub Key2 </div>-->
+            <!--              </div>-->
+            <!--              <div>-->
+            <!--                <div class="black-text-14">-->
+            <!--                  {{ item.pubKey2 }}-->
+            <!--                </div>-->
+            <!--              </div>-->
+            <!--            </div>-->
+            <!--            <div class="eco-item">-->
+            <!--              <div>-->
+            <!--                <div class="grey-text-14-300">-->
+            <!--                  {{ $t('blockChain.chip_computing_power_type') }}-->
+            <!--                </div>-->
+            <!--              </div>-->
+            <!--              <div>-->
+            <!--                <div class="black-text-14">-->
+            <!--                  {{ item.computingPowerType }}-->
+            <!--                </div>-->
+            <!--              </div>-->
+            <!--            </div>-->
             <div class="eco-item">
               <div>
                 <div class="grey-text-14-300">
@@ -379,7 +225,7 @@
               </div>
               <div>
                 <div class="black-text-14">
-                  {{ item.computingPowerValue }}
+                  {{ item.power }}
                 </div>
               </div>
             </div>
@@ -403,11 +249,11 @@
     </div>
     <div class="pagin">
       <paginationContent
-        :total-items="totalItems"
+        :total="totalItems"
         :page-size="pageSize"
         :current-page="currentPage"
         :show-button="true"
-        @page-change="handlePageChange"
+        :onPageChange="handlePageChange"
       />
     </div>
   </div>
@@ -423,6 +269,12 @@
     /* 鼠标悬停时的背景颜色 */
     color: #0facb6;
     /* 鼠标悬停时的字体颜色 */
+  }
+
+  .text-ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .content {

@@ -1,9 +1,7 @@
 <script setup lang="ts">
-  // 最新区块
   import { onMounted, onUnmounted, reactive, ref } from 'vue';
   import HeaderPage from '../../components/otherHeaderContent.vue';
   import { apiBlockList, BlockInfo, getBlockInfo } from '@/api/block.ts';
-  import Mock from 'mockjs';
   import { getTimeDiffFromTimestamp, updateTimeAgo } from '@/utils/time.ts';
   import { getScreenSize, Screen } from '@/utils/screen-size.ts';
   import paginationContent from '@/components/paginationContent.vue';
@@ -26,16 +24,15 @@
   const totalItems = ref(0); // 总条目数，即您数组的长度
   // 监听窗口大小变化
   onMounted(async () => {
-    const initialHeight = Mock.Random.integer(3000000, 4000000);
-    // 从大到小排列
-    heights.value = Array.from(
-      { length: 10 },
-      (_, index) => initialHeight - index,
-    );
+    // const initialHeight = Mock.Random.integer(3000000, 4000000);
+    // heights.value = Array.from(
+    //   { length: 10 },
+    //   (_, index) => initialHeight - index,
+    // );
     intervalId = window.setInterval(() => {
       fetchBlockInfo();
       // 更新数组：增加每个元素的值
-      heights.value = heights.value.map(h => h + 1);
+      // heights.value = heights.value.map(h => h + 1);
       // height.value += 1;
     }, 3000);
 

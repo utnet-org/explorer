@@ -2,71 +2,25 @@
   import { onMounted, onUnmounted, ref } from 'vue';
   import HeaderPage from '../../components/otherHeaderContent.vue';
   import { getScreenSize, Screen } from '@/utils/screen-size.ts';
-  import { Search } from '@element-plus/icons-vue';
   import paginationContent from '@/components/paginationContent.vue';
   const size = getScreenSize().currentScreenSize;
-  const searchMessage = ref('');
   import { useRouter } from 'vue-router';
   import { getTxnList } from '@/api/transaction.ts';
+  import { CompareTimestampNano } from '@/utils/time.ts';
 
   const router = useRouter();
 
-  // const tableData = [
-  //   {
-  //     id: 1,
-  //     TxnHash: 'BNjBCsvfDPJVS1MJv3ZUHbbknc9vPZkRv2fAN6mzgUM4',
-  //     Method: '未知',
-  //     DepositValue: '0Ⓝ',
-  //     TxnFee: '0.00026Ⓝ',
-  //     From: 'relay.tg',
-  //     To: 'i7102151627.tg',
-  //     BlockHeight: '116,375,717',
-  //     AGe: '27 minutes ago',
-  //   },
-  //   {
-  //     id: 2,
-  //     TxnHash: 'BNjBCsvfDPJVS1MJv3ZUHbbknc9vPZkRv2fAN6mzgUM4',
-  //     Method: '未知',
-  //     DepositValue: '0Ⓝ',
-  //     TxnFee: '0.00026Ⓝ',
-  //     From: 'relay.tg',
-  //     To: 'i7102151627.tg',
-  //     BlockHeight: '116,375,717',
-  //     AGe: '27 minutes ago',
-  //   },
-  //   {
-  //     id: 3,
-  //     TxnHash: 'BNjBCsvfDPJVS1MJv3ZUHbbknc9vPZkRv2fAN6mzgUM4',
-  //     Method: '未知',
-  //     DepositValue: '0Ⓝ',
-  //     TxnFee: '0.00026Ⓝ',
-  //     From: 'relay.tg',
-  //     To: 'i7102151627.tg',
-  //     BlockHeight: '116,375,717',
-  //     AGe: '27 minutes ago',
-  //   },
-  //   {
-  //     id: 4,
-  //     TxnHash: 'BNjBCsvfDPJVS1MJv3ZUHbbknc9vPZkRv2fAN6mzgUM4',
-  //     Method: '未知',
-  //     DepositValue: '0Ⓝ',
-  //     TxnFee: '0.00026Ⓝ',
-  //     From: 'relay.tg',
-  //     To: 'i7102151627.tg',
-  //     BlockHeight: '116,375,717',
-  //     AGe: '27 minutes ago',
-  //   },
-  // ];
-  let intervalId: number | undefined;
+  // let intervalId: number | undefined;
   onMounted(() => {
-    intervalId = window.setInterval(() => {
-      fetchTxnList(currentPage.value, pageSize.value);
-    }, 5000);
+    fetchTxnList(currentPage.value, pageSize.value);
+    // intervalId = window.setInterval(() => {
+    //   fetchTxnList(currentPage.value, pageSize.value);
+    // }, 5000);
   });
   onUnmounted(() => {
-    if (intervalId !== undefined) {
-      clearInterval(intervalId);
-    }
+    // if (intervalId !== undefined) {
+    //   clearInterval(intervalId);
+    // }
   });
   const tableData = ref([]);
   const currentPage = ref(1); // 当前页码
@@ -80,15 +34,6 @@
   // 处理页码改变
   const handlePageChange = (page: number) => {
     currentPage.value = page;
-  };
-
-  const formatTxnHash = (row: any) => {
-    // 获取 TxnHash 字段的值
-    const txnHash = row.TxnHash;
-    // 如果 TxnHash 存在并且长度大于12，则截取前12位并添加省略号，否则返回原始值
-    return txnHash && txnHash.length > 12
-      ? txnHash.slice(0, 12) + '...'
-      : txnHash;
   };
 
   const tableClick = (row: any) => {
@@ -152,31 +97,58 @@
         :highlight-current-row="true"
         @row-click="tableClick"
       >
-        <el-table-column
-          prop="hash"
-          label="交易哈希"
-          :formatter="formatTxnHash"
-        ></el-table-column>
+        <el-table-column prop="hash" label="交易哈希">
+          <template #default="{ row }">
+            <el-tooltip effect="dark" :content="row.hash" placement="top">
+              <div class="text-ellipsis">{{ row.hash }}</div>
+            </el-tooltip>
+          </template>
+        </el-table-column>
         <el-table-column label="类型">
-          <template #default="scope">
-            <div style="color: #0facb6">{{ scope.row.txn_type }}</div>
+          <template #default="{ row }">
+            <div style="color: #0facb6">
+              <span v-if="row.txn_type">{{ row.txn_type }}</span>
+              <span v-else>未知</span>
+            </div>
           </template>
         </el-table-column>
-        <el-table-column prop="deposit" label="存款价值"></el-table-column>
-        <el-table-column prop="txn_fee" label="TXN费用"></el-table-column>
-        <el-table-column prop="signer_id" label="发送方"></el-table-column>
+        <el-table-column prop="deposit" label="存款价值">
+          <template #default="{ row }">
+            <span v-if="row.deposit">{{ row.deposit }}</span>
+            <span v-else>0</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="txn_fee" label="TXN费用">
+          <template #default="{ row }">
+            <span>{{ row.txn_fee.toFixed(6) }} UNC</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="signer_id" label="发送方">
+          <template #default="{ row }">
+            <el-tooltip effect="dark" :content="row.signer_id" placement="top">
+              <div class="text-ellipsis">{{ row.signer_id }}</div>
+            </el-tooltip>
+          </template>
+        </el-table-column>
         <el-table-column label="接收方">
-          <template #default="scope">
-            <div style="color: #0facb6">{{ scope.row.receiver_id }}</div>
+          <template #default="{ row }">
+            <el-tooltip
+              effect="dark"
+              :content="row.receiver_id"
+              placement="top"
+            >
+              <div class="text-ellipsis" style="color: #0facb6">{{
+                row.receiver_id
+              }}</div>
+            </el-tooltip>
           </template>
         </el-table-column>
-        <el-table-column label="块高度">
-          <template #default="scope">
-            <span>{{ scope.row.height }}</span>
-            <span>UNC</span>
+        <el-table-column prop="height" label="块高度"> </el-table-column>
+        <el-table-column prop="timestamp" label="块龄">
+          <template #default="{ row }">
+            <span>{{ CompareTimestampNano(row.timestamp) }}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="timestamp" label="块龄"></el-table-column>
       </el-table>
       <div v-else style="padding-bottom: 20px">
         <div>
@@ -186,8 +158,8 @@
                 <div class="grey-text-12-300"> 交易哈希</div>
               </div>
               <div>
-                <div class="black-text-14">
-                  {{ formatTxnHash(item.hash) }}
+                <div class="black-text-14 text-ellipsis" style="width: 200px">
+                  {{ item.hash }}
                 </div>
               </div>
             </div>
@@ -197,7 +169,8 @@
               </div>
               <div>
                 <div class="black-text-14">
-                  {{ item.txn_type }}
+                  <span v-if="item.txn_type">{{ item.txn_type }}</span>
+                  <span v-else>未知</span>
                 </div>
               </div>
             </div>
@@ -207,7 +180,8 @@
               </div>
               <div>
                 <div class="black-text-14">
-                  {{ item.deposit }}
+                  <span v-if="item.deposit">{{ item.deposit }}</span>
+                  <span v-else>0</span>
                 </div>
               </div>
             </div>
@@ -217,7 +191,7 @@
               </div>
               <div>
                 <div class="black-text-14">
-                  {{ item.txn_fee }}
+                  {{ item.txn_fee.toFixed(6) }} UNC
                 </div>
               </div>
             </div>
@@ -227,7 +201,7 @@
                 <div class="grey-text-14-300"> 发送方</div>
               </div>
               <div>
-                <div class="black-text-14">
+                <div class="black-text-14 text-ellipsis" style="width: 200px">
                   {{ item.signer_id }}
                 </div>
               </div>
@@ -237,7 +211,7 @@
                 <div class="grey-text-14-300"> 接收方</div>
               </div>
               <div>
-                <div class="black-text-14">
+                <div class="black-text-14 text-ellipsis" style="width: 200px">
                   {{ item.receiver_id }}
                 </div>
               </div>
@@ -290,6 +264,12 @@
     position: absolute;
     z-index: 100;
     width: 100%;
+  }
+
+  .text-ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .content {

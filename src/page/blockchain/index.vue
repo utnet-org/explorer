@@ -2,7 +2,7 @@
   import { onMounted, onUnmounted, reactive, ref } from 'vue';
   import HeaderPage from '../../components/otherHeaderContent.vue';
   import { apiBlockList, BlockInfo, getBlockInfo } from '@/api/block.ts';
-  import { getTimeDiffFromTimestamp, updateTimeAgo } from '@/utils/time.ts';
+  import { CompareStrTimeNano, CompareTimestampNano } from '@/utils/time.ts';
   import { getScreenSize, Screen } from '@/utils/screen-size.ts';
   import paginationContent from '@/components/paginationContent.vue';
   import { useRouter } from 'vue-router';
@@ -117,7 +117,7 @@
                 align-items: center;
               "
             >
-              {{ getTimeDiffFromTimestamp(scope.row.timestamp) }}
+              {{ CompareStrTimeNano(scope.row.timestamp) }}
             </div>
           </template>
         </el-table-column>
@@ -148,7 +148,7 @@
                 <div class="second-text-14-500">{{ heights[index] }}</div>
               </div>
               <div class="black-text-14-500"
-                >{{ updateTimeAgo(Number(item.latest)) }}
+                >{{ CompareTimestampNano(Number(item.latest)) }}
               </div>
             </div>
             <div class="eco-item">

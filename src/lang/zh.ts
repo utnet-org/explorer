@@ -45,6 +45,8 @@ export default {
     year: '年',
     minute: '分',
     second: '秒',
+    day_abbreviate: '天',
+    hour_abbreviate: '小时',
     minute_abbreviate: '分',
     second_abbreviate: '秒',
     ago: '前',

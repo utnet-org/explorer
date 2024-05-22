@@ -7,7 +7,7 @@
     getLastBlock,
     LastBlock,
   } from '@/api/block.ts';
-  import { getTimeDiffFromTimestamp, updateTimeAgo } from '@/utils/time.ts';
+  import { CompareStrTimeNano, CompareTimestampNano } from '@/utils/time.ts';
   import { getScreenSize, Screen } from '@/utils/screen-size.ts';
   import { useRouter } from 'vue-router';
   const router = useRouter();
@@ -108,21 +108,18 @@
                   >{{ scope.row.height }}
                 </div>
                 <div style="color: #6a6a69; font-size: 12px"
-                  >{{ getTimeDiffFromTimestamp(scope.row.timestamp) }}
+                  >{{ CompareStrTimeNano(scope.row.timestamp) }}
                 </div>
               </div>
             </template>
           </el-table-column>
-          <el-table-column
-            :label="$t('home.block_id')"
-            prop="hash"
-          >
-          <template #default="scope">
-        <!-- 使用 @click 事件处理函数来监听点击事件 -->
-        <div  style="cursor: pointer" @click="BlockClick(scope.row.hash)">
-          {{ scope.row.hash }}
-        </div>
-      </template>
+          <el-table-column :label="$t('home.block_id')" prop="hash">
+            <template #default="scope">
+              <!-- 使用 @click 事件处理函数来监听点击事件 -->
+              <div style="cursor: pointer" @click="BlockClick(scope.row.hash)">
+                {{ scope.row.hash }}
+              </div>
+            </template>
           </el-table-column>
           <el-table-column :label="$t('home.miner')" prop="author">
           </el-table-column>
@@ -161,7 +158,7 @@
               <div class="second-text-14-500">{{ index }}</div>
             </div>
             <div class="black-text-14-500"
-              >{{ updateTimeAgo(item.latest) }}
+              >{{ CompareTimestampNano(item.latest) }}
             </div>
           </div>
           <div class="eco-item">

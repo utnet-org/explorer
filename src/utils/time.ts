@@ -1,54 +1,33 @@
 import i18n from '@/lang';
-export const timeDifference = (dateString: string) => {
-  const now = new Date();
-  const pastDate = new Date(dateString);
-  const difference = now.getTime() - pastDate.getTime();
-  const minutes = Math.floor(difference / 60000);
-  const seconds = Math.floor((difference % 60000) / 1000);
-  return `${minutes}分${seconds}秒前`;
-};
 
-export const updateTimeAgo = (seconds: number) => {
-  const pastDate = new Date(new Date().getTime() - seconds * 1000); // 当前时间减去随机时间
-  const now = new Date();
-
-  const diff = now.getTime() - pastDate.getTime();
-  const minutes = Math.floor(diff / 60000);
-  const remainingSeconds = Math.floor((diff % 60000) / 1000);
-  const m = i18n.global.t('home.minute_abbreviate');
+export function CompareTimestampNano(timestamp: number): string {
+  const currentTime = Math.floor(Date.now() / 1000); // 当前时间戳（秒）
+  const difference = Math.floor(currentTime - timestamp / 1e9); // 将纳秒转换为秒，并计算时间差
   const s = i18n.global.t('home.second_abbreviate');
-  // const ago = i18n.global.t('home.ago');
-
-  return `${minutes}${m} ${remainingSeconds}${s}`;
-};
-
-export function getTimeDiffFromTimestamp(timestampStr: string): string {
-  const timestamp = BigInt(timestampStr);
-  const currentTime = BigInt(Date.now());
-  const timeDiff = currentTime - timestamp;
-
-  // 转换为秒
-  const seconds = Math.floor(Number(timeDiff) / 1000);
-
-  if (seconds >= 60) {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${minutes} 分 ${remainingSeconds} 秒前`;
+  const m = i18n.global.t('home.minute_abbreviate');
+  const h = i18n.global.t('home.hour_abbreviate');
+  const d = i18n.global.t('home.day_abbreviate');
+  if (difference >= 86400) {
+    // 大于 24 小时
+    const days = Math.floor(difference / 86400);
+    const hours = Math.floor((difference % 86400) / 3600);
+    return `${days} ${d} ${hours} ${h}`;
+  } else if (difference >= 3600) {
+    // 大于 60 分钟
+    const hours = Math.floor(difference / 3600);
+    const minutes = Math.floor((difference % 3600) / 60);
+    return `${hours} ${h} ${minutes} ${m}`;
+  } else if (difference >= 60) {
+    // 大于 60 秒
+    const minutes = Math.floor(difference / 60);
+    const seconds = difference % 60;
+    return `${minutes} ${m} ${seconds} ${s}`;
   } else {
     return '刚刚';
   }
 }
 
-export function compareTimestampNano(timestamp: number): string {
-  const currentTime = Math.floor(Date.now() / 1000); // 当前时间戳（秒）
-  const difference = Math.floor(currentTime - timestamp / 1e9); // 将纳秒转换为秒，并计算时间差
-  const m = i18n.global.t('home.minute_abbreviate');
-  const s = i18n.global.t('home.second_abbreviate');
-  if (difference >= 60) {
-    const minutes = Math.floor(difference / 60);
-    const seconds = difference % 60;
-    return `${minutes}${m} ${seconds}${s}`;
-  } else {
-    return '刚刚';
-  }
+export function CompareStrTimeNano(timestampStr: string): string {
+  const timestamp = Number(timestampStr);
+  return CompareTimestampNano(timestamp);
 }

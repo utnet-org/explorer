@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { getOverviewInfo, OverviewInfo } from '@/api/overview.ts';
   import { onMounted, onUnmounted, reactive, ref } from 'vue';
-  import { compareTimestampNano } from '@/utils/time.ts';
+  import { CompareTimestampNano } from '@/utils/time.ts';
   import { getScreenSize, Screen } from '@/utils/screen-size.ts';
   import SearchBox from '@/components/searchBox.vue';
 
@@ -15,7 +15,7 @@
   async function fetchOverviewInfo() {
     const response = await getOverviewInfo();
     Object.assign(ovData, response.data.data);
-    lastTime.value = compareTimestampNano(ovData.latest_block);
+    lastTime.value = CompareTimestampNano(ovData.latest_block);
   }
 
   onMounted(() => {

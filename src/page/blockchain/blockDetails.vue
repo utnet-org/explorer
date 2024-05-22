@@ -6,7 +6,7 @@
     BlockDetails,
     getBlockDetails,
   } from '@/api/block.ts';
-  import { getTimeDiffFromTimestamp } from '@/utils/time.ts';
+  import { CompareStrTimeNano } from '@/utils/time.ts';
   import router from '@/route/route';
 
   const route = useRoute();
@@ -64,9 +64,7 @@
           <div class="card_title">{{ $t('home.time') }}</div>
           <div class="content_father">
             <div class="card_content">
-              {{
-                getTimeDiffFromTimestamp(blockDetails.timestamp_nanosec ?? '')
-              }}
+              {{ CompareStrTimeNano(blockDetails.timestamp_nanosec ?? '') }}
             </div>
           </div>
         </div>

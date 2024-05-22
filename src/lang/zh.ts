@@ -169,7 +169,6 @@ export default {
     chip_sn_code: 'SN编码',
     chip_computing_power_type: '算力类型',
     chip_computing_power_value: '算力值',
-    chip_belonging_to_the_miner: '所属矿工',
     Account_ID: '账户 ID',
     whether_to_punish: '是否惩罚',
     Expected_Block: '预计 Block',

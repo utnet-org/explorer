@@ -123,10 +123,6 @@
           prop="power"
           :label="$t('blockChain.chip_computing_power_value') + ' (T)'"
         ></el-table-column>
-        <el-table-column
-          prop="belongingToTheMiner"
-          :label="$t('blockChain.chip_belonging_to_the_miner')"
-        ></el-table-column>
       </el-table>
       <div v-else style="padding-bottom: 20px">
         <div>
@@ -226,18 +222,6 @@
               <div>
                 <div class="black-text-14">
                   {{ item.power }}
-                </div>
-              </div>
-            </div>
-            <div class="eco-item">
-              <div>
-                <div class="grey-text-14-300">
-                  {{ $t('blockChain.chip_belonging_to_the_miner') }}
-                </div>
-              </div>
-              <div>
-                <div class="black-text-14">
-                  {{ item.belongingToTheMiner }}
                 </div>
               </div>
             </div>

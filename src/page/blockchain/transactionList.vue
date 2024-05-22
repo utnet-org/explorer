@@ -37,10 +37,10 @@
   };
 
   const tableClick = (row: any) => {
-    // 获取点击行的 TxnHash 属性的值
-    const txnHash = row.id;
-    console.log('Clicked TxnHash:', txnHash);
-    router.push('/blockchain/transactionDetails');
+    router.push({
+      path: '/blockchain/transactionDetails',
+      query: { hash: row.hash },
+    });
   };
 </script>
 <template>

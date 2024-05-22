@@ -11,17 +11,17 @@ export function CompareTimestampNano(timestamp: number): string {
     // 大于 24 小时
     const days = Math.floor(difference / 86400);
     const hours = Math.floor((difference % 86400) / 3600);
-    return `${days} ${d} ${hours} ${h}`;
+    return `${days}${d} ${hours}${h}`;
   } else if (difference >= 3600) {
     // 大于 60 分钟
     const hours = Math.floor(difference / 3600);
     const minutes = Math.floor((difference % 3600) / 60);
-    return `${hours} ${h} ${minutes} ${m}`;
+    return `${hours}${h} ${minutes}${m}`;
   } else if (difference >= 60) {
     // 大于 60 秒
     const minutes = Math.floor(difference / 60);
     const seconds = difference % 60;
-    return `${minutes} ${m} ${seconds} ${s}`;
+    return `${minutes}${m} ${seconds}${s}`;
   } else {
     return '刚刚';
   }

@@ -19,3 +19,9 @@ export async function getTxnList(num: number, size: number) {
     },
   });
 }
+
+export async function getTxnDetail(hash: string) {
+  return axios.post<TxnInfo>('/api/txn/detail', {
+    txn_hash: hash,
+  });
+}

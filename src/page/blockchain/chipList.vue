@@ -6,16 +6,17 @@
   import paginationContent from '@/components/paginationContent.vue';
   import { getChipList } from '@/api/chip.ts';
   const size = getScreenSize().currentScreenSize;
-  let intervalId: number | undefined;
+  // let intervalId: number | undefined;
   onMounted(() => {
-    intervalId = window.setInterval(() => {
-      fetchChipList(currentPage.value, pageSize.value);
-    }, 5000);
+    fetchChipList(currentPage.value, pageSize.value);
+    // intervalId = window.setInterval(() => {
+    //   fetchChipList(currentPage.value, pageSize.value);
+    // }, 5000);
   });
   onUnmounted(() => {
-    if (intervalId !== undefined) {
-      clearInterval(intervalId);
-    }
+    // if (intervalId !== undefined) {
+    //   clearInterval(intervalId);
+    // }
   });
   // const dropdownText = ref('INT8');
   const tableData = ref([]);

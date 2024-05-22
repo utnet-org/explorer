@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { onMounted, reactive, ref } from 'vue';
+  import { onMounted, reactive } from 'vue';
   import { useRoute } from 'vue-router';
   import { ChipInfo, getChipInfo } from '@/api/chip.ts';
 
@@ -7,11 +7,9 @@
   const key = route.query.query_word ?? '';
 
   const infos = reactive<ChipInfo[]>([{}]);
-  // const info = reactive<ChipInfo>({});
 
   async function fetchChipInfo(key: string) {
     const res = await getChipInfo(key);
-    // Object.assign(info, res.data.data[0]);
     Object.assign(infos, res.data.data);
   }
   onMounted(() => {

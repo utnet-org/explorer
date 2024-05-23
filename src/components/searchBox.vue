@@ -6,6 +6,7 @@
       :placeholder="$t('home.search')"
     />
     <img
+      id="search-btn"
       class="peak_content_top_side_search_btn"
       src="../assets/images/home_search_icon.png"
       alt=""
@@ -15,7 +16,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref, defineEmits } from 'vue';
+  import { ref, defineEmits, onMounted, onBeforeUnmount } from 'vue';
   import { getSearchFilter } from '@/api/overview.ts';
   import router from '@/route/route.ts';
 
@@ -25,6 +26,25 @@
   const handleSearch = async () => {
     const result = await fetchSearchFilter();
     emit('searchFilter', result);
+  };
+
+  onMounted(() => {
+    window.addEventListener('keypress', handleKeyPress);
+  });
+
+  onBeforeUnmount(() => {
+    window.removeEventListener('keypress', handleKeyPress);
+  });
+
+  const handleKeyPress = (event: KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      const searchButton = document.getElementById(
+        'search-btn',
+      ) as HTMLImageElement;
+      if (searchButton) {
+        searchButton.click();
+      }
+    }
   };
 
   const fetchSearchFilter = async () => {

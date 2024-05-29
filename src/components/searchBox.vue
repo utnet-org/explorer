@@ -52,10 +52,10 @@
     const response = await getSearchFilter(keyword);
     if (response.data.code === 0) {
       // 搜索type 1账户 2块高度 3块哈希 4地址 5交易 6消息 7芯片
-      if (response.data.query_type == 1) {
+      if (response.data.data.query_type == 1) {
         void router.push({
           path: '/account/detail',
-          query: { query_word: keyword },
+          query: { query_word: response.data.data.keyword },
         });
       }
       if (response.data.query_type == 2) {

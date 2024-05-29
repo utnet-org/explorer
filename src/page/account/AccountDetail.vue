@@ -4,7 +4,7 @@
   import { AccountDetail, ApiAccountDetail } from '@/api/account.ts';
 
   const route = useRoute();
-  const accountId = route.query.query_word ?? '';
+  const accountId = route.query.query_word ?? route.query.keyword;
 
   const detail = reactive<AccountDetail>({
     amount: '',
@@ -63,13 +63,13 @@
         <div class="card_data">
           <div class="card_title">{{ $t('pledging') }}</div>
           <div class="content_father">
-            <div class="card_content">{{ detail?.pledging }}</div>
+            <div class="card_content">{{ detail?.pledging }} UNC</div>
           </div>
         </div>
         <div class="card_data">
           <div class="card_title">{{ $t('power') }}</div>
           <div class="content_father">
-            <div class="card_content">{{ detail?.power }}</div>
+            <div class="card_content">{{ detail?.power }} T</div>
           </div>
         </div>
         <div class="card_data">
@@ -81,7 +81,7 @@
         <div class="card_data">
           <div class="card_title">{{ $t('storage_usage') }}</div>
           <div class="content_father">
-            <div class="card_content">{{ detail?.storage_usage }}</div>
+            <div class="card_content">{{ detail?.storage_usage }} Bytes</div>
           </div>
         </div>
       </div>

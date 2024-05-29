@@ -52,6 +52,12 @@
     const response = await getSearchFilter(keyword);
     if (response.data.code === 0) {
       // 搜索type 1账户 2块高度 3块哈希 4地址 5交易 6消息 7芯片
+      if (response.data.query_type == 1) {
+        void router.push({
+          path: '/account/detail',
+          query: { query_word: keyword },
+        });
+      }
       if (response.data.query_type == 2) {
         void router.push({
           path: '/blockchain/details',
@@ -63,6 +69,12 @@
           path: '/blockchain/details',
           // block详情type 1高度 2哈希
           query: { query_word: keyword, query_type: 2 },
+        });
+      }
+      if (response.data.query_type == 5) {
+        void router.push({
+          path: '/blockchain/transactionDetails',
+          query: { keyword: keyword },
         });
       }
       if (response.data.query_type == 7) {

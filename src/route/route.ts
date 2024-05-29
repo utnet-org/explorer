@@ -23,7 +23,8 @@ import ChipInfo from '../page/chip/chipInfo.vue';
 
 import TransactionList from '../page/blockchain/transactionList.vue'; // 交易列表
 import TransactionDetails from '../page/blockchain/transactionDetail.vue'; // 交易详情
-import 'nprogress/nprogress.css'; // progress bar style
+import 'nprogress/nprogress.css';
+import AccountDetail from '@/page/account/AccountDetail.vue'; //账户详情
 NProgress.configure({ showSpinner: false });
 // assets
 const routes = [
@@ -107,6 +108,10 @@ const routes = [
       {
         path: '/chip/chipInfo',
         component: ChipInfo,
+      },
+      {
+        path: '/account/detail',
+        component: AccountDetail,
       },
     ],
   },

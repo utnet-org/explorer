@@ -5,12 +5,10 @@
   import { useRoute } from 'vue-router';
   import { onMounted, reactive } from 'vue';
   import { getTxnDetail, TxnInfo } from '@/api/transaction.ts';
-  import { CompareTimestampNano } from '../../utils/time.ts';
-
-  const status = 'Success';
+  import { CompareTimestampNano } from '@/utils/time.ts';
 
   const route = useRoute();
-  const hash = route.query.hash;
+  const hash = route.query.hash ?? route.query.keyword;
   const infos = reactive<TxnInfo>({});
 
   async function fetchTxnInfo(hash: string) {

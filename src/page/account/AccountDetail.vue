@@ -1,10 +1,97 @@
 <script setup lang="ts">
-  import { onMounted, reactive } from 'vue';
+  import { onMounted, reactive, ref } from 'vue';
   import { useRoute } from 'vue-router';
   import { AccountDetail, ApiAccountDetail } from '@/api/account.ts';
+  import WasmComponent from '@/components/WasmComponent.vue';
+  import { getContract } from '@/api/contract.ts';
 
   const route = useRoute();
   const accountId = route.query.query_word ?? route.query.keyword;
+
+  const buttons = ref([
+    { label: 'Transaction', active: false },
+    { label: 'Contract', active: false },
+  ]);
+
+  const currentPage = ref(null);
+  const functions = ref<string[]>([]);
+  const pageContents = ['Content of Page 1', functions.value];
+
+  function toggleButton(index: any) {
+    buttons.value.forEach((button, idx) => {
+      button.active = idx === index; // 只有点击的按钮为 plain 状态
+      if (index == 1) {
+        loadWasm(accountId as string);
+      }
+    });
+    currentPage.value = index; // 更新当前显示的页面内容
+  }
+  const wasmBase64 = ref('');
+
+  const loadWasm = async (accId: string) => {
+    var wasmInstance;
+    try {
+      const res = await getContract(accId);
+      console.log(res.data.data);
+      wasmBase64.value = res.data.data.replace(/\s/g, '');
+      const wasmBinary = Uint8Array.from(atob(wasmBase64.value), c =>
+        c.charCodeAt(0),
+      );
+      // test simple wasm
+      // const wasmBinary = await (await fetch('/simple.wasm')).arrayBuffer();
+      const wasmModule = await WebAssembly.compile(wasmBinary);
+      const imports = {
+        env: {
+          abort: () => {},
+          promise_results_count: () => {},
+          promise_result: () => {},
+          storage_has_key: () => {},
+          storage_read: () => {},
+          storage_write: () => {},
+          storage_remove: () => {},
+          storage_iter_create: () => {},
+          storage_iter_next: () => {},
+          memory: new WebAssembly.Memory({ initial: 256, maximum: 512 }),
+          table: new WebAssembly.Table({ initial: 0, element: 'anyfunc' }),
+          promise_batch_then: () => {},
+          promise_batch_create: () => {},
+          promise_batch_action_create_account: () => {},
+          promise_batch_action_deploy_contract: () => {},
+          promise_batch_action_function_call: () => {},
+          promise_batch_action_function_call_weight: () => {},
+          promise_batch_action_transfer: () => {},
+          promise_batch_action_stake: () => {},
+          promise_batch_action_add_key_with_full_access: () => {},
+          promise_batch_action_add_key_with_function_call: () => {},
+          promise_batch_action_delete_key: () => {},
+          promise_batch_action_delete_account: () => {},
+          promise_and: () => {},
+          promise_return: () => {},
+          panic_utf8: () => {},
+          register_len: () => {},
+          read_register: () => {},
+          current_account_id: () => {},
+          signer_account_pk: () => {},
+          predecessor_account_id: () => {},
+          input: () => {},
+          attached_deposit: () => {},
+          value_return: () => {},
+          log_utf8: () => {},
+        },
+      };
+      wasmInstance = await WebAssembly.instantiate(wasmModule, imports);
+      functions.value = [];
+      const exs = wasmInstance.exports;
+      for (const e in exs) {
+        if (typeof exs[e] === 'function') {
+          functions.value.push(e);
+        }
+      }
+      console.log(functions.value);
+    } catch (err) {
+      console.error('Error loading Wasm:', err);
+    }
+  };
 
   const detail = reactive<AccountDetail>({
     amount: '',
@@ -84,6 +171,39 @@
             <div class="card_content">{{ detail?.storage_usage }} Bytes</div>
           </div>
         </div>
+      </div>
+      <el-divider />
+      <el-button
+        v-for="(button, index) in buttons"
+        :key="index"
+        :style="{
+          color: button.active ? ' #000' : ' rgba(0, 0, 0, 0.5)',
+          backgroundColor: button.active ? '#3EDFCF' : '#fff',
+          fontWeight: button.active ? 500 : 300,
+        }"
+        effect="light"
+        :plain="button.active"
+        @click="toggleButton(index)"
+      >
+        {{ button.label }}
+      </el-button>
+      <el-divider />
+      <div v-if="currentPage !== null">
+        <el-card
+          v-show="currentPage === index"
+          v-for="(content, index) in pageContents"
+          :key="index"
+        >
+          <div v-if="currentPage === 1">
+            <div v-for="(m, index) in functions" :key="index">
+              {{ m }}
+            </div>
+          </div>
+          <div v-else>
+            {{ content }}
+          </div>
+          <!--          <WasmComponent></WasmComponent>-->
+        </el-card>
       </div>
     </div>
   </div>

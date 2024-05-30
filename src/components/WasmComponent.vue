@@ -60,11 +60,11 @@
       };
       wasmInstance = await WebAssembly.instantiate(wasmModule, imports);
       functions.value = [];
-      const ex = wasmInstance.exports;
-      for (const name in ex) {
+      const exs = wasmInstance.exports;
+      for (const e in exs) {
         debugger;
-        if (typeof ex[name] === 'function') {
-          functions.value.push(name);
+        if (typeof exs[e] === 'function') {
+          functions.value.push(e);
         }
       }
       console.log(functions.value);

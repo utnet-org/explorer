@@ -2,8 +2,11 @@
   import { onMounted, reactive, ref } from 'vue';
   import { useRoute } from 'vue-router';
   import { AccountDetail, ApiAccountDetail } from '@/api/account.ts';
-  import WasmComponent from '@/components/WasmComponent.vue';
   import { getContract } from '@/api/contract.ts';
+  import { getTxnsAccount } from '@/api/transaction.ts';
+  import { CompareTimestampNano } from '@/utils/time.ts';
+  import router from '@/route/route.ts';
+  import PaginationContent from '@/components/paginationContent.vue';
 
   const route = useRoute();
   const accountId = route.query.query_word ?? route.query.keyword;
@@ -17,17 +20,28 @@
     { label: 'Contract Methods', active: false },
   ]);
 
-  const currentPage = ref(null);
+  const currentPage = ref(1); // 当前页码
+  const pageSize = ref(10);
+  const currPage = ref(0);
   const currentConPage = ref(0);
   const functions = ref<string[]>([]);
-  const pageContents = ['Content of Page 1', functions.value];
+  const pageContents = [0, 1];
   const contractDetail = ref();
+  const tableData = ref([]);
+  const totalItems = ref(0);
+
+  const handlePageChange = (page: number) => {
+    currentPage.value = page;
+  };
 
   function toggleButton(index: any) {
     buttons.value.forEach((button, idx) => {
-      button.active = idx === index; // 只有点击的按钮为 plain 状态
+      button.active = idx === index;
+      if (index === 0) {
+        fetchTxnList(currentPage.value, pageSize.value, accountId as string);
+      }
     });
-    currentPage.value = index; // 更新当前显示的页面内容
+    currPage.value = index;
   }
 
   function toggleContractBtn(index: any) {
@@ -129,8 +143,25 @@
     const res = await ApiAccountDetail(accountId);
     Object.assign(detail, res.data.data);
   }
+
+  const fetchTxnList = async (
+    page: number,
+    size: number,
+    accountId: string,
+  ) => {
+    const res = await getTxnsAccount(page, size, accountId);
+    totalItems.value = res.data.data.total;
+    tableData.value = res.data.data.txn_list;
+  };
+  const tableClick = (row: any) => {
+    router.push({
+      path: '/blockchain/transactionDetails',
+      query: { hash: row.hash },
+    });
+  };
   onMounted(() => {
-    void fetchAccountInfo(accountId as string);
+    fetchAccountInfo(accountId as string);
+    fetchTxnList(currentPage.value, pageSize.value, accountId as string);
   });
 </script>
 <template>
@@ -194,53 +225,140 @@
         </div>
       </div>
       <el-divider />
-      <el-button
-        v-for="(button, index) in buttons"
-        :key="index"
-        :style="{
-          color: button.active ? ' #000' : ' rgba(0, 0, 0, 0.5)',
-          backgroundColor: button.active ? '#3EDFCF' : '#fff',
-        }"
-        effect="light"
-        :plain="button.active"
-        @click="toggleButton(index)"
-      >
-        {{ button.label }}
-      </el-button>
-      <el-divider />
-      <div v-if="currentPage !== null">
-        <el-card
-          v-show="currentPage === index"
-          v-for="(content, index) in pageContents"
+      <div style="padding-bottom: 20px">
+        <el-button
+          v-for="(button, index) in buttons"
           :key="index"
+          color="#3EDFCF"
+          plain
+          @click="toggleButton(index)"
         >
-          <div v-if="currentPage === 1">
-            <el-button
-              v-for="(cBtn, index) in contractBtns"
-              :key="index"
-              :style="{
-                color: cBtn.active ? ' #000' : ' rgba(0, 0, 0, 0.5)',
-                backgroundColor: cBtn.active ? '#3EDFCF' : '#fff',
-              }"
-              effect="light"
-              :plain="cBtn.active"
-              @click="toggleContractBtn(index)"
-            >
-              {{ cBtn.label }}
-            </el-button>
-            <div v-if="currentConPage === 1">
-              <div v-for="(m, index) in functions" :key="index">
-                {{ m }}
-              </div>
-            </div>
-            <div v-else>Contract Info </div>
-          </div>
-          <div v-else>
-            {{ content }}
-          </div>
-          <!--          <WasmComponent></WasmComponent>-->
-        </el-card>
+          {{ button.label }}
+        </el-button>
       </div>
+      <el-card
+        v-show="currPage === index"
+        v-for="index in pageContents"
+        :key="index"
+      >
+        <div v-if="currPage === 1">
+          <el-button
+            v-for="(cBtn, index) in contractBtns"
+            :key="index"
+            color="#ade1db"
+            plain
+            @click="toggleContractBtn(index)"
+          >
+            {{ cBtn.label }}
+          </el-button>
+          <div v-if="currentConPage === 1">
+            <div v-for="(m, index) in functions" :key="index">
+              {{ m }}
+            </div>
+          </div>
+          <div v-else>Contract Info </div>
+        </div>
+        <div v-else>
+          <div class="block_list_header">
+            <div class="block_list_header_side">
+              <div class="block_list_header_title">交易列表</div>
+              <div class="block_list_header_text"
+                >共 {{ totalItems }} 条消息</div
+              >
+            </div>
+          </div>
+          <el-table
+            :data="tableData"
+            table-layout="fixed"
+            :header-cell-style="{
+              textAlign: 'center',
+              color: 'rgba(0,0,0,0.5)',
+              fontSize: '12px',
+              fontWeight: '300',
+              borderBottom: 'none',
+              backgroundColor: '#F9F9F8',
+            }"
+            :cell-style="{
+              color: '#000',
+              height: '52px',
+              fontSize: '14px',
+              fontWeight: '500',
+              textAlign: 'center',
+              borderBottom: '0.5px solid rgba(140, 233, 220,0.5)',
+              cursor: 'pointer',
+            }"
+            :highlight-current-row="true"
+            @row-click="tableClick"
+          >
+            <el-table-column prop="hash" label="交易哈希">
+              <template #default="{ row }">
+                <el-tooltip effect="dark" :content="row.hash" placement="top">
+                  <div class="text-ellipsis">{{ row.hash }}</div>
+                </el-tooltip>
+              </template>
+            </el-table-column>
+            <el-table-column label="类型">
+              <template #default="{ row }">
+                <div style="color: #0facb6">
+                  <span v-if="row.txn_type">{{ row.txn_type }}</span>
+                  <span v-else>未知</span>
+                </div>
+              </template>
+            </el-table-column>
+            <el-table-column prop="deposit" label="存款价值">
+              <template #default="{ row }">
+                <span v-if="row.deposit">{{ row.deposit }}</span>
+                <span v-else>0</span>
+              </template>
+            </el-table-column>
+            <el-table-column prop="txn_fee" label="TXN费用">
+              <template #default="{ row }">
+                <span>{{ row.txn_fee.toFixed(6) }} UNC</span>
+              </template>
+            </el-table-column>
+            <el-table-column prop="signer_id" label="发送方">
+              <template #default="{ row }">
+                <el-tooltip
+                  effect="dark"
+                  :content="row.signer_id"
+                  placement="top"
+                >
+                  <div class="text-ellipsis">{{ row.signer_id }}</div>
+                </el-tooltip>
+              </template>
+            </el-table-column>
+            <el-table-column label="接收方">
+              <template #default="{ row }">
+                <el-tooltip
+                  effect="dark"
+                  :content="row.receiver_id"
+                  placement="top"
+                >
+                  <div class="text-ellipsis" style="color: #0facb6">{{
+                    row.receiver_id
+                  }}</div>
+                </el-tooltip>
+              </template>
+            </el-table-column>
+            <el-table-column prop="height" label="块高度"> </el-table-column>
+            <el-table-column prop="timestamp" label="块龄">
+              <template #default="{ row }">
+                <span>{{ CompareTimestampNano(row.timestamp) }}</span>
+              </template>
+            </el-table-column>
+          </el-table>
+          <div class="pagin">
+            <PaginationContent
+              :total="totalItems"
+              :page-size="pageSize"
+              :current-page="currentPage"
+              :show-button="true"
+              :onPageChange="handlePageChange"
+            />
+          </div>
+        </div>
+        <!--          <WasmComponent></WasmComponent>-->
+      </el-card>
     </div>
   </div>
 </template>
@@ -261,6 +379,24 @@
     color: #333333;
     display: flex;
     align-items: center;
+  }
+
+  .pagin {
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+  }
+
+  .pagination {
+    position: absolute;
+    z-index: 100;
+    width: 100%;
+  }
+
+  .text-ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .card {

@@ -12,28 +12,43 @@
     { label: 'Transaction', active: false },
     { label: 'Contract', active: false },
   ]);
+  const contractBtns = ref([
+    { label: 'Contract Info', active: true },
+    { label: 'Contract Methods', active: false },
+  ]);
 
   const currentPage = ref(null);
+  const currentConPage = ref(0);
   const functions = ref<string[]>([]);
   const pageContents = ['Content of Page 1', functions.value];
+  const contractDetail = ref();
 
   function toggleButton(index: any) {
     buttons.value.forEach((button, idx) => {
       button.active = idx === index; // 只有点击的按钮为 plain 状态
-      if (index == 1) {
-        loadWasm(accountId as string);
-      }
     });
     currentPage.value = index; // 更新当前显示的页面内容
   }
+
+  function toggleContractBtn(index: any) {
+    contractBtns.value.forEach((button, idx) => {
+      button.active = idx === index;
+      if (index === 0) {
+        fetchContractInfo(accountId as string);
+      } else if (index == 1) {
+        loadWasm(contractDetail.value.code_base64);
+      }
+    });
+    currentConPage.value = index;
+  }
+
   const wasmBase64 = ref('');
 
-  const loadWasm = async (accId: string) => {
-    var wasmInstance;
+  const loadWasm = async (codeBase64: string) => {
+    let wasmInstance;
     try {
-      const res = await getContract(accId);
-      console.log(res.data.data);
-      wasmBase64.value = res.data.data.replace(/\s/g, '');
+      // const res = await getContract(accId);
+      wasmBase64.value = codeBase64.replace(/\s/g, '');
       const wasmBinary = Uint8Array.from(atob(wasmBase64.value), c =>
         c.charCodeAt(0),
       );
@@ -77,6 +92,8 @@
           attached_deposit: () => {},
           value_return: () => {},
           log_utf8: () => {},
+          block_index: () => {},
+          storage_usage: () => {},
         },
       };
       wasmInstance = await WebAssembly.instantiate(wasmModule, imports);
@@ -91,6 +108,10 @@
     } catch (err) {
       console.error('Error loading Wasm:', err);
     }
+  };
+  const fetchContractInfo = async (accId: string) => {
+    const res = await getContract(accId);
+    contractDetail.value = res.data.data;
   };
 
   const detail = reactive<AccountDetail>({
@@ -179,7 +200,6 @@
         :style="{
           color: button.active ? ' #000' : ' rgba(0, 0, 0, 0.5)',
           backgroundColor: button.active ? '#3EDFCF' : '#fff',
-          fontWeight: button.active ? 500 : 300,
         }"
         effect="light"
         :plain="button.active"
@@ -195,9 +215,25 @@
           :key="index"
         >
           <div v-if="currentPage === 1">
-            <div v-for="(m, index) in functions" :key="index">
-              {{ m }}
+            <el-button
+              v-for="(cBtn, index) in contractBtns"
+              :key="index"
+              :style="{
+                color: cBtn.active ? ' #000' : ' rgba(0, 0, 0, 0.5)',
+                backgroundColor: cBtn.active ? '#3EDFCF' : '#fff',
+              }"
+              effect="light"
+              :plain="cBtn.active"
+              @click="toggleContractBtn(index)"
+            >
+              {{ cBtn.label }}
+            </el-button>
+            <div v-if="currentConPage === 1">
+              <div v-for="(m, index) in functions" :key="index">
+                {{ m }}
+              </div>
             </div>
+            <div v-else>Contract Info </div>
           </div>
           <div v-else>
             {{ content }}

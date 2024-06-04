@@ -29,7 +29,8 @@
   <div class="content">
     <HeaderPage />
     <div style="height: 160px"></div>
-    <div class="block_list">
+    <!--    <div class="block_list">-->
+    <el-card class="txn_list">
       <TransactionTable
         :tableData="tableData"
         :pageSize="pageSize"
@@ -37,7 +38,8 @@
         :total="totalItems"
         @updatePage="handlePageChange"
       />
-    </div>
+    </el-card>
+    <!--    </div>-->
   </div>
 </template>
 
@@ -47,20 +49,16 @@
     min-height: 100vh;
     background: #f2f0ea;
     position: relative;
-    padding-bottom: 100px;
-
-    .block_list {
-      width: calc(100% - 64px);
-      // height: 500px;
-      border-radius: 8px;
-      background: #f9f9f8;
-      box-shadow:
-        0 4px 15px 0 rgba(92, 255, 243, 0.1),
-        0 4px 8px 0 rgba(0, 0, 0, 0.04);
-      position: relative;
-      z-index: 10;
-      // margin-left: 62px;
-      margin: 39px auto 0;
-    }
+  }
+  .txn_list {
+    padding: 10px 5px 100px 5px;
+    margin: 30px;
+    border-radius: 8px;
+    background: #f9f9f8;
+    box-shadow:
+      0 4px 15px 0 rgba(92, 255, 243, 0.1),
+      0 4px 8px 0 rgba(0, 0, 0, 0.04);
+    position: relative;
+    z-index: 10;
   }
 </style>

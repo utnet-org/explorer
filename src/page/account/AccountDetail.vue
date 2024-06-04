@@ -231,6 +231,7 @@
         </el-button>
       </div>
       <el-card
+        class="txn_list"
         v-show="currPage === index"
         v-for="index in pageContents"
         :key="index"
@@ -273,7 +274,7 @@
   }
 
   .details {
-    padding: 0 72px;
+    padding: 0 36px;
     margin-bottom: 50px;
   }
 
@@ -330,6 +331,16 @@
     align-items: center;
     font-size: 14px;
     margin-right: 14px;
+  }
+
+  .txn_list {
+    padding: 10px 5px 100px 5px;
+    border-radius: 8px;
+    background: #f9f9f8;
+    box-shadow:
+      0 4px 15px 0 rgba(92, 255, 243, 0.1),
+      0 4px 8px 0 rgba(0, 0, 0, 0.04);
+    position: relative;
   }
   @media (max-width: 1023px) {
     .details {

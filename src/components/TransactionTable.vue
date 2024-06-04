@@ -31,10 +31,6 @@
 </script>
 
 <template>
-  <!--  <div class="content">-->
-  <!--    <HeaderPage />-->
-  <!--    <div style="height: 160px"></div>-->
-  <!--    <div class="block_list">-->
   <div class="block_list_header">
     <div class="block_list_header_side">
       <div class="block_list_header_title">交易列表</div>
@@ -203,7 +199,7 @@
       </div>
     </div>
   </div>
-  <div class="pagin">
+  <div class="paging">
     <PaginationContent
       :total="total"
       :page-size="pageSize"
@@ -212,12 +208,10 @@
       :onPageChange="handlePageChange"
     />
   </div>
-  <!--    </div>-->
-  <!--  </div>-->
 </template>
 
 <style scoped lang="scss">
-  .pagin {
+  .paging {
     position: absolute;
     z-index: 10;
     width: 100%;
@@ -235,6 +229,31 @@
     text-overflow: ellipsis;
   }
 
+  .block_list_header_side {
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    background: #fff;
+    padding-left: 26px;
+    height: 50px;
+    box-shadow:
+      0px 4px 15px 0px rgba(92, 255, 243, 0.1),
+      0px 4px 8px 0px rgba(0, 0, 0, 0.04);
+    margin-bottom: 10px;
+    .block_list_header_title {
+      color: #000;
+      font-size: 16px;
+      font-weight: 500;
+      margin-right: 15px;
+    }
+    .block_list_header_text {
+      color: #0facb6;
+      font-size: 14px;
+      font-weight: 400;
+      opacity: 0.7;
+    }
+  }
+
   .content {
     width: 100%;
     min-height: 100vh;
@@ -242,60 +261,12 @@
     position: relative;
     padding-bottom: 100px;
 
-    .block_list {
-      width: calc(100% - 64px);
-      // height: 500px;
-      border-radius: 8px;
-      background: #f9f9f8;
-      box-shadow:
-        0px 4px 15px 0px rgba(92, 255, 243, 0.1),
-        0px 4px 8px 0px rgba(0, 0, 0, 0.04);
-      position: relative;
-      z-index: 10;
-      // margin-left: 62px;
-      margin: 39px auto 0px;
-
-      .block_list_header {
-        height: 50px;
-        border-radius: 8px;
-        background: #fff;
-        padding-left: 26px;
-        box-shadow:
-          0px 4px 15px 0px rgba(92, 255, 243, 0.1),
-          0px 4px 8px 0px rgba(0, 0, 0, 0.04);
-        margin-bottom: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-
-        .block_list_header_side {
-          display: flex;
-          align-items: center;
-          font-family: PingFang SC;
-
-          .block_list_header_title {
-            color: #000;
-            font-size: 16px;
-            font-weight: 500;
-            margin-right: 26px;
-          }
-
-          .block_list_header_text {
-            color: #0facb6;
-            font-size: 14px;
-            font-weight: 400;
-            opacity: 0.7;
-          }
-        }
-      }
-
-      .search {
-        width: 100%;
-        padding: 22px 35px 20px 0;
-        box-sizing: border-box;
-        display: flex;
-        justify-content: flex-end;
-      }
+    .search {
+      width: 100%;
+      padding: 22px 35px 20px 0;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: flex-end;
     }
   }
 

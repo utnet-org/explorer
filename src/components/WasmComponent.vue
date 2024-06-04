@@ -10,8 +10,7 @@
 
   const loadWasm = async () => {
     try {
-      const res = await getContract();
-      console.log(res.data.data);
+      const res = await getContract('unc');
       wasmBase64.value = res.data.data.replace(/\s/g, '');
       const wasmBinary = Uint8Array.from(atob(wasmBase64.value), c =>
         c.charCodeAt(0),
@@ -19,6 +18,7 @@
       // test simple wasm
       // const wasmBinary = await (await fetch('/simple.wasm')).arrayBuffer();
       const wasmModule = await WebAssembly.compile(wasmBinary);
+      // wasmInstance = await WebAssembly.instantiate(wasmModule, {});
       const imports = {
         env: {
           abort: () => {},

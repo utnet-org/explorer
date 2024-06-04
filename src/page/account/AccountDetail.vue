@@ -4,9 +4,7 @@
   import { AccountDetail, ApiAccountDetail } from '@/api/account.ts';
   import { getContract } from '@/api/contract.ts';
   import { getTxnsAccount } from '@/api/transaction.ts';
-  import { CompareTimestampNano } from '@/utils/time.ts';
-  import router from '@/route/route.ts';
-  import PaginationContent from '@/components/paginationContent.vue';
+  import TransactionTable from '@/components/TransactionTable.vue';
 
   const route = useRoute();
   const accountId = route.query.query_word ?? route.query.keyword;
@@ -30,8 +28,9 @@
   const tableData = ref([]);
   const totalItems = ref(0);
 
-  const handlePageChange = (page: number) => {
+  const handlePageChange = async (page: number) => {
     currentPage.value = page;
+    await fetchTxnList(currentPage.value, pageSize.value, accountId as string);
   };
 
   function toggleButton(index: any) {
@@ -153,12 +152,7 @@
     totalItems.value = res.data.data.total;
     tableData.value = res.data.data.txn_list;
   };
-  const tableClick = (row: any) => {
-    router.push({
-      path: '/blockchain/transactionDetails',
-      query: { hash: row.hash },
-    });
-  };
+
   onMounted(() => {
     fetchAccountInfo(accountId as string);
     fetchTxnList(currentPage.value, pageSize.value, accountId as string);
@@ -258,104 +252,14 @@
           </div>
           <div v-else>Contract Info </div>
         </div>
-        <div v-else>
-          <div class="block_list_header">
-            <div class="block_list_header_side">
-              <div class="block_list_header_title">交易列表</div>
-              <div class="block_list_header_text"
-                >共 {{ totalItems }} 条消息</div
-              >
-            </div>
-          </div>
-          <el-table
-            :data="tableData"
-            table-layout="fixed"
-            :header-cell-style="{
-              textAlign: 'center',
-              color: 'rgba(0,0,0,0.5)',
-              fontSize: '12px',
-              fontWeight: '300',
-              borderBottom: 'none',
-              backgroundColor: '#F9F9F8',
-            }"
-            :cell-style="{
-              color: '#000',
-              height: '52px',
-              fontSize: '14px',
-              fontWeight: '500',
-              textAlign: 'center',
-              borderBottom: '0.5px solid rgba(140, 233, 220,0.5)',
-              cursor: 'pointer',
-            }"
-            :highlight-current-row="true"
-            @row-click="tableClick"
-          >
-            <el-table-column prop="hash" label="交易哈希">
-              <template #default="{ row }">
-                <el-tooltip effect="dark" :content="row.hash" placement="top">
-                  <div class="text-ellipsis">{{ row.hash }}</div>
-                </el-tooltip>
-              </template>
-            </el-table-column>
-            <el-table-column label="类型">
-              <template #default="{ row }">
-                <div style="color: #0facb6">
-                  <span v-if="row.txn_type">{{ row.txn_type }}</span>
-                  <span v-else>未知</span>
-                </div>
-              </template>
-            </el-table-column>
-            <el-table-column prop="deposit" label="存款价值">
-              <template #default="{ row }">
-                <span v-if="row.deposit">{{ row.deposit }}</span>
-                <span v-else>0</span>
-              </template>
-            </el-table-column>
-            <el-table-column prop="txn_fee" label="TXN费用">
-              <template #default="{ row }">
-                <span>{{ row.txn_fee.toFixed(6) }} UNC</span>
-              </template>
-            </el-table-column>
-            <el-table-column prop="signer_id" label="发送方">
-              <template #default="{ row }">
-                <el-tooltip
-                  effect="dark"
-                  :content="row.signer_id"
-                  placement="top"
-                >
-                  <div class="text-ellipsis">{{ row.signer_id }}</div>
-                </el-tooltip>
-              </template>
-            </el-table-column>
-            <el-table-column label="接收方">
-              <template #default="{ row }">
-                <el-tooltip
-                  effect="dark"
-                  :content="row.receiver_id"
-                  placement="top"
-                >
-                  <div class="text-ellipsis" style="color: #0facb6">{{
-                    row.receiver_id
-                  }}</div>
-                </el-tooltip>
-              </template>
-            </el-table-column>
-            <el-table-column prop="height" label="块高度"> </el-table-column>
-            <el-table-column prop="timestamp" label="块龄">
-              <template #default="{ row }">
-                <span>{{ CompareTimestampNano(row.timestamp) }}</span>
-              </template>
-            </el-table-column>
-          </el-table>
-          <div class="pagin">
-            <PaginationContent
-              :total="totalItems"
-              :page-size="pageSize"
-              :current-page="currentPage"
-              :show-button="true"
-              :onPageChange="handlePageChange"
-            />
-          </div>
+        <div v-else-if="currPage === 0">
+          <TransactionTable
+            :tableData="tableData"
+            :pageSize="pageSize"
+            :currentPage="currentPage"
+            :total="totalItems"
+            @updatePage="handlePageChange"
+          />
         </div>
         <!--          <WasmComponent></WasmComponent>-->
       </el-card>
@@ -379,24 +283,6 @@
     color: #333333;
     display: flex;
     align-items: center;
-  }
-
-  .pagin {
-    position: absolute;
-    z-index: 10;
-    width: 100%;
-  }
-
-  .pagination {
-    position: absolute;
-    z-index: 100;
-    width: 100%;
-  }
-
-  .text-ellipsis {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
 
   .card {

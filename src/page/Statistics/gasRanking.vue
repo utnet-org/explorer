@@ -15,8 +15,8 @@
   import { ElTable, ElTableColumn } from 'element-plus';
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   import { getScreenSize, Screen } from '@/utils/screen-size.ts';
-  import paginationContent from '@/components/paginationContent.vue';
-import { PosttgasData } from '@/api/chart';
+  import paginationContent from '@/components/PaginationContent.vue';
+  import { PosttgasData } from '@/api/chart';
 
   // ! 获取屏幕尺寸
   const windowWidth = ref(document.documentElement.clientWidth);
@@ -50,8 +50,8 @@ import { PosttgasData } from '@/api/chart';
   // ^函数用于切换数据
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const setTimeRange = async (range: string) => {
-      // ^x轴数据和系列数据
-      const xAxisData = [];
+    // ^x轴数据和系列数据
+    const xAxisData = [];
     const seriesData = [];
     // ^更新时间范围(week/month)
     selectedRange.value = range;
@@ -70,7 +70,6 @@ import { PosttgasData } from '@/api/chart';
 
     // ^获取图表实例
     myChart = echarts.getInstanceByDom(chart.value);
-  
 
     // ^根据时间范围选择数据
     // if (range === 'week') {

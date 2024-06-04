@@ -5,7 +5,7 @@
   import { getPowerRank, type PowerRank } from '@/api/power.ts';
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   import { getScreenSize, Screen } from '@/utils/screen-size.ts';
-  import paginationContent from '@/components/paginationContent.vue';
+  import paginationContent from '@/components/PaginationContent.vue';
 
   // defineProps<{ viewportWidth: number }>()
   const size = getScreenSize().currentScreenSize;

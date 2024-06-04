@@ -4,7 +4,7 @@
   import HeaderPage from '../../components/otherHeaderContent.vue';
   // import Mock from 'mockjs';
   import { getScreenSize, Screen } from '@/utils/screen-size.ts';
-  import paginationContent from '@/components/paginationContent.vue';
+  import paginationContent from '@/components/PaginationContent.vue';
   // defineProps<{ msg: string }>()
   const size = getScreenSize().currentScreenSize;
   onMounted(() => {});

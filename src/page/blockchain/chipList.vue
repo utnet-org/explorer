@@ -3,7 +3,7 @@
   import { onMounted, onUnmounted, ref } from 'vue';
   import HeaderPage from '../../components/otherHeaderContent.vue';
   import { getScreenSize, Screen } from '@/utils/screen-size.ts';
-  import paginationContent from '@/components/paginationContent.vue';
+  import paginationContent from '@/components/PaginationContent.vue';
   import { getChipList } from '@/api/chip.ts';
   const size = getScreenSize().currentScreenSize;
   // let intervalId: number | undefined;

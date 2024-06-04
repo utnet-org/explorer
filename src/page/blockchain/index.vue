@@ -4,8 +4,8 @@
   import { apiBlockList, BlockInfo, getBlockInfo } from '@/api/block.ts';
   import { CompareStrTimeNano, CompareTimestampNano } from '@/utils/time.ts';
   import { getScreenSize, Screen } from '@/utils/screen-size.ts';
-  import paginationContent from '@/components/paginationContent.vue';
   import { useRouter } from 'vue-router';
+  import PaginationContent from '@/components/PaginationContent.vue';
 
   const router = useRouter();
 
@@ -44,7 +44,6 @@
     }
   });
 
-  // 处理页码改变
   const handlePageChange = async (page: number) => {
     currentPage.value = page;
     await fetchBlockList(currentPage.value, pageSize.value);
@@ -178,7 +177,7 @@
       </div>
     </div>
     <div class="pagin">
-      <paginationContent
+      <PaginationContent
         :total="totalItems"
         :page-size="pageSize"
         :current-page="currentPage"

@@ -5,10 +5,10 @@
   // import Mock from 'mockjs';
   import { getScreenSize, Screen } from '@/utils/screen-size.ts';
   import { Search } from '@element-plus/icons-vue';
-  import paginationContent from '@/components/paginationContent.vue';
-import { BlockDetailsId } from '@/api/block';
-import { ApiMetworkValidators } from '@/api/chart';
-import router from '@/route/route';
+  import paginationContent from '@/components/PaginationContent.vue';
+  import { BlockDetailsId } from '@/api/block';
+  import { ApiMetworkValidators } from '@/api/chart';
+  import router from '@/route/route';
   // defineProps<{ msg: string }>()
   const size = getScreenSize().currentScreenSize;
   const searchMessage = ref('');
@@ -29,7 +29,10 @@ import router from '@/route/route';
 
   const handleClick = (account_id: string) => {
     console.log(account_id);
-    router.push({ path: '/blockChain/mine', query: { query_word: account_id}, });
+    router.push({
+      path: '/blockChain/mine',
+      query: { query_word: account_id },
+    });
   };
 </script>
 <template>
@@ -41,9 +44,7 @@ import router from '@/route/route';
     <div class="block_list">
       <div class="block_list_header">
         <div class="block_list_header_side">
-          <div class="block_list_header_title">{{
-            $t('home.Miner')
-          }}</div>
+          <div class="block_list_header_title">{{ $t('home.Miner') }}</div>
           <div class="block_list_header_text">共 {{ totalItems }} 条消息</div>
         </div>
         <el-input
@@ -89,18 +90,24 @@ import router from '@/route/route';
         }"
         :highlight-current-row="true"
       >
-        <el-table-column
-          prop="account_id"
-          :label="$t('blockChain.Account_ID')"
-        >  <template #default="scope">
-            <div style="cursor: pointer;" @click="handleClick(scope.row.account_id)">{{ scope.row.account_id }}</div>
-          </template></el-table-column>
+        <el-table-column prop="account_id" :label="$t('blockChain.Account_ID')">
+          <template #default="scope">
+            <div
+              style="cursor: pointer"
+              @click="handleClick(scope.row.account_id)"
+              >{{ scope.row.account_id }}</div
+            >
+          </template></el-table-column
+        >
         <el-table-column :label="$t('blockChain.whether_to_punish')">
           <template #default="scope">
             <div>{{ scope.row.is_slashed }}</div>
           </template>
         </el-table-column>
-        <el-table-column prop="num_expected_blocks" :label="$t('blockChain.Expected_Block')"></el-table-column>
+        <el-table-column
+          prop="num_expected_blocks"
+          :label="$t('blockChain.Expected_Block')"
+        ></el-table-column>
         <el-table-column
           prop="num_expected_chunks"
           :label="$t('blockChain.Expected_Chunk')"

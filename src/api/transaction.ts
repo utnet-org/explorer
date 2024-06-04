@@ -8,7 +8,7 @@ export interface TxnInfo {
   receiver_id?: string;
   signer_id?: string;
   deposit?: string;
-  txn_fee?: string;
+  txn_fee: number;
 }
 
 export async function getTxnList(num: number, size: number) {

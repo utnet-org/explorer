@@ -216,4 +216,5 @@ export default {
   power: '算力',
   storage_paid_at: '支付时间',
   storage_usage: '存储使用量',
+  txn_hash: '交易哈希',
 };

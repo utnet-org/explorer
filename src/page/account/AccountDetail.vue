@@ -2,7 +2,11 @@
   import { onMounted, reactive, ref } from 'vue';
   import { useRoute } from 'vue-router';
   import { AccountDetail, ApiAccountDetail } from '@/api/account.ts';
-  import { getContract } from '@/api/contract.ts';
+  import {
+    ContractInfo,
+    getContract,
+    getContractInfo,
+  } from '@/api/contract.ts';
   import { getTxnsAccount } from '@/api/transaction.ts';
   import TransactionTable from '@/components/TransactionTable.vue';
 
@@ -25,6 +29,7 @@
   const functions = ref<string[]>([]);
   const pageContents = [0, 1];
   const contractDetail = ref();
+  const contractInfo = ref([]);
   const tableData = ref([]);
   const totalItems = ref(0);
 
@@ -47,9 +52,9 @@
     contractBtns.value.forEach((button, idx) => {
       button.active = idx === index;
       if (index === 0) {
-        fetchContractInfo(accountId as string);
+        // fetchContractInfo(accountId as string);
       } else if (index == 1) {
-        loadWasm(contractDetail.value.code_base64);
+        // loadWasm(contractDetail.value.code_base64);
       }
     });
     currentConPage.value = index;
@@ -122,9 +127,14 @@
       console.error('Error loading Wasm:', err);
     }
   };
-  const fetchContractInfo = async (accId: string) => {
+  const fetchContractMethod = async (accId: string) => {
     const res = await getContract(accId);
     contractDetail.value = res.data.data;
+  };
+
+  const fetchContractInfo = async (accId: string) => {
+    const res = await getContractInfo(accId);
+    contractInfo.value = res.data.data;
   };
 
   const detail = reactive<AccountDetail>({
@@ -156,6 +166,7 @@
   onMounted(() => {
     fetchAccountInfo(accountId as string);
     fetchTxnList(currentPage.value, pageSize.value, accountId as string);
+    fetchContractInfo(accountId as string);
   });
 </script>
 <template>
@@ -171,20 +182,6 @@
           <div class="card_title">{{ $t('amount') }}</div>
           <div class="content_father">
             <div class="card_content">{{ detail?.amount }}</div>
-          </div>
-        </div>
-        <div class="card_data">
-          <div class="card_title">{{ $t('block_hash') }}</div>
-          <div class="content_father">
-            <div class="card_content">{{ detail?.block_hash }}</div>
-          </div>
-        </div>
-        <div class="card_data">
-          <div class="card_title">{{ $t('block_height') }}</div>
-          <div class="content_father">
-            <div class="card_content">
-              {{ detail?.block_height }}
-            </div>
           </div>
         </div>
         <div class="card_data">
@@ -223,7 +220,7 @@
         <el-button
           v-for="(button, index) in buttons"
           :key="index"
-          color="#3EDFCF"
+          color="#0facb6"
           plain
           @click="toggleButton(index)"
         >
@@ -240,18 +237,43 @@
           <el-button
             v-for="(cBtn, index) in contractBtns"
             :key="index"
-            color="#ade1db"
+            color="#3EDFCF"
             plain
             @click="toggleContractBtn(index)"
           >
             {{ cBtn.label }}
           </el-button>
-          <div v-if="currentConPage === 1">
+          <div v-if="currentConPage === 0">
+            <div class="card_data">
+              <div class="card_title">{{ $t('block_height') }}</div>
+              <div class="content_father" style="color: #0facb6">
+                <div class="card_content">{{ contractInfo.height }}</div>
+              </div>
+            </div>
+            <div class="card_data">
+              <div class="card_title">{{ $t('txn_hash') }}</div>
+              <div class="content_father">
+                <div class="card_content">{{ contractInfo.txn_hash }}</div>
+              </div>
+            </div>
+            <div class="card_data">
+              <div class="card_title">{{ $t('home.time') }}</div>
+              <div class="content_father">
+                <div class="card_content">{{ contractInfo.time_utc }}</div>
+              </div>
+            </div>
+            <div class="card_data">
+              <div class="card_title">{{ $t('code_hash') }}</div>
+              <div class="content_father">
+                <div class="card_content">{{ contractInfo.code_hash }}</div>
+              </div>
+            </div>
+          </div>
+          <div v-else-if="currentConPage === 1">
             <div v-for="(m, index) in functions" :key="index">
               {{ m }}
             </div>
           </div>
-          <div v-else>Contract Info </div>
         </div>
         <div v-else-if="currPage === 0">
           <TransactionTable

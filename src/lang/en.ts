@@ -223,4 +223,5 @@ export default {
   power: 'Power',
   storage_paid_at: 'Storage Paid At',
   storage_usage: 'Storage Usage',
+  txn_hash: 'Transacting Hash',
 };

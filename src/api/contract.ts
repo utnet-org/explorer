@@ -20,6 +20,10 @@ export function getContract(accId: string) {
   return axios.post('/api/contract/detail', { account_id: accId });
 }
 
+export function getContractCode(accId: string) {
+  return axios.post('/api/contract/code', { account_id: accId });
+}
+
 export function getContractInfo(accId: string) {
   // return axios.post<ContractDetail>('/api/contract/detail');
   return axios.post('/api/contract/info', { account_id: accId });

@@ -16,7 +16,6 @@
   onMounted(() => {
     window.addEventListener('resize', () => {
       windowWidth.value = document.documentElement.clientWidth;
-      console.log(windowWidth.value);
     });
   });
 </script>

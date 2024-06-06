@@ -2,13 +2,10 @@
   import { onMounted, reactive, ref } from 'vue';
   import { useRoute } from 'vue-router';
   import { AccountDetail, ApiAccountDetail } from '@/api/account.ts';
-  import {
-    ContractInfo,
-    getContract,
-    getContractInfo,
-  } from '@/api/contract.ts';
+  import { getContractCode, getContractInfo } from '@/api/contract.ts';
   import { getTxnsAccount } from '@/api/transaction.ts';
   import TransactionTable from '@/components/TransactionTable.vue';
+  import { parseContract } from '@/utils/contract/parseContract.ts';
 
   const route = useRoute();
   const accountId = route.query.query_word ?? route.query.keyword;
@@ -28,10 +25,10 @@
   const currentConPage = ref(0);
   const functions = ref<string[]>([]);
   const pageContents = [0, 1];
-  const contractDetail = ref();
   const contractInfo = ref([]);
   const tableData = ref([]);
   const totalItems = ref(0);
+  const wasmBase64 = ref('');
 
   const handlePageChange = async (page: number) => {
     currentPage.value = page;
@@ -41,9 +38,9 @@
   function toggleButton(index: any) {
     buttons.value.forEach((button, idx) => {
       button.active = idx === index;
-      if (index === 0) {
-        fetchTxnList(currentPage.value, pageSize.value, accountId as string);
-      }
+      // if (index === 0) {
+      //   fetchTxnList(currentPage.value, pageSize.value, accountId as string);
+      // }
     });
     currPage.value = index;
   }
@@ -51,85 +48,27 @@
   function toggleContractBtn(index: any) {
     contractBtns.value.forEach((button, idx) => {
       button.active = idx === index;
-      if (index === 0) {
-        // fetchContractInfo(accountId as string);
-      } else if (index == 1) {
+      if (index == 1 && idx == 1) {
         // loadWasm(contractDetail.value.code_base64);
+        // loadWasm();
+        fetchContractCode();
       }
     });
     currentConPage.value = index;
   }
 
-  const wasmBase64 = ref('');
-
-  const loadWasm = async (codeBase64: string) => {
-    let wasmInstance;
-    try {
-      // const res = await getContract(accId);
-      wasmBase64.value = codeBase64.replace(/\s/g, '');
-      const wasmBinary = Uint8Array.from(atob(wasmBase64.value), c =>
-        c.charCodeAt(0),
-      );
-      // test simple wasm
-      // const wasmBinary = await (await fetch('/simple.wasm')).arrayBuffer();
-      const wasmModule = await WebAssembly.compile(wasmBinary);
-      const imports = {
-        env: {
-          abort: () => {},
-          promise_results_count: () => {},
-          promise_result: () => {},
-          storage_has_key: () => {},
-          storage_read: () => {},
-          storage_write: () => {},
-          storage_remove: () => {},
-          storage_iter_create: () => {},
-          storage_iter_next: () => {},
-          memory: new WebAssembly.Memory({ initial: 256, maximum: 512 }),
-          table: new WebAssembly.Table({ initial: 0, element: 'anyfunc' }),
-          promise_batch_then: () => {},
-          promise_batch_create: () => {},
-          promise_batch_action_create_account: () => {},
-          promise_batch_action_deploy_contract: () => {},
-          promise_batch_action_function_call: () => {},
-          promise_batch_action_function_call_weight: () => {},
-          promise_batch_action_transfer: () => {},
-          promise_batch_action_stake: () => {},
-          promise_batch_action_add_key_with_full_access: () => {},
-          promise_batch_action_add_key_with_function_call: () => {},
-          promise_batch_action_delete_key: () => {},
-          promise_batch_action_delete_account: () => {},
-          promise_and: () => {},
-          promise_return: () => {},
-          panic_utf8: () => {},
-          register_len: () => {},
-          read_register: () => {},
-          current_account_id: () => {},
-          signer_account_pk: () => {},
-          predecessor_account_id: () => {},
-          input: () => {},
-          attached_deposit: () => {},
-          value_return: () => {},
-          log_utf8: () => {},
-          block_index: () => {},
-          storage_usage: () => {},
-        },
-      };
-      wasmInstance = await WebAssembly.instantiate(wasmModule, imports);
-      functions.value = [];
-      const exs = wasmInstance.exports;
-      for (const e in exs) {
-        if (typeof exs[e] === 'function') {
-          functions.value.push(e);
-        }
-      }
-      console.log(functions.value);
-    } catch (err) {
-      console.error('Error loading Wasm:', err);
-    }
-  };
-  const fetchContractMethod = async (accId: string) => {
-    const res = await getContract(accId);
-    contractDetail.value = res.data.data;
+  const fetchContractCode = async () => {
+    const res = await getContractCode(accountId as string);
+    wasmBase64.value = res.data.data.code_base64.replace(/\s/g, '');
+    // console.log(await parseContract(wasmBase64.value));
+    const pres = await parseContract(wasmBase64.value);
+    // functions.value = pres.methodNames;
+    // Functions filter __contract_abi and contract_source_metadata
+    functions.value.length = 0;
+    functions.value = pres.methodNames.filter(
+      item => item !== '__contract_abi' && item !== 'contract_source_metadata',
+    );
+    console.log(functions.value);
   };
 
   const fetchContractInfo = async (accId: string) => {
@@ -162,6 +101,34 @@
     totalItems.value = res.data.data.total;
     tableData.value = res.data.data.txn_list;
   };
+
+  const args = ref<Argument[]>([]);
+  interface Argument {
+    name: string;
+    type: string;
+    value: string;
+  }
+
+  function addArgument() {
+    args.value.push({ name: '', type: '', value: '' });
+  }
+
+  function removeArgument(index: number) {
+    args.value.splice(index, 1);
+  }
+
+  interface Operation {
+    id: string;
+    method: string;
+    attachedDeposit: string;
+    gas: string;
+  }
+
+  const form = reactive<Operation>({});
+
+  function submitQuery(item: Operation): void {
+    console.log('SubmitQuery:', item);
+  }
 
   onMounted(() => {
     fetchAccountInfo(accountId as string);
@@ -233,7 +200,16 @@
         v-for="index in pageContents"
         :key="index"
       >
-        <div v-if="currPage === 1">
+        <div v-if="currPage === 0">
+          <TransactionTable
+            :tableData="tableData"
+            :pageSize="pageSize"
+            :currentPage="currentPage"
+            :total="totalItems"
+            @updatePage="handlePageChange"
+          />
+        </div>
+        <div v-else-if="currPage === 1">
           <el-button
             v-for="(cBtn, index) in contractBtns"
             :key="index"
@@ -270,21 +246,80 @@
             </div>
           </div>
           <div v-else-if="currentConPage === 1">
-            <div v-for="(m, index) in functions" :key="index">
-              {{ m }}
-            </div>
+            <el-collapse accordion style="margin-top: 10px">
+              <el-space direction="vertical" style="width: 100%" fill>
+                <el-collapse-item
+                  v-for="(item, index) in functions"
+                  :key="index"
+                  :title="index + 1 + '. ' + item"
+                >
+                  <el-form :model="form">
+                    <el-form-item label="Arguments">
+                      <el-button color="#3EDFCF" plain @click="addArgument"
+                        >Add</el-button
+                      >
+                    </el-form-item>
+                  </el-form>
+                  <el-form inline>
+                    <div
+                      v-for="(arg, index) in args"
+                      :key="index"
+                      style="margin-bottom: 10px"
+                    >
+                      <el-space>
+                        <el-input
+                          v-model="arg.name"
+                          placeholder="Argument name"
+                          style="width: 150px"
+                        ></el-input>
+                        <el-select
+                          v-model="arg.type"
+                          placeholder="Type"
+                          style="width: 100px"
+                        >
+                          <el-option label="String" value="string"></el-option>
+                          <el-option label="Number" value="number"></el-option>
+                          <el-option label="Boolean" value="bool"></el-option>
+                          <el-option label="Null" value="undefined"></el-option>
+                          <el-option label="Json" value="json"></el-option>
+                        </el-select>
+                        <el-input
+                          v-model="arg.value"
+                          placeholder="Argument value"
+                          style="width: 150px"
+                        ></el-input>
+                        <el-button
+                          icon="Delete"
+                          @click="removeArgument(index)"
+                        ></el-button>
+                      </el-space>
+                    </div>
+                    <el-form-item label="Attached Deposit">
+                      <el-input v-model="form.attachedDeposit"></el-input>
+                    </el-form-item>
+                    <el-form-item label="Gas">
+                      <el-input
+                        v-model="form.gas"
+                        placeholder="30000000000000"
+                      ></el-input>
+                    </el-form-item>
+                  </el-form>
+                  <el-form>
+                    <el-form-item>
+                      <el-button
+                        color="#3EDFCF"
+                        plain
+                        @click="submitQuery(form)"
+                        >Query</el-button
+                      >
+                      <el-button disabled>Write</el-button>
+                    </el-form-item>
+                  </el-form>
+                </el-collapse-item>
+              </el-space>
+            </el-collapse>
           </div>
         </div>
-        <div v-else-if="currPage === 0">
-          <TransactionTable
-            :tableData="tableData"
-            :pageSize="pageSize"
-            :currentPage="currentPage"
-            :total="totalItems"
-            @updatePage="handlePageChange"
-          />
-        </div>
-        <!--          <WasmComponent></WasmComponent>-->
       </el-card>
     </div>
   </div>
@@ -356,7 +391,7 @@
   }
 
   .txn_list {
-    padding: 10px 5px 100px 5px;
+    padding: 10px 5px 80px 5px;
     border-radius: 8px;
     background: #f9f9f8;
     box-shadow:
@@ -364,6 +399,25 @@
       0 4px 8px 0 rgba(0, 0, 0, 0.04);
     position: relative;
   }
+
+  :deep(.el-collapse-item__header) {
+    color: #191919;
+    font-size: 15px;
+    font-weight: 400;
+    padding: 10px;
+    background-color: transparent;
+  }
+
+  :deep(.el-collapse-item__header:hover) {
+    border-color: #3edfcf !important;
+  }
+
+  :deep(.el-collapse-item__content) {
+    padding: 10px;
+    background: #f1f9f2;
+    //border-bottom: 0.5px solid #3edfcf;
+  }
+
   @media (max-width: 1023px) {
     .details {
       padding: 0 42px;

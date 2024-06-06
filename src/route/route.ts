@@ -123,7 +123,7 @@ const router = createRouter({
   routes,
 });
 // 在路由切换前显示进度条
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, _, next) => {
   NProgress.start(); //进度条开始
   // 如果跳转到首页,则刷新页面
   if (to.path === '/') {

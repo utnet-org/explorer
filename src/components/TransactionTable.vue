@@ -1,7 +1,6 @@
 <script setup lang="ts">
   import { getScreenSize, Screen } from '@/utils/screen-size.ts';
   import { CompareTimestampNano } from '@/utils/time.ts';
-  import { defineProps, defineEmits } from 'vue';
   import { TxnInfo } from '@/api/transaction.ts';
   import router from '@/route/route.ts';
   import PaginationContent from '@/components/PaginationContent.vue';

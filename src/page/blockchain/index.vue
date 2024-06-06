@@ -106,6 +106,11 @@
           </template>
         </el-table-column>
         <el-table-column prop="hash" :label="$t('home.hash')">
+          <template #default="{ row }">
+            <el-tooltip effect="dark" :content="row.hash" placement="top">
+              <div class="text-ellipsis">{{ row.hash }}</div>
+            </el-tooltip>
+          </template>
         </el-table-column>
         <el-table-column prop="timestamp" :label="$t('home.time')">
           <template #default="scope">
@@ -122,7 +127,12 @@
         </el-table-column>
         <el-table-column prop="transactions" :label="$t('home.trade')">
         </el-table-column>
-        <el-table-column prop="author" :label="$t('home.Miner')">
+        <el-table-column prop="author" :label="$t('account')">
+          <template #default="{ row }">
+            <el-tooltip effect="dark" :content="row.author" placement="top">
+              <div class="text-ellipsis">{{ row.author }}</div>
+            </el-tooltip>
+          </template>
         </el-table-column>
         <el-table-column prop="gas_used" :label="$t('home.Gas_used')">
         </el-table-column>
@@ -133,6 +143,11 @@
         <el-table-column prop="gas_fee" :label="$t('home.Gas_fee')">
         </el-table-column>
         <el-table-column prop="prev_hash" :label="$t('home.parent_hash')">
+          <template #default="{ row }">
+            <el-tooltip effect="dark" :content="row.prev_hash" placement="top">
+              <div class="text-ellipsis">{{ row.prev_hash }}</div>
+            </el-tooltip>
+          </template>
         </el-table-column>
       </el-table>
       <div v-else style="padding-bottom: 20px">
@@ -188,6 +203,11 @@
   </div>
 </template>
 <style scoped lang="scss">
+  .text-ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
   .pagin {
     position: absolute;
     z-index: 10;

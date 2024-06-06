@@ -94,7 +94,6 @@
             fontWeight: '500',
             textAlign: 'center',
             borderBottom: '0.5px solid rgba(140, 233, 220,0.5)',
-            // backgroundColor: '#F9F9F8',
           }"
           :highlight-current-row="true"
         >
@@ -104,7 +103,7 @@
                 @click="heightClick(scope.row.height)"
                 style="cursor: pointer"
               >
-                <div style="color: #0facb6; margin-bottom: 8px; font-size: 14px"
+                <div style="color: #0facb6; font-size: 14px"
                   >{{ scope.row.height }}
                 </div>
                 <div style="color: #6a6a69; font-size: 12px"
@@ -113,15 +112,29 @@
               </div>
             </template>
           </el-table-column>
-          <el-table-column :label="$t('home.block_id')" prop="hash">
+          <el-table-column :label="$t('home.hash')" prop="hash">
             <template #default="scope">
-              <!-- 使用 @click 事件处理函数来监听点击事件 -->
-              <div style="cursor: pointer" @click="BlockClick(scope.row.hash)">
-                {{ scope.row.hash }}
-              </div>
+              <el-tooltip
+                effect="dark"
+                :content="scope.row.author"
+                placement="top"
+              >
+                <div
+                  class="text-ellipsis"
+                  style="cursor: pointer"
+                  @click="BlockClick(scope.row.hash)"
+                >
+                  {{ scope.row.hash }}
+                </div>
+              </el-tooltip>
             </template>
           </el-table-column>
-          <el-table-column :label="$t('home.miner')" prop="author">
+          <el-table-column :label="$t('account')" prop="author">
+            <template #default="{ row }">
+              <el-tooltip effect="dark" :content="row.author" placement="top">
+                <div class="text-ellipsis">{{ row.author }}</div>
+              </el-tooltip>
+            </template>
           </el-table-column>
           <el-table-column :label="$t('home.tag')">
             <!--            <template #default="scope">-->
@@ -190,9 +203,13 @@
   </div>
 </template>
 <style scoped lang="scss">
+  .text-ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
   @media screen and (min-width: 1024px) {
     .new_block_content {
-      // height: 393px;
       border-radius: 8px;
       background: #f9f9f8;
       box-shadow:

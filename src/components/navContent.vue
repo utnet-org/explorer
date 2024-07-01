@@ -2,6 +2,7 @@
   import { onMounted, ref, watchEffect } from 'vue';
   import { useRouter } from 'vue-router';
   import Wallet from '../wallet/connect.ts';
+  import { Wallet as UtilityWallet } from '../wallet/utility.ts';
   import { ArrowDown } from '@element-plus/icons-vue';
   import { getCoinPrice } from '../api/price.ts';
   import { getScreenSize, Screen } from '../utils/screen-size.ts';
@@ -175,23 +176,41 @@
   }
 
   async function connectWallet() {
-    const wallet = new Wallet();
-    try {
-      const res = await wallet.connectWallet();
-      if (res != null) {
-        isConnect.value = true;
-        address.value = res;
-      }
-      // 设置账户变更回调函数
-      wallet.registerAccountChangeCallback((newAccount: string) => {
-        address.value = newAccount;
-        // 这里可以更新UI以反映新的地址
-        //console.log(`Address updated to: ${address.value}`);
-      });
-    } catch (error) {
-      console.error('连接 MetaMask 时发生错误', error);
-    }
+    const uWallet = new UtilityWallet({
+      networkId: 'testnet',
+      createAccessKeyFor:
+        '377ac29dcdcf80f8741c987df93e6381bc4dd36686eff06780438d1fc10970ef',
+    });
+    await uWallet.signIn();
+    // if (!isConnect.value) return;
+
+    // if (signedAccountId.value) {
+    //   action.value = wallet.value.signOut;
+    //   address.value = `Logout ${signedAccountId.value}`;
+    // } else {
+    //   action.value = wallet.value.signIn;
+    //   label.value = 'Login';
+    // }
   }
+
+  // async function connectWallet2() {
+  //   const wallet = new Wallet();
+  //   try {
+  //     const res = await wallet.connectWallet();
+  //     if (res != null) {
+  //       isConnect.value = true;
+  //       address.value = res;
+  //     }
+  //     // 设置账户变更回调函数
+  //     wallet.registerAccountChangeCallback((newAccount: string) => {
+  //       address.value = newAccount;
+  //       // 这里可以更新UI以反映新的地址
+  //       //console.log(`Address updated to: ${address.value}`);
+  //     });
+  //   } catch (error) {
+  //     console.error('连接 MetaMask 时发生错误', error);
+  //   }
+  // }
 
   const handleCommand = (command: string) => {
     const wallet = new Wallet();

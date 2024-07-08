@@ -335,7 +335,7 @@
         </div>
         <div v-if="size === Screen.Large" class="wallet_address_section">
           <img src="../assets/images/nav_logo.png" alt="" srcset="" />
-          <div class="wallet_address">Utility Mainnet</div>
+          <div class="wallet_address">Utility Testnet</div>
         </div>
         <div v-if="size === Screen.Large" class="language-container">
           <!--          <el-select-->

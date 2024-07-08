@@ -1,5 +1,20 @@
 import axios from 'axios';
 
+export interface Outcome {
+  executor_id: string;
+  gas_burnt: number;
+  metadata: any[];
+  logs: string[];
+  receipt_ids: string[];
+  tokens_burnt: string;
+}
+
+export interface Receipt {
+  block_hash: string;
+  id: string;
+  outcome: Outcome;
+}
+
 export interface TxnInfo {
   height?: number;
   timestamp?: number;
@@ -8,7 +23,8 @@ export interface TxnInfo {
   receiver_id?: string;
   signer_id?: string;
   deposit?: string;
-  txn_fee: number;
+  txn_fee?: number;
+  receipts?: Receipt[];
 }
 
 export async function getTxnList(num: number, size: number) {

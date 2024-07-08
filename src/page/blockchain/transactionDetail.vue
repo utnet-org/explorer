@@ -3,13 +3,14 @@
   import mistake from '@/assets/svgs/cuowu.svg';
   import rightarrow from '@/assets/svgs/Rightarrow_de.svg';
   import { useRoute } from 'vue-router';
-  import { onMounted, reactive } from 'vue';
+  import { onMounted, reactive, ref } from 'vue';
   import { getTxnDetail, TxnInfo } from '@/api/transaction.ts';
   import { CompareTimestampNano } from '@/utils/time.ts';
 
   const route = useRoute();
   const hash = route.query.hash ?? route.query.keyword;
   const infos = reactive<TxnInfo>({});
+  const activeNames = ref<string[]>([]);
 
   async function fetchTxnInfo(hash: string) {
     const res = await getTxnDetail(hash);
@@ -18,6 +19,7 @@
 
   onMounted(() => {
     fetchTxnInfo(hash as string);
+    activeNames.value = ['receipts'];
   });
 </script>
 <template>
@@ -51,7 +53,7 @@
           </div>
         </div>
         <div class="card_data">
-          <div class="card_title">时间戳</div>
+          <div class="card_title">时间</div>
           <div class="content_father">
             <div class="card_content"
               >{{ CompareTimestampNano(infos.timestamp!) }}
@@ -98,21 +100,73 @@
             <div class="card_content">{{ infos.txn_fee }} UNC</div>
           </div>
         </div>
-
-        <!--        <el-collapse :border="false">-->
-        <!--          <el-collapse-item title="点击查看更多" name="">-->
-        <!--            <div class="collapse_father">-->
-        <!--              <div class="collapse_title">Txn的Gas限制和使用情况</div>-->
-        <!--              <div class="collapse_data">0.00 gas | 10.21 Tgas ( N/A )</div>-->
-        <!--            </div>-->
-        <!--            <div class="collapse_father">-->
-        <!--              <div class="collapse_title">Burnt Gas & Tokens by Txn</div>-->
-        <!--              <div class="collapse_data"-->
-        <!--              ><span class="span_bg">🔥 2.63 Tgas | 0.00026 Ⓝ</span></div-->
-        <!--              >-->
-        <!--            </div>-->
-        <!--          </el-collapse-item>-->
-        <!--        </el-collapse>-->
+        <el-collapse v-model="activeNames">
+          <el-collapse-item title="回执详情" name="receipts">
+            <div v-for="r in infos.receipts">
+              <div class="collapse_father">
+                <div class="collapse_title">回执ID</div>
+                <div class="collapse_data">{{ r.id }}</div>
+              </div>
+              <div class="collapse_father">
+                <div class="collapse_title">区块Hash</div>
+                <div class="collapse_data">{{ r.block_hash }}</div>
+              </div>
+              <div class="collapse_father">
+                <div class="collapse_title">发送方</div>
+                <div class="collapse_data">NaN</div>
+              </div>
+              <div class="collapse_father">
+                <div class="collapse_title">接收方</div>
+                <div class="collapse_data">NaN</div>
+              </div>
+              <div class="collapse_father">
+                <div class="collapse_title">消耗的Gas和代币</div>
+                <div class="collapse_data"
+                  ><span class="span_bg"
+                    >🔥 {{ r.outcome.gas_burnt }} Tgas ｜
+                    {{ r.outcome.tokens_burnt }} UNC</span
+                  ></div
+                >
+              </div>
+              <div class="collapse_father">
+                <div class="collapse_title">动作</div>
+                <div class="collapse_data"
+                  ><el-input
+                    type="textarea"
+                    v-model="r.outcome.tokens_burnt"
+                    :rows="5"
+                    placeholder="The actions performed during receipt processing"
+                    readonly
+                    class="json-textarea"
+                /></div>
+              </div>
+              <div class="collapse_father">
+                <div class="collapse_title">结果</div>
+                <div class="collapse_data">Empty Result</div>
+              </div>
+              <div class="collapse_father">
+                <div class="collapse_title">日志</div>
+                <div v-if="r.outcome.logs.length == 0" class="collapse_data"
+                  >No Logs</div
+                >
+                <div
+                  v-else-if="r.outcome.logs.length != 0"
+                  class="collapse_data"
+                >
+                  <el-input
+                    type="textarea"
+                    v-model="r.outcome.logs"
+                    :rows="3"
+                    placeholder="Logs included in the receipt"
+                    readonly
+                    class="json-textarea"
+                  />
+                </div>
+              </div>
+              <el-divider></el-divider>
+            </div>
+          </el-collapse-item>
+        </el-collapse>
       </div>
     </div>
   </div>

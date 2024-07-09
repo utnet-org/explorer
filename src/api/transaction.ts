@@ -9,22 +9,46 @@ export interface Outcome {
   tokens_burnt: string;
 }
 
-export interface Receipt {
+export interface ReceiptOutcome {
   block_hash: string;
   id: string;
   outcome: Outcome;
 }
 
+export interface ReceiptElement {
+  predecessor_id: string;
+  receipt: ReceiptReceipt;
+  receipt_id: string;
+  receiver_id: string;
+}
+
+export interface ReceiptReceipt {
+  Action: ReceiptAction;
+}
+
+export interface ReceiptAction {
+  actions: any;
+  gas_price: string;
+  input_data_ids: string[];
+  output_data_receivers: string[];
+  signer_id: string;
+  signer_public_key: string;
+}
+
 export interface TxnInfo {
+  final_execution_status?: string;
+  status?: string;
   height?: number;
   timestamp?: number;
+  time_utc?: string;
   hash?: string;
   txn_type?: string;
   receiver_id?: string;
   signer_id?: string;
   deposit?: string;
   txn_fee?: number;
-  receipts?: Receipt[];
+  receipts?: ReceiptElement[];
+  receipts_outcome?: ReceiptOutcome[];
 }
 
 export async function getTxnList(num: number, size: number) {

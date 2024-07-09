@@ -4,8 +4,9 @@
   import rightarrow from '@/assets/svgs/Rightarrow_de.svg';
   import { useRoute } from 'vue-router';
   import { onMounted, reactive, ref } from 'vue';
-  import { getTxnDetail, TxnInfo } from '@/api/transaction.ts';
+  import { getTxnDetail, TxnInfo, ReceiptElement } from '@/api/transaction.ts';
   import { CompareTimestampNano } from '@/utils/time.ts';
+  import { DivBigPowerStrOfTen, DivBigPowerOfTen } from '@/utils/math.ts';
 
   const route = useRoute();
   const hash = route.query.hash ?? route.query.keyword;
@@ -14,7 +15,23 @@
 
   async function fetchTxnInfo(hash: string) {
     const res = await getTxnDetail(hash);
-    Object.assign(infos, res.data.data);
+    const resData = res.data.data;
+    if (resData.receipts) {
+      resData.receipts.forEach((receipt: ReceiptElement) => {
+        const actionsJson = JSON.stringify(
+          receipt.receipt.Action.actions,
+          null,
+          4,
+        );
+        const lines = actionsJson.split('\n');
+        if (lines.length > 2) {
+          receipt.receipt.Action.actions = lines.slice(1, -1).join('\n');
+        } else {
+          receipt.receipt.Action.actions = actionsJson;
+        }
+      });
+    }
+    Object.assign(infos, resData);
   }
 
   onMounted(() => {
@@ -78,7 +95,7 @@
           <div class="cont_arr">
             <div class="card_content">
               <rightarrow />
-              {{ infos.token_transferred ?? 'NaN' }}
+              {{ 'NaN' }}
             </div>
             <!--            <div class="card_content">-->
             <!--              <rightarrow />From system To i7169098064.tg For 0.006015 HOTHOT (-->
@@ -102,43 +119,72 @@
         </div>
         <el-collapse v-model="activeNames">
           <el-collapse-item title="回执详情" name="receipts">
-            <div v-for="r in infos.receipts">
+            <div v-for="(rec, index) in infos.receipts" :key="index">
               <div class="collapse_father">
                 <div class="collapse_title">回执ID</div>
-                <div class="collapse_data">{{ r.id }}</div>
+                <div class="collapse_data"
+                  >{{
+                    infos.receipts_outcome
+                      ? infos.receipts_outcome[index].id
+                      : 'NaN'
+                  }}
+                </div>
               </div>
               <div class="collapse_father">
                 <div class="collapse_title">区块Hash</div>
-                <div class="collapse_data">{{ r.block_hash }}</div>
+                <div class="collapse_data"
+                  >{{
+                    infos.receipts_outcome
+                      ? infos.receipts_outcome[index].block_hash
+                      : 'NaN'
+                  }}
+                </div>
               </div>
               <div class="collapse_father">
                 <div class="collapse_title">发送方</div>
-                <div class="collapse_data">NaN</div>
+                <div class="collapse_data">{{ rec.predecessor_id }}</div>
               </div>
               <div class="collapse_father">
                 <div class="collapse_title">接收方</div>
-                <div class="collapse_data">NaN</div>
+                <div class="collapse_data">{{ rec.receiver_id }}</div>
               </div>
               <div class="collapse_father">
                 <div class="collapse_title">消耗的Gas和代币</div>
                 <div class="collapse_data"
                   ><span class="span_bg"
-                    >🔥 {{ r.outcome.gas_burnt }} Tgas ｜
-                    {{ r.outcome.tokens_burnt }} UNC</span
+                    >🔥
+                    {{
+                      infos.receipts_outcome
+                        ? DivBigPowerOfTen(
+                            infos.receipts_outcome[index].outcome.gas_burnt,
+                            12,
+                          )
+                        : 'NaN'
+                    }}
+                    Tgas ｜
+                    {{
+                      infos.receipts_outcome
+                        ? DivBigPowerStrOfTen(
+                            infos.receipts_outcome[index].outcome.tokens_burnt,
+                            24,
+                          )
+                        : 'NaN'
+                    }}
+                    UNC</span
                   ></div
                 >
               </div>
               <div class="collapse_father">
                 <div class="collapse_title">动作</div>
-                <div class="collapse_data"
-                  ><el-input
+                <div class="collapse_data">
+                  <el-input
                     type="textarea"
-                    v-model="r.outcome.tokens_burnt"
-                    :rows="5"
+                    :autosize="{ minRows: 3, maxRows: 10 }"
+                    v-model="rec.receipt.Action.actions"
                     placeholder="The actions performed during receipt processing"
                     readonly
-                    class="json-textarea"
-                /></div>
+                  />
+                </div>
               </div>
               <div class="collapse_father">
                 <div class="collapse_title">结果</div>
@@ -146,16 +192,20 @@
               </div>
               <div class="collapse_father">
                 <div class="collapse_title">日志</div>
-                <div v-if="r.outcome.logs.length == 0" class="collapse_data"
-                  >No Logs</div
-                >
                 <div
-                  v-else-if="r.outcome.logs.length != 0"
+                  v-if="infos.receipts_outcome![index].outcome.logs.length == 0"
+                  class="collapse_data"
+                  >No Logs
+                </div>
+                <div
+                  v-else-if="
+                    infos.receipts_outcome![index].outcome.logs.length != 0
+                  "
                   class="collapse_data"
                 >
                   <el-input
                     type="textarea"
-                    v-model="r.outcome.logs"
+                    v-model="infos.receipts_outcome![index].outcome.logs"
                     :rows="3"
                     placeholder="Logs included in the receipt"
                     readonly
@@ -171,8 +221,15 @@
     </div>
   </div>
 </template>
-<!-- 14, 57, 57 -->
 <style scoped lang="scss">
+  ::v-deep(.el-textarea__inner) {
+    background-color: #f3f4f6;
+  }
+
+  ::v-deep(.el-textarea) {
+    --el-input-focus-border-color: #3edfcf;
+  }
+
   .collapse_father {
     display: flex;
     margin: 10px 0;
@@ -195,17 +252,14 @@
 
   .collapse_data {
     flex: 3;
+    margin-right: 24px;
   }
 
   ::v-deep(.el-collapse-item__header) {
-    background: #f9f9f8;
-    color: #3edfcf;
-    font-size: 14px;
-    // border: none !important;
-
+    color: #0facb6;
+    font-size: 15px;
     border: none;
     background-color: transparent;
-
     width: 110px;
   }
 
@@ -242,14 +296,13 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: left;
     padding: 0;
     border: 1px solid #e9ecef;
     border-radius: 8px;
     background: #f9f9f8;
     box-shadow:
-      0px 4px 8px 0px rgba(0, 0, 0, 0.04),
-      0px 4px 15px 0px rgba(92, 255, 243, 0.1);
+      0 4px 8px 0 rgba(0, 0, 0, 0.04),
+      0 4px 15px 0 rgba(92, 255, 243, 0.1);
   }
 
   .card_data {
@@ -294,9 +347,6 @@
     align-items: center;
     font-size: 12px;
     border-radius: 6px;
-  }
-
-  .card_content {
   }
 
   .content_button {
@@ -363,7 +413,7 @@
     }
 
     .details {
-      padding: 0px 22px;
+      padding: 0 22px;
     }
   }
 </style>

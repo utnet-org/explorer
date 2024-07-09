@@ -44,9 +44,9 @@ export default defineConfig({
         rewrite: path => path.replace(/^\/api\/mock/, ''), // 去掉代理路径中的/api/mock
       },
       '/api': {
-        target: 'http://192.168.10.80:1080', // 后端真实数据服务地址
+        // target: 'http://192.168.10.80:1080', // 后端真实数据服务地址
         // target: 'http://0.0.0.0:1080', // 后端真实数据服务地址
-        // target: 'https://uncscan.com', // 后端真实数据服务地址
+        target: 'https://uncscan.com', // 后端真实数据服务地址
         changeOrigin: true,
         // rewrite: path => path.replace(/^\/api/, ''), // 去掉代理路径中的/api
       },

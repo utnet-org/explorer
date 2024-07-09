@@ -7,20 +7,6 @@
           <div class="trend">{{ $t('home.power_trend') }}</div>
           <el-button
             class="custom_buttons"
-            color="#3EDFCF"
-            type="success"
-            size="small"
-            :plain="selectedRange !== 'week'"
-            :style="{
-              color: selectedRange === 'week' ? ' #000' : ' rgba(0, 0, 0, 0.5)',
-              backgroundColor: selectedRange === 'week' ? '#3EDFCF' : '#fff',
-              fontWeight: selectedRange === 'week' ? 500 : 300,
-            }"
-            @click="setTimeRange('week')"
-            >{{ $t('home.week') }}</el-button
-          >
-          <el-button
-            class="custom_buttons"
             size="small"
             color="#3EDFCF"
             type="success"
@@ -33,6 +19,20 @@
             }"
             @click="setTimeRange('month')"
             >{{ $t('home.month') }}</el-button
+          >
+          <el-button
+            class="custom_buttons"
+            color="#3EDFCF"
+            type="success"
+            size="small"
+            :plain="selectedRange !== 'week'"
+            :style="{
+              color: selectedRange === 'week' ? ' #000' : ' rgba(0, 0, 0, 0.5)',
+              backgroundColor: selectedRange === 'week' ? '#3EDFCF' : '#fff',
+              fontWeight: selectedRange === 'week' ? 500 : 300,
+            }"
+            @click="setTimeRange('week')"
+            >{{ $t('home.week') }}</el-button
           >
         </div>
         <div @click="goToMore">
@@ -75,7 +75,7 @@
   } from 'echarts/components';
   import { LineChart } from 'echarts/charts';
   import { CanvasRenderer } from 'echarts/renderers';
-  import { PosttChartData, PosttgasData } from '@/api/chart'
+  import { PosttChartData, PosttgasData } from '@/api/chart';
   defineProps<{ viewportWidth: number }>();
   echarts.use([
     TitleComponent,
@@ -90,13 +90,11 @@
 
   const chart = ref(null);
   let myChart: echarts.ECharts | null | undefined = null;
-  const selectedRange = ref('week');
+  const selectedRange = ref('month');
 
   // 函数用于切换数据
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const setTimeRange = async (range: string) => {
-  
-   
     selectedRange.value = range;
 
     // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
@@ -256,12 +254,12 @@
           },
           option: {
             grid: {
-        containLabel: true, // 确保坐标轴的标签完全显示
-        left: 0,
-        right: 40,
-        top: 15,
-        bottom: 20,
-      },
+              containLabel: true, // 确保坐标轴的标签完全显示
+              left: 0,
+              right: 40,
+              top: 15,
+              bottom: 20,
+            },
             xAxis: {
               axisLabel: {
                 fontSize: 12, // 设置 X 轴标签的文字大小
@@ -283,12 +281,12 @@
           },
           option: {
             grid: {
-        containLabel: true, // 确保坐标轴的标签完全显示
-        left: 0,
-        right: 40,
-        top: 15,
-        bottom: 20,
-      },
+              containLabel: true, // 确保坐标轴的标签完全显示
+              left: 0,
+              right: 40,
+              top: 15,
+              bottom: 20,
+            },
             tooltip: {
               formatter: function (value: any) {
                 return `
@@ -507,7 +505,7 @@
             fontSize: 12, // 设置 X 轴标签的文字大小
             color: '#0FACB6',
             position: 'top',
-            formatter: function (value: { value: string; }) {
+            formatter: function (value: { value: string }) {
               // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
               return value.value + 'UNC';
             },
@@ -576,11 +574,11 @@
     myChart1?.setOption(option);
   };
 
-  onMounted( () => {
+  onMounted(() => {
     // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     if (chart.value) {
       myChart = echarts.init(chart.value);
-       void setTimeRange('week'); // 默认显示周数据
+      void setTimeRange('month'); // 默认显示周数据
       window.addEventListener('resize', resizeChart);
     }
     // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
@@ -589,9 +587,7 @@
       procedureRateTrend();
       window.addEventListener('resize', resizeChart);
     }
-   
-    
-    });
+  });
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   function resizeChart() {
     if (myChart != null) {

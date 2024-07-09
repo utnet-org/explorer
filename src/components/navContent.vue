@@ -1,8 +1,8 @@
 <script setup lang="ts">
   import { onMounted, ref, watchEffect } from 'vue';
   import { useRouter } from 'vue-router';
-  import Wallet from '../wallet/connect.ts';
-  import { Wallet as UtilityWallet } from '../wallet/utility.ts';
+  // import Wallet from '../wallet/eth/connect.ts';
+  import { Wallet } from '../wallet/utility.ts';
   import { ArrowDown } from '@element-plus/icons-vue';
   import { getCoinPrice } from '../api/price.ts';
   import { getScreenSize, Screen } from '../utils/screen-size.ts';
@@ -128,12 +128,16 @@
       : Number(localStorage.getItem('navSelectIndex')),
   );
   const address = ref(i18n.global.t('home.connect_wallet'));
-  const isConnect = ref(false);
+  // const isConnect = ref(false);
   const price = ref('---');
   const amount = ref('0.00');
 
   const size = getScreenSize().currentScreenSize;
   const langValue = ref('');
+
+  const signedAccountId = ref<string | null>(null);
+  const label = ref('SignIn...');
+  const action = ref<() => void>(() => {});
 
   // 使用 watchEffect 来监听语言变化
   watchEffect(() => {
@@ -148,6 +152,13 @@
     localStorage.setItem('navSelectIndex', '-1');
     showNavSelectType.value = false;
     router.push('/');
+  };
+
+  const updateWalletAction = async () => {
+    signedAccountId.value = await uWallet.startUp((accountId: any) => {
+      signedAccountId.value = accountId || null;
+      updateWalletActionAndLabel();
+    });
   };
 
   onMounted(() => {
@@ -165,33 +176,35 @@
         }
       });
     });
+    updateWalletAction();
   });
 
   async function getP() {
-    console.log('start get price');
-    // const response = await getPrice();
     const response = await getCoinPrice();
     price.value = response.data.data.price.toFixed(6);
     amount.value = response.data.data.amount.toFixed(2);
   }
 
-  async function connectWallet() {
-    const uWallet = new UtilityWallet({
-      networkId: 'testnet',
-      createAccessKeyFor:
-        '377ac29dcdcf80f8741c987df93e6381bc4dd36686eff06780438d1fc10970ef',
-    });
-    await uWallet.signIn();
-    // if (!isConnect.value) return;
+  const uWallet = new Wallet({
+    networkId: 'testnet',
+    createAccessKeyFor:
+      '377ac29dcdcf80f8741c987df93e6381bc4dd36686eff06780438d1fc10970ef',
+  });
 
-    // if (signedAccountId.value) {
-    //   action.value = wallet.value.signOut;
-    //   address.value = `Logout ${signedAccountId.value}`;
-    // } else {
-    //   action.value = wallet.value.signIn;
-    //   label.value = 'Login';
-    // }
-  }
+  const updateWalletActionAndLabel = () => {
+    if (signedAccountId.value) {
+      action.value = uWallet.signOut;
+      label.value =
+        i18n.global.t('home.disconnect_wallet') + `: ${signedAccountId.value}`;
+    } else {
+      action.value = uWallet.signIn;
+      label.value = i18n.global.t('home.connect_wallet');
+    }
+  };
+
+  const handleAction = () => {
+    action.value();
+  };
 
   // async function connectWallet2() {
   //   const wallet = new Wallet();
@@ -212,12 +225,13 @@
   //   }
   // }
 
-  const handleCommand = (command: string) => {
-    const wallet = new Wallet();
-    if (command === 'disconnect') {
-      address.value = wallet.disconnectWallet();
-    }
-  };
+  // const handleCommand = (command: string) => {
+  // const wallet = new Wallet();
+  // if (command === 'disconnect') {
+  //   address.value = wallet.disconnectWallet();
+  // }
+  // };
+
   const activeName = ref('0');
   const showNavSelectType = ref(false);
   const changeCollapse = (index: any) => {
@@ -299,38 +313,34 @@
       </div>
       <div class="nav_select_right">
         <div class="dropdown">
-          <el-dropdown
-            popper-class="drop-menu"
-            v-if="isConnect"
-            trigger="click"
-            placement="bottom-end"
-            @command="handleCommand"
-          >
-            <el-button round class="nav_select_right_title">
-              {{ address }}
-              <el-icon class="el-icon--right">
-                <arrow-down />
-              </el-icon>
-            </el-button>
-            <template #dropdown>
-              <el-dropdown-menu>
-                <el-dropdown-item> {{ $t('home.wallet') }}</el-dropdown-item>
-                <el-dropdown-item>
-                  {{ $t('home.recent_trans') }}</el-dropdown-item
-                >
-                <el-dropdown-item command="disconnect">
-                  {{ $t('home.disconnect_wallet') }}
-                </el-dropdown-item>
-              </el-dropdown-menu>
-            </template>
-          </el-dropdown>
-          <!-- 当没有连接钱包时显示普通按钮 -->
-          <el-button
-            v-else
-            class="nav_select_right_title"
-            @click="connectWallet"
-          >
-            {{ address }}
+          <!--          <el-dropdown-->
+          <!--            popper-class="drop-menu"-->
+          <!--            v-if="isConnect"-->
+          <!--            trigger="click"-->
+          <!--            placement="bottom-end"-->
+          <!--            @command="handleCommand"-->
+          <!--          >-->
+          <!--            <el-button round class="nav_select_right_title">-->
+          <!--              {{ address }}-->
+          <!--              <el-icon class="el-icon&#45;&#45;right">-->
+          <!--                <arrow-down />-->
+          <!--              </el-icon>-->
+          <!--            </el-button>-->
+          <!--            <template #dropdown>-->
+          <!--              <el-dropdown-menu>-->
+          <!--                <el-dropdown-item> {{ $t('home.wallet') }}</el-dropdown-item>-->
+          <!--                <el-dropdown-item>-->
+          <!--                  {{ $t('home.recent_trans') }}</el-dropdown-item-->
+          <!--                >-->
+          <!--                <el-dropdown-item command="disconnect">-->
+          <!--                  {{ $t('home.disconnect_wallet') }}-->
+          <!--                </el-dropdown-item>-->
+          <!--              </el-dropdown-menu>-->
+          <!--            </template>-->
+          <!--          </el-dropdown>-->
+
+          <el-button class="nav_select_right_title" @click="handleAction">
+            {{ label }}
           </el-button>
         </div>
         <div v-if="size === Screen.Large" class="wallet_address_section">

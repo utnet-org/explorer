@@ -1,8 +1,7 @@
-import axios from 'axios';
-import type { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { Message, Modal } from '@arco-design/web-vue';
-import { useUserStore } from '@/store';
+import type { AxiosResponse, InternalAxiosRequestConfig } from 'axios';
+import { ElMessage } from 'element-plus';
 import { getToken } from '@/utils/auth';
+import axios from 'axios';
 
 export interface HttpResponse<T = unknown> {
   status: number;
@@ -16,7 +15,7 @@ if (import.meta.env.VITE_API_BASE_URL) {
 }
 
 axios.interceptors.request.use(
-  (config: AxiosRequestConfig) => {
+  (config: InternalAxiosRequestConfig) => {
     // let each request carry token
     // this example using the JWT token
     // Authorization is a custom headers key
@@ -24,10 +23,10 @@ axios.interceptors.request.use(
     const token = getToken();
     // const token = 'test_hash_token_user_id_1';
     if (token) {
-      if (!config.headers) {
-        config.headers = {};
-      }
-      config.headers = { token };
+      // if (!config.headers) {
+      //   config.headers = {};
+      // }
+      // config.headers = { token };
     }
     return config;
   },
@@ -38,32 +37,21 @@ axios.interceptors.request.use(
 
 // add response interceptors
 axios.interceptors.response.use(
-  (response: AxiosResponse<HttpResponse>) => {
+  (response: AxiosResponse<any, any>) => {
     const res = response.data;
     // if the custom code is not 20000, it is judged as an error.
     if (res.code !== 0) {
-      Message.error({
-        content: res.data.message_zh || 'Error',
+      ElMessage.error({
+        message: res.data.message_zh || 'Error',
         duration: 5 * 1000,
-      });
-      Modal.error({
-        title: 'Confirm logout',
-        content:
-          'You have been logged out, you can cancel to stay on this page, or log in again',
-        okText: 'Re-Login',
-        async onOk() {
-          const userStore = useUserStore();
-          await userStore.logout();
-          window.location.reload();
-        },
       });
       return Promise.reject(new Error(res.msg || 'Error'));
     }
     return res;
   },
   error => {
-    Message.error({
-      content: error.msg || 'Request Error',
+    ElMessage.error({
+      message: error.msg || 'Request Error',
       duration: 5 * 1000,
     });
     return Promise.reject(error);

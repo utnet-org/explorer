@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref, defineEmits, onMounted, onBeforeUnmount } from 'vue';
+  import { ref, onMounted, onBeforeUnmount } from 'vue';
   import { getSearchFilter } from '@/api/overview.ts';
   import router from '@/route/route.ts';
 

@@ -3,10 +3,11 @@
   import mistake from '@/assets/svgs/cuowu.svg';
   import rightarrow from '@/assets/svgs/Rightarrow_de.svg';
   import { useRoute } from 'vue-router';
-  import { onMounted, reactive, ref } from 'vue';
+  import { computed, onMounted, reactive, ref } from 'vue';
   import { getTxnDetail, TxnInfo, ReceiptElement } from '@/api/transaction.ts';
   import { CompareTimestampNano } from '@/utils/time.ts';
   import { DivBigPowerStrOfTen, DivBigPowerOfTen } from '@/utils/math.ts';
+import router from '@/route/route';
 
   const route = useRoute();
   const hash = route.query.hash ?? route.query.keyword;
@@ -38,20 +39,51 @@
     fetchTxnInfo(hash as string);
     activeNames.value = ['receipts'];
   });
+
+  const ClickPush = (hash: string, type: string) => {
+    if (type === 'BlockHash') {
+      void router.push({
+        path: '/blockchain/details',
+        // block详情type 1高度 2哈希
+        query: { query_word: hash, query_type: 2 },
+      });
+    } else if (type === 'sender') {
+      if (isValidReceiverAddress(hash)) {
+        void router.push({
+          path: '/account/detail',
+          // block详情type 1高度 2哈希
+          query: { query_word: hash },
+        });
+      }
+    } else if (type === 'receiver') {
+      if (isValidReceiverAddress(hash)) {
+        void router.push({
+          path: '/account/detail',
+          // block详情type 1高度 2哈希
+          query: { query_word: hash },
+        });
+      }
+    }
+  };
+
+  // 判断地址是否有 64 个字符
+  const isValidReceiverAddress = (address: string) => {
+    return address.length === 64;
+  };
 </script>
 <template>
   <div class="content">
     <div class="details">
-      <div class="details_title">交易详情</div>
+      <div class="details_title">{{ $t('static.Transaction_Details') }}</div>
       <div class="card">
         <div class="card_data">
-          <div class="card_title">交易Hash</div>
+          <div class="card_title">{{ $t('static.Transaction_Hash') }}</div>
           <div class="content_father">
             <div class="card_content">{{ infos.hash }}</div>
           </div>
         </div>
         <div class="card_data">
-          <div class="card_title">状态</div>
+          <div class="card_title">{{ $t('home.status') }}</div>
           <div class="content_father">
             <div v-if="infos.status !== ''" class="Success">
               <correct />
@@ -64,28 +96,28 @@
           </div>
         </div>
         <div class="card_data">
-          <div class="card_title">区块高度</div>
+          <div class="card_title">{{ $t('home.height') }}</div>
           <div class="content_father">
             <div class="card_content">{{ infos.height }}</div>
           </div>
         </div>
         <div class="card_data">
-          <div class="card_title">时间</div>
+          <div class="card_title">{{ $t('home.time') }}</div>
           <div class="content_father">
             <div class="card_content"
-              >{{ CompareTimestampNano(infos.timestamp!) }}
+              >{{ CompareTimestampNano(infos.timestamp) }}
               {{ infos.time_utc }}
             </div>
           </div>
         </div>
         <div class="card_data">
-          <div class="card_title">发送方</div>
+          <div class="card_title">{{ $t('home.sender') }}</div>
           <div class="content_father">
             <div class="card_content">{{ infos.signer_id }}</div>
           </div>
         </div>
         <div class="card_data">
-          <div class="card_title">接收方</div>
+          <div class="card_title">{{ $t('home.receiver') }}</div>
           <div class="content_father">
             <div class="card_content">{{ infos.receiver_id }}</div>
           </div>
@@ -104,7 +136,7 @@
           </div>
         </div>
         <div class="card_data">
-          <div class="card_title">存款价值</div>
+          <div class="card_title">{{ $t('contract.DepositValue') }}</div>
           <div class="content_father">
             <div class="card_content"
               >{{ infos.deposit != '' ? infos.deposit : 0 }}
@@ -112,16 +144,19 @@
           </div>
         </div>
         <div class="card_data">
-          <div class="card_title">交易费</div>
+          <div class="card_title">{{ $t('static.transaction_fee') }}</div>
           <div class="content_father">
             <div class="card_content">{{ infos.txn_fee }} UNC</div>
           </div>
         </div>
         <el-collapse v-model="activeNames">
-          <el-collapse-item title="回执详情" name="receipts">
+          <el-collapse-item
+            :title="$t('static.ReturnReceiptDetails')"
+            name="receipts"
+          >
             <div v-for="(rec, index) in infos.receipts" :key="index">
               <div class="collapse_father">
-                <div class="collapse_title">回执ID</div>
+                <div class="collapse_title">{{ $t('static.Receipt_ID') }}</div>
                 <div class="collapse_data"
                   >{{
                     infos.receipts_outcome
@@ -131,8 +166,17 @@
                 </div>
               </div>
               <div class="collapse_father">
-                <div class="collapse_title">区块Hash</div>
-                <div class="collapse_data"
+                <div class="collapse_title">{{ $t('static.Block_Hash') }}</div>
+                <div
+                  class="collapse_data collapse_data1"
+                  @click="
+                    ClickPush(
+                      infos.receipts_outcome
+                        ? infos.receipts_outcome[index].block_hash
+                        : 'NaN',
+                      'BlockHash',
+                    )
+                  "
                   >{{
                     infos.receipts_outcome
                       ? infos.receipts_outcome[index].block_hash
@@ -141,15 +185,31 @@
                 </div>
               </div>
               <div class="collapse_father">
-                <div class="collapse_title">发送方</div>
-                <div class="collapse_data">{{ rec.predecessor_id }}</div>
+                <div class="collapse_title">{{ $t('home.sender') }}</div>
+                <div
+                  class="collapse_data"
+                  :class="{
+                    collapse_data1: isValidReceiverAddress(rec.predecessor_id),
+                  }"
+                  @click="ClickPush(rec.predecessor_id, 'sender')"
+                  >{{ rec.predecessor_id }}</div
+                >
               </div>
               <div class="collapse_father">
-                <div class="collapse_title">接收方</div>
-                <div class="collapse_data">{{ rec.receiver_id }}</div>
+                <div class="collapse_title">{{ $t('home.receiver') }}</div>
+                <div
+                  :class="{
+                    collapse_data1: isValidReceiverAddress(rec.receiver_id),
+                  }"
+                  class="collapse_data"
+                  @click="ClickPush(rec.receiver_id, 'receiver')"
+                  >{{ rec.receiver_id }}</div
+                >
               </div>
               <div class="collapse_father">
-                <div class="collapse_title">消耗的Gas和代币</div>
+                <div class="collapse_title">{{
+                  $t('static.Gas_and_tokens_consumed')
+                }}</div>
                 <div class="collapse_data"
                   ><span class="span_bg"
                     >🔥
@@ -175,7 +235,7 @@
                 >
               </div>
               <div class="collapse_father">
-                <div class="collapse_title">动作</div>
+                <div class="collapse_title">{{ $t('static.action') }}</div>
                 <div class="collapse_data">
                   <el-input
                     type="textarea"
@@ -187,11 +247,11 @@
                 </div>
               </div>
               <div class="collapse_father">
-                <div class="collapse_title">结果</div>
+                <div class="collapse_title">{{ $t('static.result') }}</div>
                 <div class="collapse_data">Empty Result</div>
               </div>
               <div class="collapse_father">
-                <div class="collapse_title">日志</div>
+                <div class="collapse_title">{{ $t('static.logs') }}</div>
                 <div
                   v-if="infos.receipts_outcome![index].outcome.logs.length == 0"
                   class="collapse_data"
@@ -254,13 +314,25 @@
     flex: 3;
     margin-right: 24px;
   }
+  .collapse_data1 {
+    //鼠标
+    cursor: pointer;
+    color: #3edfcf;
+    // 下划线
+    line-height: 24px;
 
+    text-decoration: underline;
+  }
   ::v-deep(.el-collapse-item__header) {
     color: #0facb6;
     font-size: 15px;
     border: none;
     background-color: transparent;
-    width: 110px;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
   }
 
   ::v-deep(.el-collapse-item__wrap) {

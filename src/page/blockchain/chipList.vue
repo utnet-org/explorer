@@ -56,7 +56,10 @@
     <div class="block_list">
       <div class="block_list_header">
         <div class="block_list_header_title">{{ $t('home.chip_list') }}</div>
-        <div class="block_list_header_text">共 {{ totalItems }} 条芯片信息</div>
+        <div class="block_list_header_text"
+          >{{ $t('contract.common') }} {{ totalItems }}
+          {{ $t('contract.piece_of_chip_information') }}</div
+        >
       </div>
       <!--      <div v-if="size === Screen.Large" class="dropdown">-->
       <!--        <div class="dropdown_title">{{ $t('home.power_type') }} </div>-->

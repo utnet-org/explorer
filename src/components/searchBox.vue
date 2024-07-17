@@ -1,5 +1,5 @@
 <template>
-  <div class="peak_content_top_side_search">
+  <div v-loading.fullscreen.lock="loading" class="peak_content_top_side_search">
     <input
       type="text"
       v-model="searchFilter"
@@ -19,13 +19,17 @@
   import { ref, onMounted, onBeforeUnmount } from 'vue';
   import { getSearchFilter } from '@/api/overview.ts';
   import router from '@/route/route.ts';
+  import { ElMessage } from 'element-plus';
 
   const searchFilter = ref('');
   const emit = defineEmits(['searchFilter']);
+  const loading = ref(false);
 
   const handleSearch = async () => {
+  
     const result = await fetchSearchFilter();
     emit('searchFilter', result);
+   
   };
 
   onMounted(() => {
@@ -48,11 +52,17 @@
   };
 
   const fetchSearchFilter = async () => {
+    loading.value = true;
     const keyword = searchFilter.value.trim();
     const response = await getSearchFilter(keyword);
+    if (response.data.data == null) {
+      ElMessage.error('查询数据有误');
+      loading.value = false;
+      return;
+    }
     if (response.data.code === 0) {
       // 搜索type 1账户 2块高度 3块哈希 4地址 5交易 6消息 7芯片
-      if (response.data.data.query_type == 1) {
+      if (response.data.data.query_type === 1) {
         void router.push({
           path: '/account/detail',
           query: { query_word: response.data.data.keyword },
@@ -74,7 +84,7 @@
       if (response.data.query_type == 5) {
         void router.push({
           path: '/blockchain/transactionDetails',
-          query: { keyword: keyword },
+          query: { keyword },
         });
       }
       if (response.data.query_type == 7) {
@@ -83,9 +93,13 @@
           query: { query_word: keyword },
         });
       }
+
     } else {
+ 
       alert(response.data.data.message_zh);
+
     }
+
     return response.data.data;
   };
 </script>

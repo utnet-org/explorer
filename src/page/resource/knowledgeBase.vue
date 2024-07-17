@@ -4,20 +4,20 @@
   import HeaderPage from '../../components/otherHeaderContent.vue';
   // const windowWidth = ref(document.documentElement.clientWidth);
 
-  //监听窗口大小变化
+  // 监听窗口大小变化
   onMounted(() => {});
   const articleList = [
     {
       id: '',
-      title: '入门篇',
+      title: 'contract.Getting_Started',
     },
     {
       id: '',
-      title: '挖矿篇',
+      title: 'contract.Mining',
     },
     {
       id: '',
-      title: '开发篇',
+      title: 'contract.Development',
     },
   ];
   const currentIndex = ref(0);
@@ -32,28 +32,30 @@
     <div style="height: 200px"></div>
     <div class="block_list">
       <div class="block_list_side">
-        <div class="block_list_side_header">文章列表</div>
+        <div class="block_list_side_header">{{
+          $t('contract.Article_list')
+        }}</div>
         <div class="block_list_side_list">
           <div
-            class="block_list_side_list_item"
             v-for="(item, index) in articleList"
             :key="index"
+            class="block_list_side_list_item"
             @click="changeContent(index)"
-            >{{ index + 1 }}.{{ item.title }}</div
+            >{{ index + 1 }}.{{ $t(item.title) }}</div
           >
         </div>
       </div>
-      <div class="block_list_content" v-if="currentIndex == 0">
-        <h2>一、入门篇</h2>
-        <h3>utility项目介绍</h3>
+      <div v-if="currentIndex == 0" class="block_list_content">
+        <h2>{{ $t('contract.one') }}{{ $t('contract.Getting_Started') }}</h2>
+        <h3>{{ $t('contract.Utility_project_introduction') }}</h3>
       </div>
-      <div class="block_list_content" v-if="currentIndex == 1">
-        <h2>二、挖矿篇</h2>
-        <h3>utility要如何挖矿</h3>
+      <div v-if="currentIndex == 1" class="block_list_content">
+        <h2>{{ $t('contract.two') }}{{ $t('contract.Mining') }}</h2>
+        <h3>{{ $t('contract.How_to_mine_using_utility') }}</h3>
       </div>
-      <div class="block_list_content" v-if="currentIndex == 2">
-        <h2>三、开发篇</h2>
-        <h3>utility开发介绍</h3>
+      <div v-if="currentIndex == 2" class="block_list_content">
+        <h2>{{ $t('contract.three') }}{{ $t('contract.Development') }}</h2>
+        <h3>{{ $t('contract.Introduction_to_utility_development') }}</h3>
       </div>
     </div>
   </div>

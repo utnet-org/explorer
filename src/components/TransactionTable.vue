@@ -32,8 +32,13 @@
 <template>
   <div class="block_list_header">
     <div class="block_list_header_side">
-      <div class="block_list_header_title">交易列表</div>
-      <div class="block_list_header_text">共 {{ props.total }} 条消息</div>
+      <div class="block_list_header_title">{{
+        $t('blockChain.transactionList')
+      }}</div>
+      <div class="block_list_header_text"
+        >{{ $t('contract.common') }} {{ props.total }}
+        {{ $t('contract.messages') }}</div
+      >
     </div>
   </div>
   <el-table
@@ -60,14 +65,14 @@
     :highlight-current-row="true"
     @row-click="tableClick"
   >
-    <el-table-column prop="hash" label="交易哈希">
+    <el-table-column prop="hash" :label="$t('txn_hash')">
       <template #default="{ row }">
         <el-tooltip effect="dark" :content="row.hash" placement="top">
           <div class="text-ellipsis">{{ row.hash }}</div>
         </el-tooltip>
       </template>
     </el-table-column>
-    <el-table-column label="类型">
+    <el-table-column :label="$t('home.type')">
       <template #default="{ row }">
         <div style="color: #0facb6">
           <span v-if="row.txn_type">{{ row.txn_type }}</span>
@@ -75,25 +80,25 @@
         </div>
       </template>
     </el-table-column>
-    <el-table-column prop="deposit" label="存款价值">
+    <el-table-column prop="deposit" :label="$t('contract.DepositValue')">
       <template #default="{ row }">
         <span v-if="row.deposit">{{ row.deposit }}</span>
         <span v-else>0</span>
       </template>
     </el-table-column>
-    <el-table-column prop="txn_fee" label="TXN费用">
+    <el-table-column prop="txn_fee" :label="$t('contract.TXNFee')">
       <template #default="{ row }">
         <span>{{ row.txn_fee.toFixed(6) }} UNC</span>
       </template>
     </el-table-column>
-    <el-table-column prop="signer_id" label="发送方">
+    <el-table-column prop="signer_id" :label="$t('home.sender')">
       <template #default="{ row }">
         <el-tooltip effect="dark" :content="row.signer_id" placement="top">
           <div class="text-ellipsis">{{ row.signer_id }}</div>
         </el-tooltip>
       </template>
     </el-table-column>
-    <el-table-column label="接收方">
+    <el-table-column :label="$t('home.receiver')">
       <template #default="{ row }">
         <el-tooltip effect="dark" :content="row.receiver_id" placement="top">
           <div class="text-ellipsis" style="color: #0facb6">{{
@@ -102,8 +107,9 @@
         </el-tooltip>
       </template>
     </el-table-column>
-    <el-table-column prop="height" label="块高度"> </el-table-column>
-    <el-table-column prop="timestamp" label="块龄">
+    <el-table-column prop="height" :label="$t('home.height')">
+    </el-table-column>
+    <el-table-column prop="timestamp" :label="$t('contract.Block_age')">
       <template #default="{ row }">
         <span>{{ CompareTimestampNano(row.timestamp) }}</span>
       </template>
@@ -114,7 +120,7 @@
       <div v-for="(item, index) in tableData" :key="index">
         <div class="eco-item">
           <div>
-            <div class="grey-text-12-300"> 交易哈希</div>
+            <div class="grey-text-12-300"> {{ $t('txn_hash') }}</div>
           </div>
           <div>
             <div class="black-text-14 text-ellipsis" style="width: 200px">
@@ -124,7 +130,7 @@
         </div>
         <div class="eco-item">
           <div>
-            <div class="grey-text-12-300"> 类型</div>
+            <div class="grey-text-12-300"> {{ $t('home.type') }}</div>
           </div>
           <div>
             <div class="black-text-14">
@@ -135,7 +141,9 @@
         </div>
         <div class="eco-item">
           <div>
-            <div class="grey-text-12-300"> 存款价值</div>
+            <div class="grey-text-12-300">
+              {{ $t('contract.DepositValue') }}</div
+            >
           </div>
           <div>
             <div class="black-text-14">
@@ -146,16 +154,18 @@
         </div>
         <div class="eco-item">
           <div>
-            <div class="grey-text-12-300"> 交易费用</div>
+            <div class="grey-text-12-300"> {{ $t('contract.TXNFee') }}</div>
           </div>
           <div>
-            <div class="black-text-14"> {{ item.txn_fee.toFixed(6) }} UNC </div>
+            <div class="black-text-14">
+              {{ item.txn_fee?.toFixed(6) }} UNC
+            </div>
           </div>
         </div>
 
         <div class="eco-item">
           <div>
-            <div class="grey-text-14-300"> 发送方</div>
+            <div class="grey-text-14-300"> {{ $t('home.sender') }}</div>
           </div>
           <div>
             <div class="black-text-14 text-ellipsis" style="width: 200px">
@@ -165,7 +175,7 @@
         </div>
         <div class="eco-item">
           <div>
-            <div class="grey-text-14-300"> 接收方</div>
+            <div class="grey-text-14-300"> {{ $t('home.receiver') }}</div>
           </div>
           <div>
             <div class="black-text-14 text-ellipsis" style="width: 200px">
@@ -175,7 +185,7 @@
         </div>
         <div class="eco-item">
           <div>
-            <div class="grey-text-14-300"> 区块高度</div>
+            <div class="grey-text-14-300"> {{ $t('home.height') }}</div>
           </div>
           <div>
             <div class="black-text-14" style="color: #0facb6">
@@ -185,7 +195,7 @@
         </div>
         <div class="eco-item">
           <div>
-            <div class="grey-text-14-300"> 时间</div>
+            <div class="grey-text-14-300"> {{ $t('contract.Block_age') }}</div>
           </div>
           <div>
             <div class="black-text-14">

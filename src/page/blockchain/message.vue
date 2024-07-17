@@ -202,7 +202,10 @@
           <div class="block_list_header_title">{{
             $t('home.Message_list')
           }}</div>
-          <div class="block_list_header_text">共 1141606363 条消息</div>
+          <div class="block_list_header_text"
+            >{{ $t('contract.common') }} 1141606363
+            {{ $t('contract.messages') }}</div
+          >
         </div>
         <el-input
           v-if="size === Screen.Large"
@@ -296,7 +299,7 @@
             </div>
             <div class="eco-item">
               <div>
-                <div class="grey-text-14-300"> 区块高度 </div>
+                <div class="grey-text-14-300"> {{ $t('home.height') }} </div>
               </div>
               <div>
                 <div class="black-text-14" style="color: #0facb6">
@@ -316,7 +319,7 @@
             </div>
             <div class="eco-item">
               <div>
-                <div class="grey-text-14-300"> 发送方 </div>
+                <div class="grey-text-14-300"> {{ $t('home.sender') }} </div>
               </div>
               <div>
                 <div class="black-text-14">
@@ -326,7 +329,7 @@
             </div>
             <div class="eco-item">
               <div>
-                <div class="grey-text-14-300"> 接收方 </div>
+                <div class="grey-text-14-300"> {{ $t('home.receiver') }} </div>
               </div>
               <div>
                 <div class="black-text-14">

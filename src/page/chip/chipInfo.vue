@@ -22,7 +22,7 @@
       <div class="details_title">芯片</div>
       <div class="card">
         <div class="card_data">
-          <div class="card_title">类型</div>
+          <div class="card_title">{{ $t('home.type') }}</div>
           <div class="content_father">
             <div class="card_content">{{ infos[0].chip_type }}</div>
           </div>

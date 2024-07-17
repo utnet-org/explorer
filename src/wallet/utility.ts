@@ -36,6 +36,9 @@ interface CallMethodOptions {
 }
 
 export class Wallet {
+  disconnectWallet(): string {
+    throw new Error('Method not implemented.');
+  }
   createAccessKeyFor?: string;
   networkId: string;
   selector: Promise<WalletSelector>;

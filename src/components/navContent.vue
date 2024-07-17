@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { onMounted, ref, watchEffect } from 'vue';
+  import { onMounted, ref, watch, watchEffect } from 'vue';
   import { useRouter } from 'vue-router';
   // import Wallet from '../wallet/eth/connect.ts';
   import { Wallet } from '../wallet/utility.ts';
@@ -7,6 +7,7 @@
   import { getCoinPrice } from '../api/price.ts';
   import { getScreenSize, Screen } from '../utils/screen-size.ts';
   import i18n from '@/lang';
+import { nextTick } from 'process';
   // import { useI18n } from 'vue-i18n';
 
   const props = defineProps<{ viewportWidth: number }>();
@@ -128,7 +129,7 @@
       : Number(localStorage.getItem('navSelectIndex')),
   );
   const address = ref(i18n.global.t('home.connect_wallet'));
-  // const isConnect = ref(false);
+  const isConnect = ref(false);
   const price = ref('---');
   const amount = ref('0.00');
 
@@ -192,19 +193,19 @@
   });
 
   const updateWalletActionAndLabel = () => {
-    if (signedAccountId.value) {
+    if (signedAccountId.value != null) {
       action.value = uWallet.signOut;
       label.value =
-        i18n.global.t('home.disconnect_wallet') + `: ${signedAccountId.value}`;
+        signedAccountId.value || i18n.global.t('home.connect_wallet');
     } else {
       action.value = uWallet.signIn;
       label.value = i18n.global.t('home.connect_wallet');
     }
   };
 
-  const handleAction = () => {
-    action.value();
-  };
+  // const handleAction = () => {
+  //   action.value();
+  // };
 
   // async function connectWallet2() {
   //   const wallet = new Wallet();
@@ -225,12 +226,33 @@
   //   }
   // }
 
-  // const handleCommand = (command: string) => {
-  // const wallet = new Wallet();
-  // if (command === 'disconnect') {
-  //   address.value = wallet.disconnectWallet();
-  // }
-  // };
+  watch(label, newValue => {
+    nextTick(() => {
+      if (newValue === signedAccountId.value) {
+        pullDown.value = true;
+      } else {
+        pullDown.value = false;
+      }
+    });
+  });
+  const pullDown = ref(false);
+  const handleConnect = async () => {
+    await uWallet.signIn();
+    updateWalletActionAndLabel();
+  };
+  const handleDisconnect = async () => {
+    await uWallet.signOut();
+    updateWalletActionAndLabel();
+  };
+
+  const handleCommand = (command: string) => {
+  const wallet = new Wallet();
+  if (command === 'disconnect') {
+    // address.value = wallet.disconnectWallet();
+    handleDisconnect();
+
+  }
+  };
 
   const activeName = ref('0');
   const showNavSelectType = ref(false);
@@ -313,33 +335,42 @@
       </div>
       <div class="nav_select_right">
         <div class="dropdown">
-          <!--          <el-dropdown-->
-          <!--            popper-class="drop-menu"-->
-          <!--            v-if="isConnect"-->
-          <!--            trigger="click"-->
-          <!--            placement="bottom-end"-->
-          <!--            @command="handleCommand"-->
-          <!--          >-->
-          <!--            <el-button round class="nav_select_right_title">-->
-          <!--              {{ address }}-->
-          <!--              <el-icon class="el-icon&#45;&#45;right">-->
-          <!--                <arrow-down />-->
-          <!--              </el-icon>-->
-          <!--            </el-button>-->
-          <!--            <template #dropdown>-->
-          <!--              <el-dropdown-menu>-->
-          <!--                <el-dropdown-item> {{ $t('home.wallet') }}</el-dropdown-item>-->
-          <!--                <el-dropdown-item>-->
-          <!--                  {{ $t('home.recent_trans') }}</el-dropdown-item-->
-          <!--                >-->
-          <!--                <el-dropdown-item command="disconnect">-->
-          <!--                  {{ $t('home.disconnect_wallet') }}-->
-          <!--                </el-dropdown-item>-->
-          <!--              </el-dropdown-menu>-->
-          <!--            </template>-->
-          <!--          </el-dropdown>-->
+          <el-dropdown
+            v-if="pullDown"
+            popper-class="drop-menu"
+            trigger="click"
+            placement="bottom-end"
+            @command="handleCommand"
+          >
+            <el-button round class="nav_select_right_title">
+              {{ label }}
+              <el-icon class="el-icon&#45;&#45;right">
+                <arrow-down />
+              </el-icon>
+            </el-button>
+            <template #dropdown>
+              <el-dropdown-menu>
+                <!-- <el-dropdown-item @click="handleConnect">
+                  {{ $t('home.wallet') }}</el-dropdown-item
+                > -->
+                <!-- <el-dropdown-item>
+                  {{ $t('home.recent_trans') }}</el-dropdown-item
+                > -->
+                <el-dropdown-item
+                  command="disconnect"
+                  @click="handleDisconnect"
+                >
+                  {{ $t('home.disconnect_wallet') }}
+                </el-dropdown-item>
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
 
-          <el-button class="nav_select_right_title" @click="handleAction">
+          <el-button
+            v-else
+            class="nav_select_right_title"
+            @click="handleConnect"
+          >
             {{ label }}
           </el-button>
         </div>

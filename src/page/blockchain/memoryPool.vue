@@ -229,7 +229,9 @@
         <div class="block_list_header_title">{{
           $t('home.Memory_pool_message_list')
         }}</div>
-        <div class="block_list_header_text">共 676 条消息</div>
+        <div class="block_list_header_text"
+          >{{ $t('contract.common') }} 676 {{ $t('contract.messages') }}</div
+        >
       </div>
       <el-table
         :data="
@@ -314,7 +316,7 @@
             </div>
             <div class="eco-item">
               <div>
-                <div class="grey-text-12-300"> 发送方 </div>
+                <div class="grey-text-12-300"> {{ $t('home.sender') }} </div>
               </div>
               <div>
                 <div class="black-text-14">
@@ -324,7 +326,7 @@
             </div>
             <div class="eco-item">
               <div>
-                <div class="grey-text-14-300"> 接收方 </div>
+                <div class="grey-text-14-300"> {{ $t('home.receiver') }} </div>
               </div>
               <div>
                 <div class="black-text-14">

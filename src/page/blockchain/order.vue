@@ -190,21 +190,24 @@
       <div class="block_list_header">
         <div class="block_list_header_side">
           <div class="block_list_header_title">{{ $t('home.Order_List') }}</div>
-          <div class="block_list_header_text">共 1141606363 条消息</div>
+          <div class="block_list_header_text"
+            >{{ $t('contract.common') }} 1141606363
+            {{ $t('contract.messages') }}</div
+          >
         </div>
         <el-input
           v-if="size === Screen.Large"
-          style="width: 30%; height: 30px; margin-right: 20px"
           v-model="searchMessage"
+          style="width: 30%; height: 30px; margin-right: 20px"
           :placeholder="$t('home.Search_for_clients_or_miner')"
           :suffix-icon="Search"
           clearable
         />
       </div>
-      <div class="search" v-if="size === Screen.Small">
+      <div v-if="size === Screen.Small" class="search">
         <el-input
-          style="width: 50%; height: 40px"
           v-model="searchMessage"
+          style="width: 50%; height: 40px"
           :placeholder="$t('home.Search_for_clients_or_miner')"
           :suffix-icon="Search"
           clearable
